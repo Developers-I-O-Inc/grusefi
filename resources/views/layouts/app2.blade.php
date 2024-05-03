@@ -35,7 +35,7 @@
                 data-kt-drawer-width="{default:'80px', '300px': '100px'}" data-kt-drawer-direction="start"
                 data-kt-drawer-toggle="#kt_aside_mobile_toggle">
                 <div class="aside-logo py-8" id="kt_aside_logo">
-                    <a href="../../demo6/dist/index.html" class="d-flex align-items-center">
+                    <a href="/dashboard" class="d-flex align-items-center">
                         <img alt="Logo" src="{{asset('img/logo.png')}}" class="h-85px logo" />
                     </a>
                 </div>
@@ -47,7 +47,7 @@
                         <div class="menu menu-column menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold"
                             id="#kt_aside_menu" data-kt-menu="true">
                             <div class="menu-item py-2">
-                                <a class="menu-link @yield('dashboard') menu-center" href="dashboard" data-bs-trigger="hover"
+                                <a class="menu-link @yield('dashboard') menu-center" href="/dashboard" data-bs-trigger="hover"
                                     data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon me-0">
                                         <i class="bi bi-house fs-2"></i>
@@ -55,7 +55,7 @@
                                     <span class="menu-title">Inicio</span>
                                 </a>
                             </div>
-                            <div data-kt-menu-trigger="click" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
                                 class="menu-item py-2">
                                 <span class="menu-link menu-center @yield("catalogs")" data-bs-trigger="hover" data-bs-dismiss="click"
                                     data-bs-placement="right">
@@ -72,9 +72,7 @@
                                     </div>
                                     <div class="menu-item">
                                         <a class="menu-link" href="categories">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
+                                            <span class="menu-icon"><i class="bi bi-tag fs-2"></i></span>
                                             <span class="menu-title">Categorias</span>
                                         </a>
                                     </div>
@@ -88,7 +86,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-kt-menu-trigger="click" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
                                 class="menu-item py-2">
                                 <span class="menu-link menu-center  @yield("purchases")" data-bs-trigger="hover" data-bs-dismiss="click"
                                     data-bs-placement="right">
@@ -121,7 +119,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-kt-menu-trigger="click" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
                                 class="menu-item py-2">
                                 <span class="menu-link @yield('admin') menu-center" data-bs-trigger="hover" data-bs-dismiss="click"
                                     data-bs-placement="right">
@@ -162,7 +160,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-kt-menu-trigger="click" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
                                 class="menu-item py-2">
                                 <span class="menu-link menu-center" data-bs-trigger="hover" data-bs-dismiss="click"
                                     data-bs-placement="right">
@@ -324,7 +322,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-                            <a href="../../demo6/dist/index.html" class="d-lg-none">
+                            <a href="/dashboard" class="d-lg-none">
                                 <img alt="Logo" src="{{asset('img/logo.png')}}" class="h-30px" />
                             </a>
                         </div>
@@ -379,26 +377,39 @@
                                                                 class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
                                                         </div>
                                                         <a href="#"
-                                                            class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                                            class="fw-bold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
                                                     </div>
-                                                    <!--end::Username-->
                                                 </div>
                                             </div>
                                             <div class="separator my-2"></div>
+                                            <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
+                                                <a href="#" class="menu-link px-5">
+                                                    <span class="menu-title">Administración</span>
+                                                    <span class="menu-arrow"></span>
+                                                </a>
+                                                <div class="menu-sub menu-sub-dropdown w-175px py-4">
+                                                    <div class="menu-item px-3">
+                                                        <a href="../../demo6/dist/account/referrals.html" class="menu-link px-5">Roles</a>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a href="../../demo6/dist/account/billing.html" class="menu-link px-5">Usuarios</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="menu-item px-5">
                                                 <a href="user/profile" class="menu-link px-5">Mi Perfil</a>
                                             </div>
                                             <div class="separator my-2"></div>
                                             <div class="menu-item px-5">
-                                                    <form method="POST" action="{{ route('logout') }}" x-data>
-                                                        @csrf
-                                                        <button type="submit" @click.prevent="$root.submit();"
-                                                        class="menu-link px-5 btn btn-white"><span class="svg-icon svg-icon-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <rect opacity="0.3" x="4" y="11" width="12" height="2" rx="1" fill="black"/>
-                                                            <path d="M5.86875 11.6927L7.62435 10.2297C8.09457 9.83785 8.12683 9.12683 7.69401 8.69401C7.3043 8.3043 6.67836 8.28591 6.26643 8.65206L3.34084 11.2526C2.89332 11.6504 2.89332 12.3496 3.34084 12.7474L6.26643 15.3479C6.67836 15.7141 7.3043 15.6957 7.69401 15.306C8.12683 14.8732 8.09458 14.1621 7.62435 13.7703L5.86875 12.3073C5.67684 12.1474 5.67684 11.8526 5.86875 11.6927Z" fill="black"/>
-                                                            <path d="M8 5V6C8 6.55228 8.44772 7 9 7C9.55228 7 10 6.55228 10 6C10 5.44772 10.4477 5 11 5H18C18.5523 5 19 5.44772 19 6V18C19 18.5523 18.5523 19 18 19H11C10.4477 19 10 18.5523 10 18C10 17.4477 9.55228 17 9 17C8.44772 17 8 17.4477 8 18V19C8 20.1046 8.89543 21 10 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3H10C8.89543 3 8 3.89543 8 5Z" fill="#C4C4C4"/>
-                                                            </svg></span>Cerrar Sesión</button>
-                                                    </form>
+                                                <form method="POST" action="{{ route('logout') }}" x-data>
+                                                    @csrf
+                                                    <button type="submit" @click.prevent="$root.submit();"
+                                                    class="menu-link px-5 btn btn-white"><span class="svg-icon svg-icon-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="4" y="11" width="12" height="2" rx="1" fill="black"/>
+                                                        <path d="M5.86875 11.6927L7.62435 10.2297C8.09457 9.83785 8.12683 9.12683 7.69401 8.69401C7.3043 8.3043 6.67836 8.28591 6.26643 8.65206L3.34084 11.2526C2.89332 11.6504 2.89332 12.3496 3.34084 12.7474L6.26643 15.3479C6.67836 15.7141 7.3043 15.6957 7.69401 15.306C8.12683 14.8732 8.09458 14.1621 7.62435 13.7703L5.86875 12.3073C5.67684 12.1474 5.67684 11.8526 5.86875 11.6927Z" fill="black"/>
+                                                        <path d="M8 5V6C8 6.55228 8.44772 7 9 7C9.55228 7 10 6.55228 10 6C10 5.44772 10.4477 5 11 5H18C18.5523 5 19 5.44772 19 6V18C19 18.5523 18.5523 19 18 19H11C10.4477 19 10 18.5523 10 18C10 17.4477 9.55228 17 9 17C8.44772 17 8 17.4477 8 18V19C8 20.1046 8.89543 21 10 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3H10C8.89543 3 8 3.89543 8 5Z" fill="#C4C4C4"/>
+                                                        </svg></span>Cerrar Sesión</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
