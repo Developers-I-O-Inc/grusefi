@@ -18,5 +18,18 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Manuel',
+            'user_name' => 'Manuel',
+            'last_name' => 'Morales',
+            'address' => 'Roble 4',
+            'phone' => '3411671215',
+            'name' => 'Test User',
+            'email' => 'admin@admin.com',
+            'password'=> Hash::make('123456')
+        ]);
+        // Create role administrator
+        Role::create(['name' => 'admin']);
     }
 }
