@@ -50,7 +50,7 @@ class RolesController extends Controller
         $roles = Roles::updateOrCreate(
 
             ['id'=>$request->get('id_rol')],
-            ['name' => $request->input('name'), 'guard_name' => $request->input('name')],
+            ['name' => $request->input('name'), 'guard_name' => 'web'],
         );
         return response()->json(["OK"=>"Se guardo correctamente"]);
     }
