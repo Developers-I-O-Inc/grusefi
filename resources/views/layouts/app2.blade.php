@@ -389,7 +389,7 @@
                                                 </a>
                                                 <div class="menu-sub menu-sub-dropdown w-175px py-4">
                                                     <div class="menu-item px-3">
-                                                        <a href="../../demo6/dist/account/referrals.html" class="menu-link px-5">Roles</a>
+                                                        <a href="admin/roles" class="menu-link px-5">Roles</a>
                                                     </div>
                                                     <div class="menu-item px-3">
                                                         <a href="../../demo6/dist/account/billing.html" class="menu-link px-5">Usuarios</a>

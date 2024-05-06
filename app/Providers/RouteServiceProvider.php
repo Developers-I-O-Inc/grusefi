@@ -35,9 +35,10 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')->namespace($this->CONTROLLERS)
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware('web')->namespace($this->CONTROLLERS)
-                ->prefix('catalogs')
-                ->group(base_path('routes/catalogs.php'));
+            Route::middleware(['web', 'auth:sanctum', config('jetstream.auth_session'), 'verified',])
+                ->namespace($this->CONTROLLERS)
+                ->prefix('admin')
+                ->group(base_path('routes/admin.php'));
         });
     }
 
