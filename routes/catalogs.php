@@ -2,6 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('prueba', function () {
-    return "dsaasdsda";
-});
+Route::get('prueba', 'pruebacontroller@prueba');

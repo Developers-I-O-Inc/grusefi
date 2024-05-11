@@ -19,6 +19,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/dashboard';
     protected $CONTROLLERS = 'App\Http\Controllers';
+    protected $CONTROLLERS_CATALOGS = 'App\Http\Controllers\Catalogs';
+    protected $CONTROLLERS_OPERATION = 'App\Http\Controllers\Operation';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -34,11 +36,21 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')->namespace($this->CONTROLLERS)
                 ->group(base_path('routes/web.php'));
-
+            //Admin
             Route::middleware(['web', 'auth:sanctum', config('jetstream.auth_session'), 'verified',])
                 ->namespace($this->CONTROLLERS)
                 ->prefix('admin')
                 ->group(base_path('routes/admin.php'));
+            // Catalogs
+            Route::middleware(['web', 'auth:sanctum', config('jetstream.auth_session'), 'verified',])
+                ->namespace($this->CONTROLLERS_CATALOGS)
+                ->prefix('catalogs')
+                ->group(base_path('routes/catalogs.php'));
+            // Operation
+            Route::middleware(['web', 'auth:sanctum', config('jetstream.auth_session'), 'verified',])
+                ->namespace($this->CONTROLLERS_OPERATION)
+                ->prefix('operation')
+                ->group(base_path('routes/operation.php'));
         });
     }
 

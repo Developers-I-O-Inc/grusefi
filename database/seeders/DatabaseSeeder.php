@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'name' => 'Manuel',
-            'user_name' => 'Manuel',
+            // 'user_name' => 'Manuel',
             'last_name' => 'Morales',
             'address' => 'Roble 4',
             'phone' => '3411671215',
