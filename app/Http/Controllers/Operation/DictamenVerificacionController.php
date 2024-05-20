@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Input;
 class DictamenVerificacionController extends Controller
 {
     public function dictamen_verificacion(){
-        return "xsfdssd";
+        return view("operation/dictamen_verificacion");
     }
 
 }

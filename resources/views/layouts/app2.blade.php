@@ -57,23 +57,26 @@
                             </div>
                             <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
                                 class="menu-item py-2">
-                                <span class="menu-link menu-center @yield("catalogs")" data-bs-trigger="hover" data-bs-dismiss="click"
+                                <span class="menu-link menu-center @yield("zones")" data-bs-trigger="hover" data-bs-dismiss="click"
                                     data-bs-placement="right">
                                     <span class="menu-icon me-0">
-                                        <i class="bi bi-box-seam fs-2"></i>
+                                        <i class="bi bi-geo-alt"></i>
                                     </span>
-                                    <span class="menu-title">Cátalogos</span>
+                                    <span class="menu-title center">Zona Geográfica</span>
                                 </span>
                                 <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
                                     <div class="menu-item">
                                         <div class="menu-content">
-                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Cátalogos</span>
+                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Zonas</span>
                                         </div>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link" href="categories">
-                                            <span class="menu-icon"><i class="bi bi-tag fs-2"></i></span>
-                                            <span class="menu-title">Categorias</span>
+                                        <a class="menu-link" href="/catalogs/paises">
+                                            {{-- <span class="menu-icon"><i class="bi bi-tag fs-2"></i></span> --}}
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Paises</span>
                                         </a>
                                     </div>
                                     <div class="menu-item">
@@ -81,7 +84,23 @@
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Productos</span>
+                                            <span class="menu-title">Estados</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="products">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Municipios</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="products">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Localidades</span>
                                         </a>
                                     </div>
                                 </div>
@@ -102,11 +121,11 @@
                                         </div>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link" href="purchases">
+                                        <a class="menu-link" href="/operation/dictamen_verificacion">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Nueva</span>
+                                            <span class="menu-title">Dictamen de Verificación</span>
                                         </a>
                                     </div>
                                     <div class="menu-item">

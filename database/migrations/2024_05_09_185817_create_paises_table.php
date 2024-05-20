@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('nombre_corto');
             $table->string('codigo');
+            $table->tinyInteger('activo')->default(1);
             $table->timestamps();
             $table->softdeletes();
         });

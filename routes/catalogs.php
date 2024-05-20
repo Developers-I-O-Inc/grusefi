@@ -2,4 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('prueba', 'pruebacontroller@prueba');
+// CATEGORIES
+Route::resource('paises', 'PaisesController');
+Route::post('destroy_paises', 'PaisesController@destroy_paises');

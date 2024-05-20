@@ -48745,6 +48745,7 @@ body {
 }
 .aside-menu .menu > .menu-item > .menu-link {
   color: #9899ac;
+  text-align: center;
 }
 .aside-menu .menu > .menu-item > .menu-link .menu-title {
   color: #9899ac;
@@ -48954,7 +48955,7 @@ body {
 }
 .aside-menu .menu > .menu-item > .menu-link.active {
   transition: color 0.2s ease, background-color 0.2s ease;
-  background-color: #1b1b28;
+  background-color: #17594a;
   color: #fff;
 }
 .aside-menu .menu > .menu-item > .menu-link.active .menu-title {

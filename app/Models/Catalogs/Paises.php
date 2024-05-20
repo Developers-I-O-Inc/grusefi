@@ -11,4 +11,12 @@ class Paises extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'cat_paises';
+
+    protected $fillable = [
+        'id',
+        'codigo',
+        'nombre',
+        'nombre_corto',
+        'activo',
+    ];
 }
