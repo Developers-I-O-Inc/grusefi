@@ -11,4 +11,13 @@ class Municipios extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = "cat_municipios";
+
+    protected $fillable = [
+        'id',
+        'nombre',
+        'nombre_corto',
+        'activo',
+        'codigo',
+        'estado_id',
+    ];
 }

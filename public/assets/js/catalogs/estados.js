@@ -325,7 +325,8 @@ var KTestadoesList = (function () {
                                                 title: "Error",
                                                 text: "Ocurrio un error en la base de datos!",
                                             });
-                                                console.log(data);
+                                            console.log(data);
+                                            btn_submit.enabled;
                                         }
                                     });
 
