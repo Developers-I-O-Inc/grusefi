@@ -2,6 +2,7 @@
 var KTpaisesList = (function () {
     var table_items,
         btn_modal,
+        btn_add,
         btn_cancel,
         btn_submit,
         modal,
@@ -149,6 +150,7 @@ var KTpaisesList = (function () {
                     document.querySelector("#kt_modal_add_pais")
                 )),
                 // inicialize elements html
+                (btn_add = document.querySelector("#btn_add")),
                 (form = document.querySelector("#kt_modal_add_pais_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_pais_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_pais_submit")),
@@ -205,6 +207,7 @@ var KTpaisesList = (function () {
                                 { data: "nombre", name: "nombre" },
                                 { data: "nombre_corto", name: "nombre_corto" },
                                 { data: "codigo", name: "codigo" },
+                                { data: "activos", name: "activos" },
                                 { data: "buttons", name: "buttons" },
                             ],
                             order: [[2, "asc"]],
@@ -222,9 +225,7 @@ var KTpaisesList = (function () {
                                 infoEmpty: "No hay información",
                                 infoFiltered: "(Filtrando _MAX_ registros)",
                                 processing:
-                                    "<span class='fa-stack fa-lg'>\n\
-                                    <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
-                                </span>&emsp;Processing Message here...",
+                                `<span class="loader"></span>`,
                             },
                         })).on("draw", function () {
                             delete_items(), edit(), uncheck();
@@ -243,6 +244,12 @@ var KTpaisesList = (function () {
                     else{
                         edit_active.value=0
                     }
+                });
+                // BUTTON ADD
+                btn_add.addEventListener("click", function (t) {
+                    t.preventDefault()
+                    form.reset()
+                    modal.show()
                 });
                 // CLOSE MODAL
                 btn_modal.addEventListener("click", function (t) {

@@ -11,4 +11,13 @@ class Estados extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = "cat_estados";
+
+    protected $fillable = [
+        'id',
+        'nombre',
+        'nombre_corto',
+        'pais_id',
+        'codigo',
+        'activo'
+    ];
 }

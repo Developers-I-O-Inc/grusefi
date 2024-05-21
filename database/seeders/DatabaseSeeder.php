@@ -33,5 +33,11 @@ class DatabaseSeeder extends Seeder
         ]);
         // Create role administrator
         Role::create(['name' => 'admin']);
+        // ADD PAIS
+        \App\Models\Catalogs\Paises::factory()->create([
+            'nombre' => 'México',
+            'nombre_corto' => 'MEX',
+            'codigo' => '010'
+        ]);
     }
 }

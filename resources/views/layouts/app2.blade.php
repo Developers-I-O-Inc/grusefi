@@ -80,7 +80,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link" href="products">
+                                        <a class="menu-link" href="/catalogs/estados">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
