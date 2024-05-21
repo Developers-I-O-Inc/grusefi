@@ -260,6 +260,7 @@ var KTestadoesList = (function () {
                 btn_add.addEventListener("click", function (t) {
                     t.preventDefault()
                     form.reset()
+                    $("#pais_id").val(null).trigger("change.select2");
                     modal.show()
                 });
                 // CLOSE MODAL
@@ -326,7 +327,7 @@ var KTestadoesList = (function () {
                                                 text: "Ocurrio un error en la base de datos!",
                                             });
                                             console.log(data);
-                                            btn_submit.enabled;
+                                            btn_submit.disabled = !1
                                         }
                                     });
 

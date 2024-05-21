@@ -261,6 +261,7 @@ var KTmunicipioesList = (function () {
                 btn_add.addEventListener("click", function (t) {
                     t.preventDefault()
                     form.reset()
+                    $("#estado_id").val(null).trigger("change.select2");
                     modal.show()
                 });
                 // CLOSE MODAL
@@ -326,7 +327,7 @@ var KTmunicipioesList = (function () {
                                                 title: "Error",
                                                 text: "Ocurrio un error en la base de datos!",
                                             });
-                                            btn_submit.enabled;
+                                            btn_submit.disabled = !1
                                             console.log(data);
                                         }
                                     });

@@ -11,4 +11,13 @@ class Localidades extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = "cat_localidades";
+
+    protected $fillable = [
+        'id',
+        'nombre',
+        'nombre_corto',
+        'codigo',
+        'activo',
+        'municipio_id',
+    ];
 }

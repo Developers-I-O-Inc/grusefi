@@ -1,5 +1,5 @@
 "use strict";
-var KTpaisesList = (function () {
+var KTlocalidadesList = (function () {
     var table_items,
         btn_modal,
         btn_add,
@@ -14,19 +14,21 @@ var KTpaisesList = (function () {
         edit_codigo,
         edit_active,
         check_active,
+        select_estado,
         n,
+        loader,
         edit = () => {
             n.querySelectorAll(
-                '[data-kt-pais-table-filter="edit"]'
+                '[data-kt-localidad-table-filter="edit"]'
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
                     e.preventDefault();
-                    $.get("paises/"+ $(this).data("id") + "/edit", function(data){
-                        edit_id.value=data.pais.id;
-                        edit_nombre.value=data.pais.nombre;
-                        edit_nombre_corto.value=data.pais.nombre_corto;
-                        edit_codigo.value=data.pais.codigo;
-                        if(data.pais.activo){
+                    $.get("localidades/"+ $(this).data("id") + "/edit", function(data){
+                        edit_id.value=data.localidad.id;
+                        edit_nombre.value=data.localidad.nombre;
+                        edit_nombre_corto.value=data.localidad.nombre_corto;
+                        edit_codigo.value=data.localidad.codigo;
+                        if(data.localidad.activo){
                             check_active.checked = true
                             edit_active.value = 1
                         }
@@ -34,6 +36,7 @@ var KTpaisesList = (function () {
                             check_active.checked = false
                             edit_active.value = 0
                         }
+                        $("#municipio_id").val(data.localidad.municipio_id).trigger("change.select2");
                         modal.show();
                     })
                 });
@@ -42,7 +45,7 @@ var KTpaisesList = (function () {
         delete_items = () => {
             const e = n.querySelectorAll('[type="checkbox"]'),
                 o = document.querySelector(
-                    '[data-kt-pais-table-select="delete_selected"]'
+                    '[data-kt-localidad-table-select="delete_selected"]'
                 );
             e.forEach((t) => {
                 t.addEventListener("click", function () {
@@ -71,7 +74,7 @@ var KTpaisesList = (function () {
                     o.value
                     ?
                     $.ajax({
-                        url: "destroy_paises",
+                        url: "destroy_localidades",
                         type: "POST",
                         dataType:"json",
                         headers: {
@@ -125,13 +128,13 @@ var KTpaisesList = (function () {
         };
         const uncheck = () => {
             const t = document.querySelector(
-                    '[data-kt-pais-table-toolbar="base"]'
+                    '[data-kt-localidad-table-toolbar="base"]'
                 ),
                 e = document.querySelector(
-                    '[data-kt-pais-table-toolbar="selected"]'
+                    '[data-kt-localidad-table-toolbar="selected"]'
                 ),
                 o = document.querySelector(
-                    '[data-kt-pais-table-select="selected_count"]'
+                    '[data-kt-localidad-table-select="selected_count"]'
                 ),
                 c = n.querySelectorAll('tbody [type="checkbox"]');
             let r = !1,
@@ -147,15 +150,17 @@ var KTpaisesList = (function () {
         return {
             init: function () {
                 (modal = new bootstrap.Modal(
-                    document.querySelector("#kt_modal_add_pais")
+                    document.querySelector("#kt_modal_add_localidad")
                 )),
                 // inicialize elements html
                 (btn_add = document.querySelector("#btn_add")),
-                (form = document.querySelector("#kt_modal_add_pais_form")),
-                (btn_modal = form.querySelector("#kt_modal_add_pais_close")),
-                (btn_submit = form.querySelector("#kt_modal_add_pais_submit")),
-                (btn_cancel = form.querySelector("#kt_modal_add_pais_cancel")),
-                (edit_id = form.querySelector("#id_pais")),
+                (loader = document.querySelector("#loader")),
+                (select_estado = document.querySelector("#estado_id")),
+                (form = document.querySelector("#kt_modal_add_localidad_form")),
+                (btn_modal = form.querySelector("#kt_modal_add_localidad_close")),
+                (btn_submit = form.querySelector("#kt_modal_add_localidad_submit")),
+                (btn_cancel = form.querySelector("#kt_modal_add_localidad_cancel")),
+                (edit_id = form.querySelector("#id_localidad")),
                 (edit_nombre = form.querySelector("#nombre")),
                 (edit_nombre_corto = form.querySelector("#nombre_corto")),
                 (edit_codigo = form.querySelector("#codigo")),
@@ -194,18 +199,22 @@ var KTpaisesList = (function () {
                         }),
                     },
                 })),
-                (n = document.querySelector("#kt_paises_table")) &&
+                (n = document.querySelector("#kt_localidades_table")) &&
                     (n.querySelectorAll("tbody tr").forEach((t) => {
                         // formats
                         }),
                         (table_items = $(n).DataTable({
-                            ajax: "paises",
+                            ajax: "localidades",
+                            serverSide: true,
                             processing: true,
                             columns: [
                                 { data: "check", name: "check" },
                                 { data: "id", name: "id" },
                                 { data: "nombre", name: "nombre" },
                                 { data: "nombre_corto", name: "nombre_corto" },
+                                { data: "municipio", name: "municipio" },
+                                { data: "estado", name: "estado" },
+                                { data: "pais", name: "pais" },
                                 { data: "codigo", name: "codigo" },
                                 { data: "activos", name: "activos" },
                                 { data: "buttons", name: "buttons" },
@@ -225,14 +234,18 @@ var KTpaisesList = (function () {
                                 infoEmpty: "No hay información",
                                 infoFiltered: "(Filtrando _MAX_ registros)",
                                 processing:
-                                `<span class="loader"></span>`,
+                                    `<div id="loader">
+                                    <span class='fa-stack fa-lg'>
+                                        <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>
+                                    </span>&emsp;Loading...
+                                </div>`
                             },
                         })).on("draw", function () {
                             delete_items(), edit(), uncheck();
                         }),
                         delete_items(),
                         edit(),
-                        document.querySelector('[data-kt-pais-table-filter="search"]').addEventListener("keyup", function (e) {
+                        document.querySelector('[data-kt-localidad-table-filter="search"]').addEventListener("keyup", function (e) {
                             table_items.search(e.target.value).draw();
                         })
                     );
@@ -249,6 +262,7 @@ var KTpaisesList = (function () {
                 btn_add.addEventListener("click", function (t) {
                     t.preventDefault()
                     form.reset()
+                    $("#municipio_id").val(null).trigger("change.select2");
                     modal.show()
                 });
                 // CLOSE MODAL
@@ -275,14 +289,14 @@ var KTpaisesList = (function () {
                                         "data-kt-indicator"
                                     ),
                                     $.ajax({
-                                        url: "paises",
+                                        url: "localidades",
                                         type: "POST",
                                         dataType:"json",
                                         encode: "true",
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                         },
-                                        data: $("#kt_modal_add_pais_form").serialize(),
+                                        data: $("#kt_modal_add_localidad_form").serialize(),
                                         success: function (result) {
                                                 Swal.fire({
                                                 text: "Datos guardados exitosamente!",
@@ -314,8 +328,8 @@ var KTpaisesList = (function () {
                                                 title: "Error",
                                                 text: "Ocurrio un error en la base de datos!",
                                             });
-                                            console.log(data);
                                             btn_submit.disabled = !1
+                                            console.log(data);
                                         }
                                     });
 
@@ -335,5 +349,5 @@ var KTpaisesList = (function () {
         };
 })();
 KTUtil.onDOMContentLoaded(function () {
-    KTpaisesList.init();
+    KTlocalidadesList.init();
 });
