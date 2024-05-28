@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catalogs\Localidades;
 use App\Models\Catalogs\Municipios;
+use App\Models\Catalogs\Paises;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
@@ -57,9 +58,9 @@ class LocalidadesController extends Controller
                     ->make(true);
         }
 
-        $municipios = Municipios::all();
+        $paises = Paises::all();
 
-        return view('catalogs/localidades', array("municipios" => $municipios));
+        return view('catalogs/localidades', array("paises" => $paises));
     }
     /**
      * Store a newly created resource in storage.
@@ -81,7 +82,11 @@ class LocalidadesController extends Controller
      */
     public function edit(string $id)
     {
-        $localidad=Localidades::find($id);
+        $localidad=DB::select('SELECT cat_localidades.id, municipio_id, estado_id, pais_id, cat_localidades.nombre, cat_localidades.nombre_corto, cat_localidades.codigo, cat_localidades.activo
+        FROM cat_localidades LEFT JOIN cat_municipios ON cat_localidades.municipio_id = cat_municipios.id
+		LEFT JOIN cat_estados ON cat_municipios.estado_id = cat_estados.id
+        LEFT JOIN cat_paises ON cat_estados.pais_id = cat_paises.id
+        WHERE cat_localidades.id = '.$id);
 
         return response()->json(['localidad'=>$localidad]);
     }

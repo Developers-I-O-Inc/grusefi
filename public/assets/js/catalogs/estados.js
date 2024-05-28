@@ -1,5 +1,13 @@
-"use strict";
+"use strict"
+
+import Catalogs from "./general.js"
+
 var KTestadoesList = (function () {
+
+    const catalog = "estados"
+    const catalog_item = "estado"
+    const token = $('meta[name="csrf-token"]').attr('content')
+
     var table_items,
         btn_modal,
         btn_add,
@@ -14,6 +22,7 @@ var KTestadoesList = (function () {
         edit_codigo,
         edit_active,
         check_active,
+        edit_active,
         select_pais,
         n,
         loader,
@@ -23,6 +32,7 @@ var KTestadoesList = (function () {
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
                     e.preventDefault();
+                    // Catalogs.checked(check_active)
                     $.get("estados/"+ $(this).data("id") + "/edit", function(data){
                         edit_id.value=data.estado.id;
                         edit_nombre.value=data.estado.nombre;
@@ -41,112 +51,8 @@ var KTestadoesList = (function () {
                     })
                 });
             });
-        },
-        delete_items = () => {
-            const e = n.querySelectorAll('[type="checkbox"]'),
-                o = document.querySelector(
-                    '[data-kt-estado-table-select="delete_selected"]'
-                );
-            e.forEach((t) => {
-                t.addEventListener("click", function () {
-                    setTimeout(function () {
-                        uncheck();
-                    }, 50);
-                });
-            }),
-            o.addEventListener("click", function () {
-                let arr_items_deleted=[];
-                e.forEach((e) => {
-                    e.checked && arr_items_deleted.push($(e).data("id"));
-                });
-                Swal.fire({
-                    text: "Estas seguro de eliminar los registros seleccionados?",
-                    icon: "warning",
-                    showCancelButton: !0,
-                    buttonsStyling: !1,
-                    confirmButtonText: "Si, eliminar!",
-                    cancelButtonText: "No, cancelar",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-danger",
-                        cancelButton: "btn fw-bold btn-active-light-primary",
-                    },
-                }).then(function (o) {
-                    o.value
-                    ?
-                    $.ajax({
-                        url: "destroy_estados",
-                        type: "POST",
-                        dataType:"json",
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            ids:arr_items_deleted
-                        },
-                        success: function (result) {
-                            Swal.fire({
-                                text: "Datos eliminados correctamente!",
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText:"Entendido!",
-                                customClass: {
-                                    confirmButton:"btn btn-primary",
-                                },
-                            }).then(function (e) {
-                                e.isConfirmed && table_items.ajax.reload();
-                            });
-                        },
-                        beforeSend(){
-                            Swal.fire({
-                                title: "<strong>Cargando</strong>",
-                                html: `<div class="progress container-fluid"></div>`,
-                                showConfirmButton: false,
-                            });
-                        },
-                        error(data){
-                            Swal.fire({
-                                icon: "error",
-                                title: "Error",
-                                text: "Ocurrio un error en la base de datos!",
-                            });
-                                console.log(data);
-                        }
-                    })
+        }
 
-                    : "cancel" === o.dismiss &&
-                        Swal.fire({
-                            text: "Los registros no se eliminaron.",
-                            icon: "error",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Entendido!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            },
-                        });
-                });
-            });
-        };
-        const uncheck = () => {
-            const t = document.querySelector(
-                    '[data-kt-estado-table-toolbar="base"]'
-                ),
-                e = document.querySelector(
-                    '[data-kt-estado-table-toolbar="selected"]'
-                ),
-                o = document.querySelector(
-                    '[data-kt-estado-table-select="selected_count"]'
-                ),
-                c = n.querySelectorAll('tbody [type="checkbox"]');
-            let r = !1,
-                l = 0;
-            c.forEach((t) => {
-                t.checked && ((r = !0), l++);
-            }),
-                r ? ((o.innerHTML = l),
-                    t.classList.add("d-none"),
-                    e.classList.remove("d-none"))
-                    : (t.classList.remove("d-none"), e.classList.add("d-none"));
-        };
         return {
             init: function () {
                 (modal = new bootstrap.Modal(
@@ -164,7 +70,7 @@ var KTestadoesList = (function () {
                 (edit_nombre = form.querySelector("#nombre")),
                 (edit_nombre_corto = form.querySelector("#nombre_corto")),
                 (edit_codigo = form.querySelector("#codigo")),
-                (check_active = form.querySelector("#active_check")),
+                (check_active = form.querySelector("#check_activo")),
                 (edit_active = form.querySelector("#activo")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
@@ -232,16 +138,12 @@ var KTestadoesList = (function () {
                                 infoEmpty: "No hay información",
                                 infoFiltered: "(Filtrando _MAX_ registros)",
                                 processing:
-                                    `<div id="loader">
-                                    <span class='fa-stack fa-lg'>
-                                        <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>
-                                    </span>&emsp;Loading...
-                                </div>`
+                                    `<span class="loader"></span>`
                             },
                         })).on("draw", function () {
-                            delete_items(), edit(), uncheck();
+                            Catalogs.delete_items(n, table_items, catalog, catalog_item, token), edit(), Catalogs.uncheck(n, catalog_item)
                         }),
-                        delete_items(),
+                        Catalogs.delete_items(n, table_items, catalog, catalog_item, token),
                         edit(),
                         document.querySelector('[data-kt-estado-table-filter="search"]').addEventListener("keyup", function (e) {
                             table_items.search(e.target.value).draw();
@@ -249,16 +151,11 @@ var KTestadoesList = (function () {
                     );
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
-                    if(check_active.checked) {
-                        edit_active.value=1
-                    }
-                    else{
-                        edit_active.value=0
-                    }
+                    Catalogs.checked(edit_active, check_active)
                 });
                 // BUTTON ADD
                 btn_add.addEventListener("click", function (t) {
-                    t.preventDefault()
+                    Catalogs.checked(edit_active, check_active)
                     form.reset()
                     $("#pais_id").val(null).trigger("change.select2");
                     modal.show()
@@ -285,51 +182,10 @@ var KTestadoesList = (function () {
                                 setTimeout(function () {
                                     btn_submit.removeAttribute(
                                         "data-kt-indicator"
-                                    ),
-                                    $.ajax({
-                                        url: "estados",
-                                        type: "POST",
-                                        dataType:"json",
-                                        encode: "true",
-                                        headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                        },
-                                        data: $("#kt_modal_add_estado_form").serialize(),
-                                        success: function (result) {
-                                                Swal.fire({
-                                                text: "Datos guardados exitosamente!",
-                                                icon: "success",
-                                                buttonsStyling: !1,
-                                                confirmButtonText:
-                                                    "Entendido!",
-                                                customClass: {
-                                                confirmButton:
-                                                    "btn btn-primary",
-                                            },
-                                            }).then(function (e) {
-                                                e.isConfirmed &&
-                                                    (modal.hide(),
-                                                    (btn_submit.disabled =
-                                                        !1), table_items.ajax.reload(), form.reset());
-                                            });
-                                        },
-                                        beforeSend(){
-                                            Swal.fire({
-                                                title: "<strong>Cargando</strong>",
-                                                html: `<div class="progress container-fluid"></div>`,
-                                                showConfirmButton: false,
-                                                });
-                                        },
-                                        error(data){
-                                            Swal.fire({
-                                                icon: "error",
-                                                title: "Error",
-                                                text: "Ocurrio un error en la base de datos!",
-                                            });
-                                            console.log(data);
-                                            btn_submit.disabled = !1
-                                        }
-                                    });
+                                    )
+                                    const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
+                                    Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
+
 
                                 }, 1000))
                             : Swal.fire({

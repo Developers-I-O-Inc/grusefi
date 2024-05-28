@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('localidades', function (Blueprint $table) {
+        Schema::create('cat_localidades', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('municipio_id')->unsigned()->index();
             $table->string('nombre');

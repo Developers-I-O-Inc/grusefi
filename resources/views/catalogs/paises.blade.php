@@ -99,15 +99,15 @@
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Código</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="codigo" id="codigo" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre corto" name="codigo" id="codigo" />
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="" id="active_check" name="active_check"/>
+                                    <input class="form-check-input" type="checkbox" id="check_activo" name="check_activo"/>
                                     <label class="form-check-label" for="active">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo"/>
+                                <input type="text" class="form-control form-control-solid d-none" value="0" name="activo" id="activo"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
@@ -127,5 +127,5 @@
 @endsection
 @section('scripts')
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-    <script src="{{asset('assets/js/catalogs/paises.js')}}"></script>
+    <script src="{{asset('assets/js/catalogs/paises.js')}}" type="module"></script>
 @endsection

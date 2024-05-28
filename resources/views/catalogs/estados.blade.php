@@ -112,12 +112,12 @@
                                     <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="codigo" id="codigo" />
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="" id="active_check" name="active_check"/>
-                                    <label class="form-check-label" for="active">
+                                    <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
+                                    <label class="form-check-label" for="activo">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo"/>
+                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
@@ -137,5 +137,5 @@
 @endsection
 @section('scripts')
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-    <script src="{{asset('assets/js/catalogs/estados.js')}}"></script>
+    <script src="{{asset('assets/js/catalogs/estados.js')}}" type="module"></script>
 @endsection

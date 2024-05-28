@@ -83,9 +83,9 @@ class PaisesController extends Controller
      */
     public function destroy_paises(Request $request)
     {
-        $ids = $request->input('ids');
+        $ids = $request->get('ids');
         Paises::whereIn('id', $ids)->delete();
-        return response()->json(["OK"=>"Eliminados"]);
+        return response()->json(["OK"=>$ids]);
     }
 
 }

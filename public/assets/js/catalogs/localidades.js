@@ -1,6 +1,16 @@
-"use strict";
+"use strict"
+
+import Catalogs from "./general.js"
+
 var KTlocalidadesList = (function () {
-    var table_items,
+
+    const catalog_fat = "estados"
+    const catalog_fat2 = "municipios"
+    const catalog = "localidades"
+    const catalog_item = "localidad"
+    const token = $('meta[name="csrf-token"]').attr('content')
+
+    let table_items,
         btn_modal,
         btn_add,
         btn_cancel,
@@ -14,21 +24,24 @@ var KTlocalidadesList = (function () {
         edit_codigo,
         edit_active,
         check_active,
+        select_pais,
         select_estado,
+        select_municipio,
+        select_estado_2,
+        prueba,
         n,
-        loader,
         edit = () => {
             n.querySelectorAll(
                 '[data-kt-localidad-table-filter="edit"]'
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
-                    e.preventDefault();
+                    e.preventDefault()
                     $.get("localidades/"+ $(this).data("id") + "/edit", function(data){
-                        edit_id.value=data.localidad.id;
-                        edit_nombre.value=data.localidad.nombre;
-                        edit_nombre_corto.value=data.localidad.nombre_corto;
-                        edit_codigo.value=data.localidad.codigo;
-                        if(data.localidad.activo){
+                        edit_id.value = data.localidad[0].id
+                        edit_nombre.value = data.localidad[0].nombre
+                        edit_nombre_corto.value = data.localidad[0].nombre_corto
+                        edit_codigo.value = data.localidad[0].codigo
+                        if(data.localidad[0].activo){
                             check_active.checked = true
                             edit_active.value = 1
                         }
@@ -36,126 +49,32 @@ var KTlocalidadesList = (function () {
                             check_active.checked = false
                             edit_active.value = 0
                         }
-                        $("#municipio_id").val(data.localidad.municipio_id).trigger("change.select2");
-                        modal.show();
-                    })
-                });
-            });
-        },
-        delete_items = () => {
-            const e = n.querySelectorAll('[type="checkbox"]'),
-                o = document.querySelector(
-                    '[data-kt-localidad-table-select="delete_selected"]'
-                );
-            e.forEach((t) => {
-                t.addEventListener("click", function () {
-                    setTimeout(function () {
-                        uncheck();
-                    }, 50);
-                });
-            }),
-            o.addEventListener("click", function () {
-                let arr_items_deleted=[];
-                e.forEach((e) => {
-                    e.checked && arr_items_deleted.push($(e).data("id"));
-                });
-                Swal.fire({
-                    text: "Estas seguro de eliminar los registros seleccionados?",
-                    icon: "warning",
-                    showCancelButton: !0,
-                    buttonsStyling: !1,
-                    confirmButtonText: "Si, eliminar!",
-                    cancelButtonText: "No, cancelar",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-danger",
-                        cancelButton: "btn fw-bold btn-active-light-primary",
-                    },
-                }).then(function (o) {
-                    o.value
-                    ?
-                    $.ajax({
-                        url: "destroy_localidades",
-                        type: "POST",
-                        dataType:"json",
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            ids:arr_items_deleted
-                        },
-                        success: function (result) {
-                            Swal.fire({
-                                text: "Datos eliminados correctamente!",
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText:"Entendido!",
-                                customClass: {
-                                    confirmButton:"btn btn-primary",
-                                },
-                            }).then(function (e) {
-                                e.isConfirmed && table_items.ajax.reload();
-                            });
-                        },
-                        beforeSend(){
-                            Swal.fire({
-                                title: "<strong>Cargando</strong>",
-                                html: `<div class="progress container-fluid"></div>`,
-                                showConfirmButton: false,
-                            });
-                        },
-                        error(data){
-                            Swal.fire({
-                                icon: "error",
-                                title: "Error",
-                                text: "Ocurrio un error en la base de datos!",
-                            });
-                                console.log(data);
-                        }
-                    })
+                        $("#pais_id").val(data.localidad[0].pais_id).trigger("change.select2")
+                        select_pais.trigger('change');
+                        select_estado_2.setAttribute('data-id', data.localidad[0].estado_id)
+                        $("#estado_id").val(data.localidad[0].estado_id).trigger("change.select2")
+                        prueba= data.localidad[0].estado_id
+                        select_estado.trigger('change');
+                        select_municipio.setAttribute('data-id', data.localidad[0].municipio_id)
 
-                    : "cancel" === o.dismiss &&
-                        Swal.fire({
-                            text: "Los registros no se eliminaron.",
-                            icon: "error",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Entendido!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            },
-                        });
-                });
-            });
-        };
-        const uncheck = () => {
-            const t = document.querySelector(
-                    '[data-kt-localidad-table-toolbar="base"]'
-                ),
-                e = document.querySelector(
-                    '[data-kt-localidad-table-toolbar="selected"]'
-                ),
-                o = document.querySelector(
-                    '[data-kt-localidad-table-select="selected_count"]'
-                ),
-                c = n.querySelectorAll('tbody [type="checkbox"]');
-            let r = !1,
-                l = 0;
-            c.forEach((t) => {
-                t.checked && ((r = !0), l++);
-            }),
-                r ? ((o.innerHTML = l),
-                    t.classList.add("d-none"),
-                    e.classList.remove("d-none"))
-                    : (t.classList.remove("d-none"), e.classList.add("d-none"));
-        };
+                        modal.show()
+                    })
+                })
+            })
+        }
+
         return {
             init: function () {
                 (modal = new bootstrap.Modal(
                     document.querySelector("#kt_modal_add_localidad")
                 )),
                 // inicialize elements html
+                (select_pais = $('#pais_id').select2()),
+                (select_estado = $('#estado_id').select2()),
+                (select_estado_2 = document.querySelector("#estado_id")),
+                (select_municipio = document.querySelector("#municipio_id")),
                 (btn_add = document.querySelector("#btn_add")),
-                (loader = document.querySelector("#loader")),
-                (select_estado = document.querySelector("#estado_id")),
+                // (select_estado = document.querySelector("#estado_id")),
                 (form = document.querySelector("#kt_modal_add_localidad_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_localidad_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_localidad_submit")),
@@ -234,45 +153,54 @@ var KTlocalidadesList = (function () {
                                 infoEmpty: "No hay información",
                                 infoFiltered: "(Filtrando _MAX_ registros)",
                                 processing:
-                                    `<div id="loader">
-                                    <span class='fa-stack fa-lg'>
-                                        <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>
-                                    </span>&emsp;Loading...
-                                </div>`
+                                    `<span class="loader"></span>`
                             },
                         })).on("draw", function () {
-                            delete_items(), edit(), uncheck();
+                            Catalogs.delete_items(n, table_items, catalog, catalog_item, token), edit(), Catalogs.uncheck(n, catalog_item)
                         }),
-                        delete_items(),
+                        Catalogs.delete_items(n, table_items, catalog, catalog_item, token),
                         edit(),
                         document.querySelector('[data-kt-localidad-table-filter="search"]').addEventListener("keyup", function (e) {
-                            table_items.search(e.target.value).draw();
+                            table_items.search(e.target.value).draw()
                         })
-                    );
+                    )
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
-                    if(check_active.checked) {
-                        edit_active.value=1
-                    }
-                    else{
-                        edit_active.value=0
-                    }
-                });
+                    Catalogs.checked(edit_active, check_active)
+                })
                 // BUTTON ADD
                 btn_add.addEventListener("click", function (t) {
-                    t.preventDefault()
+                    Catalogs.checked(edit_active, check_active)
                     form.reset()
-                    $("#municipio_id").val(null).trigger("change.select2");
+                    $("#municipio_id").val(null).trigger("change.select2")
                     modal.show()
-                });
+                })
                 // CLOSE MODAL
                 btn_modal.addEventListener("click", function (t) {
-                    t.preventDefault(), modal.hide();
-                });
+                    t.preventDefault(), modal.hide()
+                })
                 // CLOSE MODAL
                 btn_cancel.addEventListener("click", function (t) {
-                    t.preventDefault(), modal.hide();
-                });
+                    t.preventDefault(), modal.hide()
+                })
+                // CHANGE PAIS
+                select_pais.on('change', function() {
+                    const select_estado2 = $('#estado_id').select2()
+                    Catalogs.get_next_selects(catalog_fat, select_pais.val(), catalog_item, select_estado2)
+                })
+                // CHANGE ESTADO
+                select_estado.on('change', function() {
+                    const select_estado2 = $('#municipio_id').select2()
+                    let estado_id_changue
+                    if (typeof prueba === "undefined") {
+                        // se ejecutan estas instrucciones
+                        estado_id_changue = select_estado.val()
+                      }
+                    else{
+                        estado_id_changue = prueba
+                    }
+                    Catalogs.get_next_selects(catalog_fat2, estado_id_changue, catalog_item, select_estado2)
+                })
                 // SUBMIT
                 btn_submit.addEventListener("click", function (e) {
                     e.preventDefault(),
@@ -287,51 +215,10 @@ var KTlocalidadesList = (function () {
                                 setTimeout(function () {
                                     btn_submit.removeAttribute(
                                         "data-kt-indicator"
-                                    ),
-                                    $.ajax({
-                                        url: "localidades",
-                                        type: "POST",
-                                        dataType:"json",
-                                        encode: "true",
-                                        headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                        },
-                                        data: $("#kt_modal_add_localidad_form").serialize(),
-                                        success: function (result) {
-                                                Swal.fire({
-                                                text: "Datos guardados exitosamente!",
-                                                icon: "success",
-                                                buttonsStyling: !1,
-                                                confirmButtonText:
-                                                    "Entendido!",
-                                                customClass: {
-                                                confirmButton:
-                                                    "btn btn-primary",
-                                            },
-                                            }).then(function (e) {
-                                                e.isConfirmed &&
-                                                    (modal.hide(),
-                                                    (btn_submit.disabled =
-                                                        !1), table_items.ajax.reload(), form.reset());
-                                            });
-                                        },
-                                        beforeSend(){
-                                            Swal.fire({
-                                                title: "<strong>Cargando</strong>",
-                                                html: `<div class="progress container-fluid"></div>`,
-                                                showConfirmButton: false,
-                                                });
-                                        },
-                                        error(data){
-                                            Swal.fire({
-                                                icon: "error",
-                                                title: "Error",
-                                                text: "Ocurrio un error en la base de datos!",
-                                            });
-                                            btn_submit.disabled = !1
-                                            console.log(data);
-                                        }
-                                    });
+                                    )
+
+                                    const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
+                                    Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
 
                                 }, 1000))
                             : Swal.fire({
@@ -342,12 +229,12 @@ var KTlocalidadesList = (function () {
                                     customClass: {
                                         confirmButton: "btn btn-primary",
                                     },
-                                });
-                    });
-                });
+                                })
+                    })
+                })
             },
-        };
-})();
+        }
+})()
 KTUtil.onDOMContentLoaded(function () {
-    KTlocalidadesList.init();
-});
+    KTlocalidadesList.init()
+})

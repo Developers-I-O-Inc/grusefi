@@ -93,4 +93,9 @@ class EstadosController extends Controller
         return response()->json(["OK"=>"Eliminados"]);
     }
 
+    public function get_estados(Request $request){
+        $estados = Estados::where('pais_id', '=', $request->query('id'))->get();
+        return response()->json(["ok" => "OK", "catalogo" => $estados]);
+    }
+
 }

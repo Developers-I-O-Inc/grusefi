@@ -100,12 +100,18 @@
                                     <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" />
                                 </div>
                                 <div class="fv-row mb-7">
+                                    <label class="required fs-6 fw-bold mb-2">País</label>
+                                    <select id="pais_id" name="pais_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_municipio" data-placeholder="Selecciona un pais" data-allow-clear="true">
+                                        <option value=""></option>
+                                         @foreach($paises as $pais)
+                                            <option value="{{$pais->id}}">{{$pais->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Estado</label>
                                     <select id="estado_id" name="estado_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_municipio" data-placeholder="Selecciona un estado" data-allow-clear="true">
-                                        <option value="0"></option>
-                                        @foreach($estados as $estado)
-                                            <option value="{{$estado->id}}">{{$estado->nombre}}</option>
-                                        @endforeach
+                                        <option></option>
                                     </select>
                                 </div>
                                 <div class="fv-row mb-7">
@@ -118,7 +124,7 @@
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo"/>
+                                <input type="text" class="form-control form-control-solid d-none" value="0" name="activo" id="activo"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
@@ -138,5 +144,5 @@
 @endsection
 @section('scripts')
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-    <script src="{{asset('assets/js/catalogs/municipios.js')}}"></script>
+    <script src="{{asset('assets/js/catalogs/municipios.js')}}" type="module"></script>
 @endsection

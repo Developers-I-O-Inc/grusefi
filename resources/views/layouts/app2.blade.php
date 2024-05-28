@@ -107,6 +107,31 @@
                             </div>
                             <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
                                 class="menu-item py-2">
+                                <span class="menu-link menu-center @yield("config")" data-bs-trigger="hover" data-bs-dismiss="click"
+                                    data-bs-placement="right">
+                                    <span class="menu-icon me-0">
+                                        <i class="bi bi-wrench"></i>
+                                    </span>
+                                    <span class="menu-title center">Configuración</span>
+                                </span>
+                                <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
+                                    <div class="menu-item center">
+                                        <div class="menu-content text-center">
+                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Configuración General</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="/catalogs/regulaciones">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Regulaciones del País</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
+                                class="menu-item py-2">
                                 <span class="menu-link menu-center  @yield("purchases")" data-bs-trigger="hover" data-bs-dismiss="click"
                                     data-bs-placement="right">
                                     <span class="menu-icon me-0">

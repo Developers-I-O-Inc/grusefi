@@ -94,19 +94,34 @@
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Nombre localidad</label>
                                     <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre" id="nombre" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_localidad" id="id_localidad" />
+                                    <input type="text" class="form-control form-control-solid" name="id_localidad" id="id_localidad" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
                                     <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" />
                                 </div>
                                 <div class="fv-row mb-7">
+                                    <label class="required fs-6 fw-bold mb-2">País</label>
+                                    <select id="pais_id" name="pais_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_localidad" data-placeholder="Selecciona un pais" data-allow-clear="true">
+                                        <option value=""></option>
+                                         @foreach($paises as $pais)
+                                            <option value="{{$pais->id}}">{{$pais->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fs-6 fw-bold mb-2">Estado</label>
+                                    <select id="estado_id" name="estado_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_localidad" data-placeholder="Selecciona un estado" data-allow-clear="true">
+                                        <option value=""></option>
+                                         {{-- @foreach($paises as $pais)
+                                            <option value="{{$pais->id}}">{{$pais->nombre}}</option>
+                                        @endforeach --}}
+                                    </select>
+                                </div>
+                                <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Municipio</label>
                                     <select id="municipio_id" name="municipio_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_localidad" data-placeholder="Selecciona un municipio" data-allow-clear="true">
-                                        <option value="0"></option>
-                                        @foreach($municipios as $municipio)
-                                            <option value="{{$municipio->id}}">{{$municipio->nombre}}</option>
-                                        @endforeach
+                                        <option value=""></option>
                                     </select>
                                 </div>
                                 <div class="fv-row mb-7">
@@ -139,5 +154,5 @@
 @endsection
 @section('scripts')
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-    <script src="{{asset('assets/js/catalogs/localidades.js')}}"></script>
+    <script src="{{asset('assets/js/catalogs/localidades.js')}}" type="module"></script>
 @endsection

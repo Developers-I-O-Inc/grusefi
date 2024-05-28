@@ -1,5 +1,14 @@
-"use strict";
+"use strict"
+
+import Catalogs from "./general.js"
+
 var KTmunicipioesList = (function () {
+
+    const catalog_fat = "estados"
+    const catalog = "municipios"
+    const catalog_item = "municipio"
+    const token = $('meta[name="csrf-token"]').attr('content')
+
     var table_items,
         btn_modal,
         btn_add,
@@ -12,23 +21,23 @@ var KTmunicipioesList = (function () {
         edit_nombre,
         edit_nombre_corto,
         edit_codigo,
-        edit_active,
         check_active,
+        edit_active,
         select_estado,
+        select_pais,
         n,
-        loader,
         edit = () => {
             n.querySelectorAll(
                 '[data-kt-municipio-table-filter="edit"]'
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
-                    e.preventDefault();
+                    // e.preventDefault()
                     $.get("municipios/"+ $(this).data("id") + "/edit", function(data){
-                        edit_id.value=data.municipio.id;
-                        edit_nombre.value=data.municipio.nombre;
-                        edit_nombre_corto.value=data.municipio.nombre_corto;
-                        edit_codigo.value=data.municipio.codigo;
-                        if(data.municipio.activo){
+                        edit_id.value = data.municipio[0].id
+                        edit_nombre.value = data.municipio[0].nombre
+                        edit_nombre_corto.value = data.municipio[0].nombre_corto
+                        edit_codigo.value = data.municipio[0].codigo
+                        if(data.municipio[0].activo){
                             check_active.checked = true
                             edit_active.value = 1
                         }
@@ -36,117 +45,15 @@ var KTmunicipioesList = (function () {
                             check_active.checked = false
                             edit_active.value = 0
                         }
-                        $("#estado_id").val(data.municipio.estado_id).trigger("change.select2");
-                        modal.show();
+                        $("#pais_id").val(data.municipio[0].pais_id).trigger("change.select2")
+                        select_pais.trigger('change');
+                        select_estado.setAttribute('data-id', data.municipio[0].estado_id)
+                        modal.show()
                     })
-                });
-            });
-        },
-        delete_items = () => {
-            const e = n.querySelectorAll('[type="checkbox"]'),
-                o = document.querySelector(
-                    '[data-kt-municipio-table-select="delete_selected"]'
-                );
-            e.forEach((t) => {
-                t.addEventListener("click", function () {
-                    setTimeout(function () {
-                        uncheck();
-                    }, 50);
-                });
-            }),
-            o.addEventListener("click", function () {
-                let arr_items_deleted=[];
-                e.forEach((e) => {
-                    e.checked && arr_items_deleted.push($(e).data("id"));
-                });
-                Swal.fire({
-                    text: "Estas seguro de eliminar los registros seleccionados?",
-                    icon: "warning",
-                    showCancelButton: !0,
-                    buttonsStyling: !1,
-                    confirmButtonText: "Si, eliminar!",
-                    cancelButtonText: "No, cancelar",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-danger",
-                        cancelButton: "btn fw-bold btn-active-light-primary",
-                    },
-                }).then(function (o) {
-                    o.value
-                    ?
-                    $.ajax({
-                        url: "destroy_municipios",
-                        type: "POST",
-                        dataType:"json",
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            ids:arr_items_deleted
-                        },
-                        success: function (result) {
-                            Swal.fire({
-                                text: "Datos eliminados correctamente!",
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText:"Entendido!",
-                                customClass: {
-                                    confirmButton:"btn btn-primary",
-                                },
-                            }).then(function (e) {
-                                e.isConfirmed && table_items.ajax.reload();
-                            });
-                        },
-                        beforeSend(){
-                            Swal.fire({
-                                title: "<strong>Cargando</strong>",
-                                html: `<div class="progress container-fluid"></div>`,
-                                showConfirmButton: false,
-                            });
-                        },
-                        error(data){
-                            Swal.fire({
-                                icon: "error",
-                                title: "Error",
-                                text: "Ocurrio un error en la base de datos!",
-                            });
-                                console.log(data);
-                        }
-                    })
+                })
+            })
+        }
 
-                    : "cancel" === o.dismiss &&
-                        Swal.fire({
-                            text: "Los registros no se eliminaron.",
-                            icon: "error",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Entendido!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            },
-                        });
-                });
-            });
-        };
-        const uncheck = () => {
-            const t = document.querySelector(
-                    '[data-kt-municipio-table-toolbar="base"]'
-                ),
-                e = document.querySelector(
-                    '[data-kt-municipio-table-toolbar="selected"]'
-                ),
-                o = document.querySelector(
-                    '[data-kt-municipio-table-select="selected_count"]'
-                ),
-                c = n.querySelectorAll('tbody [type="checkbox"]');
-            let r = !1,
-                l = 0;
-            c.forEach((t) => {
-                t.checked && ((r = !0), l++);
-            }),
-                r ? ((o.innerHTML = l),
-                    t.classList.add("d-none"),
-                    e.classList.remove("d-none"))
-                    : (t.classList.remove("d-none"), e.classList.add("d-none"));
-        };
         return {
             init: function () {
                 (modal = new bootstrap.Modal(
@@ -154,8 +61,8 @@ var KTmunicipioesList = (function () {
                 )),
                 // inicialize elements html
                 (btn_add = document.querySelector("#btn_add")),
-                (loader = document.querySelector("#loader")),
                 (select_estado = document.querySelector("#estado_id")),
+                (select_pais = $('#pais_id').select2()),
                 (form = document.querySelector("#kt_modal_add_municipio_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_municipio_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_municipio_submit")),
@@ -233,45 +140,43 @@ var KTmunicipioesList = (function () {
                                 infoEmpty: "No hay información",
                                 infoFiltered: "(Filtrando _MAX_ registros)",
                                 processing:
-                                    `<div id="loader">
-                                    <span class='fa-stack fa-lg'>
-                                        <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>
-                                    </span>&emsp;Loading...
-                                </div>`
+                                    `<span class="loader"></span>`
                             },
                         })).on("draw", function () {
-                            delete_items(), edit(), uncheck();
+                            Catalogs.delete_items(n, table_items, catalog, catalog_item, token), edit(), Catalogs.uncheck(n, catalog_item)
                         }),
-                        delete_items(),
+                        Catalogs.delete_items(n, table_items, catalog, catalog_item, token),
                         edit(),
                         document.querySelector('[data-kt-municipio-table-filter="search"]').addEventListener("keyup", function (e) {
-                            table_items.search(e.target.value).draw();
+                            table_items.search(e.target.value).draw()
                         })
-                    );
+                    )
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
-                    if(check_active.checked) {
-                        edit_active.value=1
-                    }
-                    else{
-                        edit_active.value=0
-                    }
-                });
+                    Catalogs.checked(edit_active, check_active)
+                })
                 // BUTTON ADD
                 btn_add.addEventListener("click", function (t) {
-                    t.preventDefault()
+                    Catalogs.checked(edit_active, check_active)
                     form.reset()
-                    $("#estado_id").val(null).trigger("change.select2");
+                    $("#pais_id").val(null).trigger("change.select2")
+                    $("#estado_id").val(null).trigger("change.select2")
+                    select_estado.removeAttribute('data-id')
                     modal.show()
-                });
+                })
                 // CLOSE MODAL
                 btn_modal.addEventListener("click", function (t) {
-                    t.preventDefault(), modal.hide();
-                });
+                    t.preventDefault(), modal.hide()
+                })
                 // CLOSE MODAL
                 btn_cancel.addEventListener("click", function (t) {
-                    t.preventDefault(), modal.hide();
-                });
+                    t.preventDefault(), modal.hide()
+                })
+                // CHANGE PAIS
+                select_pais.on('change', function() {
+                    const select_estado2 = $('#estado_id').select2()
+                    Catalogs.get_next_selects(catalog_fat, select_pais.val(), catalog_item, select_estado2)
+                })
                 // SUBMIT
                 btn_submit.addEventListener("click", function (e) {
                     e.preventDefault(),
@@ -286,52 +191,9 @@ var KTmunicipioesList = (function () {
                                 setTimeout(function () {
                                     btn_submit.removeAttribute(
                                         "data-kt-indicator"
-                                    ),
-                                    $.ajax({
-                                        url: "municipios",
-                                        type: "POST",
-                                        dataType:"json",
-                                        encode: "true",
-                                        headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                        },
-                                        data: $("#kt_modal_add_municipio_form").serialize(),
-                                        success: function (result) {
-                                                Swal.fire({
-                                                text: "Datos guardados exitosamente!",
-                                                icon: "success",
-                                                buttonsStyling: !1,
-                                                confirmButtonText:
-                                                    "Entendido!",
-                                                customClass: {
-                                                confirmButton:
-                                                    "btn btn-primary",
-                                            },
-                                            }).then(function (e) {
-                                                e.isConfirmed &&
-                                                    (modal.hide(),
-                                                    (btn_submit.disabled =
-                                                        !1), table_items.ajax.reload(), form.reset());
-                                            });
-                                        },
-                                        beforeSend(){
-                                            Swal.fire({
-                                                title: "<strong>Cargando</strong>",
-                                                html: `<div class="progress container-fluid"></div>`,
-                                                showConfirmButton: false,
-                                                });
-                                        },
-                                        error(data){
-                                            Swal.fire({
-                                                icon: "error",
-                                                title: "Error",
-                                                text: "Ocurrio un error en la base de datos!",
-                                            });
-                                            btn_submit.disabled = !1
-                                            console.log(data);
-                                        }
-                                    });
-
+                                    )
+                                    const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
+                                    Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
                                 }, 1000))
                             : Swal.fire({
                                     text: "Error, faltan algunos datos, intente de nuevo por favor.",
@@ -341,12 +203,12 @@ var KTmunicipioesList = (function () {
                                     customClass: {
                                         confirmButton: "btn btn-primary",
                                     },
-                                });
-                    });
-                });
+                                })
+                    })
+                })
             },
-        };
-})();
+        }
+})()
 KTUtil.onDOMContentLoaded(function () {
-    KTmunicipioesList.init();
-});
+    KTmunicipioesList.init()
+})
