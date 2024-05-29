@@ -28,6 +28,9 @@ Route::post('destroy_categorias', 'CategoriasController@destroy_categorias');
 // PRESENTACIONES
 Route::resource('presentaciones', 'PresentacionesController');
 Route::post('destroy_presentaciones', 'PresentacionesController@destroy_presentaciones');
-// PRESENTACIONES
+// FLORACIONES
 Route::resource('floraciones', 'FloracionesController');
 Route::post('destroy_floraciones', 'FloracionesController@destroy_floraciones');
+// TIPO CULTIVO
+Route::resource('tipo_cultivos', 'TipoCultivosController');
+Route::post('destroy_tipo_cultivos', 'TipoCultivosController@destroy_tipo_cultivos');
