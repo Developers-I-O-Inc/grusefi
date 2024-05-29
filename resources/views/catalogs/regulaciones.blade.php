@@ -50,6 +50,7 @@
                                         data-kt-check-target="#kt_regulaciones_table .form-check-input" value="1" />
                                 </div>
                             </th>
+                            <th class="min-w-60px">Opciones</th>
                             <th class="min-w-125px">id</th>
                             <th class="min-w-125px">País</th>
                             <th class="min-w-125px">Abreviación</th>
@@ -64,7 +65,6 @@
                             <th class="min-w-125px">Req. Estudio Análisis</th>
                             <th class="min-w-125px">Req. Impresión</th>
                             <th class="min-w-125px">Activo</th>
-                            <th class="min-w-125px">Opciones</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
@@ -98,9 +98,9 @@
                                 data-kt-scroll-dependencies="#kt_modal_add_regulacion_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_regulacion_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-7">
-                                    <label class="required fs-6 fw-bold mb-2">Municipio</label>
-                                    <select id="municipio_id" name="municipio_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_regulacion" data-placeholder="Selecciona un municipio" data-allow-clear="true">
-                                        <option value="0"></option>
+                                    <label class="required fs-6 fw-bold mb-2">Pais</label>
+                                    <select id="pais_id" name="pais_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_regulacion" data-placeholder="Selecciona un país" data-allow-clear="true">
+                                        <option></option>
                                         @foreach($paises as $pais)
                                             <option value="{{$pais->id}}">{{$pais->nombre}}</option>
                                         @endforeach
@@ -127,20 +127,54 @@
                                     <label class="required fs-6 fw-bold mb-2">Nombre País Certificado</label>
                                     <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_pais_certificado" id="nombre_pais_certificado" />
                                 </div>
+
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="0" id="check_embarques" name="check_embarques"/>
                                     <label class="form-check-label" for="active">
-                                        Embarques
+                                        Activo para embarques
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo_embarques" id="activo_embarques"/>
+                                <input type="text" class="form-control form-control-solid d-none" name="activo_embarques" id="activo_embarques" value="0"/>
+
+                                <div class="fv-row mb-7">
+                                    <input class="form-check-input" type="checkbox" value="0" id="check_inspector" name="check_inspector"/>
+                                    <label class="form-check-label" for="active">
+                                        Requiere Inspector
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control form-control-solid d-none" name="rq_inspector" id="rq_inspector" value="0"/>
+
+                                <div class="fv-row mb-7">
+                                    <input class="form-check-input" type="checkbox" value="0" id="check_huertas" name="check_huertas"/>
+                                    <label class="form-check-label" for="active">
+                                        Requiere Huertas
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control form-control-solid d-none" name="rq_huertas" id="rq_huertas" value="0"/>
+
+                                <div class="fv-row mb-7">
+                                    <input class="form-check-input" type="checkbox" value="0" id="check_analisis" name="check_analisis"/>
+                                    <label class="form-check-label" for="active">
+                                        Requiere Estudios de Análisis
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control form-control-solid d-none" name="rq_estudios_analisis" id="rq_estudios_analisis" value="0"/>
+
+                                <div class="fv-row mb-7">
+                                    <input class="form-check-input" type="checkbox" value="0" id="check_impresion" name="check_impresion"/>
+                                    <label class="form-check-label" for="active">
+                                        Requiere Impresión de Anexo
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control form-control-solid d-none" name="rq_impresion" id="rq_impresion" value="0"/>
+
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="" id="active_check" name="active_check"/>
                                     <label class="form-check-label" for="active">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo"/>
+                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
@@ -160,5 +194,5 @@
 @endsection
 @section('scripts')
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-    <script src="{{asset('assets/js/catalogs/regulaciones.js')}}"></script>
+    <script src="{{asset('assets/js/catalogs/regulaciones.js')}}" type="module"></script>
 @endsection

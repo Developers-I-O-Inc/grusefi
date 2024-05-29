@@ -1,5 +1,13 @@
-"use strict";
+"use strict"
+
+import Catalogs from "./general.js"
+
 var KTregulacionesList = (function () {
+
+    const catalog = "regulaciones"
+    const catalog_item = "regulacion"
+    const token = $('meta[name="csrf-token"]').attr('content')
+
     var table_items,
         btn_modal,
         btn_add,
@@ -9,148 +17,52 @@ var KTregulacionesList = (function () {
         validations,
         form,
         edit_id,
-        edit_nombre,
-        edit_nombre_corto,
-        edit_codigo,
+        edit_dictamen_4,
+        edit_dictamen_5,
+        edit_dictamen_11,
+        edit_pais_dictamen,
+        edit_pais_certificado,
+        edit_embarques,
+        edit_inspector,
+        edit_huertas,
+        edit_analisis,
+        edit_impresion,
         edit_active,
         check_active,
         check_embarques,
-        select_estado,
+        check_inspector,
+        check_huertas,
+        check_analisis,
+        check_impresion,
+        select_pais,
         n,
-        loader,
-        checked = (attrs) => {
-
-        },
         edit = () => {
             n.querySelectorAll(
                 '[data-kt-regulacion-table-filter="edit"]'
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
-                    e.preventDefault();
+                    e.preventDefault()
                     $.get("regulaciones/"+ $(this).data("id") + "/edit", function(data){
-                        edit_id.value=data.regulacion.id;
-                        edit_nombre.value=data.regulacion.nombre;
-                        edit_nombre_corto.value=data.regulacion.nombre_corto;
-                        edit_codigo.value=data.regulacion.codigo;
-                        if(data.regulacion.activo){
-                            check_active.checked = true
-                            edit_active.value = 1
-                        }
-                        else{
-                            check_active.checked = false
-                            edit_active.value = 0
-                        }
-                        $("#municipio_id").val(data.regulacion.municipio_id).trigger("change.select2");
-                        modal.show();
+                        edit_id.value=data.regulacion[0].id
+                        edit_dictamen_4.value=data.regulacion[0].dictamen_apartado_4
+                        edit_dictamen_5.value=data.regulacion[0].dictamen_apartado_5
+                        edit_dictamen_11.value=data.regulacion[0].dictamen_apartado_11
+                        edit_pais_dictamen.value=data.regulacion[0].nombre_pais_dictamen
+                        edit_pais_certificado.value=data.regulacion[0].nombre_pais_certificado
+                        Catalogs.checked_edit(data.regulacion[0].activo_embarques, edit_embarques, check_embarques)
+                        Catalogs.checked_edit(data.regulacion[0].rq_inspector, edit_inspector, check_inspector)
+                        Catalogs.checked_edit(data.regulacion[0].rq_huertas, edit_huertas, check_huertas)
+                        Catalogs.checked_edit(data.regulacion[0].rq_estudios_analisis, edit_analisis, check_analisis)
+                        Catalogs.checked_edit(data.regulacion[0].rq_impresion, edit_impresion, check_impresion)
+                        Catalogs.checked_edit(data.regulacion[0].rq_activo, edit_active, check_active)
+                        $("#pais_id").val(data.regulacion[0].pais_id).trigger("change.select2")
+                        select_pais.trigger('change');
+                        modal.show()
                     })
-                });
-            });
-        },
-        delete_items = () => {
-            const e = n.querySelectorAll('[type="checkbox"]'),
-                o = document.querySelector(
-                    '[data-kt-regulacion-table-select="delete_selected"]'
-                );
-            e.forEach((t) => {
-                t.addEventListener("click", function () {
-                    setTimeout(function () {
-                        uncheck();
-                    }, 50);
-                });
-            }),
-            o.addEventListener("click", function () {
-                let arr_items_deleted=[];
-                e.forEach((e) => {
-                    e.checked && arr_items_deleted.push($(e).data("id"));
-                });
-                Swal.fire({
-                    text: "Estas seguro de eliminar los registros seleccionados?",
-                    icon: "warning",
-                    showCancelButton: !0,
-                    buttonsStyling: !1,
-                    confirmButtonText: "Si, eliminar!",
-                    cancelButtonText: "No, cancelar",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-danger",
-                        cancelButton: "btn fw-bold btn-active-light-primary",
-                    },
-                }).then(function (o) {
-                    o.value
-                    ?
-                    $.ajax({
-                        url: "destroy_regulaciones",
-                        type: "POST",
-                        dataType:"json",
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            ids:arr_items_deleted
-                        },
-                        success: function (result) {
-                            Swal.fire({
-                                text: "Datos eliminados correctamente!",
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText:"Entendido!",
-                                customClass: {
-                                    confirmButton:"btn btn-primary",
-                                },
-                            }).then(function (e) {
-                                e.isConfirmed && table_items.ajax.reload();
-                            });
-                        },
-                        beforeSend(){
-                            Swal.fire({
-                                title: "<strong>Cargando</strong>",
-                                html: `<div class="progress container-fluid"></div>`,
-                                showConfirmButton: false,
-                            });
-                        },
-                        error(data){
-                            Swal.fire({
-                                icon: "error",
-                                title: "Error",
-                                text: "Ocurrio un error en la base de datos!",
-                            });
-                                console.log(data);
-                        }
-                    })
+                })
+            })
+        }
 
-                    : "cancel" === o.dismiss &&
-                        Swal.fire({
-                            text: "Los registros no se eliminaron.",
-                            icon: "error",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Entendido!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            },
-                        });
-                });
-            });
-        };
-        const uncheck = () => {
-            const t = document.querySelector(
-                    '[data-kt-regulacion-table-toolbar="base"]'
-                ),
-                e = document.querySelector(
-                    '[data-kt-regulacion-table-toolbar="selected"]'
-                ),
-                o = document.querySelector(
-                    '[data-kt-regulacion-table-select="selected_count"]'
-                ),
-                c = n.querySelectorAll('tbody [type="checkbox"]');
-            let r = !1,
-                l = 0;
-            c.forEach((t) => {
-                t.checked && ((r = !0), l++);
-            }),
-                r ? ((o.innerHTML = l),
-                    t.classList.add("d-none"),
-                    e.classList.remove("d-none"))
-                    : (t.classList.remove("d-none"), e.classList.add("d-none"));
-        };
         return {
             init: function () {
                 (modal = new bootstrap.Modal(
@@ -158,19 +70,29 @@ var KTregulacionesList = (function () {
                 )),
                 // inicialize elements html
                 (btn_add = document.querySelector("#btn_add")),
-                (loader = document.querySelector("#loader")),
-                (select_estado = document.querySelector("#estado_id")),
+                (select_pais = $('#pais_id').select2()),
                 (form = document.querySelector("#kt_modal_add_regulacion_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_regulacion_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_regulacion_submit")),
                 (btn_cancel = form.querySelector("#kt_modal_add_regulacion_cancel")),
                 (edit_id = form.querySelector("#id_regulacion")),
-                (edit_nombre = form.querySelector("#nombre")),
-                (edit_nombre_corto = form.querySelector("#nombre_corto")),
-                (edit_codigo = form.querySelector("#codigo")),
+                (edit_dictamen_4 = form.querySelector("#dictamen_apartado_4")),
+                (edit_dictamen_5 = form.querySelector("#dictamen_apartado_5")),
+                (edit_dictamen_11 = form.querySelector("#dictamen_apartado_11")),
+                (edit_pais_dictamen = form.querySelector("#nombre_pais_dictamen")),
+                (edit_pais_certificado = form.querySelector("#nombre_pais_certificado")),
                 (check_active = form.querySelector("#active_check")),
                 (check_embarques = form.querySelector("#check_embarques")),
+                (check_inspector = form.querySelector("#check_inspector")),
+                (check_huertas = form.querySelector("#check_huertas")),
+                (check_analisis = form.querySelector("#check_analisis")),
+                (check_impresion = form.querySelector("#check_impresion")),
                 (edit_active = form.querySelector("#activo")),
+                (edit_embarques = form.querySelector("#activo_embarques")),
+                (edit_inspector = form.querySelector("#rq_inspector")),
+                (edit_huertas = form.querySelector("#rq_huertas")),
+                (edit_analisis = form.querySelector("#rq_estudios_analisis")),
+                (edit_impresion = form.querySelector("#rq_impresion")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
                         nombre: {
@@ -214,6 +136,7 @@ var KTregulacionesList = (function () {
                             processing: true,
                             columns: [
                                 { data: "check", name: "check" },
+                                { data: "buttons", name: "buttons" },
                                 { data: "id", name: "id" },
                                 { data: "pais", name: "pais" },
                                 { data: "abreviacion", name: "abreviacion" },
@@ -228,13 +151,12 @@ var KTregulacionesList = (function () {
                                 { data: "analisis", name: "analisis" },
                                 { data: "impresion", name: "impresion" },
                                 { data: "activos", name: "activos" },
-                                { data: "buttons", name: "buttons" },
                             ],
                             order: [[2, "asc"]],
                             columnDefs: [
                                 { orderable: !1, targets: 0 },
                                 {
-                                    targets: [1],
+                                    targets: [2],
                                     visible: false,
                                     searchable: false,
                                 },
@@ -245,57 +167,55 @@ var KTregulacionesList = (function () {
                                 infoEmpty: "No hay información",
                                 infoFiltered: "(Filtrando _MAX_ registros)",
                                 processing:
-                                    `<div id="loader">
-                                    <span class='fa-stack fa-lg'>
-                                        <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>
-                                    </span>&emsp;Loading...
-                                </div>`
+                                    `<span class="loader"></span>`
                             },
                         })).on("draw", function () {
-                            delete_items(), edit(), uncheck();
+                            Catalogs.delete_items(n, table_items, catalog, catalog_item, token), edit(), Catalogs.uncheck(n, catalog_item)
                         }),
-                        delete_items(),
+                        Catalogs.delete_items(n, table_items, catalog, catalog_item, token),
                         edit(),
                         document.querySelector('[data-kt-regulacion-table-filter="search"]').addEventListener("keyup", function (e) {
-                            table_items.search(e.target.value).draw();
+                            table_items.search(e.target.value).draw()
                         })
-                    );
+                    )
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
-                    console.log(t)
-                    if(check_active.checked) {
-                        edit_active.value=1
-                    }
-                    else{
-                        edit_active.value=0
-                    }
-                });
-                // CHECK ACTIVE
+                    Catalogs.checked(edit_active, check_active)
+                })
+                // CHECK EMBARQUES
                 check_embarques.addEventListener("click", function (t) {
-                    if(this.checked) {
-                        this.value=1
-                        console.log(this.value)
-                    }
-                    else{
-                        this.value=0
-                        console.log(this.value)
-                    }
-                });
+                    Catalogs.checked(edit_embarques, check_embarques)
+                })
+                // CHECK INSPECTOR
+                check_inspector.addEventListener("click", function (t) {
+                    Catalogs.checked(edit_inspector, check_inspector)
+                })
+                // CHECK HUERTAS
+                check_huertas.addEventListener("click", function (t) {
+                    Catalogs.checked(edit_huertas, check_huertas)
+                })
+                // CHECK ANALISIS
+                check_analisis.addEventListener("click", function (t) {
+                    Catalogs.checked(edit_analisis, check_analisis)
+                })
+                // CHECK IMPRESION
+                check_impresion.addEventListener("click", function (t) {
+                    Catalogs.checked(edit_impresion, check_impresion)
+                })
                 // BUTTON ADD
                 btn_add.addEventListener("click", function (t) {
-                    t.preventDefault()
+                    Catalogs.checked(edit_active, check_active)
                     form.reset()
-                    $("#municipio_id").val(null).trigger("change.select2");
                     modal.show()
-                });
+                })
                 // CLOSE MODAL
                 btn_modal.addEventListener("click", function (t) {
-                    t.preventDefault(), modal.hide();
-                });
+                    t.preventDefault(), modal.hide()
+                })
                 // CLOSE MODAL
                 btn_cancel.addEventListener("click", function (t) {
-                    t.preventDefault(), modal.hide();
-                });
+                    t.preventDefault(), modal.hide()
+                })
                 // SUBMIT
                 btn_submit.addEventListener("click", function (e) {
                     e.preventDefault(),
@@ -335,26 +255,26 @@ var KTregulacionesList = (function () {
                                                 e.isConfirmed &&
                                                     (modal.hide(),
                                                     (btn_submit.disabled =
-                                                        !1), table_items.ajax.reload(), form.reset());
-                                            });
+                                                        !1), table_items.ajax.reload(), form.reset())
+                                            })
                                         },
                                         beforeSend(){
                                             Swal.fire({
                                                 title: "<strong>Cargando</strong>",
                                                 html: `<div class="progress container-fluid"></div>`,
                                                 showConfirmButton: false,
-                                                });
+                                                })
                                         },
                                         error(data){
                                             Swal.fire({
                                                 icon: "error",
                                                 title: "Error",
                                                 text: "Ocurrio un error en la base de datos!",
-                                            });
+                                            })
                                             btn_submit.disabled = !1
-                                            console.log(data);
+                                            console.log(data)
                                         }
-                                    });
+                                    })
 
                                 }, 1000))
                             : Swal.fire({
@@ -365,12 +285,12 @@ var KTregulacionesList = (function () {
                                     customClass: {
                                         confirmButton: "btn btn-primary",
                                     },
-                                });
-                    });
-                });
+                                })
+                    })
+                })
             },
-        };
-})();
+        }
+})()
 KTUtil.onDOMContentLoaded(function () {
-    KTregulacionesList.init();
-});
+    KTregulacionesList.init()
+})

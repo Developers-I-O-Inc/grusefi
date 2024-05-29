@@ -31,13 +31,13 @@ var KTestadoesList = (function () {
                 '[data-kt-estado-table-filter="edit"]'
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
-                    e.preventDefault();
+                    e.preventDefault()
                     // Catalogs.checked(check_active)
                     $.get("estados/"+ $(this).data("id") + "/edit", function(data){
-                        edit_id.value=data.estado.id;
-                        edit_nombre.value=data.estado.nombre;
-                        edit_nombre_corto.value=data.estado.nombre_corto;
-                        edit_codigo.value=data.estado.codigo;
+                        edit_id.value=data.estado.id
+                        edit_nombre.value=data.estado.nombre
+                        edit_nombre_corto.value=data.estado.nombre_corto
+                        edit_codigo.value=data.estado.codigo
                         if(data.estado.activo){
                             check_active.checked = true
                             edit_active.value = 1
@@ -46,11 +46,11 @@ var KTestadoesList = (function () {
                             check_active.checked = false
                             edit_active.value = 0
                         }
-                        $("#pais_id").val(data.estado.pais_id).trigger("change.select2");
-                        modal.show();
+                        $("#pais_id").val(data.estado.pais_id).trigger("change.select2")
+                        modal.show()
                     })
-                });
-            });
+                })
+            })
         }
 
         return {
@@ -146,28 +146,28 @@ var KTestadoesList = (function () {
                         Catalogs.delete_items(n, table_items, catalog, catalog_item, token),
                         edit(),
                         document.querySelector('[data-kt-estado-table-filter="search"]').addEventListener("keyup", function (e) {
-                            table_items.search(e.target.value).draw();
+                            table_items.search(e.target.value).draw()
                         })
-                    );
+                    )
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
-                });
+                })
                 // BUTTON ADD
                 btn_add.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
                     form.reset()
-                    $("#pais_id").val(null).trigger("change.select2");
+                    $("#pais_id").val(null).trigger("change.select2")
                     modal.show()
-                });
+                })
                 // CLOSE MODAL
                 btn_modal.addEventListener("click", function (t) {
-                    t.preventDefault(), modal.hide();
-                });
+                    t.preventDefault(), modal.hide()
+                })
                 // CLOSE MODAL
                 btn_cancel.addEventListener("click", function (t) {
-                    t.preventDefault(), modal.hide();
-                });
+                    t.preventDefault(), modal.hide()
+                })
                 // SUBMIT
                 btn_submit.addEventListener("click", function (e) {
                     e.preventDefault(),
@@ -196,12 +196,12 @@ var KTestadoesList = (function () {
                                     customClass: {
                                         confirmButton: "btn btn-primary",
                                     },
-                                });
-                    });
-                });
+                                })
+                    })
+                })
             },
-        };
-})();
+        }
+})()
 KTUtil.onDOMContentLoaded(function () {
-    KTestadoesList.init();
-});
+    KTestadoesList.init()
+})

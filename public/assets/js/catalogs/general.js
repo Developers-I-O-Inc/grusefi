@@ -8,6 +8,17 @@ class Catalogs {
             campo.value = 0
         }
     }
+    // CHECK AND CHANGUE VALUE FOR EDIT
+    checked_edit(activo, campo, check) {
+        if(activo){
+            check.checked = true
+            campo.value = 1
+        }
+        else{
+            check.checked = false
+            campo.value = 0
+        }
+    }
 
     delete_items(selector, table_items, catalog, catalog_item, token) {
         const e = selector.querySelectorAll('[type="checkbox"]')

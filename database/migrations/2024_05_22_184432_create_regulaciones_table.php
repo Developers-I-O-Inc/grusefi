@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean("rq_huertas");
             $table->boolean("rq_estudios_analisis");
             $table->boolean("rq_impresion");
+            $table->tinyInteger('activo')->default(1);
             $table->timestamps();
             $table->softdeletes();
             $table->foreign('pais_id')->references('id')->on('cat_paises');

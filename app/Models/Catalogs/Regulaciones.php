@@ -23,7 +23,8 @@ class Regulaciones extends Model
         'activo_embarques',
         'rq_inspector',
         'rq_huertas',
-        'rq_estudio_analisis',
+        'rq_estudios_analisis',
         'rq_impresion',
+        'activo'
     ];
 }

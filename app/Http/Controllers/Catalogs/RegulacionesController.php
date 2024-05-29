@@ -19,7 +19,7 @@ class RegulacionesController extends Controller
     {
         if ($request->ajax()) {
             $regulaciones = DB::select('SELECT cat_regulaciones.id, pais_id, nombre_corto as abreviacion, dictamen_apartado_4, dictamen_apartado_5, dictamen_apartado_11, nombre_pais_dictamen,
-                    nombre_pais_certificado, activo_embarques, rq_inspector, rq_huertas, rq_estudios_analisis, rq_impresion, activo, nombre as pais
+                    nombre_pais_certificado, activo_embarques, rq_inspector, rq_huertas, rq_estudios_analisis, rq_impresion, cat_regulaciones.activo, nombre as pais
                     FROM cat_regulaciones LEFT JOIN cat_paises ON cat_regulaciones.pais_id = cat_paises.id where cat_regulaciones.deleted_at IS NULL');
             return Datatables::of($regulaciones)
                     ->addIndexColumn()
@@ -41,7 +41,7 @@ class RegulacionesController extends Controller
                     })
                     ->addIndexColumn()
                     ->addColumn('embarques', function($row){
-                        if($row->activo){
+                        if($row->activo_embarques){
                            $btn = '<span class="badge badge-light-success">Si</span>';
                         }
                         else{
@@ -51,7 +51,7 @@ class RegulacionesController extends Controller
                     })
                     ->addIndexColumn()
                     ->addColumn('inspector', function($row){
-                        if($row->activo){
+                        if($row->rq_inspector){
                            $btn = '<span class="badge badge-light-success">Si</span>';
                         }
                         else{
@@ -61,7 +61,7 @@ class RegulacionesController extends Controller
                     })
                     ->addIndexColumn()
                     ->addColumn('huertas', function($row){
-                        if($row->activo){
+                        if($row->rq_huertas){
                            $btn = '<span class="badge badge-light-success">Si</span>';
                         }
                         else{
@@ -71,7 +71,7 @@ class RegulacionesController extends Controller
                     })
                     ->addIndexColumn()
                     ->addColumn('analisis', function($row){
-                        if($row->activo){
+                        if($row->rq_estudios_analisis){
                            $btn = '<span class="badge badge-light-success">Si</span>';
                         }
                         else{
@@ -80,7 +80,7 @@ class RegulacionesController extends Controller
                         return $btn;
                     })
                     ->addColumn('impresion', function($row){
-                        if($row->activo){
+                        if($row->rq_impresion){
                            $btn = '<span class="badge badge-light-success">Si</span>';
                         }
                         else{
@@ -136,7 +136,9 @@ class RegulacionesController extends Controller
      */
     public function edit(string $id)
     {
-        $regulacion=Regulaciones::find($id);
+        $regulacion = DB::select('SELECT cat_regulaciones.id, pais_id, nombre_corto as abreviacion, dictamen_apartado_4, dictamen_apartado_5, dictamen_apartado_11, nombre_pais_dictamen,
+                    nombre_pais_certificado, activo_embarques, rq_inspector, rq_huertas, rq_estudios_analisis, rq_impresion, cat_regulaciones.activo, nombre as pais
+                    FROM cat_regulaciones LEFT JOIN cat_paises ON cat_regulaciones.pais_id = cat_paises.id where cat_regulaciones.deleted_at IS NULL AND cat_regulaciones.id = '.$id);
 
         return response()->json(['regulacion'=>$regulacion]);
     }
