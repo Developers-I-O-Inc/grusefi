@@ -19,3 +19,6 @@ Route::post('destroy_localidades', 'LocalidadesController@destroy_localidades');
 // REGULACIONES
 Route::resource('regulaciones', 'RegulacionesController');
 Route::post('destroy_regulaciones', 'RegulacionesController@destroy_regulaciones');
+// CALIBRES
+Route::resource('calibres', 'CalibresController');
+Route::post('destroy_calibres', 'CalibresController@destroy_calibres');

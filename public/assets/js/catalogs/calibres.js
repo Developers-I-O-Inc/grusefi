@@ -2,10 +2,10 @@
 
 import Catalogs from "./general.js"
 
-var KTestadoesList = (function () {
+var KTcalibreesList = (function () {
 
-    const catalog = "estados"
-    const catalog_item = "estado"
+    const catalog = "calibres"
+    const catalog_item = "calibre"
     const token = $('meta[name="csrf-token"]').attr('content')
 
     var table_items,
@@ -17,34 +17,20 @@ var KTestadoesList = (function () {
         validations,
         form,
         edit_id,
-        edit_nombre,
-        edit_nombre_corto,
-        edit_codigo,
+        edit_calibre,
         edit_active,
         check_active,
-        select_pais,
         n,
         edit = () => {
             n.querySelectorAll(
-                '[data-kt-estado-table-filter="edit"]'
+                '[data-kt-calibre-table-filter="edit"]'
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
                     e.preventDefault()
-                    // Catalogs.checked(check_active)
-                    $.get("estados/"+ $(this).data("id") + "/edit", function(data){
-                        edit_id.value=data.estado.id
-                        edit_nombre.value=data.estado.nombre
-                        edit_nombre_corto.value=data.estado.nombre_corto
-                        edit_codigo.value=data.estado.codigo
-                        if(data.estado.activo){
-                            check_active.checked = true
-                            edit_active.value = 1
-                        }
-                        else{
-                            check_active.checked = false
-                            edit_active.value = 0
-                        }
-                        $("#pais_id").val(data.estado.pais_id).trigger("change.select2")
+                    $.get("calibres/"+ $(this).data("id") + "/edit", function(data){
+                        edit_id.value=data.calibre.id
+                        edit_calibre.value=data.calibre.calibre
+                        Catalogs.checked_edit(data.calibre.activo, edit_active, check_active)
                         modal.show()
                     })
                 })
@@ -54,41 +40,24 @@ var KTestadoesList = (function () {
         return {
             init: function () {
                 (modal = new bootstrap.Modal(
-                    document.querySelector("#kt_modal_add_estado")
+                    document.querySelector("#kt_modal_add_calibre")
                 )),
                 // inicialize elements html
                 (btn_add = document.querySelector("#btn_add")),
-                (select_pais = document.querySelector("#select_pais")),
-                (form = document.querySelector("#kt_modal_add_estado_form")),
-                (btn_modal = form.querySelector("#kt_modal_add_estado_close")),
-                (btn_submit = form.querySelector("#kt_modal_add_estado_submit")),
-                (btn_cancel = form.querySelector("#kt_modal_add_estado_cancel")),
-                (edit_id = form.querySelector("#id_estado")),
-                (edit_nombre = form.querySelector("#nombre")),
-                (edit_nombre_corto = form.querySelector("#nombre_corto")),
-                (edit_codigo = form.querySelector("#codigo")),
+                (form = document.querySelector("#kt_modal_add_calibre_form")),
+                (btn_modal = form.querySelector("#kt_modal_add_calibre_close")),
+                (btn_submit = form.querySelector("#kt_modal_add_calibre_submit")),
+                (btn_cancel = form.querySelector("#kt_modal_add_calibre_cancel")),
+                (edit_id = form.querySelector("#id_calibre")),
+                (edit_calibre = form.querySelector("#calibre")),
                 (check_active = form.querySelector("#check_activo")),
                 (edit_active = form.querySelector("#activo")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
-                        nombre: {
+                        calibre: {
                             validators: {
                                 notEmpty: {
-                                    message: "Nombre requerido",
-                                },
-                            },
-                        },
-                        nombre_corto: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Nombre corto requerido",
-                                },
-                            },
-                        },
-                        codigo: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Código",
+                                    message: "Calibre",
                                 },
                             },
                         },
@@ -102,21 +71,18 @@ var KTestadoesList = (function () {
                         }),
                     },
                 })),
-                (n = document.querySelector("#kt_estados_table")) &&
+                (n = document.querySelector("#kt_calibres_table")) &&
                     (n.querySelectorAll("tbody tr").forEach((t) => {
                         // formats
                         }),
                         (table_items = $(n).DataTable({
-                            ajax: "estados",
+                            ajax: "calibres",
                             serverSide: true,
                             processing: true,
                             columns: [
                                 { data: "check", name: "check" },
                                 { data: "id", name: "id" },
-                                { data: "nombre", name: "nombre" },
-                                { data: "nombre_corto", name: "nombre_corto" },
-                                { data: "pais", name: "pais" },
-                                { data: "codigo", name: "codigo" },
+                                { data: "calibre", name: "calibre" },
                                 { data: "activos", name: "activos" },
                                 { data: "buttons", name: "buttons" },
                             ],
@@ -142,7 +108,7 @@ var KTestadoesList = (function () {
                         }),
                         Catalogs.delete_items(n, table_items, catalog, catalog_item, token),
                         edit(),
-                        document.querySelector('[data-kt-estado-table-filter="search"]').addEventListener("keyup", function (e) {
+                        document.querySelector('[data-kt-calibre-table-filter="search"]').addEventListener("keyup", function (e) {
                             table_items.search(e.target.value).draw()
                         })
                     )
@@ -200,5 +166,5 @@ var KTestadoesList = (function () {
         }
 })()
 KTUtil.onDOMContentLoaded(function () {
-    KTestadoesList.init()
+    KTcalibreesList.init()
 })
