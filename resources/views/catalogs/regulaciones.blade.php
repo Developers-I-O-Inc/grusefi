@@ -5,7 +5,7 @@
 @endsection
 @section('title', 'Regulaciones de Paises')
 @section('title_top', 'Regulaciones de Paises')
-@section('zones', 'active')
+@section('config', 'active')
 @section('subtitle_top', 'Control de Regulaciones de Paises')
 @section('content')
     <div id="kt_content_container" class="container-xxl">

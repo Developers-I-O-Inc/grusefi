@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Calibres extends Model
+class Categorias extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'cat_calibres';
+    protected $table = 'cat_categorias';
 
     protected $fillable = [
         'id',
-        'calibre',
-        'activo'
+        'categoria',
+        'activo',
     ];
 }

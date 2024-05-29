@@ -22,3 +22,6 @@ Route::post('destroy_regulaciones', 'RegulacionesController@destroy_regulaciones
 // CALIBRES
 Route::resource('calibres', 'CalibresController');
 Route::post('destroy_calibres', 'CalibresController@destroy_calibres');
+// CATEGORIAS
+Route::resource('categorias', 'CategoriasController');
+Route::post('destroy_categorias', 'CategoriasController@destroy_categorias');

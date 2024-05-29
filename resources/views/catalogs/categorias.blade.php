@@ -3,10 +3,10 @@
     <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
 @endsection
-@section('title', 'Calibres')
-@section('title_top', 'Calibres')
+@section('title', 'Categorías')
+@section('title_top', 'Categorías')
 @section('config', 'active')
-@section('subtitle_top', 'Control de Calibres')
+@section('subtitle_top', 'Control de Categorías')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card">
@@ -23,35 +23,35 @@
                                     fill="black" />
                             </svg>
                         </span>
-                        <input type="text" data-kt-calibre-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar calibres" />
+                        <input type="text" data-kt-categoria-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar categorias" />
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    <div class="d-flex justify-content-end" data-kt-calibre-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar calibre</button>
+                    <div class="d-flex justify-content-end" data-kt-categoria-table-toolbar="base">
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar categoria</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
-                        data-kt-calibre-table-toolbar="selected">
+                        data-kt-categoria-table-toolbar="selected">
                         <div class="fw-bolder me-5">
-                            <span class="me-2" data-kt-calibre-table-select="selected_count"></span>Seleccionados
+                            <span class="me-2" data-kt-categoria-table-select="selected_count"></span>Seleccionados
                         </div>
                         <button type="button" class="btn btn-danger"
-                            data-kt-calibre-table-select="delete_selected">Borrar Seleccionados</button>
+                            data-kt-categoria-table-select="delete_selected">Borrar Seleccionados</button>
                     </div>
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_calibres_table">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_categorias_table">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="w-10px pe-2">
                                 <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                     <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                        data-kt-check-target="#kt_calibres_table .form-check-input" value="1" />
+                                        data-kt-check-target="#kt_categorias_table .form-check-input" value="1" />
                                 </div>
                             </th>
                             <th class="min-w-125px">id</th>
-                            <th class="min-w-125px">Calibre</th>
+                            <th class="min-w-125px">categoría</th>
                             <th class="min-w-125px">Status</th>
                             <th class="min-w-125px">Opciones</th>
                         </tr>
@@ -62,14 +62,14 @@
                 </table>
             </div>
         </div>
-        <div class="modal fade" id="kt_modal_add_calibre" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="kt_modal_add_categoria" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_calibre_form"
-                        data-kt-redirect="../../demo6/dist/apps/calibres/list.html">
-                        <div class="modal-header" id="kt_modal_add_calibre_header">
-                            <h2 class="fw-bolder">Agregar calibre</h2>
-                            <div id="kt_modal_add_calibre_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                    <form class="form" action="#" id="kt_modal_add_categoria_form"
+                        data-kt-redirect="../../demo6/dist/apps/categorias/list.html">
+                        <div class="modal-header" id="kt_modal_add_categoria_header">
+                            <h2 class="fw-bolder">Agregar categoría</h2>
+                            <div id="kt_modal_add_categoria_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none">
@@ -82,14 +82,14 @@
                             </div>
                         </div>
                         <div class="modal-body py-10 px-lg-17">
-                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_calibre_scroll" data-kt-scroll="true"
+                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_categoria_scroll" data-kt-scroll="true"
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
-                                data-kt-scroll-dependencies="#kt_modal_add_calibre_header"
-                                data-kt-scroll-wrappers="#kt_modal_add_calibre_scroll" data-kt-scroll-offset="300px">
+                                data-kt-scroll-dependencies="#kt_modal_add_categoria_header"
+                                data-kt-scroll-wrappers="#kt_modal_add_categoria_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-7">
-                                    <label class="required fs-6 fw-bold mb-2">Calibre</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="calibre" id="calibre" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_calibre" id="id_calibre" />
+                                    <label class="required fs-6 fw-bold mb-2">Categoría</label>
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="categoria" id="categoria" />
+                                    <input type="text" class="form-control form-control-solid d-none" name="id_categoria" id="id_categoria" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
@@ -101,9 +101,9 @@
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
-                            <button type="button" id="kt_modal_add_calibre_cancel"
+                            <button type="button" id="kt_modal_add_categoria_cancel"
                                 class="btn btn-light me-3">Cancelar</button>
-                            <button type="submit" id="kt_modal_add_calibre_submit" class="btn btn-primary">
+                            <button type="submit" id="kt_modal_add_categoria_submit" class="btn btn-primary">
                                 <span class="indicator-label">Guardar</span>
                                 <span class="indicator-progress">Espere un momento...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -117,5 +117,5 @@
 @endsection
 @section('scripts')
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-    <script src="{{asset('assets/js/catalogs/calibres.js')}}" type="module"></script>
+    <script src="{{asset('assets/js/catalogs/categorias.js')}}" type="module"></script>
 @endsection

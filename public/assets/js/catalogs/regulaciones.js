@@ -95,24 +95,45 @@ var KTregulacionesList = (function () {
                 (edit_impresion = form.querySelector("#rq_impresion")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
-                        nombre: {
+                        pais: {
                             validators: {
                                 notEmpty: {
-                                    message: "Nombre requerido",
+                                    message: "País requerido",
                                 },
                             },
                         },
-                        nombre_corto: {
+                        dictamen_apartado_4: {
                             validators: {
                                 notEmpty: {
-                                    message: "Nombre corto requerido",
+                                    message: "Dictamen Apartado 4 requerido",
                                 },
                             },
                         },
-                        codigo: {
+                        dictamen_apartado_5: {
                             validators: {
                                 notEmpty: {
-                                    message: "Código",
+                                    message: "Dictamen Apartado 5 requerido",
+                                },
+                            },
+                        },
+                        dictamen_apartado_11: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Dictamen Apartado 11 requerido",
+                                },
+                            },
+                        },
+                        nombre_pais_certificado: {
+                            validators: {
+                                notEmpty: {
+                                    message: "País certificado requerido",
+                                },
+                            },
+                        },
+                        nombre_pais_dictamen: {
+                            validators: {
+                                notEmpty: {
+                                    message: "País dictamen requerido",
                                 },
                             },
                         },
