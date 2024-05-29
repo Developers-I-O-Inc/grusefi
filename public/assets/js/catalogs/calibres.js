@@ -57,7 +57,7 @@ var KTcalibreesList = (function () {
                         calibre: {
                             validators: {
                                 notEmpty: {
-                                    message: "Calibre",
+                                    message: "Ingrese el calibre",
                                 },
                             },
                         },
