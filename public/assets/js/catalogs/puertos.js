@@ -2,15 +2,15 @@
 
 import Catalogs from "./general.js"
 
-var KTlocalidadesList = (function () {
+var KTpuertoesList = (function () {
 
     const catalog_fat = "estados"
     const catalog_fat2 = "municipios"
-    const catalog = "localidades"
-    const catalog_item = "localidad"
+    const catalog = "puertos"
+    const catalog_item = "puerto"
     const token = $('meta[name="csrf-token"]').attr('content')
 
-    let table_items,
+    var table_items,
         btn_modal,
         btn_add,
         btn_cancel,
@@ -19,44 +19,40 @@ var KTlocalidadesList = (function () {
         validations,
         form,
         edit_id,
-        edit_nombre,
+        edit_puerto,
         edit_nombre_corto,
-        edit_codigo,
+        edit_transporte,
         edit_active,
+        edit_placas,
         check_active,
+        check_placas,
         select_pais,
         select_estado,
+        select_estado2,
         select_municipio,
-        select_estado_2,
         var_estado,
         n,
         edit = () => {
             n.querySelectorAll(
-                '[data-kt-localidad-table-filter="edit"]'
+                '[data-kt-puerto-table-filter="edit"]'
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
                     e.preventDefault()
-                    $.get("localidades/"+ $(this).data("id") + "/edit", function(data){
-                        edit_id.value = data.localidad[0].id
-                        edit_nombre.value = data.localidad[0].nombre
-                        edit_nombre_corto.value = data.localidad[0].nombre_corto
-                        edit_codigo.value = data.localidad[0].codigo
-                        if(data.localidad[0].activo){
-                            check_active.checked = true
-                            edit_active.value = 1
-                        }
-                        else{
-                            check_active.checked = false
-                            edit_active.value = 0
-                        }
-                        $("#pais_id").val(data.localidad[0].pais_id).trigger("change.select2")
+                    $.get("puertos/"+ $(this).data("id") + "/edit", function(data){
+                        edit_id.value=data.puerto[0].id
+                        edit_puerto.value=data.puerto[0].puerto
+                        edit_nombre_corto.value=data.puerto[0].nombre_corto
+                        edit_transporte.value=data.puerto[0].medio_transporte
+                        Catalogs.checked_edit(data.puerto[0].placas, edit_placas, check_placas)
+                        Catalogs.checked_edit(data.puerto[0].activo, edit_active, check_active)
+                        $("#medio_transporte").val(data.puerto[0].medio_transporte).trigger("change.select2")
+                        $("#pais_id").val(data.puerto[0].pais_id).trigger("change.select2")
                         select_pais.trigger('change');
-                        select_estado_2.setAttribute('data-id', data.localidad[0].estado_id)
-                        $("#estado_id").val(data.localidad[0].estado_id).trigger("change.select2")
-                        var_estado= data.localidad[0].estado_id
+                        select_estado2.setAttribute('data-id', data.puerto[0].estado_id)
+                        $("#estado_id").val(data.puerto[0].estado_id).trigger("change.select2")
+                        var_estado= data.puerto[0].estado_id
                         select_estado.trigger('change');
-                        select_municipio.setAttribute('data-id', data.localidad[0].municipio_id)
-
+                        select_municipio.setAttribute('data-id', data.puerto[0].municipio_id)
                         modal.show()
                     })
                 })
@@ -66,45 +62,32 @@ var KTlocalidadesList = (function () {
         return {
             init: function () {
                 (modal = new bootstrap.Modal(
-                    document.querySelector("#kt_modal_add_localidad")
+                    document.querySelector("#kt_modal_add_puerto")
                 )),
                 // inicialize elements html
                 (select_pais = $('#pais_id').select2()),
                 (select_estado = $('#estado_id').select2()),
-                (select_estado_2 = document.querySelector("#estado_id")),
+                (select_estado2 = document.querySelector("#estado_id")),
                 (select_municipio = document.querySelector("#municipio_id")),
                 (btn_add = document.querySelector("#btn_add")),
-                // (select_estado = document.querySelector("#estado_id")),
-                (form = document.querySelector("#kt_modal_add_localidad_form")),
-                (btn_modal = form.querySelector("#kt_modal_add_localidad_close")),
-                (btn_submit = form.querySelector("#kt_modal_add_localidad_submit")),
-                (btn_cancel = form.querySelector("#kt_modal_add_localidad_cancel")),
-                (edit_id = form.querySelector("#id_localidad")),
-                (edit_nombre = form.querySelector("#nombre")),
+                (form = document.querySelector("#kt_modal_add_puerto_form")),
+                (btn_modal = form.querySelector("#kt_modal_add_puerto_close")),
+                (btn_submit = form.querySelector("#kt_modal_add_puerto_submit")),
+                (btn_cancel = form.querySelector("#kt_modal_add_puerto_cancel")),
+                (edit_id = form.querySelector("#id_puerto")),
+                (edit_puerto = form.querySelector("#puerto")),
                 (edit_nombre_corto = form.querySelector("#nombre_corto")),
-                (edit_codigo = form.querySelector("#codigo")),
-                (check_active = form.querySelector("#active_check")),
+                (edit_transporte = form.querySelector("#medio_transporte")),
+                (check_active = form.querySelector("#check_activo")),
+                (check_placas = form.querySelector("#check_placas")),
                 (edit_active = form.querySelector("#activo")),
+                (edit_placas = form.querySelector("#placas")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
-                        nombre: {
+                        puerto: {
                             validators: {
                                 notEmpty: {
-                                    message: "Nombre requerido",
-                                },
-                            },
-                        },
-                        nombre_corto: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Nombre corto requerido",
-                                },
-                            },
-                        },
-                        codigo: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Código",
+                                    message: "Ingrese el puerto",
                                 },
                             },
                         },
@@ -118,31 +101,32 @@ var KTlocalidadesList = (function () {
                         }),
                     },
                 })),
-                (n = document.querySelector("#kt_localidades_table")) &&
+                (n = document.querySelector("#kt_puertos_table")) &&
                     (n.querySelectorAll("tbody tr").forEach((t) => {
                         // formats
                         }),
                         (table_items = $(n).DataTable({
-                            ajax: "localidades",
+                            ajax: "puertos",
                             serverSide: true,
                             processing: true,
                             columns: [
                                 { data: "check", name: "check" },
-                                { data: "id", name: "id" },
-                                { data: "nombre", name: "nombre" },
-                                { data: "nombre_corto", name: "nombre_corto" },
-                                { data: "municipio", name: "municipio" },
-                                { data: "estado", name: "estado" },
-                                { data: "pais", name: "pais" },
-                                { data: "codigo", name: "codigo" },
-                                { data: "activos", name: "activos" },
                                 { data: "buttons", name: "buttons" },
+                                { data: "id", name: "id" },
+                                { data: "puerto", name: "puerto" },
+                                { data: "pais", name: "pais" },
+                                { data: "estado", name: "estado" },
+                                { data: "municipio", name: "municipio" },
+                                { data: "nombre_corto", name: "nombre_corto" },
+                                { data: "medio_transporte", name: "medio_transporte" },
+                                { data: "placas", name: "placas" },
+                                { data: "activos", name: "activos" },
                             ],
                             order: [[2, "asc"]],
                             columnDefs: [
                                 { orderable: !1, targets: 0 },
                                 {
-                                    targets: [1],
+                                    targets: [2],
                                     visible: false,
                                     searchable: false,
                                 },
@@ -160,7 +144,7 @@ var KTlocalidadesList = (function () {
                         }),
                         Catalogs.delete_items(n, table_items, catalog, catalog_item, token),
                         edit(),
-                        document.querySelector('[data-kt-localidad-table-filter="search"]').addEventListener("keyup", function (e) {
+                        document.querySelector('[data-kt-puerto-table-filter="search"]').addEventListener("keyup", function (e) {
                             table_items.search(e.target.value).draw()
                         })
                     )
@@ -168,10 +152,16 @@ var KTlocalidadesList = (function () {
                 check_active.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
                 })
+                 // CHECK INSPECTOR
+                check_placas.addEventListener("click", function (t) {
+                    Catalogs.checked(edit_placas, check_placas)
+                })
                 // BUTTON ADD
                 btn_add.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
                     form.reset()
+                    $("#pais_id").val(null).trigger("change.select2")
+                    $("#estado_id").val(null).trigger("change.select2")
                     $("#municipio_id").val(null).trigger("change.select2")
                     modal.show()
                 })
@@ -183,8 +173,8 @@ var KTlocalidadesList = (function () {
                 btn_cancel.addEventListener("click", function (t) {
                     t.preventDefault(), modal.hide()
                 })
-                // CHANGE PAIS
-                select_pais.on('change', function() {
+                 // CHANGE PAIS
+                 select_pais.on('change', function() {
                     const select_estado2 = $('#estado_id').select2()
                     Catalogs.get_next_selects(catalog_fat, select_pais.val(), catalog_item, select_estado2)
                 })
@@ -215,9 +205,9 @@ var KTlocalidadesList = (function () {
                                     btn_submit.removeAttribute(
                                         "data-kt-indicator"
                                     )
-
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
+
 
                                 }, 1000))
                             : Swal.fire({
@@ -235,5 +225,5 @@ var KTlocalidadesList = (function () {
         }
 })()
 KTUtil.onDOMContentLoaded(function () {
-    KTlocalidadesList.init()
+    KTpuertoesList.init()
 })

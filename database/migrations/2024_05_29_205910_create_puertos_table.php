@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('puertos', function (Blueprint $table) {
+        Schema::create('cat_puertos', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('municipio_id')->unsigned()->index();
+            $table->string('puerto');
+            $table->string('nombre_corto');
+            $table->string('medio_transporte');
+            $table->tinyInteger('placas')->default(1);
+            $table->tinyInteger('activo')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('puertos');
+        Schema::dropIfExists('cat_puertos');
     }
 };

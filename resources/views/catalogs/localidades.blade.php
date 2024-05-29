@@ -113,9 +113,6 @@
                                     <label class="required fs-6 fw-bold mb-2">Estado</label>
                                     <select id="estado_id" name="estado_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_localidad" data-placeholder="Selecciona un estado" data-allow-clear="true">
                                         <option value=""></option>
-                                         {{-- @foreach($paises as $pais)
-                                            <option value="{{$pais->id}}">{{$pais->nombre}}</option>
-                                        @endforeach --}}
                                     </select>
                                 </div>
                                 <div class="fv-row mb-7">

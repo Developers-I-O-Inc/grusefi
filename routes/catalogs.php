@@ -34,3 +34,6 @@ Route::post('destroy_floraciones', 'FloracionesController@destroy_floraciones');
 // TIPO CULTIVO
 Route::resource('tipo_cultivos', 'TipoCultivosController');
 Route::post('destroy_tipo_cultivos', 'TipoCultivosController@destroy_tipo_cultivos');
+// PUERTOS
+Route::resource('puertos', 'PuertosController');
+Route::post('destroy_puertos', 'PuertosController@destroy_puertos');
