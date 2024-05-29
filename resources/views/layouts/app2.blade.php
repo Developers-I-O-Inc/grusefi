@@ -137,6 +137,14 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
+                                        <a class="menu-link" href="/catalogs/floraciones">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Floraciones</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
                                         <a class="menu-link" href="/catalogs/presentaciones">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
