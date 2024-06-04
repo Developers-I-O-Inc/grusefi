@@ -101,4 +101,9 @@ class LocalidadesController extends Controller
         return response()->json(["OK"=>"Eliminados"]);
     }
 
+    public function get_localidades(Request $request){
+        $localidades = Localidades::where('municipio_id', '=', $request->query('id'))->get();
+        return response()->json(["ok" => "OK", "catalogo" => $localidades]);
+    }
+
 }

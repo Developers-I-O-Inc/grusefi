@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Catalogs\Calibres;
 use Yajra\DataTables\DataTables;
 
-class calibresController extends Controller
+class CalibresController extends Controller
 {
     /**
      * Display a listing of the resource.

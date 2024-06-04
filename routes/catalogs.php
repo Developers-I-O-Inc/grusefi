@@ -16,6 +16,7 @@ Route::get('get_municipios', 'MunicipiosController@get_municipios');
 // LOCALIDADES
 Route::resource('localidades', 'LocalidadesController');
 Route::post('destroy_localidades', 'LocalidadesController@destroy_localidades');
+Route::get('get_localidades', 'LocalidadesController@get_localidades');
 // REGULACIONES
 Route::resource('regulaciones', 'RegulacionesController');
 Route::post('destroy_regulaciones', 'RegulacionesController@destroy_regulaciones');
@@ -37,3 +38,6 @@ Route::post('destroy_tipo_cultivos', 'TipoCultivosController@destroy_tipo_cultiv
 // PUERTOS
 Route::resource('puertos', 'PuertosController');
 Route::post('destroy_puertos', 'PuertosController@destroy_puertos');
+// EMPAQUES
+Route::resource('empaques', 'EmpaquesController');
+Route::post('destroy_empaques', 'EmpaquesController@destroy_empaques');

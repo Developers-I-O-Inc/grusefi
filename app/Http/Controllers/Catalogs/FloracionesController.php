@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Catalogs\Floraciones;
 use Yajra\DataTables\DataTables;
 
-class floracionesController extends Controller
+class FloracionesController extends Controller
 {
     /**
      * Display a listing of the resource.
