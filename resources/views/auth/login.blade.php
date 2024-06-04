@@ -18,7 +18,7 @@
 								<img alt="Logo" src="{{asset('img/logo.png')}}" class="h-60px" />
 							</a>
 							<h1 class="fw-bolder fs-2qx pb-5 pb-md-10" style="color: #0f914c;">Bienvenido a Grusefi</h1>
-							<p class="fw-bold fs-2" style="color: #986923;">Administración
+							<p class="fw-bold fs-2" style="color: #986923;">Administración de Plantillas
 						</div>
 					</div>
 				</div>
