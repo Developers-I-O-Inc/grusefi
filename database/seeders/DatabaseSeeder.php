@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'name' => 'Manuel',
-            'user_name' => 'Manuel',
+            // 'user_name' => 'Manuel',
             'last_name' => 'Morales',
             'address' => 'Roble 4',
             'phone' => '3411671215',
@@ -31,5 +33,11 @@ class DatabaseSeeder extends Seeder
         ]);
         // Create role administrator
         Role::create(['name' => 'admin']);
+        // ADD PAIS
+        \App\Models\Catalogs\Paises::factory()->create([
+            'nombre' => 'México',
+            'nombre_corto' => 'MEX',
+            'codigo' => '010'
+        ]);
     }
 }
