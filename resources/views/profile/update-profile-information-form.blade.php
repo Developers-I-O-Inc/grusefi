@@ -2,45 +2,14 @@
     <div class="card mb-5 mb-xl-5">
         <form wire:submit="updateProfileInformation">
         <div class="card-body pt-9 pb-0">
-            <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
-                    <div class="me-7 mb-4" x-data="{photoName: null, photoPreview: null}">
-                        <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                            <div class="image-input image-input-empty" data-kt-image-input="true" style="background-image: url({{ $this->user->profile_photo_url }})">
-                                <div class="image-input-wrapper w-125px h-125px"></div>
-                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                    data-kt-image-input-action="change"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-dismiss="click"
-                                    title="Cambiar Imagen">
-                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                    <input type="file" accept=".png, .jpg, .jpeg" id="photo" class="hidden"
-                                    wire:model.live="photo"
-                                    x-ref="photo"
-                                    x-on:change="
-                                            photoName = $refs.photo.files[0].name;
-                                            const reader = new FileReader();
-                                            reader.onload = (e) => {
-                                                photoPreview = e.target.result;
-                                            };
-                                            reader.readAsDataURL($refs.photo.files[0]);
-                                    "/>
-                                    <input type="hidden" name="avatar_remove" />
-                                </label>
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                data-kt-image-input-action="cancel"
-                                data-bs-toggle="tooltip"
-                                data-bs-dismiss="click"
-                                title="Cancel avatar">
-                                    <i class="bi bi-x fs-2"></i>
-                                </span>
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                data-kt-image-input-action="remove"
-                                data-bs-toggle="tooltip"
-                                data-bs-dismiss="click"
-                                title="Remove avatar">
-                                    <i class="bi bi-x fs-2"></i>
-                                </span>
-                            </div>
+            <div class="d-flex flex-wrap flex-sm-nowrap mb-3" x-data="{photoName: null, photoPreview: null}">
+                    <div class="me-7 mb-4">
+                        <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative" x-show="!photoPreview">
+                            <img src="{{ $this->user->profile_photo_url }}" alt="image">
+                            <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
+                        </div>
+                        <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative" x-show="photoPreview">
+                            <img src="{{ asset('img/change_image.png') }}" alt="image">
                             <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                         </div>
                     </div>
@@ -86,6 +55,18 @@
                                     {{ $this->user->email }}</a>
                                 </div>
                             </div>
+                            <input type="file" id="photo" class="d-none"
+                            wire:model.live="photo"
+                            x-ref="photo"
+                            x-on:change="
+                                    photoName = $refs.photo.files[0].name;
+                                    const reader = new FileReader();
+                                    reader.onload = (e) => {
+                                        photoPreview = e.target.result;
+                                    };
+                                    reader.readAsDataURL($refs.photo.files[0]);
+                                    console.log('2dssdadsa')
+                            " />
                             <div class="d-flex my-4">
                                 @if ($this->user->profile_photo_path)
                                 <a href="#" class="btn btn-sm btn-light me-2" id="kt_user_follow_button" wire:click="deleteProfilePhoto" >
@@ -100,7 +81,10 @@
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </a>
                             @endif
-                                <button wire:target="photo" type="submit" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_offer_a_deal">Guardar</button>
+                            <x-secondary-button class="btn btn-sm btn-light me-3" type="button" x-on:click.prevent="$refs.photo.click()">
+                                {{ __('Cambiar foto de perfil') }}
+                            </x-secondary-button>
+                                <button wire:target="photo" type="submit" class="btn btn-sm btn-primary me-3">Guardar</button>
                             </div>
                         </div>
                     </div>
