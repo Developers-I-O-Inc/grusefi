@@ -24,7 +24,7 @@
 
                                 <div id="template-container">
                                     <div class="section template-header">
-                                        <img class="logo-SNSICA" src="/imagenes/SNSICA.png" alt="Logo SNSICA">
+                                        <img class="logo-SNSICA" src="/imagenes/SNSICA.png" alt="Logo">
                                         <h2 class="title">Dictamen de verificacion (DV) <br> para la movilizacion de productos vegetales</h2>
                                         <div class="logo-unidad-verificacion">
                                             <img src="/imagenes/no-image-available-2.png" alt="Logo Unidad de Verificación">

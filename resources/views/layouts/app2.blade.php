@@ -202,6 +202,14 @@
                                         </div>
                                     </div>
                                     <div class="menu-item">
+                                        <a class="menu-link" href="/operation/plantillas_rpv">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Plantilla RPV</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
                                         <a class="menu-link" href="/operation/dictamen_verificacion">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
