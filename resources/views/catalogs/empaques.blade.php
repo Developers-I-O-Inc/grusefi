@@ -78,8 +78,7 @@
         <div class="modal fade" id="kt_modal_add_empaque" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-950px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_empaque_form"
-                        data-kt-redirect="../../demo6/dist/apps/empaques/list.html">
+                    <form class="form" action="#" id="kt_modal_add_empaque_form" enctype="multipart/form-data">
                         <div class="modal-header" id="kt_modal_add_empaque_header">
                             <h2 class="fw-bolder">Agregar empaque</h2>
                             <div id="kt_modal_add_empaque_close" class="btn btn-icon btn-sm btn-active-icon-primary">
@@ -95,38 +94,12 @@
                             </div>
                         </div>
                         <div class="modal-body py-10 px-lg-17">
+                            <br>
                             <div class="scroll-y me-n7 pe-7" id="kt_modal_add_empaque_scroll" data-kt-scroll="true"
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_empaque_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_empaque_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7 text-center">
-                                    <div class="image-input image-input-empty" data-kt-image-input="true" style="background-image: url(/img/gen006.svg)">
-                                        <div class="image-input-wrapper w-125px h-125px"></div>
-                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                           data-kt-image-input-action="change"
-                                           data-bs-toggle="tooltip"
-                                           data-bs-dismiss="click"
-                                           title="Change avatar">
-                                            <i class="bi bi-pencil-fill fs-7"></i>
-                                            <input type="file" name="imagen" accept=".png, .jpg, .jpeg" />
-                                            <input type="hidden" name="imagen_remove" />
-                                        </label>
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                           data-kt-image-input-action="cancel"
-                                           data-bs-toggle="tooltip"
-                                           data-bs-dismiss="click"
-                                           title="Cancel avatar">
-                                            <i class="bi bi-x fs-2"></i>
-                                        </span>
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                           data-kt-image-input-action="remove"
-                                           data-bs-toggle="tooltip"
-                                           data-bs-dismiss="click"
-                                           title="Remove avatar">
-                                            <i class="bi bi-x fs-2"></i>
-                                        </span>
-                                    </div>
-                                </div>
+
                                 <div class="overflow-hidden position-relative card-rounded">
                                     <div class="ribbon ribbon-triangle ribbon-top-start border-primary"></div>
                                     <div class="card card-bordered">
@@ -134,20 +107,22 @@
                                             <div class="card-title">DATOS FISCALES</div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="fv-row mb-7">
-                                                <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
-                                                <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" />
-                                                <input type="text" class="form-control form-control-solid d-none" name="id_empaque" id="id_empaque" />
+                                            <div class="row mb-12">
+                                                <div class="col-md-2 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
+                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" />
+                                                    <input type="text" class="form-control form-control-solid d-none" name="id_empaque" id="id_empaque" />
+                                                </div>
+                                                <div class="col-md-5 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Nombre Fiscal</label>
+                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre fiscal del empaque" name="nombre_fiscal" id="nombre_fiscal" />
+                                                </div>
+                                                <div class="col-md-5 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Domicilio Fiscal</label>
+                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre fiscal del empaque" name="domicilio_fiscal" id="domicilio_fiscal" />
+                                                </div>
                                             </div>
-                                            <div class="fv-row mb-7">
-                                                <label class="required fs-6 fw-bold mb-2">Nombre Fiscal</label>
-                                                <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre fiscal del empaque" name="nombre_fiscal" id="nombre_fiscal" />
-                                            </div>
-                                            <div class="fv-row mb-7">
-                                                <label class="required fs-6 fw-bold mb-2">Domicilio Fiscal</label>
-                                                <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre fiscal del empaque" name="domicilio_fiscal" id="domicilio_fiscal" />
-                                            </div>
-                                            <div class="row mb-10">
+                                            <div class="row mb-12">
                                                 <div class="col-md-8 fv-row">
                                                     <label class="required fs-6 fw-bold form-label mb-2">Número</label>
                                                     <div class="row fv-row fv-plugins-icon-container">
@@ -280,7 +255,34 @@
                                     </div>
                                 </div>
                                 <br></br>
-
+                                <div class="fv-row mb-7 text-center">
+                                    <div class="image-input image-input-empty" data-kt-image-input="true" style="background-image: url(/img/gen006.svg)">
+                                        <div class="image-input-wrapper w-125px h-125px"></div>
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                           data-kt-image-input-action="change"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-dismiss="click"
+                                           title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <input type="file" name="imagen" accept=".png, .jpg, .jpeg" />
+                                            <input type="hidden" name="imagen_remove" />
+                                        </label>
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                           data-kt-image-input-action="cancel"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-dismiss="click"
+                                           title="Cancel avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                           data-kt-image-input-action="remove"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-dismiss="click"
+                                           title="Remove avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>

@@ -11,8 +11,9 @@ use Yajra\DataTables\DataTables;
 
 use Illuminate\Support\Str;
 
-use Intervention\Image\ImageManager;
+use Intervention\Image\Image;
 use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 // use Image;
 
 class EmpaquesController extends Controller
@@ -134,31 +135,11 @@ class EmpaquesController extends Controller
 
         // Manejo de la imagen
         if ($request->hasFile('imagen')) {
-            // $image = $request->file('imagen')->store("public/pruebas");
-            // $url = Storage::url($image);
-            // // $imageName = time() . '.' . $image->getClientOriginalExtension();
-            // // $image->move(public_path('images'), $imageName);
-            // $nombre = Str::random(10).$request->file('imagen')->getClientOriginalName();
-            // $ruta = storage_path().'\app\public\imagenes/'.$nombre;
-            // Image::make($request->file('image'))
-            // ->save($ruta);
-            // $data['imagen'] = $url;
-            // create new image instance
-            $manager = new ImageManager(new Driver());
-
-            // read image from file system
-            $image = $manager->read($request->file('imagen'));
-
-            // resize image proportionally to 300px width
-            $image->scale(width: 300)->save();
-
-            // insert watermark
-            // $image->place('images/watermark.png');
-
-            // save modified image in new format
-            // $image->toPng()->save('images/foo.png');
+            $image = ImageManager::imagick()->read($request->file('imagen'));
+            $image->resize(300, 200);
+            $imageString = (string) $image->encode();
+            Storage::disk('local')->put('public/img/example.jpg', $imageString);
         } else {
-            // Si no se proporciona una nueva imagen, mantener la imagen existente (si es una actualización)
             $existingEmpaque = Empaques::find($request->get('id_empaque'));
             if ($existingEmpaque) {
                 $data['imagen'] = $existingEmpaque->imagen;
