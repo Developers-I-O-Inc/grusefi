@@ -49,23 +49,9 @@ var KTempaqueesList = (function () {
                     e.preventDefault()
                     $.get("empaques/"+ $(this).data("id") + "/edit", function(data){
                         edit_id.value=data.empaque.id
-                        // edit_localidad_id.value = data.empaque.localidad_id
-                        // edit_localidad_doc_id.value = data.empaque.
-                        // edit_nombre_corto.value = data.empaque.
-                        // edit_nombre_fiscal.value = data.empaque.
-                        // edit_domicilio_fiscal.value = data.empaque.
-                        // edit_num_ext.value = data.empaque.
-                        // edit_num_int.value = data.empaque.
-                        // edit_cp.value = data.empaque.
-                        // edit_rfc.value = data.empaque.
-                        // edit_telefonos.value = data.empaque.
-                        // edit_imagen.value = data.empaque.
-                        // edit_nombre_embarque.value = data.empaque.
-                        // edit_domicilio_documentacion.value = data.empaque.
-                        // edit_codigo.value = data.empaque.
-                        // edit_exportacion.value = data.empaque.
-                        // edit_asociado.value = data.empaque.
-                        // edit_empaque.value=data.empaque.empaque
+                        console.log(data.empaque.nombre_corto)
+                        edit_nombre_corto.value = data.empaque.nombre_corto
+
                         Catalogs.checked_edit(data.empaque.activo, edit_active, check_active)
                         modal.show()
                     })
@@ -87,6 +73,7 @@ var KTempaqueesList = (function () {
                 (btn_submit = form.querySelector("#kt_modal_add_empaque_submit")),
                 (btn_cancel = form.querySelector("#kt_modal_add_empaque_cancel")),
                 (edit_id = form.querySelector("#id_empaque")),
+                (edit_nombre_corto = form.querySelector("#nombre_corto")),
                 // (edit_empaque = form.querySelector("#empaque")),
                 (check_active = form.querySelector("#check_activo")),
                 (check_exportacion = form.querySelector("#check_exportacion")),
