@@ -1,15 +1,15 @@
 @extends('layouts/app2')
-@section('title', 'Dicatemn de Verificación')
+@section('title', 'Dictamen de Verificación')
 @section('title_top', 'Dictamen de Verificación')
 @section('subtitle_top', 'Nuevo Documento')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card">
             <div class="py-5" id="prueba">
-                sdkjfhksdjfkhjhjk
+                En manten
             </div>
         </div>
-        <div class="card">
+        {{-- <div class="card">
             <div class="py-5">
                 <textarea id="kt_docs_tinymce_hidden" name="kt_docs_tinymce_hidden" class="tox-target">
                     <h1>Quick and Simple TinyMCE 5 Integration</h1>
@@ -28,7 +28,7 @@
                     </ul>
                 </textarea>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 @section('scripts')

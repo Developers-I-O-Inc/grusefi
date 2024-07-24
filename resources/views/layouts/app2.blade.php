@@ -120,14 +120,14 @@
                                             <span class="menu-section fs-5 fw-bolder ps-1 py-1">Configuración General</span>
                                         </div>
                                     </div>
-                                    <div class="menu-item">
+                                    {{-- <div class="menu-item">
                                         <a class="menu-link" href="/catalogs/calibres">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
                                             <span class="menu-title">Calibres</span>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                     <div class="menu-item">
                                         <a class="menu-link" href="/catalogs/categorias">
                                             <span class="menu-bullet">
@@ -144,14 +144,14 @@
                                             <span class="menu-title">Empaques</span>
                                         </a>
                                     </div>
-                                    <div class="menu-item">
+                                    {{-- <div class="menu-item">
                                         <a class="menu-link" href="/catalogs/floraciones">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
                                             <span class="menu-title">Floraciones</span>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                     <div class="menu-item">
                                         <a class="menu-link" href="/catalogs/presentaciones">
                                             <span class="menu-bullet">
@@ -435,13 +435,19 @@
                             </a>
                         </div>
                         <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
-                            <div class="d-flex align-items-stretch" id="kt_header_nav">
-                                <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-20 pb-2 pb-lg-0"
-                                    data-kt-swapper="true" data-kt-swapper-mode="prepend"
-                                    data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_wrapper'}">
-                                    <h1 class="text-dark fw-bolder my-1 fs-3 lh-1">@yield('title_top')
-                                        <small class="text-muted fs-7 fw-bold my-1 ms-1">#@yield('subtitle_top')</small>
-                                    </h1>
+                            <div class="d-flex align-items-center" id="kt_header_nav">
+                                <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_header_nav'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                                   <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">@yield('title')</h1>
+                                    <span class="h-20px border-gray-200 border-start mx-4"></span>
+                                    <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
+                                        <li class="breadcrumb-item text-muted">
+                                            <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">@yield('title_top')</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                                        </li>
+                                        <li class="breadcrumb-item text-dark">@yield('subtitle_top')</li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="d-flex align-items-stretch flex-shrink-0">
