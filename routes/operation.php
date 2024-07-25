@@ -7,3 +7,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('dictamen_verificacion', 'DictamenVerificacionController@dictamen_verificacion');
 // PLANTILLAS
 Route::get('plantillas_rpv', 'PlantillasController@plantillas_rpv');
+Route::get('get_plantilla/{pais}', 'PlantillasController@get_plantilla');
+Route::post('save_plantilla', 'PlantillasController@save_plantilla');
