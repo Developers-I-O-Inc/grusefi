@@ -29,6 +29,7 @@ var KTcalibreesList = (function () {
                     datosFormulario[input.id] = input.value
             }
         })
+        console.log(datosFormulario)
         fetch('save_plantilla', {
             method: 'POST',
             headers: {
@@ -53,35 +54,63 @@ var KTcalibreesList = (function () {
             form = document.querySelector("#form_plantilla")
 
             btn_add.addEventListener("click", function (t) {
-
-               obtener_datos(form, select_pais.val())
+                if(select_pais.val() != '' && select_pais.val() !== null){
+                    obtener_datos(form, select_pais.val())
+                }
+                else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Selecciona un pais",
+                    })
+                }
             })
             btn_search.addEventListener("click", function (t) {
-                fetch(`get_plantilla/${select_pais.val()}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': token
-                    },
-                    // body: JSON.stringify(datosFormulario)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const inputs = form.querySelectorAll('.p_input');
-                    inputs.forEach(input => {
-                        if (data.plantilla.hasOwnProperty(input.id)) {
-                            // if (input.type === 'checkbox') {
-                            if (typeof dato[input.value] === "boolean") {
-                                input.checked = datos[input.id];
-                            } else {
-                                input.value = datos[input.id];
+                if(select_pais.val() != '' && select_pais.val() !== null){
+                    fetch(`get_plantilla/${select_pais.val()}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': token
+                        },
+                        // body: JSON.stringify(datosFormulario)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const datos = data.plantilla[0]
+                        delete datos.id
+                        delete datos.created_at
+                        delete datos.deleted_at
+                        delete datos.updated_at
+
+                        for (const [key, value] of Object.entries(datos)) {
+                            const elementos = document.getElementsByName(key);
+                            if (elementos.length > 0) {
+                              if (elementos[0].type === 'radio') {
+                                elementos.forEach(radio => {
+                                    console.log("entra aqyu", value)
+                                  radio.checked = radio.value == value.toString();
+                                });
+                              } else if (elementos[0].type === 'checkbox') {
+                                elementos[0].checked = Boolean(value);
+                              } else {
+                                elementos[0].value = value;
+                              }
                             }
                         }
-                    });
-                })
-                .catch((error) => {
-                    console.error('Error:', error)
-                })
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error)
+                    })
+                }
+                else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Selecciona un pais",
+                    })
+                }
+
             })
         }
     }
