@@ -276,12 +276,14 @@
                         </div>
                     </div>
                     <div class="card-toolbar">
-                        <div class="d-flex justify-content-end" data-kt-categoria-table-toolbar="base">
-                            <button type="button" class="btn btn-primary" id="btn_add">Guardar</button>
-                        </div>
-                        <div class="d-flex justify-content-end mr-2" data-kt-categoria-table-toolbar="base">
-                            <button type="button" class="btn btn-primary" id="btn_search">Buscar</button>
-                        </div>
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <button type="button" class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1" id="btn_search">Buscar</button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1" id="btn_add">Guardar</button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -404,60 +406,60 @@
                                         </div>
                                         <div class="section" style="display: flex; align-items: center;">
                                             <span class="text-bold m-r-sm">4 Indique la regulación o requisito que se evaluará:</span>
-                                            <input id="Regulacion" type="text" name="Regulacion" value="" maxlength="500" style="flex-grow: 1;">
+                                            <input class="p_input" id="regulacion_tvaluar" type="text" name="regulacion_tvaluar" value="" maxlength="500" style="flex-grow: 1;">
                                         </div>
                                         <div class="section">
                                             <div class="text-bold">5 De acuerdo al servicio solicitado y a la regulación o requisito que aplica, marque con una “X” los documentos que son requeridos para iniciar el proceso de verificación:</div>
                                             <div style="display: flex; flex-wrap: wrap; align-items: center;">
                                                 <div class="m-b-xs" style="display: flex; width: 50%; padding-right: 16px;">
-                                                    <span style="width: 250px;">(<input id="IsCFMN5" type="checkbox" name="IsCFMN5" value="">) Certificado Fitosanitario para la Movilización Nacional</span>
-                                                    <input id="DetalleCFMN" type="text" name="DetalleCFMN" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_certificado_movilizacion" type="checkbox" name="dr_certificado_movilizacion" value="" class="p_input">) Certificado Fitosanitario para la Movilización Nacional</span>
+                                                    <input id="dr_certificado_movilizacion_t" type="text" name="dr_certificado_movilizacion_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                                 <div class="m-b-xs" style="display: flex; width: 50%;">
-                                                    <span style="width: 250px;">(<input id="IsCDFINorma" type="checkbox" name="IsCDFINorma" value="">) Certificado Fitosanitario de cumplimiento de Norma</span>
-                                                    <input id="DetalleCFINorma" type="text" name="DetalleCFINorma" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_certificado_cumplimiento" type="checkbox" name="dr_certificado_cumplimiento" value="" class="p_input">) Certificado Fitosanitario de cumplimiento de Norma</span>
+                                                    <input id="dr_certificado_cumplimiento_t" type="text" name="dr_certificado_cumplimiento_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                                 <div class="m-b-xs" style="display: flex; width: 50%; padding-right: 16px;">
-                                                    <span style="width: 250px;">(<input id="IsCartillaFito" type="checkbox" name="IsCartillaFito" value="">) Cartilla Fitosanitaria</span>
-                                                    <input id="DetalleCartillaFito" type="text" name="DetalleCartillaFito" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_cartilla_fitosanitaria" type="checkbox" name="dr_cartilla_fitosanitaria" value="" class="p_input">) Cartilla Fitosanitaria</span>
+                                                    <input id="dr_cartilla_fitosanitaria_t" type="text" name="dr_cartilla_fitosanitaria_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                                 <div class="m-b-xs" style="display: flex; width: 50%;">
-                                                    <span style="width: 250px;">(<input id="IsTarjManejo" type="checkbox" name="IsTarjManejo" value="">) Tarjeta de Manejo Integrado de Moscas de la Fruta</span>
-                                                    <input id="DetalleTarjManejo" type="text" name="DetalleTarjManejo" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_tarjeta_moscas" type="checkbox" name="dr_tarjeta_moscas" value="" class="p_input">) Tarjeta de Manejo Integrado de Moscas de la Fruta</span>
+                                                    <input id="dr_tarjeta_moscas_t" type="text" name="dr_tarjeta_moscas_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                                 <div class="m-b-xs" style="display: flex; width: 50%; padding-right: 16px;">
-                                                    <span style="width: 250px;">(<input id="IsCopiaCFMN" type="checkbox" name="IsCopiaCFMN" value="">) Copia del CFMN expedido en el origen</span>
-                                                    <input id="DetalleCopiaCFMN" type="text" name="DetalleCopiaCFMN" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_copiacfmn" type="checkbox" name="dr_copiacfmn" value="" class="p_input">) Copia del CFMN expedido en el origen</span>
+                                                    <input id="dr_copiacfmn_t" type="text" name="dr_copiacfmn_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                                 <div class="m-b-xs" style="display: flex; width: 50%;">
-                                                    <span style="width: 250px;">(<input id="IsCopiaCFIImport" type="checkbox" name="IsCopiaCFIImport" value="">) Copia de Certificado Fitosanitario de Importación</span>
-                                                    <input id="DetalleCopiaCFIImport" type="text" name="DetalleCopiaCFIImport" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_copia_certificado" type="checkbox" name="dr_copia_certificado" value="" class="p_input">) Copia de Certificado Fitosanitario de Importación</span>
+                                                    <input id="dr_copia_certificado_t" type="text" name="dr_copia_certificado_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                                 <div class="m-b-xs" style="display: flex; width: 50%; padding-right: 16px;">
-                                                    <span style="width: 250px;">(<input id="IsDiagFito" type="checkbox" name="IsDiagFito" value="">) Diagnóstico Fitosanitario</span>
-                                                    <input id="DetalleDiagFito" type="text" name="DetalleDiagFito" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_diagnostico_fitosanitario" type="checkbox" name="dr_diagnostico_fitosanitario" value="" class="p_input">) Diagnóstico Fitosanitario</span>
+                                                    <input id="dr_diagnostico_fitosanitario_t" type="text" name="dr_diagnostico_fitosanitario_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                                 <div class="m-b-xs" style="display: flex; width: 50%;">
-                                                    <span style="width: 250px;">(<input id="IsCerHTLMF" type="checkbox" name="IsCerHTLMF" value="">) Certificado de HTLMF</span>
-                                                    <input id="DetalleCerHTLMF" type="text" name="DetalleCerHTLMF" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_certificado_htlmf" type="checkbox" name="dr_certificado_htlmf" value="" class="p_input">) Certificado de HTLMF</span>
+                                                    <input id="dr_certificado_htlmf_t" type="text" name="dr_certificado_htlmf_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                                 <div class="m-b-xs" style="display: flex; width: 50%; padding-right: 16px;">
-                                                    <span style="width: 250px;">(<input id="IsDictEvaluacion" type="checkbox" name="IsDictEvaluacion" value="">) Dictamen de Evaluación de la Conformidad</span>
-                                                    <input id="DetalleDictEvaluacion" type="text" name="DetalleDictEvaluacion" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_tvaluacion_conformidad" type="checkbox" name="dr_tvaluacion_conformidad" value="" class="p_input">) Dictamen de Evaluación de la Conformidad</span>
+                                                    <input id="dr_tvaluacion_conformidad_t" type="text" name="dr_tvaluacion_conformidad_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                                 <div class="m-b-xs" style="display: flex; width: 50%;">
-                                                    <span style="width: 250px;">(<input id="IsCerFitoCuarentena" type="checkbox" name="IsCerFitoCuarentena" value="">) Certificado Fitosanitario de Tratamiento Cuarentenario</span>
-                                                    <input id="DetalleCerFitoCuarentena" type="text" name="DetalleCerFitoCuarentena" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_tratamiento_cuarentenario" type="checkbox" name="dr_tratamiento_cuarentenario" value="" class="p_input">) Certificado Fitosanitario de Tratamiento Cuarentenario</span>
+                                                    <input id="dr_tratamiento_cuarentenario_t" type="text" name="dr_tratamiento_cuarentenario_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
-                                                <div style="width: 50%; padding-right: 16px;">(<input id="IsNingunDoc" type="checkbox" name="IsNingunDoc" value="">) Ningún documento</div>
+                                                <div style="width: 50%; padding-right: 16px;">(<input id="dr_ninguno" type="checkbox" name="dr_ninguno" value="" class="p_input">) Ningún documento</div>
                                                 <div class="m-b-xs" style="display: flex; width: 50%;">
-                                                    <span style="width: 250px;">(<input id="IsAvisoInicio" type="checkbox" name="IsAvisoInicio" value="">) Aviso de inicio de funcionamiento (Anotar # de Registro de Huerto o instalación)</span>
-                                                    <input id="DetalleAvisoInicio" type="text" name="DetalleAvisoInicio" value="" maxlength="150" style="flex-grow: 1;">
+                                                    <span style="width: 250px;">(<input id="dr_aviso" type="checkbox" name="dr_aviso" value="" class="p_input">) Aviso de inicio de funcionamiento (Anotar # de Registro de Huerto o instalación)</span>
+                                                    <input id="dr_aviso_t" type="text" name="dr_aviso_t" value="" maxlength="150" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                                 <div style="width: 100%;">
                                                     <div style="display: flex;">
-                                                        <span class="m-r-sm">(<input id="IsOtro" type="checkbox" name="IsOtro" value="">) Otro(especifique):</span>
-                                                        <input id="DetalleOtro" type="text" name="DetalleOtro" value="" maxlength="500" style="flex-grow: 1;">
+                                                        <span class="m-r-sm">(<input id="dr_otro" type="checkbox" name="dr_otro" value="" class="p_input">) Otro(especifique):</span>
+                                                        <input id="dr_otro_t" type="text" name="dr_otro_t" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                     </div>
                                                 </div>
                                             </div>
@@ -465,19 +467,19 @@
                                         <div class="section">
                                             <div>
                                                 <span class="text-bold">6 ¿El producto, lote o instalación se encuentra identificado, acondicionado y preparado  para realizar la verificación?</span>
-                                                Si (<input type="radio" name="IsIdentificado" value="1" checked="checked">) No (<input type="radio" name="IsIdentificado" value="0">).
+                                                Si (<input type="radio" name="pv" value="1" checked="checked" class="p_input">) No (<input type="radio" name="pv" value="0" class="p_input">).
                                             </div>
                                             <p>Si su respuesta es No, cancele la verificación hasta que sea requerido nuevamente, de lo contrario continúe con el siguiente apartado.</p>
                                         </div>
                                         <div class="section">
                                             <div class="text-bold">7 De acuerdo con la regulación o requisito que aplica. ¿El tipo de verificación que se requiere es?</div>
                                             <div style="display: flex; align-items: center;">
-                                                <div class="group-control" style="flex-grow: 1;">(<input id="ConstatacionOcular" type="checkbox" name="ConstatacionOcular" value="">) Constatación ocular</div>
-                                                <div class="group-control m-l-md" style="flex-grow: 1;">(<input id="DiagnosticoFitosanitario" type="checkbox" name="DiagnosticoFitosanitario" value="">) Diagnostico fitosanitario</div>
-                                                <div class="group-control m-l-md" style="flex-grow: 1;">(<input id="MuestreoSitio" type="checkbox" name="MuestreoSitio" value="">) Muestreo en sitio</div>
+                                                <div class="group-control" style="flex-grow: 1;">(<input id="tv_constatacion_ocular" type="checkbox" name="tv_constatacion_ocular" value="" class="p_input">) Constatación ocular</div>
+                                                <div class="group-control m-l-md" style="flex-grow: 1;">(<input id="tv_diagnostico_fitosanitario" type="checkbox" name="tv_diagnostico_fitosanitario" value="" class="p_input">) Diagnostico fitosanitario</div>
+                                                <div class="group-control m-l-md" style="flex-grow: 1;">(<input id="tv_muestreo_sitio" type="checkbox" name="tv_muestreo_sitio" value="" class="p_input">) Muestreo en sitio</div>
                                                 <div class="group-control m-l-md" style="flex-grow: 1;">
-                                                    (<input id="VerificacionOtro" type="checkbox" name="VerificacionOtro" value="">) Otro(especifique):
-                                                    <input id="DetalleOtroVerificacion" type="text" name="DetalleOtroVerificacion" value="" maxlength="150" style="width: 350px; margin-left: 8px;">
+                                                    (<input id="tv_otro" type="checkbox" name="tv_otro" value="" class="p_input">) Otro(especifique):
+                                                    <input id="tv_otro_t" type="text" name="tv_otro_t" value="" maxlength="150" style="width: 350px; margin-left: 8px;" class="p_input">
                                                 </div>
                                             </div>
                                         </div>
@@ -499,202 +501,202 @@
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Toma de muestra</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="TomaMuestra" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="TomaMuestra" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="TomaMuestra" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_toma_muestra" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_toma_muestra" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_toma_muestra" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantMuestra" type="text" name="CantMuestra" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_toma_muestra_p" type="text" name="cf_c_toma_muestra_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionMuestra" type="text" name="ObservacionMuestra" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_toma_muestra_o" type="text" name="cf_c_toma_muestra_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Plagas de importancia cuarentenaria</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="PlagaCuarentena" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="PlagaCuarentena" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="PlagaCuarentena" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_plagas_cuarentenaria" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_plagas_cuarentenaria" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_plagas_cuarentenaria" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantPlagaCuarentena" type="text" name="CantPlagaCuarentena" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_plagas_cuarentenaria_p" type="text" name="cf_c_plagas_cuarentenaria_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionPlagaCuarentena" type="text" name="ObservacionPlagaCuarentena" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_plagas_cuarentenaria_o" type="text" name="cf_c_plagas_cuarentenaria_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Plagas de importancia económica</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="PlagaEconomica" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="PlagaEconomica" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="PlagaEconomica" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_plagas_economica" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_plagas_economica" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_plagas_economica" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantPlagaEconomica" type="text" name="CantPlagaEconomica" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_plagas_economica_p" type="text" name="cf_c_plagas_economica_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionPlagaEconomica" type="text" name="ObservacionPlagaEconomica" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_plagas_economica_o" type="text" name="cf_c_plagas_economica_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Tratamiento cuarentenario</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="Tratamiento" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="Tratamiento" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="Tratamiento" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_tratamiento_cuarentenario" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_tratamiento_cuarentenario" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_tratamiento_cuarentenario" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantTratamiento" type="text" name="CantTratamiento" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_tratamiento_cuarentenario_p" type="text" name="cf_c_tratamiento_cuarentenario_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionTratamiento" type="text" name="ObservacionTratamiento" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_tratamiento_cuarentenario_o" type="text" name="cf_c_tratamiento_cuarentenario_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Residuos vegetales</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="ResiduosVegetales" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="ResiduosVegetales" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="ResiduosVegetales" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_residuos_vegetales" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_residuos_vegetales" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_residuos_vegetales" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantResiduosVegetales" type="text" name="CantResiduosVegetales" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_residuos_vegetales_p" type="text" name="cf_c_residuos_vegetales_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionResiduos" type="text" name="ObservacionResiduos" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_residuos_vegetales_o" type="text" name="cf_c_residuos_vegetales_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Suelo</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="Suelo" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="Suelo" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="Suelo" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_suelo" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_suelo" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_suelo" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantSuelo" type="text" name="CantSuelo" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_suelo_p" type="text" name="cf_c_suelo_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionSuelo" type="text" name="ObservacionSuelo" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_suelo_o" type="text" name="cf_c_suelo_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Lavado</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="Lavado" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="Lavado" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="Lavado" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_lavado" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_lavado" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_lavado" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantLavado" type="text" name="CantLavado" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_lavado_p" type="text" name="cf_c_lavado_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionLavado" type="text" name="ObservacionLavado" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_lavado_o" type="text" name="cf_c_lavado_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Cepillado</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="Cepillado" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="Cepillado" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="Cepillado" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_cepillado" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_cepillado" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_cepillado" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantCepillado" type="text" name="CantCepillado" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_cepillado_p" type="text" name="cf_c_cepillado_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionCepillado" type="text" name="ObservacionCepillado" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_cepillado_o" type="text" name="cf_c_cepillado_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Empaque nuevo</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="EmpaqueNvo" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="EmpaqueNvo" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="EmpaqueNvo" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_empaque_nuevo" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_empaque_nuevo" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_empaque_nuevo" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantEmpaqueNvo" type="text" name="CantEmpaqueNvo" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_empaque_nuevo_p" type="text" name="cf_c_empaque_nuevo_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionEmpaque" type="text" name="ObservacionEmpaque" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_empaque_nuevo_o" type="text" name="cf_c_empaque_nuevo_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Etiquetas Fitosanitarias</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="EtiquetaFito" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="EtiquetaFito" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="EtiquetaFito" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_etiquetas_fitosanitarias" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_etiquetas_fitosanitarias" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_etiquetas_fitosanitarias" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantEtiquetaFito" type="text" name="CantEtiquetaFito" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_etiquetas_fitosanitarias_p" type="text" name="cf_c_etiquetas_fitosanitarias_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionEtiqueta" type="text" name="ObservacionEtiqueta" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_etiquetas_fitosanitarias_o" type="text" name="cf_c_etiquetas_fitosanitarias_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Diagnostico Fitosanitario</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="Diagnostico" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="Diagnostico" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="Diagnostico" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_diagnostico_fitosanitario" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_diagnostico_fitosanitario" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_diagnostico_fitosanitario" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantDiagnostico" type="text" name="CantDiagnostico" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_diagnostico_fitosanitario_p" type="text" name="cf_c_diagnostico_fitosanitario_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionDiagnostico" type="text" name="ObservacionDiagnostico" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_diagnostico_fitosanitario_o" type="text" name="cf_c_diagnostico_fitosanitario_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Materia extraña no sujeta a regulación</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="MateriaExt" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="MateriaExt" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="MateriaExt" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_materia_regulación" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_materia_regulación" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_materia_regulación" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantMateriaExt" type="text" name="CantMateriaExt" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cf_c_materia_regulación_p" type="text" name="cf_c_materia_regulación_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="ObservacionMateriaExt" type="text" name="ObservacionMateriaExt" value="" maxlength="500" style="flex-grow: 1;">
+                                                    <input id="cf_c_materia_regulación_o" type="text" name="cf_c_materia_regulación_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Otra:</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="Otra" value="0">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="Otra" value="1">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="Otra" value="2">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cd_c_otra" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cd_c_otra" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cd_c_otra" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="CantOtra" type="text" name="CantOtra" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;">
+                                                        <input id="cd_c_otra_p" type="text" name="cd_c_otra_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex; flex-wrap: wrap;">
                                                     <div>Fecha de inspección: <span class="disabled-input m-b-xs" style="width: 150px;">XX/XX/XXXX</span></div>
-                                                    <input id="ObservacionOtra" type="text" name="ObservacionOtra" value="" maxlength="500" style="width: 100%;">
+                                                    <input id="cd_c_fecha_inspeccion" type="text" name="cd_c_fecha_inspeccion" value="" maxlength="500" style="width: 100%;" class="p_input">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="section">
                                             <div class="text-bold">9 ¿El transporte para la movilización del Lote de producto (s) presenta o se encuentra? (Marque con una X y complemente):</div>
                                             <div style="display: flex; align-items: center;">
-                                                <div class="group-control" style="width: 20%;">(<input id="IsResiduosVegetales" type="checkbox" name="IsResiduosVegetales" value="">) Sin residuos vegetales</div>
-                                                <div class="group-control" style="width: 20%;">(<input id="IsResiduosSuelo" type="checkbox" name="IsResiduosSuelo" value="">) Sin residuos de suelo</div>
-                                                <div class="group-control" style="width: 15%;">(<input id="IsLavado" type="checkbox" name="IsLavado" value="">) Lavado</div>
-                                                <div class="group-control" style="width: 45%;">(<input id="IsLimpioCompletamente" type="checkbox" name="IsLimpioCompletamente" value="">) Limpio completamente</div>
+                                                <div class="group-control" style="width: 20%;">(<input class="p_input" id="tm_residuos_vegetales" type="checkbox" name="tm_residuos_vegetales" value="">) Sin residuos vegetales</div>
+                                                <div class="group-control" style="width: 20%;">(<input class="p_input" id="tm_sn_residuos_vegetales" type="checkbox" name="tm_sn_residuos_vegetales" value="">) Sin residuos de suelo</div>
+                                                <div class="group-control" style="width: 15%;">(<input class="p_input" id="tm_lavado" type="checkbox" name="tm_lavado" value="">) Lavado</div>
+                                                <div class="group-control" style="width: 45%;">(<input class="p_input" id="tm_limpio" type="checkbox" name="tm_limpio" value="">) Limpio completamente</div>
                                             </div>
                                             <div style="display: flex; align-items: center;">
-                                                <div class="group-control" style="width: 20%;">(<input id="IsRefrigerado" type="checkbox" name="IsRefrigerado" value="">) Refrigerado</div>
-                                                <div class="group-control" style="width: 20%;">(<input id="IsEnlonado" type="checkbox" name="IsEnlonado" value="">) Enlonado</div>
-                                                <div class="group-control" style="width: 15%;">(<input id="IsCajasSeca" type="checkbox" name="IsCajasSeca" value="">) Caja seca</div>
+                                                <div class="group-control" style="width: 20%;">(<input class="p_input" id="tm_refrigerado" type="checkbox" name="tm_refrigerado" value="">) Refrigerado</div>
+                                                <div class="group-control" style="width: 20%;">(<input class="p_input" id="tm_enlonado" type="checkbox" name="tm_enlonado" value="">) Enlonado</div>
+                                                <div class="group-control" style="width: 15%;">(<input class="p_input" id="tm_caja_seca" type="checkbox" name="tm_caja_seca" value="">) Caja seca</div>
                                                 <div class="group-control" style="width: 45%;">
-                                                    (<input id="IsOtro11" type="checkbox" name="IsOtro11" value="">) Otro(especifique):
-                                                    <input id="DetalleOtro11" type="text" name="DetalleOtro11" value="" maxlength="500" style="flex-grow: 1; margin-left: 8px;">
+                                                    (<input id="tm_otro" type="checkbox" name="tm_otro" value="" class="p_input">) Otro(especifique):
+                                                    <input id="tm_otro_t" type="text" name="tm_otro_t" value="" maxlength="500" style="flex-grow: 1; margin-left: 8px;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="m-t-md">
@@ -706,26 +708,26 @@
                                         </div>
                                         <div class="section">
                                             <span class="text-bold">10 No requiere Certificado Fitosanitario por movilizarse en una zona bajo un mismo estatus fitosanitario por tratarse de un producto no regulado.</span>
-                                            (<input id="IsReqCFI" type="checkbox" name="IsReqCFI" value="1">)
+                                            (<input id="no_requiere_certificado" type="checkbox" name="no_requiere_certificado" value="1" class="p_input">)
                                         </div>
                                         <div class="section">
                                             <div class="text-bold m-b-xs">
-                                                11 Si Cumple (<input type="radio" name="IsCumple" value="1" checked="checked">) No cumple (<input type="radio" name="IsCumple" value="0">) con la normatividad,  requisitos aplicables y/o condición fitosanitaria evaluada.
+                                                11 Si Cumple (<input type="radio" name="cfe_si_cumple" value="1" checked="checked" class="p_input">) No cumple (<input type="radio" name="cfe_si_cumple" value="0" class="p_input">) con la normatividad,  requisitos aplicables y/o condición fitosanitaria evaluada.
                                             </div>
                                             <div style="display: flex;">
                                                 <div style="width: 100px;">Por lo que:</div>
                                                 <div style="flex-grow: 1;">
                                                     <div style="display: flex;">
-                                                        <div style="width: 25%;">(<input id="IsExpedirCFMN" type="checkbox" name="IsExpedirCFMN" value="">) Debe expedirse el CFMN</div>
-                                                        <div style="width: 15%;">(<input id="IsCFMNFleje" type="checkbox" name="IsCFMNFleje" value="">) Aplica Fleje</div>
+                                                        <div style="width: 25%;">(<input id="cfe_debe_CFMN" type="checkbox" name="cfe_debe_CFMN" value="" class="p_input">) Debe expedirse el CFMN</div>
+                                                        <div style="width: 15%;">(<input id="cfe_aplica_fleje_CFMN" type="checkbox" name="cfe_aplica_fleje_CFMN" value="" class="p_input">) Aplica Fleje</div>
                                                         <div style="width: 35%; display: flex; padding-right: 16px;">Anote folios: <span class="disabled-input" style="flex-grow: 1; margin-left: 8px;">XXXXXXXXXXXXXXXXXXXXXX</span></div>
-                                                        <div style="width: 25%;">(<input id="NoExpedirCFMN" type="checkbox" name="NoExpedirCFMN" value="">) No debe expedirse el CFMN</div>
+                                                        <div style="width: 25%;">(<input id="cfe_no_debe_CFMN" type="checkbox" name="cfe_no_debe_CFMN" value="" class="p_input">) No debe expedirse el CFMN</div>
                                                     </div>
                                                     <div class="m-t-xs" style="display: flex;">
-                                                        <div style="width: 25%;">(<input id="IsExpedirCFI" type="checkbox" name="IsExpedirCFI" value="">) Debe expedirse el CFI</div>
-                                                        <div style="width: 15%;">(<input id="IsCFIFleje" type="checkbox" name="IsCFIFleje" value="">) Aplica Fleje</div>
+                                                        <div style="width: 25%;">(<input id="cfe_debe_CFI" type="checkbox" name="cfe_debe_CFI" value="" class="p_input">) Debe expedirse el CFI</div>
+                                                        <div style="width: 15%;">(<input id="cfe_aplica_fleje_CFI" type="checkbox" name="cfe_aplica_fleje_CFI" value="" class="p_input">) Aplica Fleje</div>
                                                         <div style="width: 35%; display: flex; padding-right: 16px;">Anote folios: <span class="disabled-input" style="flex-grow: 1; margin-left: 8px;">XXXXXXXXXXXXXXXXXXXXXX</span></div>
-                                                        <div style="width: 25%;">(<input id="NoExpedirCFI" type="checkbox" name="NoExpedirCFI" value="">) No debe expedirse el CFI</div>
+                                                        <div style="width: 25%;">(<input id="cfe_no_debe_CFI" type="checkbox" name="cfe_no_debe_CFI" value="" class="p_input">) No debe expedirse el CFI</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -751,11 +753,11 @@
                                             <div class="m-t-md" style="display: flex; justify-content: flex-end;">
                                                 <div class="m-r-sm">
                                                     Clave de aprobación:
-                                                    <input id="CedulaAprobacion" type="text" name="CedulaAprobacion" value="" maxlength="50">
+                                                    <input id="clave_aprobacion" type="text" name="clave_aprobacion" value="" maxlength="50" class="p-input">
                                                 </div>
                                                 <div>
                                                     Vigencia:
-                                                    <input id="Vigencia" type="text" name="Vigencia" value="" maxlength="50">
+                                                    <input id="vigencia" type="text" name="vigencia" value="" maxlength="50" class="p-input">
                                                 </div>
                                             </div>
                                         </div>

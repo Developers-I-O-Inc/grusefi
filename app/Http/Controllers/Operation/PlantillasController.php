@@ -29,7 +29,7 @@ class PlantillasController extends Controller
     }
 
     public function get_plantilla($pais){
-        $plantilla = PlantillaRPV::find($pais);
+        $plantilla = PlantillaRPV::where("pais_id", $pais)->get();
 
         return response()->json(["plantilla"=>$plantilla]);
     }
