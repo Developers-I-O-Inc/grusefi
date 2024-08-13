@@ -94,11 +94,11 @@
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Nombre localidad</label>
                                     <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre" id="nombre" />
-                                    <input type="text" class="form-control form-control-solid" name="id_localidad" id="id_localidad" />
+                                    <input type="text" class="form-control form-control-solid d-none" name="id_localidad" id="id_localidad" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">País</label>
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Código</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="codigo" id="codigo" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un código" name="codigo" id="codigo" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="" id="active_check" name="active_check"/>

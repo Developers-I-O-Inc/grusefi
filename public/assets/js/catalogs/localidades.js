@@ -108,6 +108,27 @@ var KTlocalidadesList = (function () {
                                 },
                             },
                         },
+                        pais_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione un país'
+                                }
+                            }
+                        },
+                        estado_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione un estado'
+                                }
+                            }
+                        },
+                        municipio_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione un municipio'
+                                }
+                            }
+                        },
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),

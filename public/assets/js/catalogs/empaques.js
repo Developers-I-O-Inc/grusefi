@@ -18,27 +18,28 @@ var KTempaqueesList = (function () {
         validations,
         form,
         edit_id,
+        edit_exportacion,
+        edit_asociado,
         edit_nombre_corto,
         edit_nombre_fiscal,
         edit_domicilio_fiscal,
+        edit_rfc,
+        edit_telefonos,
         edit_num_ext,
         edit_num_int,
         edit_cp,
-        edit_rfc,
-        edit_telefonos,
-        edit_imagen,
-        edit_nombre_embarque,
+        edit_embarque,
         edit_domicilio_documentacion,
+        edit_sader,
         edit_codigo,
-        edit_exportacion,
-        edit_asociado,
         edit_active,
         check_active,
         check_exportacion,
         check_asociado,
-        check_exportacion,
-        check_asociado,
         select_municipio,
+        select_municipio2,
+        select_localidad_2,
+        select_localidad_22,
         select_municipio2,
         n,
         edit = () => {
@@ -48,11 +49,28 @@ var KTempaqueesList = (function () {
                 e.addEventListener("click", function (e) {
                     e.preventDefault()
                     $.get("empaques/"+ $(this).data("id") + "/edit", function(data){
-                        edit_id.value=data.empaque.id
-                        console.log(data.empaque.nombre_corto)
-                        edit_nombre_corto.value = data.empaque.nombre_corto
-
-                        Catalogs.checked_edit(data.empaque.activo, edit_active, check_active)
+                        edit_id.value=data.empaque[0].id
+                        edit_nombre_corto.value = data.empaque[0].nombre_corto
+                        edit_nombre_fiscal.value = data.empaque[0].nombre_fiscal
+                        edit_domicilio_fiscal.value = data.empaque[0].domicilio_fiscal
+                        edit_rfc.value = data.empaque[0].rfc
+                        edit_telefonos.value = data.empaque[0].telefonos
+                        edit_num_ext.value = data.empaque[0].num_ext
+                        edit_num_int.value = data.empaque[0].num_int
+                        edit_cp.value = data.empaque[0].cp
+                        $("#municipio_id").val(data.empaque[0].municipio_id).trigger("change.select2")
+                        select_municipio.trigger('change')
+                        select_localidad_2.setAttribute('data-id', data.empaque[0].localidad_id)
+                        edit_embarque.value = data.empaque[0].nombre_embarque
+                        edit_domicilio_documentacion.value = data.empaque[0].domicilio_documentacion
+                        edit_sader.value = data.empaque[0].sader
+                        edit_codigo.value = data.empaque[0].codigo
+                        $("#municipio_id2").val(data.empaque[0].municipio2).trigger("change.select2")
+                        select_municipio2.trigger('change')
+                        select_localidad_22.setAttribute('data-id', data.empaque[0].localidad_doc_id)
+                        Catalogs.checked_edit(data.empaque[0].exportacion, edit_exportacion, check_exportacion)
+                        Catalogs.checked_edit(data.empaque[0].asociado, edit_asociado, check_asociado)
+                        Catalogs.checked_edit(data.empaque[0].activo, edit_active, check_active)
                         modal.show()
                     })
                 })
@@ -67,26 +85,38 @@ var KTempaqueesList = (function () {
                 // inicialize elements html
                 (select_municipio = $('#municipio_id').select2()),
                 (select_municipio2 = $('#municipio_id2').select2()),
+                (select_localidad_2 = document.querySelector("#localidad_id")),
+                (select_localidad_22 = document.querySelector("#localidad_doc_id")),
                 (btn_add = document.querySelector("#btn_add")),
                 (form = document.querySelector("#kt_modal_add_empaque_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_empaque_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_empaque_submit")),
                 (btn_cancel = form.querySelector("#kt_modal_add_empaque_cancel")),
                 (edit_id = form.querySelector("#id_empaque")),
+                (edit_asociado = form.querySelector("#asociado")),
+                (edit_exportacion = form.querySelector("#exportacion")),
                 (edit_nombre_corto = form.querySelector("#nombre_corto")),
-                // (edit_empaque = form.querySelector("#empaque")),
+                (edit_nombre_fiscal = form.querySelector("#nombre_fiscal")),
+                (edit_domicilio_fiscal = form.querySelector("#domicilio_fiscal")),
+                (edit_rfc = form.querySelector("#rfc")),
+                (edit_telefonos = form.querySelector("#telefonos")),
+                (edit_num_int = form.querySelector("#num_int")),
+                (edit_num_ext = form.querySelector("#num_ext")),
+                (edit_cp = form.querySelector("#cp")),
+                (edit_embarque = form.querySelector("#nombre_embarque")),
+                (edit_domicilio_documentacion = form.querySelector("#domicilio_documentacion")),
+                (edit_sader = form.querySelector("#sader")),
+                (edit_codigo = form.querySelector("#codigo")),
                 (check_active = form.querySelector("#check_activo")),
                 (check_exportacion = form.querySelector("#check_exportacion")),
                 (check_asociado = form.querySelector("#check_asociado")),
-                (edit_exportacion = form.querySelector("#exportacion")),
-                (edit_asociado = form.querySelector("#asociado")),
                 (edit_active = form.querySelector("#activo")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
                         empaque: {
                             validators: {
                                 notEmpty: {
-                                    message: "Ingrese el empaque",
+                                    message: "Ingrese el nombre del empaque",
                                 },
                             },
                         },
@@ -164,7 +194,7 @@ var KTempaqueesList = (function () {
                 })
                 // CHECK ACTIVE
                 check_exportacion.addEventListener("click", function (t) {
-                    Catalogs.checked(edit_exportacion, check_exportacion)
+                    Catalogs.checked(check_exportacion, check_exportacion)
                 })
                 // BUTTON ADD
                 btn_add.addEventListener("click", function (t) {

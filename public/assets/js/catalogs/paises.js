@@ -85,7 +85,7 @@ var KTpaisesList = (function () {
                         codigo: {
                             validators: {
                                 notEmpty: {
-                                    message: "Código",
+                                    message: "Código requerido",
                                 },
                             },
                         },

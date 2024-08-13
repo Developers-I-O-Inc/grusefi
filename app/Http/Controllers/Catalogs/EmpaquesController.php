@@ -160,7 +160,7 @@ class EmpaquesController extends Controller
      */
     public function edit(string $id)
     {
-        $empaque=Empaques::find($id);
+        $empaque=Empaques::get_empaques_localidad($id);
 
         return response()->json(['empaque'=>$empaque]);
     }
