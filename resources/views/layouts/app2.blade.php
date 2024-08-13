@@ -137,6 +137,14 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
+                                        <a class="menu-link" href="/catalogs/destinatarios">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Destinatarios</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
                                         <a class="menu-link" href="/catalogs/empaques">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
