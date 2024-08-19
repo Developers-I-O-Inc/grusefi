@@ -2,6 +2,8 @@
 @section('styles')
     <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.1.0/css/fixedColumns.dataTables.min.css">
+
 @endsection
 @section('title', 'Empaques')
 @section('title_top', 'Empaques')
@@ -50,7 +52,8 @@
                                         data-kt-check-target="#kt_empaques_table .form-check-input" value="1" />
                                 </div>
                             </th>
-                            <th class="min-w-125px">id</th>
+                            <th class="min-w-85px">id</th>
+                            <th class="min-w-85px">Opciones</th>
                             <th class="min-w-125px">Nom. Corto</th>
                             <th class="min-w-125px">Nombre Fiscal</th>
                             <th class="min-w-125px">Domicilio_fiscal</th>
@@ -66,7 +69,6 @@
                             <th class="min-w-125px">Exportacion</th>
                             <th class="min-w-125px">Asociado</th>
                             <th class="min-w-125px">Status</th>
-                            <th class="min-w-125px">Opciones</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
@@ -253,7 +255,7 @@
                                 </div>
                                 <br></br>
                                 <div class="fv-row mb-7 text-center">
-                                    <div class="image-input image-input-empty" data-kt-image-input="true" style="background-image: url(/img/gen006.svg)">
+                                    <div id="image_empaque" class="image-input image-input-empty" data-kt-image-input="true" style="background-image: url(/img/gen006.svg)">
                                         <div class="image-input-wrapper w-125px h-125px"></div>
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
                                            data-kt-image-input-action="change"

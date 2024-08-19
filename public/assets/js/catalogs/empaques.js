@@ -41,6 +41,7 @@ var KTempaqueesList = (function () {
         select_localidad_2,
         select_localidad_22,
         select_municipio2,
+        image_empaque,
         n,
         edit = () => {
             n.querySelectorAll(
@@ -71,6 +72,7 @@ var KTempaqueesList = (function () {
                         Catalogs.checked_edit(data.empaque[0].exportacion, edit_exportacion, check_exportacion)
                         Catalogs.checked_edit(data.empaque[0].asociado, edit_asociado, check_asociado)
                         Catalogs.checked_edit(data.empaque[0].activo, edit_active, check_active)
+                        image_empaque.style.backgroundImage = `url('${data.empaque[0].imagen}')`;
                         modal.show()
                     })
                 })
@@ -89,6 +91,7 @@ var KTempaqueesList = (function () {
                 (select_localidad_22 = document.querySelector("#localidad_doc_id")),
                 (btn_add = document.querySelector("#btn_add")),
                 (form = document.querySelector("#kt_modal_add_empaque_form")),
+                (image_empaque = document.querySelector("#image_empaque")),
                 (btn_modal = form.querySelector("#kt_modal_add_empaque_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_empaque_submit")),
                 (btn_cancel = form.querySelector("#kt_modal_add_empaque_cancel")),
@@ -141,6 +144,7 @@ var KTempaqueesList = (function () {
                             columns: [
                                 { data: "check", name: "check" },
                                 { data: "id", name: "id" },
+                                { data: "buttons", name: "buttons" },
                                 { data: "nombre_corto" , name : "nombre_corto" },
                                 { data: "nombre_fiscal" , name : "nombre_fiscal" },
                                 { data: "domicilio_fiscal" , name : "domicilio_fiscal" },
@@ -156,7 +160,6 @@ var KTempaqueesList = (function () {
                                 { data: "exportacion" , name : "exportacion" },
                                 { data: "asociados" , name : "asociados"},
                                 { data: "activos", name: "activos" },
-                                { data: "buttons", name: "buttons" },
                             ],
                             order: [[2, "asc"]],
                             columnDefs: [

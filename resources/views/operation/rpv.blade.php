@@ -2,7 +2,7 @@
 @section('styles')
     <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/plantilla_pdf.css')}}" rel="stylesheet" type="text/css" />
+    {{-- <link href="{{asset('assets/css/plantilla_pdf.css')}}" rel="stylesheet" type="text/css" /> --}}
     <style>
         table {
             table-layout: fixed !important;
@@ -277,6 +277,9 @@
                     </div>
                     <div class="card-toolbar">
                         <ul class="nav">
+                            <li class="nav-item">
+                                <button type="button" class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1" id="btn_imprimir">Imprimir</button>
+                            </li>
                             <li class="nav-item">
                                 <button type="button" class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1" id="btn_search">Buscar</button>
                             </li>
@@ -776,6 +779,10 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js"
+        integrity="sha512-axXaF5grZBaYl7qiM6OMHgsgVXdSLxqq0w7F4CQxuFyrcPmn0JfnqsOtYHUun80g6mRRdvJDrTCyL8LQqBOt/Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/operation/plantilla_rpv.js')}}" type="module"></script>
 @endsection
