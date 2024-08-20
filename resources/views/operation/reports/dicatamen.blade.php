@@ -3,16 +3,6 @@
 <head>
     <title>PDF Report</title>
     <style>
-        /* table {
-            table-layout: fixed !important;
-            width: 100% !important;
-            border: red;
-        } */
-
-        .card table {
-            position: relative;
-            z-index: 1;
-        }
         .logo-unidad-verificacion {
             width: 64px;
             min-width: 64px;
@@ -24,71 +14,14 @@
             align-items: center;
             justify-content: center;
         }
-        #ContentPlaceHolder1_ASPxFormLayout1_3_0 > div {
-            display: block;
-            padding: 16px 0px;
-            margin: 0px -16px;
-        }
 
         #template-container {
-            display: block;
-            font-size: 16px;
             background: #FFF;
             color: #333;
             padding: 16px;
-            /* box-shadow: 0px 3px 4px #AAA; */
         }
 
-        #template-container * {
-            box-sizing: border-box;
-            font-size: 0.1 rem;
-
-        }
-
-        #template-container input[type=checkbox] {
-            margin: 4px 4px 0px 4px;
-        }
-
-        #template-container input[type=text],
-        .disabled-input {
-            padding: 4px;
-            /*border: 1px solid #DDD;*/
-            border: none;
-            border-bottom: 1px solid #BBB;
-            outline: none;
-        }
-
-        #template-container input[type=text] {
-            border-color: #005c87;
-        }
-
-        #template-container input[type=text],
-        #template-container input[type=text]:active,
-        #template-container input[type=text]:focus {
-            animation: editable_input 1.5s ease-in-out infinite;
-            /*border-width: 2px;*/
-        }
-
-        .disabled-input {
-            height: 25px;
-            font-size: 16px;
-            line-height: 18px;
-            font-weight: 500;
-            /*text-align: center;*/
-            overflow: hidden;
-            word-break: break-all;
-        }
-
-        .template-header {
-            display: flex;
-            align-items: center;
-        }
-
-        /* .template-header .logo-SNSICA { */
         .logo-SNSICA {
-            /* height: 48px;
-            min-height: 48px;
-            max-height: 48px; */
             width: 64px;
             min-width: 64px;
             max-width: 64px;
@@ -98,13 +31,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .template-header .title {
-            text-transform: uppercase;
-            text-align: center;
-            flex-grow: 1;
-            margin: 0px 40px;
         }
 
         .template-header .logo-unidad-verificacion {
@@ -119,137 +45,16 @@
             justify-content: center;
         }
 
-            .template-header .logo-unidad-verificacion > img {
-                max-width: 100%;
-                max-height: 100%;
-            }
-
-        .template-subheader {
-        }
-
-
-        .section {
-            margin-bottom: 224px;
-        }
-
-        .group-control {
-            display: inline-flex;
-            align-items: center;
-        }
-
-            .group-control > span.disabled-input {
-                flex-grow: 1;
-            }
-
-        .text-upper {
-            text-transform: uppercase;
-        }
-
-        .text-bold {
-            font-weight: 700;
-        }
-
-        .text-left {
-            text-align: left;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        .m-l-xs {
-            margin-left: 8px;
-        }
-
-        .m-t-xs {
-            margin-top: 8px;
-        }
-
-        .m-r-xs {
-            margin-right: 8px;
-        }
-
-        .m-b-xs {
-            margin-bottom: 8px;
-        }
-
-        .m-l-sm {
-            margin-left: 16px;
-        }
-
-        .m-t-sm {
-            margin-top: 16px;
-        }
-
-        .m-r-sm {
-            margin-right: 16px;
-        }
-
-        .m-b-sm {
-            margin-bottom: 16px;
-        }
-
-        .m-l-md {
-            margin-left: 24px;
-        }
-
-        .m-t-md {
-            margin-top: 24px;
-        }
-
-        .m-r-md {
-            margin-right: 24px;
-        }
-
-        .m-b-md {
-            margin-bottom: 24px;
+        .template-header .logo-unidad-verificacion > img {
+            max-width: 100%;
+            max-height: 100%;
         }
 
         @page {
             margin: 10px; /* Puedes ajustar este valor según tus necesidades */
         }
 
-        @keyframes editable_input {
-            0% {
-                border-bottom-color: #B3E5FC;
-            }
 
-            50% {
-                border-bottom-color: #02d155;
-            }
-
-            100% {
-                border-bottom-color: #B3E5FC;
-            }
-        }
-
-        .brd {
-            border: 1px solid #CCC;
-        }
-
-        .brd-l {
-            border-left: 1px solid #CCC;
-        }
-
-        .brd-t {
-            border-top: 1px solid #CCC;
-        }
-
-        .brd-r {
-            border-right: 1px solid #CCC;
-        }
-
-        .brd-b {
-            border-bottom: 1px solid #CCC;
-        }
-
-        .pd-sm {
-            padding: 4px 8px;
-        }
         table{
             width: 100%;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -385,12 +190,12 @@
         <table>
             <tr class="encabezado_principal">
                 <td rowspan="2" style="width: 8%;"><img class="logo-SNSICA" src="{{public_path('img/SNSICA.png')}}" alt="Logo"></td>
-                <td colspan="2" style="text-align:center; border:1px;">Dictamen de verificacion (DV) <br> para la movilizacion de productos vegetales</td>
+                <td colspan="2" style="text-align:center; border:1px;">Dictamen de verificacion (DV)</td>
 
                 <td rowspan="2" style="width: 8%; text-align:right"><img src="{{public_path('img/logo.png')}}" class="logo-unidad-verificacion" alt="Logo Unidad de Verificación"></td>
             </tr>
             <tr class="prueba">
-                <td style="text-align:left;"><b>A) ORDEN DE SERVICIO</b> ((PARA SER LLENADO POR EL CLIENTE O USUARIO)</td>
+                <td style="text-align:left;"><b>A) ORDEN DE SERVICIO</b> (PARA SER LLENADO POR EL CLIENTE O USUARIO)</td>
                 <td style="text-align:center;"><b>FOLIO:</b> UV-220724-16-VMRE-006-293-0096-24</td>
             </tr>
         </table>
