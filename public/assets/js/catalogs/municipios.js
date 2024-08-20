@@ -96,6 +96,20 @@ var KTmunicipioesList = (function () {
                                 },
                             },
                         },
+                        pais_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione un país'
+                                }
+                            }
+                        },
+                        estado_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione un estado'
+                                }
+                            }
+                        },
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),

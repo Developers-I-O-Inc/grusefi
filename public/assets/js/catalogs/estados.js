@@ -92,6 +92,13 @@ var KTestadoesList = (function () {
                                 },
                             },
                         },
+                        pais_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione un país'
+                                }
+                            }
+                        },
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),

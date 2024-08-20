@@ -89,30 +89,6 @@ class EmpaquesController extends Controller
      */
     public function store(Request $request)
     {
-        // Empaques::updateOrCreate(
-        //     ['id'=>$request->get('id_empaque')],
-        //     [
-        //         'localidad_id' => $request->input('localidad_id'),
-        //         'localidad_doc_id' => $request->input('localidad_doc_id'),
-        //         'nombre_corto' => $request->input('nombre_corto'),
-        //         'nombre_fiscal' => $request->input('nombre_fiscal'),
-        //         'domicilio_fiscal' => $request->input('domicilio_fiscal'),
-        //         'num_ext' => $request->input('num_ext'),
-        //         'num_int' => $request->input('num_int'),
-        //         'cp' => $request->input('cp'),
-        //         'rfc' => $request->input('rfc'),
-        //         'telefonos' => $request->input('telefonos'),
-        //         'imagen' => $request->input('imagen'),
-        //         'nombre_embarque' => $request->input('nombre_embarque'),
-        //         'domicilio_documentacion' => $request->input('domicilio_documentacion'),
-        //         'codigo' => $request->input('codigo'),
-        //         'sader' => $request->input('sader'),
-        //         'exportacion' => $request->input('exportacion'),
-        //         'asociado' => $request->input('asociado'),
-        //         'activo' => $request->input('activo')
-        //     ],
-        // );
-
         $data = $request->only([
             'localidad_id',
             'localidad_doc_id',
@@ -138,12 +114,9 @@ class EmpaquesController extends Controller
             $image = ImageManager::imagick()->read($request->file('imagen'));
             $image->resize(300, 200);
             $imageString = (string) $image->encode();
-            Storage::disk('local')->put('public/img/example.jpg', $imageString);
-        } else {
-            $existingEmpaque = Empaques::find($request->get('id_empaque'));
-            if ($existingEmpaque) {
-                $data['imagen'] = $existingEmpaque->imagen;
-            }
+            $ruta = "public/img/empaques/".$request->get('nombre_fiscal').".".$request->file('imagen')->getClientOriginalExtension();
+            Storage::disk('local')->put($ruta, $imageString);
+            $data['imagen'] = $ruta;
         }
 
         Empaques::updateOrCreate(
@@ -152,15 +125,13 @@ class EmpaquesController extends Controller
         );
 
         return response()->json(['success' => 'Datos guardados exitosamente!']);
-
-        return response()->json(["OK"=>"Se guardo correctamente"]);
     }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $empaque=Empaques::find($id);
+        $empaque=Empaques::get_empaques_localidad($id);
 
         return response()->json(['empaque'=>$empaque]);
     }
