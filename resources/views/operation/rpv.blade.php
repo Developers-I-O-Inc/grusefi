@@ -279,7 +279,7 @@
                     <div class="card-toolbar">
                         <ul class="nav">
                             <li class="nav-item">
-                                <button type="button" class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1 d-none" id="btn_imprimir">Previsualizar</button>
+                                <a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1 d-none" id="btn_imprimir" href="/operation/imprimir_dictamen/1" target="_blank">Previsualizar</a>
                             </li>
                             <li class="nav-item">
                                 <button type="button" class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1" id="btn_search">Buscar</button>

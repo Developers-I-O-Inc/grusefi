@@ -54,10 +54,10 @@ class PlantillasController extends Controller
         return response()->json(["plantilla"=>$plantilla]);
     }
 
-    public function imprimir_dictamen()
+    public function imprimir_dictamen($id)
     {
-        $prueba = "Hola";
-        $pdf = PDF::loadView('operation/reports/dicatamen', compact("prueba"));
+        $plantilla = PlantillaRPV::find($id);
+        $pdf = PDF::loadView('operation/reports/dicatamen', compact("plantilla"));
         return $pdf->stream('reporte_productos.pdf');
     }
 }

@@ -213,15 +213,15 @@
         <table class="table_2">
             <tr>
                 <td class="pregunta2 font-p">2. Servicio Solicitado:</td>
-                <td class="r_servicio font-g">Dictamen de Verificación ( X ) </td>
-                <td class="r_servicio font-g">Certificado Fitosanitario para la Movilización Nacional ( ) </td>
-                <td class="r_servicio font-g">Certificado Fitosanitario Internacional ( X )</td>
+                <td class="r_servicio font-g">Dictamen de Verificación ( {{$plantilla->ss_dictamen_verificacion ? 'X' : ''}} ) </td>
+                <td class="r_servicio font-g">Certificado Fitosanitario para la Movilización Nacional ( {{$plantilla->ss_certificado_movilizacion ? 'X' : ''}} ) </td>
+                <td class="r_servicio font-g">Certificado Fitosanitario Internacional ( {{$plantilla->ss_certificado_internacional ? 'X' : ''}} )</td>
             </tr>
         </table>
         <table class="table_3">
             <tr>
                 <td class="r_otro font-g">Otro (ESPECIFIQUE): </td>
-                <td class="rr_otro"></td>
+                <td class="rr_otro font-g">{{$plantilla->ss_otro}}</td>
             </tr>
         </table>
         <table>
