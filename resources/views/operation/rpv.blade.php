@@ -267,6 +267,7 @@
                 <div class="card-header pt-6 bg-light-primary rounded border-primary border border-dashed">
                     <div class="card-title">
                         <div class="d-flex align-items-center position-relative my-1">
+                            <input type="text" id="plantilla_id" name="plantilla_id" class="d-none">
                             <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-placeholder="Selecciona un país" data-allow-clear="true">
                                 <option></option>
                                 @foreach($paises as $pais)
@@ -278,13 +279,16 @@
                     <div class="card-toolbar">
                         <ul class="nav">
                             <li class="nav-item">
-                                <button type="button" class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1" id="btn_imprimir">Imprimir</button>
+                                <a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1 d-none" id="btn_imprimir" href="/operation/imprimir_dictamen/1" target="_blank">Previsualizar</a>
                             </li>
                             <li class="nav-item">
                                 <button type="button" class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1" id="btn_search">Buscar</button>
                             </li>
                             <li class="nav-item">
                                 <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1" id="btn_add">Guardar</button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_edit">Editar</button>
                             </li>
                         </ul>
                     </div>

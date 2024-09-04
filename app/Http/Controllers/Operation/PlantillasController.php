@@ -17,9 +17,27 @@ class PlantillasController extends Controller
 
     public function save_plantilla(Request $request) {
         $datos = $request->json()->all();
+        $count_pais = PlantillaRPV::where("pais_id",$request->pais_id)->count();
+        if($count_pais > 0 ){
+            return response()->json(['mensaje' => 'El país ya tiene una plantilla registrada'], 422);
+        }
+        else{
+            $registro = new PlantillaRPV();
 
-        $registro = new PlantillaRPV();
+            foreach ($datos as $campo => $valor) {
+                $registro->$campo = $valor;
+            }
 
+            $registro->save();
+
+            return response()->json(['mensaje' => 'Datos guardados con éxito'], 200);
+        }
+
+    }
+
+    public function edit_plantilla(Request $request) {
+        $datos = $request->json()->all();
+        $registro = PlantillaRPV::find($request->id);
         foreach ($datos as $campo => $valor) {
             $registro->$campo = $valor;
         }
@@ -27,6 +45,7 @@ class PlantillasController extends Controller
         $registro->save();
 
         return response()->json(['mensaje' => 'Datos guardados con éxito'], 200);
+
     }
 
     public function get_plantilla($pais){
@@ -34,17 +53,11 @@ class PlantillasController extends Controller
 
         return response()->json(["plantilla"=>$plantilla]);
     }
-    public function imprimir_dictamen()
-    {
-        return view('operation/reports/dictamen_verificacion_pdf');
-    }
-    public function imprimir_dictamen2()
-    {
-        // $products = Product::all(); // Obtener datos de tu modelo o fuente de datos
 
-        $pdf = PDF::loadView('operation/reports/dicatamen2');
-        // return view('operation/reports/dicatamen2');
-          return $pdf->stream('reporte_productos.pdf');// Descargar el PDF
-        // return $pdf->stream('reporte_productos.pdf'); // Para mostrar en el navegador
+    public function imprimir_dictamen($id)
+    {
+        $plantilla = PlantillaRPV::find($id);
+        $pdf = PDF::loadView('operation/reports/dicatamen', compact("plantilla"));
+        return $pdf->stream('reporte_productos.pdf');
     }
 }
