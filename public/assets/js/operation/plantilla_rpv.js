@@ -49,15 +49,14 @@ var KTcalibreesList = (function () {
             body: JSON.stringify(datosFormulario)
         })
         .then(
-            response => {
+            async response => {
                 if (!response.ok) {
-                    return response.json().then(data => {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "Ya existe una plantilla para este país si desea modificarla, seleccione el país y presione el botón de buscar ",
-                        })
-                    });
+                    const data = await response.json()
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Ya existe una plantilla para este país si desea modificarla, seleccione el país y presione el botón de buscar ",
+                    })
                 }
                 return response.json();
             }
@@ -144,7 +143,7 @@ var KTcalibreesList = (function () {
                             if (elementos.length > 0) {
                               if (elementos[0].type === 'radio') {
                                 elementos.forEach(radio => {
-                                  radio.checked = radio.value == value.toString();
+                                  radio.checked = radio.value == value;
                                 });
                               } else if (elementos[0].type === 'checkbox') {
                                 elementos[0].checked = Boolean(value);

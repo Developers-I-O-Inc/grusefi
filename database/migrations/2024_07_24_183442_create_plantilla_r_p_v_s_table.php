@@ -89,13 +89,12 @@ return new class extends Migration
             $table->tinyInteger('cf_c_diagnostico_fitosanitario')->nullable();
             $table->decimal('cf_c_diagnostico_fitosanitario_p')->nullable();
             $table->string('cf_c_diagnostico_fitosanitario_o')->nullable();
-            $table->tinyInteger('cf_c_materia_regulación')->nullable();
-            $table->decimal('cf_c_materia_regulación_p')->nullable();
-            $table->string('cf_c_materia_regulación_o')->nullable();
-            $table->tinyInteger('cd_c_otra')->nullable();
-            $table->decimal('cd_c_otra_p')->nullable();
-            $table->string('cd_c_otra_o')->nullable();
-            $table->string('cd_c_fecha_inspeccion')->nullable();
+            $table->tinyInteger('cf_c_materia_regulacion')->nullable();
+            $table->decimal('cf_c_materia_regulacion_p')->nullable();
+            $table->string('cf_c_materia_regulacion_o')->nullable();
+            $table->tinyInteger('cf_c_otra')->nullable();
+            $table->decimal('cf_c_otra_p')->nullable();
+            $table->string('cf_c_otra_o')->nullable();
             // 9 ¿El transporte para la movilización del Lote de producto (s) presenta o se encuentra? (Marque con una X y complemente):
             $table->boolean('tm_residuos_vegetales');
             $table->boolean('tm_sn_residuos_vegetales');
@@ -111,10 +110,10 @@ return new class extends Migration
             // 11 Si Cumple () No cumple () con la normatividad, requisitos aplicables y/o condición fitosanitaria evaluada.
             $table->boolean('cfe_si_cumple');
             $table->boolean('cfe_debe_CFMN');
-            $table->boolean('cfe_aplica_fleje_CFMN');
+            $table->boolean('cfe_aplica_flete_CFMN');
             $table->boolean('cfe_no_debe_CFMN');
             $table->boolean('cfe_debe_CFI');
-            $table->boolean('cfe_aplica_fleje_CFI');
+            $table->boolean('cfe_aplica_flete_CFI');
             $table->boolean('cfe_no_debe_CFI');
             $table->string('clave_aprobacion');
             $table->string('vigencia');
