@@ -59,5 +59,16 @@ class PlantillaRPV extends Model
         'tm_caja_seca',
         'tm_otro',
         'tm_otro_t',
+        'plantilla_aprobacion',
+        'no_requiere_certificado',
+        'cfe_si_cumple',
+        'cfe_debe_CFMN',
+        'cfe_aplica_fleje_CFMN',
+        'cfe_no_debe_CFMN',
+        'cfe_debe_CFI',
+        'cfe_aplica_fleje_CFI',
+        'cfe_no_debe_CFI',
+        'clave_aprobacion',
+        'vigencia'
     ];
 }
