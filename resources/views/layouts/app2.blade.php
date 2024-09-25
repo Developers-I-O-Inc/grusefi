@@ -235,6 +235,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="menu-item py-2">
+                                <a class="menu-link @yield('embarques') menu-center" href="/operation/embarques" data-bs-trigger="hover"
+                                    data-bs-dismiss="click" data-bs-placement="right">
+                                    <span class="menu-icon me-0">
+                                        <i class="bi bi-house fs-2"></i>
+                                    </span>
+                                    <span class="menu-title">Embarques</span>
+                                </a>
+                            </div>
                             <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
                                 class="menu-item py-2">
                                 <span class="menu-link @yield('admin') menu-center" data-bs-trigger="hover" data-bs-dismiss="click"
