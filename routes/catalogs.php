@@ -44,3 +44,6 @@ Route::post('destroy_empaques', 'EmpaquesController@destroy_empaques');
 // DESTINATARIOS
 Route::resource('destinatarios', 'DestinatariosController');
 Route::post('destroy_destinatarios', 'DestinatariosController@destroy_destinatarios');
+// DESTINATARIOS
+Route::resource('marcas', 'MarcasController');
+Route::post('destroy_marcas', 'MarcasController@destroy_marcas');
