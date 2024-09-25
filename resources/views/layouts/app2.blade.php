@@ -144,13 +144,34 @@
                                             <span class="menu-title">Destinatarios</span>
                                         </a>
                                     </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/empaques">
+                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                        <span class="menu-link">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
                                             <span class="menu-title">Empaques</span>
-                                        </a>
+                                            <span class="menu-arrow"></span>
+                                        </span>
+                                        <div class="menu-sub menu-sub-accordion">
+                                            <div class="menu-item">
+                                                <a class="menu-link"
+                                                    href="/catalogs/empaques">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Nuevo</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a class="menu-link"
+                                                    href="/catalogs/marcas">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Marcas</span>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                     {{-- <div class="menu-item">
                                         <a class="menu-link" href="/catalogs/floraciones">
