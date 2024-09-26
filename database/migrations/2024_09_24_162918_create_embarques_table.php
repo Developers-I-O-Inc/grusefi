@@ -17,11 +17,14 @@ return new class extends Migration
             $table->bigInteger('destinatario_id')->unsigned()->index();
             $table->bigInteger('pais_id')->unsigned()->index();
             $table->bigInteger('puerto_id')->unsigned()->index();
+            $table->bigInteger('tefs_id')->unsigned()->index();
             $table->date('fecha_embarque');
-            $table->string('numero_economico');
+            $table->string('numero_economico')->nullable();
             $table->string('placas_trasporte')->nullable();
+            $table->string('inspector')->nullable();
             $table->foreign('empaque_id')->references('id')->on('cat_empaques');
             $table->foreign('destinatario_id')->references('id')->on('cat_destinatarios');
+            $table->foreign('tefs_id')->references('id')->on('users');
             $table->foreign('pais_id')->references('id')->on('cat_paises');
             $table->foreign('puerto_id')->references('id')->on('cat_puertos');
             $table->timestamps();
