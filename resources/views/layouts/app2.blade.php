@@ -46,15 +46,6 @@
                         data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu" data-kt-scroll-offset="5px">
                         <div class="menu menu-column menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold"
                             id="#kt_aside_menu" data-kt-menu="true">
-                            <div class="menu-item py-2">
-                                <a class="menu-link @yield('dashboard') menu-center" href="/dashboard" data-bs-trigger="hover"
-                                    data-bs-dismiss="click" data-bs-placement="right">
-                                    <span class="menu-icon me-0">
-                                        <i class="bi bi-house fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Inicio</span>
-                                </a>
-                            </div>
                             <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
                                 class="menu-item py-2">
                                 <span class="menu-link menu-center @yield("zones")" data-bs-trigger="hover" data-bs-dismiss="click"
@@ -136,14 +127,6 @@
                                             <span class="menu-title">Categorías</span>
                                         </a>
                                     </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/destinatarios">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Destinatarios</span>
-                                        </a>
-                                    </div>
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                         <span class="menu-link">
                                             <span class="menu-bullet">
@@ -160,6 +143,15 @@
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title">Nuevo</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a class="menu-link"
+                                                    href="/catalogs/destinatarios">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Destinatarios</span>
                                                 </a>
                                             </div>
                                             <div class="menu-item">
@@ -260,7 +252,7 @@
                                 <a class="menu-link @yield('embarques') menu-center" href="/operation/embarques" data-bs-trigger="hover"
                                     data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon me-0">
-                                        <i class="bi bi-house fs-2"></i>
+                                        <i class="bi bi-box"></i>
                                     </span>
                                     <span class="menu-title">Embarques</span>
                                 </a>
