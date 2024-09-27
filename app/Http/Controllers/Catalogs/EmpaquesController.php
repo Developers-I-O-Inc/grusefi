@@ -8,11 +8,7 @@ use App\Models\Catalogs\Empaques;
 use App\Models\Catalogs\Municipios;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
-
-use Illuminate\Support\Str;
-
-use Intervention\Image\Image;
-use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 // use Image;
 
@@ -144,6 +140,11 @@ class EmpaquesController extends Controller
         $ids = $request->input('ids');
         Empaques::whereIn('id', $ids)->delete();
         return response()->json(["OK"=>"Eliminados"]);
+    }
+
+    public function get_maquiladores(Request $request){
+        $empaques = DB::select("SELECT id, nombre_fiscal as nombre FROM cat_empaques where id <>". $request->query('id'));
+        return response()->json(["ok" => "OK", "catalogo" => $empaques]);
     }
 
 }

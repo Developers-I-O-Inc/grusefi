@@ -95,4 +95,10 @@ class MarcasController extends Controller
         return response()->json(["OK"=>"Eliminados"]);
     }
 
+    public function get_marcas(Request $request){
+        $marcas = Marcas::where("empaque_id", $request->query('id'))->get();
+        return response()->json(["ok" => "OK", "catalogo" => $marcas]);
+    }
+
+
 }
