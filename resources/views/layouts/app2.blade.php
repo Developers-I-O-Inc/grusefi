@@ -111,14 +111,14 @@
                                             <span class="menu-section fs-5 fw-bolder ps-1 py-1">Configuración General</span>
                                         </div>
                                     </div>
-                                    {{-- <div class="menu-item">
+                                    <div class="menu-item">
                                         <a class="menu-link" href="/catalogs/calibres">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
                                             <span class="menu-title">Calibres</span>
                                         </a>
-                                    </div> --}}
+                                    </div>
                                     <div class="menu-item">
                                         <a class="menu-link" href="/catalogs/categorias">
                                             <span class="menu-bullet">
