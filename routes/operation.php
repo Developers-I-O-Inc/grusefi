@@ -11,3 +11,5 @@ Route::get('get_plantilla/{pais}', 'PlantillasController@get_plantilla');
 Route::post('save_plantilla', 'PlantillasController@save_plantilla');
 Route::post('edit_plantilla', 'PlantillasController@edit_plantilla');
 Route::get('imprimir_dictamen/{id}', 'PlantillasController@imprimir_dictamen');
+// EMBARQUES
+Route::resource('embarques', 'EmbarquesController');

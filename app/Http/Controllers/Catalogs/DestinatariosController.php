@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Catalogs\Destinatarios;
 use App\Models\Catalogs\Empaques;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class DestinatariosController extends Controller
 {
@@ -117,6 +118,14 @@ class DestinatariosController extends Controller
         $ids = $request->input('ids');
         Destinatarios::whereIn('id', $ids)->delete();
         return response()->json(["OK"=>"Eliminados"]);
+    }
+
+    public function get_destinatarios(Request $request){
+        $puertos = DB::select("SELECT cat_destinatarios.id, nombre
+            FROM cat_destinatarios
+            LEFT JOIN cat_empaques ON cat_destinatarios.empaque_id = cat_empaques.id
+            WHERE empaque_id =".$request->query('id'));
+        return response()->json(["ok" => "OK", "catalogo" => $puertos]);
     }
 
 }

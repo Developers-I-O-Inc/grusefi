@@ -312,7 +312,7 @@
                                         <div class="section template-subheader">
                                             <div class="text-right m-b-xs">
                                                 <span class="text-bold">Folio: </span>
-                                                <input id="FolioRPV" type="text" name="FolioRPV" value="" maxlength="250" style="width: 250px;">
+                                                <input id="FolioRPV" type="text" name="FolioRPV" value="XXXXXXXXXXXXXXXX" maxlength="250" style="width: 250px;" disabled>
                                             </div>
                                             <h4 class="text-upper text-center"><span class="text-bold">A) Orden de servicio</span> (Para ser llenado por el cliente o usuario)</h4>
                                         </div>
@@ -473,7 +473,7 @@
                                         </div>
                                         <div class="section">
                                             <div>
-                                                <span class="text-bold">6 ¿El producto, lote o instalación se encuentra identificado, acondicionado y preparado  para realizar la verificación?</span>
+                                                <span class="text-bold">6 ¿El producto, lote o instalación se encuentra identificado, acondicionado y preparado para realizar la verificación?</span>
                                                 Si (<input type="radio" name="pv" value="1" checked="checked" class="p_input">) No (<input type="radio" name="pv" value="0" class="p_input">).
                                             </div>
                                             <p>Si su respuesta es No, cancele la verificación hasta que sea requerido nuevamente, de lo contrario continúe con el siguiente apartado.</p>
@@ -662,30 +662,31 @@
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Materia extraña no sujeta a regulación</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_materia_regulación" value="0" class="p_input">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_materia_regulación" value="1" class="p_input">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_materia_regulación" value="2" class="p_input">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_materia_regulacion" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_materia_regulacion" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_materia_regulacion" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="cf_c_materia_regulación_p" type="text" name="cf_c_materia_regulación_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
+                                                        <input id="cf_c_materia_regulacion_p" type="text" name="cf_c_materia_regulacion_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex;">
-                                                    <input id="cf_c_materia_regulación_o" type="text" name="cf_c_materia_regulación_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
+                                                    <input id="cf_c_materia_regulacion_o" type="text" name="cf_c_materia_regulacion_o" value="" maxlength="500" style="flex-grow: 1;" class="p_input">
                                                 </div>
                                             </div>
                                             <div class="brd-l brd-r brd-b" style="display: flex; align-items: center;">
                                                 <div class="pd-sm" style="width: 30%;">Otra:</div>
                                                 <div class="text-center brd-l brd-r" style="width: 30%; display: flex;">
-                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cd_c_otra" value="0" class="p_input">)</div>
-                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cd_c_otra" value="1" class="p_input">)</div>
-                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cd_c_otra" value="2" class="p_input">)</div>
+                                                    <div class="pd-sm" style="width: 25%;">(<input type="radio" name="cf_c_otra" value="0" class="p_input">)</div>
+                                                    <div class="pd-sm brd-l brd-r" style="width: 25%;">(<input type="radio" name="cf_c_otra" value="1" class="p_input">)</div>
+                                                    <div class="pd-sm brd-r" style="width: 25%;">(<input type="radio" name="cf_c_otra" value="2" class="p_input">)</div>
                                                     <div class="pd-sm" style="width: 25%; display: flex;">
-                                                        <input id="cd_c_otra_p" type="text" name="cd_c_otra_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
+                                                        <input id="cf_c_otra_p" type="text" name="cf_c_otra_p" value="" maxlength="50" style="flex-grow: 1; max-width: 100%;" class="p_input">
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex; flex-wrap: wrap;">
-                                                    <div>Fecha de inspección: <span class="disabled-input m-b-xs" style="width: 150px;">XX/XX/XXXX</span></div>
-                                                    <input id="cd_c_fecha_inspeccion" type="text" name="cd_c_fecha_inspeccion" value="" maxlength="500" style="width: 100%;" class="p_input">
+                                                    {{-- <div>Fecha de inspección: <span class="disabled-input m-b-xs" style="width: 150px;">XX/XX/XXXX</span></div> --}}
+                                                    {{-- <input id="cd_c_fecha_inspeccion" type="text" name="cd_c_fecha_inspeccion" value="" maxlength="500" style="width: 100%;" class="p_input"> --}}
+                                                    <input id="cf_c_otra" type="text" name="cf_c_otra" value="" maxlength="500" style="width: 100%;" class="p_input">
                                                 </div>
                                             </div>
                                         </div>
@@ -726,13 +727,13 @@
                                                 <div style="flex-grow: 1;">
                                                     <div style="display: flex;">
                                                         <div style="width: 25%;">(<input id="cfe_debe_CFMN" type="checkbox" name="cfe_debe_CFMN" value="" class="p_input">) Debe expedirse el CFMN</div>
-                                                        <div style="width: 15%;">(<input id="cfe_aplica_fleje_CFMN" type="checkbox" name="cfe_aplica_fleje_CFMN" value="" class="p_input">) Aplica Fleje</div>
+                                                        <div style="width: 15%;">(<input id="cfe_aplica_flete_CFMN" type="checkbox" name="cfe_aplica_flete_CFMN" value="" class="p_input">) Aplica Flete</div>
                                                         <div style="width: 35%; display: flex; padding-right: 16px;">Anote folios: <span class="disabled-input" style="flex-grow: 1; margin-left: 8px;">XXXXXXXXXXXXXXXXXXXXXX</span></div>
                                                         <div style="width: 25%;">(<input id="cfe_no_debe_CFMN" type="checkbox" name="cfe_no_debe_CFMN" value="" class="p_input">) No debe expedirse el CFMN</div>
                                                     </div>
                                                     <div class="m-t-xs" style="display: flex;">
                                                         <div style="width: 25%;">(<input id="cfe_debe_CFI" type="checkbox" name="cfe_debe_CFI" value="" class="p_input">) Debe expedirse el CFI</div>
-                                                        <div style="width: 15%;">(<input id="cfe_aplica_fleje_CFI" type="checkbox" name="cfe_aplica_fleje_CFI" value="" class="p_input">) Aplica Fleje</div>
+                                                        <div style="width: 15%;">(<input id="cfe_aplica_flete_CFI" type="checkbox" name="cfe_aplica_flete_CFI" value="" class="p_input">) Aplica Flete</div>
                                                         <div style="width: 35%; display: flex; padding-right: 16px;">Anote folios: <span class="disabled-input" style="flex-grow: 1; margin-left: 8px;">XXXXXXXXXXXXXXXXXXXXXX</span></div>
                                                         <div style="width: 25%;">(<input id="cfe_no_debe_CFI" type="checkbox" name="cfe_no_debe_CFI" value="" class="p_input">) No debe expedirse el CFI</div>
                                                     </div>
@@ -760,11 +761,11 @@
                                             <div class="m-t-md" style="display: flex; justify-content: flex-end;">
                                                 <div class="m-r-sm">
                                                     Clave de aprobación:
-                                                    <input id="clave_aprobacion" type="text" name="clave_aprobacion" value="" maxlength="50" class="p-input">
+                                                    <input id="clave_aprobacion" type="text" name="clave_aprobacion" value="" maxlength="50" class="p_input">
                                                 </div>
                                                 <div>
                                                     Vigencia:
-                                                    <input id="vigencia" type="text" name="vigencia" value="" maxlength="50" class="p-input">
+                                                    <input id="vigencia" type="text" name="vigencia" value="" maxlength="50" class="p_input">
                                                 </div>
                                             </div>
                                         </div>
@@ -783,10 +784,10 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js"
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js"
         integrity="sha512-axXaF5grZBaYl7qiM6OMHgsgVXdSLxqq0w7F4CQxuFyrcPmn0JfnqsOtYHUun80g6mRRdvJDrTCyL8LQqBOt/Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script>
+    </script> --}}
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/operation/plantilla_rpv.js')}}" type="module"></script>
 @endsection

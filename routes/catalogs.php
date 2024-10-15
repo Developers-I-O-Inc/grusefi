@@ -38,9 +38,16 @@ Route::post('destroy_tipo_cultivos', 'TipoCultivosController@destroy_tipo_cultiv
 // PUERTOS
 Route::resource('puertos', 'PuertosController');
 Route::post('destroy_puertos', 'PuertosController@destroy_puertos');
+Route::get('get_puertos', 'PuertosController@get_puertos');
 // EMPAQUES
 Route::resource('empaques', 'EmpaquesController');
 Route::post('destroy_empaques', 'EmpaquesController@destroy_empaques');
+Route::get('get_maquiladores', 'EmpaquesController@get_maquiladores');
 // DESTINATARIOS
 Route::resource('destinatarios', 'DestinatariosController');
 Route::post('destroy_destinatarios', 'DestinatariosController@destroy_destinatarios');
+Route::get('get_destinatarios', 'DestinatariosController@get_destinatarios');
+// MARCAS
+Route::resource('marcas', 'MarcasController');
+Route::post('destroy_marcas', 'MarcasController@destroy_marcas');
+Route::get('get_marcas', 'MarcasController@get_marcas');

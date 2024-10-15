@@ -213,9 +213,9 @@
         <table class="table_2">
             <tr>
                 <td class="pregunta2 font-p">2. Servicio Solicitado:</td>
-                <td class="r_servicio font-g">Dictamen de Verificación ( {{$plantilla->ss_dictamen_verificacion ? 'X' : ''}} ) </td>
-                <td class="r_servicio font-g">Certificado Fitosanitario para la Movilización Nacional ( {{$plantilla->ss_certificado_movilizacion ? 'X' : ''}} ) </td>
-                <td class="r_servicio font-g">Certificado Fitosanitario Internacional ( {{$plantilla->ss_certificado_internacional ? 'X' : ''}} )</td>
+                <td class="r_servicio font-g">Dictamen de Verificación ({{$plantilla->ss_dictamen_verificacion ? 'X' : ' '}}) </td>
+                <td class="r_servicio font-g">Certificado Fitosanitario para la Movilización Nacional ({{$plantilla->ss_certificado_movilizacion ? 'X' : ' '}}) </td>
+                <td class="r_servicio font-g">Certificado Fitosanitario Internacional ( {{$plantilla->ss_certificado_internacional ? 'X' : ' '}} )</td>
             </tr>
         </table>
         <table class="table_3">
@@ -301,45 +301,45 @@
         </table>
         <table>
             <tr>
-                <td class="font-mm td_incisos_left"> (X) Certificado Fitosanitario para la Movilización Nacional</td>
-                <td class="font-mm_right td_incisos">1899312, 1899333, 24-2415002961, 24-2415475598, 24-2415616408,24-2415285894</td>
-                <td class="font-mm td_incisos_right"> (X) Cartilla Fitosanitaria</td>
-                <td class="font-mm_right td_incisos">PFA-PAGU-22-061-190674</td>
+                <td class="font-mm td_incisos_left"> ({{$plantilla->dr_certificado_movilizacion ? 'X' : ' '}}) Certificado Fitosanitario para la Movilización Nacional</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_certificado_movilizacion_t}}</td>
+                <td class="font-mm td_incisos_right"> ({{$plantilla->dr_cartilla_fitosanitaria ? 'X' : ' '}}) Cartilla Fitosanitaria</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_cartilla_fitosanitaria_t}}</td>
             </tr>
             <tr>
-                <td class="font-mm td_incisos_left"> ( ) Copia del CFMN expedido en el origen</td>
-                <td class="font-mm_right td_incisos"></td>
-                <td class="font-mm td_incisos_right"> (X)Certificado de cumplimiento de Norma</td>
-                <td class="font-mm_right td_incisos">EMP0414121293/2016</td>
+                <td class="font-mm td_incisos_left"> ({{$plantilla->dr_copiacfmn ? 'X' : ' '}}) Copia del CFMN expedido en el origen</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_copiacfmn_t}}</td>
+                <td class="font-mm td_incisos_right"> ({{$plantilla->dr_certificado_cumplimiento ? 'X' : ' '}})Certificado de cumplimiento de Norma</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_certificado_cumplimiento_t}}</td>
             </tr>
             <tr>
-                <td class="font-mm td_incisos_left">( ) Diagnóstico Fitosanitario</td>
-                <td class="font-mm_right td_incisos"></td>
-                <td class="font-mm td_incisos_right">( ) Tarjeta de Manejo Integrado de Moscas de la Fruta</td>
-                <td class="font-mm_right td_incisos"></td>
+                <td class="font-mm td_incisos_left">({{$plantilla->dr_diagnostico_fitosanitario ? 'X' : ' '}}) Diagnóstico Fitosanitario</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_diagnostico_fitosanitario_t}}</td>
+                <td class="font-mm td_incisos_right">({{$plantilla->dr_tarjeta_moscas ? 'X' : ' '}}) Tarjeta de Manejo Integrado de Moscas de la Fruta</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_tarjeta_moscas_t}}</td>
             </tr>
             <tr>
-                <td class="font-mm td_incisos_left">( ) Dictamen de Evaluación de la Conformidad</td>
-                <td class="font-mm_right td_incisos"></td>
-                <td class="font-mm td_incisos_right">( ) Copia de Certificado Fitosanitario de Importación</td>
-                <td class="font-mm_right td_incisos"></td>
+                <td class="font-mm td_incisos_left">({{$plantilla->dr_tvaluacion_conformidad ? 'X' : ' '}}) Dictamen de Evaluación de la Conformidad</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_tvaluacion_conformidad_t}}</td>
+                <td class="font-mm td_incisos_right">({{$plantilla->dr_copia_certificado ? 'X' : ' '}}) Copia de Certificado Fitosanitario de Importación</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_copia_certificado_t}}</td>
             </tr>
             <tr>
-                <td class="font-mm td_incisos_left"> ( ) Ningún documento</td>
+                <td class="font-mm td_incisos_left"> ({{$plantilla->dr_ninguno ? 'X' : ' '}}) Ningún documento</td>
                 <td class="font-mm_right td_incisos"></td>
-                <td class="font-mm td_incisos_right"> ( ) Certificado Fitosanitario de Tratamiento Cuarentenario</td>
-                <td class="font-mm_right td_incisos"></td>
+                <td class="font-mm td_incisos_right"> ({{$plantilla->dr_tratamiento_cuarentenario ? 'X' : ' '}}) Certificado Fitosanitario de Tratamiento Cuarentenario</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_tratamiento_cuarentenario_t}}</td>
             </tr>
             <tr>
-                <td class="font-mm td_incisos_left"> ( ) Otro (especifique):</td>
-                <td class="font-mm_right td_incisos"></td>
-                <td class="font-mm td_incisos_right"> (X) Aviso de inicio de funcionamiento (Anotar # registro del huerto o instalacion).</td>
-                <td class="font-mm_right td_incisos">ANEXO</td>
+                <td class="font-mm td_incisos_left"> ({{$plantilla->dr_otro ? 'X' : ' '}}) Otro (especifique):</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_otro_t}}</td>
+                <td class="font-mm td_incisos_right"> ({{$plantilla->dr_aviso ? 'X' : ' '}}) Aviso de inicio de funcionamiento (Anotar # registro del huerto o instalacion).</td>
+                <td class="font-mm_right td_incisos">{{$plantilla->dr_aviso_t}}</td>
             </tr>
         </table>
         <table>
             <tr>
-                <td class="font-p">6. El producto o lote se encuentra identificado, acondicionado y preparado para realizar la verificación?: Si ( X ) No ( ). Si su respuesta es No, cancele la verificación hasta que
+                <td class="font-p">6. El producto o lote se encuentra identificado, acondicionado y preparado para realizar la verificación?: {{$plantilla->pv ? 'SI(X) NO( )' : 'SI( ) NO(X)'}}. Si su respuesta es No, cancele la verificación hasta que
                     sea requerido nuevamente, de lo contrario continúe con el siguiente apartado.</td>
             </tr>
         </table>
@@ -350,11 +350,11 @@
         </table>
         <table>
             <tr>
-                <td class="font-g td_tipo_verificacion"> (X) Constatación ocular</td>
-                <td class="font-g td_tipo_verificacion"> ( ) Diagnóstico Fitosanitario</td>
-                <td class="font-g td_tipo_verificacion"> (X) Muestreo en sitio</td>
-                <td class="font-g td_tipo_verificacion"> ( ) Otro especifique:</td>
-                <td class="font-g"> </td>
+                <td class="font-g td_tipo_verificacion"> ({{$plantilla->tv_constatacion_ocular ? 'X' : ' '}}) Constatación ocular</td>
+                <td class="font-g td_tipo_verificacion"> ({{$plantilla->tv_diagnostico_fitosanitario ? 'X' : ' '}}) Diagnóstico Fitosanitario</td>
+                <td class="font-g td_tipo_verificacion"> ({{$plantilla->tv_muestreo_sitio ? 'X' : ' '}}) Muestreo en sitio</td>
+                <td class="font-g td_tipo_verificacion"> ({{$plantilla->tv_otro ? 'X' : ' '}}) Otro especifique:</td>
+                <td class="font-g">{{$plantilla->tv_otro_t}}</td>
             </tr>
         </table>
         <table>
@@ -376,109 +376,107 @@
             </tr>
             <tr>
                 <td class="font-g">Toma de Muestra</td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">10%</td>
-                <td class="font-g">DE 4 CAJAS EN BASE A PROCEDIMIENTO TECNICO DE TOMA DE MUESTRA DE SIAR A.C.</td>
+                <td class="font-cc">{{$plantilla->cf_c_toma_muestra == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_toma_muestra == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_toma_muestra == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_toma_muestra_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_toma_muestra_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Plagas de importancia cuarentenaria</td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">0.0</td>
-                <td class="font-g">LIBRE DE PLAGAS DE INTERES CUARENTENARIO: Barrenador pequeño del hueso (Conotrachelus aguacatae y C. persea); Barrenador grande del hueso (Heilipus lauri);
-                    Barrenador de ramas (Copturus aguacatae) y la Palomilla barrenadora del hueso del aguacate (Stenoma catenifer)</td>
+                <td class="font-cc">{{$plantilla->cf_c_plagas_cuarentenaria == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_plagas_cuarentenaria == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_plagas_cuarentenaria == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_plagas_cuarentenaria_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_plagas_cuarentenaria_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Plagas de importancia económica</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-g"></td>
+                <td class="font-cc">{{$plantilla->cf_c_plagas_economica == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_plagas_economica == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_plagas_economica == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_plagas_economica_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_plagas_economica_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Tratamiento cuarentenario</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-g"></td>
+                <td class="font-cc">{{$plantilla->cf_c_tratamiento_cuarentenario == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_tratamiento_cuarentenario == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_tratamiento_cuarentenario == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_tratamiento_cuarentenario_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_tratamiento_cuarentenario_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Residuos vegetales</td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">0.0</td>
-                <td class="font-g">LIBRE DE RESIDUOS VEGETALES</td>
+                <td class="font-cc">{{$plantilla->cf_c_residuos_vegetales == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_residuos_vegetales == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_residuos_vegetales == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_residuos_vegetales_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_residuos_vegetales_o}}</td>
             </tr>
             <tr>
-                <td class="font-g">Toma de Muestra</td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">0.0</td>
-                <td class="font-g">LIBRE DE SUELO</td>
+                <td class="font-g">Suelo</td>
+                <td class="font-cc">{{$plantilla->cf_c_suelo == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_suelo == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_suelo == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_suelo_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_suelo_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Lavado</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-g"></td>
+                <td class="font-cc">{{$plantilla->cf_c_lavado == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_lavado == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_lavado == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_lavado_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_lavado_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Cepillado</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-g"></td>
+                <td class="font-cc">{{$plantilla->cf_c_cepillado == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_cepillado == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_cepillado == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_cepillado_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_cepillado_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Empaque nuevo</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-g"></td>
+                <td class="font-cc">{{$plantilla->cf_c_empaque_nuevo == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_empaque_nuevo == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_empaque_nuevo == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_empaque_nuevo_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_empaque_nuevo_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Etiquetas fitosanitarias</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-g"></td>
+                <td class="font-cc">{{$plantilla->cf_c_etiquetas_fitosanitarias == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_etiquetas_fitosanitarias == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_etiquetas_fitosanitarias == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_etiquetas_fitosanitarias_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_etiquetas_fitosanitarias_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Diagnostico fitosanitario</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-g"></td>
+                <td class="font-cc">{{$plantilla->cf_c_diagnostico_fitosanitario == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_diagnostico_fitosanitario == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_diagnostico_fitosanitario == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_diagnostico_fitosanitario_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_diagnostico_fitosanitario_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Materia extraña no sujeta a regulación</td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-g">LIBRE DE PLAGAS CONTAMINANTES</td>
+                <td class="font-cc">{{$plantilla->cf_c_materia_regulacion == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_materia_regulacion == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_materia_regulacion == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_materia_regulacion_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_materia_regulacion_o}}</td>
             </tr>
             <tr>
                 <td class="font-g">Otra</td>
-                <td class="font-cc">X</td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-cc"></td>
-                <td class="font-g">FECHA INSPECCIÓN: DEL 02 AL 15 DE AGOSTO DEL 2024 SE CONSTATÓ QUE LAS TARIMAS FUERON TRATADAS DE ACUERDO
-                    A LA NIMF No. 15</td>
+                <td class="font-cc">{{$plantilla->cf_c_otra == 0 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_otra == 1 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_otra == 2 ? 'X' : ' '}}</td>
+                <td class="font-cc">{{$plantilla->cf_c_otra_p}}</td>
+                <td class="font-g">{{$plantilla->cf_c_otra_o}}</td>
             </tr>
         </table>
         <table>
@@ -486,16 +484,16 @@
                 <td colspan="4" class="pregunta3 font-p">9. El transporte para la movilización del Lote de producto (s) presenta o se encuentra? (Marque con una X y complemente): </td>
             </tr>
             <tr>
-                <td class="font-g">( ) Sin Residuos vegetales o de cosecha</td>
-                <td class="font-g">( ) Sin residuos de suelo </td>
-                <td class="font-g">( ) Lavado </td>
-                <td class="font-g">( X ) Limpio completamente</td>
+                <td class="font-g">({{$plantilla->tm_residuos_vegetales ? 'X' : ' '}}) Sin Residuos vegetales o de cosecha</td>
+                <td class="font-g">({{$plantilla->tm_sn_residuos_vegetales ? 'X' : ' '}}) Sin residuos de suelo </td>
+                <td class="font-g">({{$plantilla->tm_lavado ? 'X' : ' '}}) Lavado </td>
+                <td class="font-g">({{$plantilla->tm_limpio ? 'X' : ' '}}) Limpio completamente</td>
             </tr>
             <tr>
-                <td class="font-g">( X ) Refrigerado</td>
-                <td class="font-g">( ) Enlonado</td>
-                <td class="font-g">( ) Caja seca</td>
-                <td class="font-g">( ) Otro especifique:
+                <td class="font-g">({{$plantilla->tm_refrigerado ? 'X' : ' '}}) Refrigerado</td>
+                <td class="font-g">({{$plantilla->tm_enlonado ? 'X' : ' '}}) Enlonado</td>
+                <td class="font-g">({{$plantilla->tm_caja_seca ? 'X' : ' '}}) Caja seca</td>
+                <td class="font-g">({{$plantilla->tm_otro ? 'X' : ' '}}) Otro especifique:  {{$plantilla->tm_otro_t}}
                 </td>
             </tr>
         </table>
@@ -509,11 +507,11 @@
                     producto (s)</td>
             </tr>
             <tr>
-                <td colspan="2" class="font-p">10. No requiere Certificado Fitosanitario por movilizarse en una zona bajo un mismo estatus fitosanitario o por tratarse de un producto no regulado ( )
+                <td colspan="2" class="font-p">10. No requiere Certificado Fitosanitario por movilizarse en una zona bajo un mismo estatus fitosanitario o por tratarse de un producto no regulado ({{$plantilla->no_requiere_certificado ? 'X' : ' '}})
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="font-p">11 Si Cumple ( X ) No Cumple ( ) con la normatividad, requisitos aplicables y/o requisito fitosanitario evaluado.
+                <td colspan="2" class="font-p">11. {{$plantilla->cfe_si_cumple ? 'Si cumple (X) No Cumple ()' : 'Si Cumple () No Cumple (X)'}} con la normatividad, requisitos aplicables y/o requisito fitosanitario evaluado.
                 </td>
             </tr>
             <tr>
@@ -524,19 +522,19 @@
         <table>
             <tr>
                 <td class="font-g" style="width: 8%">Por lo que:</td>
-                <td class="font-g">( ) Debe expedirse el CFMN</td>
-                <td class="font-g">( ) Aplica Fleje</td>
+                <td class="font-g">({{$plantilla->cfe_debe_CFMN ? 'X' : ' '}}) Debe expedirse el CFMN</td>
+                <td class="font-g">({{$plantilla->cfe_aplica_flete_CFMN ? 'X' : ' '}}) Aplica Flete</td>
                 <td class="font-g">Anote Folios</td>
                 <td class="font-g"></td>
-                <td class="font-g">( ) No debe expedirse el CFMN</td>
+                <td class="font-g">({{$plantilla->cfe_no_debe_CFMN ? 'X' : ' '}}) No debe expedirse el CFMN</td>
             </tr>
             <tr>
                 <td class="font-g" style="width: 8%"></td>
-                <td class="font-g">( X ) Debe expedirse el CFI </td>
-                <td class="font-g">( ) Aplica Fleje </td>
+                <td class="font-g">({{$plantilla->cfe_debe_CFI ? 'X' : ' '}}) Debe expedirse el CFI </td>
+                <td class="font-g">({{$plantilla->cfe_aplica_flete_CFI ? 'X' : ' '}}) Aplica Flete </td>
                 <td class="font-g">Anote Folios</td>
                 <td class="font-g"></td>
-                <td class="font-g">( ) No debe expedirse el CFI</td>
+                <td class="font-g">({{$plantilla->cfe_no_debe_CFI ? 'X' : ' '}}) No debe expedirse el CFI</td>
             </tr>
         </table>
         <table>
@@ -568,10 +566,10 @@
         <table>
             <tr>
                 <td style="width: 40%"></td>
-                <td class="font-rr">LAVE DE APROBACION: </td>
-                <td class="font-rr">V-220724-16-VMRE-006</td>
+                <td class="font-rr">CLAVE DE APROBACION: </td>
+                <td class="font-rr">{{$plantilla->clave_aprobacion}}</td>
                 <td class="font-rr">VIGENCIA</td>
-                <td class="font-rr">21/07/2026</td>
+                <td class="font-rr">{{$plantilla->vigencia}}</td>
             </tr>
         </table>
         <table class="table_datos_expedicion">
