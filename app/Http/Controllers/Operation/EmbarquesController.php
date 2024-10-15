@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Operation;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catalogs\Calibres;
+use App\Models\Catalogs\Categorias;
 use App\Models\Catalogs\Empaques;
 use App\Models\Catalogs\Paises;
+use App\Models\Catalogs\Presentaciones;
+use App\Models\Catalogs\TipoCultivos;
 use Yajra\DataTables\DataTables;
 use App\Models\User;
 
@@ -17,10 +20,14 @@ class EmbarquesController extends Controller
      */
     public function index(Request $request)
     {
-        $empaques = Empaques::all();
-        $paises = Paises::all();
+        $empaques = Empaques::where('activo', 1)->get();
+        $paises = Paises::where('activo', 1)->get();
         $users = User::role('tefs')->get();
-        return view('operation/embarques', compact('empaques', 'paises', 'users'));
+        $categorias = Categorias::where('activo', 1)->get();
+        $cultivos = TipoCultivos::where('activo', 1)->get();
+        $calibres = Calibres::where('activo', 1)->get();
+        $presentaciones = Presentaciones::where('activo', 1)->get();
+        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'cultivos', 'calibres', 'presentaciones'));
 
     }
     /**
