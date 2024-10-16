@@ -10,8 +10,12 @@ use App\Models\Catalogs\Empaques;
 use App\Models\Catalogs\Paises;
 use App\Models\Catalogs\Presentaciones;
 use App\Models\Catalogs\TipoCultivos;
-use Yajra\DataTables\DataTables;
+use App\Models\Operation\EmbarquesMarcas;
+use App\Models\Operation\EmbarquesMaquiladores;
+use App\Models\Operation\Embarques;
+use App\Models\Operation\EmbarquesProductos;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class EmbarquesController extends Controller
 {
@@ -35,21 +39,87 @@ class EmbarquesController extends Controller
      */
     public function store(Request $request)
     {
-        calibres::updateOrCreate(
-            ['id'=>$request->get('id_calibre')],
-            ['calibre' => $request->input('calibre'),
-            'activo' => $request->input('activo')],
-        );
-        return response()->json(["OK"=>"Se guardo correctamente"]);
+        $marcas = json_decode($request->get('marcas'), true);
+        $maquiladores = json_decode($request->get('maquiladores'), true);
+        $productos = json_decode($request->get('productos'), true);
+
+        $data = $request->only([
+            'empaque_id',
+            'destinatario_id',
+            'pais_id',
+            'puerto_id',
+            'fecha_embarque',
+            'numero_economico',
+            'placas_trasporte',
+            'inspector',
+            'consolidado',
+            'consolidado_id',
+            'empresa_transporte',
+            'chofer',
+        ]);
+        DB::beginTransaction();
+
+        try {
+            $embarque = Embarques::updateOrCreate(
+                ['id' => $request->get('id_embarque')],
+                $data
+            );
+
+            if (!empty($marcas)) {
+                foreach ($marcas as $marca_arr) {
+                    $marca = new EmbarquesMarcas();
+                    $marca->embarque_id = $embarque->id;
+                    $marca->marca_id = $marca_arr;
+                    $marca->save();
+                }
+            }
+
+            if (!empty($maquiladores)) {
+                foreach ($maquiladores as $maquilador_arr) {
+                    $maquilador = new EmbarquesMaquiladores();
+                    $maquilador->embarque_id = $embarque->id;
+                    $maquilador->maquilador_id = $maquilador_arr;
+                    $maquilador->save();
+                }
+            }
+
+            $insertData = [];
+            if (!empty($productos)) {
+                foreach ($productos as $product) {
+                    $insertData[] = [
+                        'embarque_id' => $embarque->id,
+                        'categoria_id' => $product[5],
+                        'tipo_cultivo_id' => $product[7],
+                        'presentacion_id' => $product[9],
+                        'calibre_id' => $product[11],
+                        'folio_pallet' => $product[1],
+                        'sader' => $product[3],
+                        'cajas' => $product[12],
+                        'lote' => $product[2],
+                        'tipo_fruta' => $product[14],
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                }
+
+                EmbarquesProductos::insert($insertData);
+            }
+            DB::commit();
+
+            return response()->json(['success' => 'Datos guardados exitosamente!', 'marcas'=>json_decode($request->get('productos'), true)]);
+        }
+        catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => 'Error al guardar los permisos.'], 500);
+        }
+
     }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $calibre=Calibres::find($id);
 
-        return response()->json(['calibre'=>$calibre]);
     }
 
     /**
@@ -57,9 +127,7 @@ class EmbarquesController extends Controller
      */
     public function destroy_calibres(Request $request)
     {
-        $ids = $request->input('ids');
-        Calibres::whereIn('id', $ids)->delete();
-        return response()->json(["OK"=>"Eliminados"]);
+
     }
 
 }

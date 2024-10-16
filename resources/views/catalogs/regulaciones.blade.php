@@ -109,23 +109,23 @@
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Dictamen Apartado #4</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="dictamen_apartado_4" id="dictamen_apartado_4" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el dictamen #4" name="dictamen_apartado_4" id="dictamen_apartado_4" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Dictamen Apartado #5</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="dictamen_apartado_5" id="dictamen_apartado_5" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el dictamen #5" name="dictamen_apartado_5" id="dictamen_apartado_5" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Dictamen Apartado #11</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="dictamen_apartado_11" id="dictamen_apartado_11" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el dictamen #11" name="dictamen_apartado_11" id="dictamen_apartado_11" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Nombre País Dictamen</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_pais_dictamen" id="nombre_pais_dictamen" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un país" name="nombre_pais_dictamen" id="nombre_pais_dictamen" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Nombre País Certificado</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_pais_certificado" id="nombre_pais_certificado" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un páis" name="nombre_pais_certificado" id="nombre_pais_certificado" />
                                 </div>
 
                                 <div class="fv-row mb-7">

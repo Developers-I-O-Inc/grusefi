@@ -121,7 +121,7 @@
                                                 </div>
                                                 <div class="col-md-5 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Domicilio Fiscal</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre fiscal del empaque" name="domicilio_fiscal" id="domicilio_fiscal" />
+                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el domicilio fiscal del empaque" name="domicilio_fiscal" id="domicilio_fiscal" />
                                                 </div>
                                             </div>
                                             <div class="row mb-12">
@@ -129,12 +129,12 @@
                                                     <div class="row fv-row fv-plugins-icon-container">
                                                         <div class="col-md-6 fv-row">
                                                             <label class="required fs-6 fw-bold form-label mb-2">RFC</label>
-                                                            <input type="text" class="form-control form-control-solid" placeholder="Exterior" name="rfc" id="rfc" />
+                                                            <input type="text" class="form-control form-control-solid" placeholder="RFC" name="rfc" id="rfc" />
                                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                                         </div>
                                                         <div class="col-md-6 fv-row">
                                                             <label class="required fs-6 fw-bold form-label mb-2">Teléfonos(s)</label>
-                                                            <input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="CVV" id="telefonos" name="telefonos">
+                                                            <input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="Ingrese Teléfono" id="telefonos" name="telefonos">
 
                                                         </div>
                                                     </div>
@@ -155,7 +155,7 @@
                                                         <span class="required">Código Postal</span>
                                                     </label>
                                                     <div class="position-relative">
-                                                        <input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="CVV" id="cp" name="cp">
+                                                        <input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="Código Postal" id="cp" name="cp">
 
                                                     </div>
                                                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
@@ -202,12 +202,12 @@
                                             <div class="row mb-12">
                                                 <div class="col-md-6 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Registro Sader</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa domicilio" name="sader" id="sader" />
+                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa SADER" name="sader" id="sader" />
                                                 </div>
 
                                                 <div class="col-md-6 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Código</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa domicilio" name="codigo" id="codigo" />
+                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa código" name="codigo" id="codigo" />
                                                 </div>
                                             </div>
                                             <div class="row mb-12">

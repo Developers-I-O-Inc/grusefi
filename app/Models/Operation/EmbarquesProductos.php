@@ -5,14 +5,15 @@ namespace App\Models\Operation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductosEmbarques extends Model
+class EmbarquesProductos extends Model
 {
     use HasFactory;
 
-    protected $table = "productos_embarques";
+    protected $table = "op_embarques_productos";
 
     protected $fillable = [
         'id',
+        'embarque_id',
         'categoria_id',
         'tipo_cultivo_id',
         'presentacion_id',
@@ -20,7 +21,6 @@ class ProductosEmbarques extends Model
         'folio_pallet',
         'sader',
         'cajas',
-        'peso',
         'lote',
         'tipo_fruta',
     ];

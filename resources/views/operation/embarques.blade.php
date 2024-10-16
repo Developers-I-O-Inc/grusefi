@@ -83,7 +83,6 @@
             </div>
             <div class="d-flex flex-row-fluid flex-center bg-body rounded">
                 <form class="py-20 w-100 w-xl-900px px-9" novalidate="novalidate" id="form_embarques">
-
                     <div data-kt-stepper-element="content" class="current">
                         <div class="w-100">
                             <div class="row mb-12">
@@ -146,7 +145,7 @@
                                 </div>
                                 <div class="col-md-4 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Placas</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="placas" id="placas" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="placas_trasporte" id="placas_trasporte" />
                                 </div>
                             </div>
                         </div>
@@ -159,7 +158,6 @@
                                         <option></option>
                                     </select>
                                     <div class="col-md-6 fv-row d-none">
-                                        <label class="required fs-6 fw-bold mb-2">Fecha Embarque</label>
                                         <input class="form-control form-control-solid" placeholder="Seleccione Fecha" id="edit_marcas" name="edit_marcas"/>
                                     </div>
                                 </div>
@@ -227,10 +225,11 @@
                     <div data-kt-stepper-element="content">
                         <div class="w-100">
                             <div class="container">
-
-
                             <div class="row mb-12">
                                 <div class="col-5">
+                                    <div class="col-md-6 fv-row d-none">
+                                        <input class="form-control form-control-solid" placeholder="Seleccione Fecha" id="edit_products" name="edit_products"/>
+                                    </div>
                                     <button class="btn btn-flex btn-light-primary" id="btn_add_products">
                                         <span class="svg-icon svg-icon-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -262,6 +261,7 @@
                                                     <th class="">idcalibre</th>
                                                     <th class="">N° Cajas</th>
                                                     <th class="">Peso Unitario</th>
+                                                    <th class="">Tipo Fruta</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="fw-bold text-gray-600">
@@ -307,7 +307,7 @@
                             <div class="row mb-12">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Empresa Transportista</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="empresa_trasnportista" id="empresa_trasnportista" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="empresa_transporte" id="empresa_transporte" />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Nombre del chofer</label>
@@ -359,7 +359,7 @@
                         </div>
                         <div>
                             <button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
-                                <span class="indicator-label">Submit
+                                <span class="indicator-label">Guardar
                                 <span class="svg-icon svg-icon-3 ms-2 me-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
@@ -442,7 +442,7 @@
                                 <div class="row mb-12">
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Calibre</label>
-                                        <select id="calibre_id" name="calibre_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione un calibre" data-allow-clear="true">
+                                        <select id="calibre_id" name="calibre_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
                                             <option></option>
                                             @foreach($calibres as $calibre)
                                                 <option value="{{$calibre->id}}">{{$calibre->calibre}}</option>
@@ -492,10 +492,6 @@
     </div>
 @endsection
 @section('scripts')
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js"
-        integrity="sha512-axXaF5grZBaYl7qiM6OMHgsgVXdSLxqq0w7F4CQxuFyrcPmn0JfnqsOtYHUun80g6mRRdvJDrTCyL8LQqBOt/Q=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script> --}}
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/operation/embarques.js')}}" type="module"></script>
 @endsection
