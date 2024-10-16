@@ -11,8 +11,10 @@ var KTCreateAccount = (function () {
         select_categoria,
         select_cultivo,
         select_calibre,
-        select_presentacion
-
+        select_presentacion,
+        check_active,
+        edit_active
+    const token = $('meta[name="csrf-token"]').attr('content')
     var e,
         btn_modal,
         btn_modal_c,
@@ -21,7 +23,9 @@ var KTCreateAccount = (function () {
         btn_add_products,
         btn_add_product,
         count_marcas = 0,
+        count_products = 0,
         edit_text_marca,
+        edit_text_products,
         table_marcas,
         table_maquilador,
         table_products,
@@ -29,7 +33,7 @@ var KTCreateAccount = (function () {
         form_embarques,
         form_products,
         modal,
-        o,
+        btn_submit,
         s,
         r,
         select_empaque,
@@ -92,6 +96,60 @@ var KTCreateAccount = (function () {
                     }
                 });
             });
+        },
+        save_embarque = async (datos, token, btnSubmit, form) => {
+            try {
+                // Mostrar alerta de carga antes de la solicitud
+                console.log("inicai")
+                Swal.fire({
+                    title: "<strong>Cargando</strong>",
+                    html: `<div class="progress container-fluid"></div>`,
+                    showConfirmButton: false,
+                });
+                console.log(table_marcas.column(0).data().toArray())
+                // Realizar la solicitud fetch
+                const response = await fetch('embarques', {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": token,
+                    },
+                    body: datos,
+                });
+
+                // Verificar si la respuesta es correcta
+                if (!response.ok) {
+                    throw new Error("Error en la base de datos");
+                }
+
+                // Convertir la respuesta a JSON
+                const result = await response.json();
+                console.log(result)
+                // Mostrar alerta de éxito
+                await Swal.fire({
+                    text: "Datos guardados exitosamente!",
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Entendido!",
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                    },
+                });
+
+                // Acción posterior a la confirmación del SweetAlert
+                btnSubmit.disabled = false;
+                form.reset();
+
+            } catch (error) {
+                // Manejo de errores
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: error.message,
+                });
+                console.error(error);
+                btnSubmit.disabled = false;
+            }
+            // console.log(datos)
         }
     return {
         init: function () {
@@ -103,14 +161,17 @@ var KTCreateAccount = (function () {
                 (select_consolidado = $('#consolidado_id').select2()),
                 (select_destinatario = $('#destinatario_id').select2()),
                 (select_marca = $('#select_marca').select2()),
+                (select_calibre = $('#calibre_id').select2()),
                 (select_maquiladores = $('#select_maquiladores').select2()),
                 (select_puerto = $('#puerto_id').select2()),
                 (select_categoria = $('#categoria_id').select2()),
-                (select_calibre = $('#calibre_id').select2()),
                 (select_presentacion = $('#presentacion_id').select2()),
                 (select_cultivo = $('#tipo_cultivo_id').select2()),
                 (select_puerto2 = document.querySelector("#puerto_id")),
                 (edit_text_marca = document.querySelector("#edit_marcas")),
+                (edit_text_products = document.querySelector("#edit_products")),
+                (check_active = document.querySelector("#check_activo")),
+                (edit_active = document.querySelector("#consolidado")),
                 (btn_add_marca = document.querySelector("#btn_add_marca")),
                 (btn_add_maquilador = document.querySelector("#btn_add_maquilador")),
                 (btn_add_products = document.querySelector("#btn_add_products")),
@@ -225,17 +286,17 @@ var KTCreateAccount = (function () {
                         }),
                     },
                 })),
-                (o = stepper_embarques.querySelector('[data-kt-stepper-action="submit"]')),
+                (btn_submit = stepper_embarques.querySelector('[data-kt-stepper-action="submit"]')),
                 (s = stepper_embarques.querySelector('[data-kt-stepper-action="next"]')),
                 (r = new KTStepper(stepper_embarques)).on("kt.stepper.changed", function (e) {
                     5 === r.getCurrentStepIndex()
-                        ? (o.classList.remove("d-none"),
-                            o.classList.add("d-inline-block"),
+                        ? (btn_submit.classList.remove("d-none"),
+                            btn_submit.classList.add("d-inline-block"),
                             s.classList.add("d-none"))
                         : 6 === r.getCurrentStepIndex()
-                            ? (o.classList.add("d-none"), s.classList.add("d-none"))
-                            : (o.classList.remove("d-inline-block"),
-                                o.classList.remove("d-none"),
+                            ? (btn_submit.classList.add("d-none"), s.classList.add("d-none"))
+                            : (btn_submit.classList.remove("d-inline-block"),
+                                btn_submit.classList.remove("d-none"),
                                 s.classList.remove("d-none"))
                 }),
                 r.on("kt.stepper.next", function (e) {
@@ -260,6 +321,10 @@ var KTCreateAccount = (function () {
                 }),
                 r.on("kt.stepper.previous", function (e) {
                     console.log("stepper.previous"), e.goPrevious(), KTUtil.scrollTop()
+                }),
+                 // CHECK ACTIVE
+                 check_active.addEventListener("click", function (t) {
+                    Operation.checked(edit_active, check_active)
                 }),
                  // TABLE PERMISSIONS
                 (table_marcas = $("#kt_marcas_table").DataTable({
@@ -374,7 +439,7 @@ var KTCreateAccount = (function () {
                         fields: {
                             edit_marcas: {
                                 validators: {
-                                    notEmpty: { message: "La fecha es obligatoria" },
+                                    notEmpty: { message: "La marca es obligatorìa" },
                                 },
                             },
                         },
@@ -388,138 +453,57 @@ var KTCreateAccount = (function () {
                         },
                     })
                 ),
-                // arr_validations.push(
-                //     FormValidation.formValidation(form_embarques, {
-                //         fields: {
-                //             account_team_size: {
-                //                 validators: { notEmpty: { message: "Time size is required" } },
-                //             },
-                //             account_name: {
-                //                 validators: {
-                //                     notEmpty: { message: "Account name is required" },
-                //                 },
-                //             },
-                //             account_plan: {
-                //                 validators: {
-                //                     notEmpty: { message: "Account plan is required" },
-                //                 },
-                //             },
-                //         },
-                //         plugins: {
-                //             trigger: new FormValidation.plugins.Trigger(),
-                //             bootstrap: new FormValidation.plugins.Bootstrap5({
-                //                 rowSelector: ".fv-row",
-                //                 eleInvalidClass: "",
-                //                 eleValidClass: "",
-                //             }),
-                //         },
-                //     })
-                // ),
-                // arr_validations.push(
-                //     FormValidation.formValidation(form_embarques, {
-                //         fields: {
-                //             business_name: {
-                //                 validators: {
-                //                     notEmpty: { message: "Busines name is required" },
-                //                 },
-                //             },
-                //             business_descriptor: {
-                //                 validators: {
-                //                     notEmpty: { message: "Busines descriptor is required" },
-                //                 },
-                //             },
-                //             business_type: {
-                //                 validators: {
-                //                     notEmpty: { message: "Busines type is required" },
-                //                 },
-                //             },
-                //             business_description: {
-                //                 validators: {
-                //                     notEmpty: { message: "Busines description is required" },
-                //                 },
-                //             },
-                //             business_email: {
-                //                 validators: {
-                //                     notEmpty: { message: "Busines email is required" },
-                //                     emailAddress: {
-                //                         message: "The value is not a valid email address",
-                //                     },
-                //                 },
-                //             },
-                //         },
-                //         plugins: {
-                //             trigger: new FormValidation.plugins.Trigger(),
-                //             bootstrap: new FormValidation.plugins.Bootstrap5({
-                //                 rowSelector: ".fv-row",
-                //                 eleInvalidClass: "",
-                //                 eleValidClass: "",
-                //             }),
-                //         },
-                //     })
-                // ),
-                // arr_validations.push(
-                //     FormValidation.formValidation(form_embarques, {
-                //         fields: {
-                //             card_name: {
-                //                 validators: {
-                //                     notEmpty: { message: "Name on card is required" },
-                //                 },
-                //             },
-                //             card_number: {
-                //                 validators: {
-                //                     notEmpty: { message: "Card member is required" },
-                //                     creditCard: { message: "Card number is not valid" },
-                //                 },
-                //             },
-                //             card_expiry_month: {
-                //                 validators: { notEmpty: { message: "Month is required" } },
-                //             },
-                //             card_expiry_year: {
-                //                 validators: { notEmpty: { message: "Year is required" } },
-                //             },
-                //             card_cvv: {
-                //                 validators: {
-                //                     notEmpty: { message: "CVV is required" },
-                //                     digits: { message: "CVV must contain only digits" },
-                //                     stringLength: {
-                //                         min: 3,
-                //                         max: 4,
-                //                         message: "CVV must contain 3 to 4 digits only",
-                //                     },
-                //                 },
-                //             },
-                //         },
-                //         plugins: {
-                //             trigger: new FormValidation.plugins.Trigger(),
-                //             bootstrap: new FormValidation.plugins.Bootstrap5({
-                //                 rowSelector: ".fv-row",
-                //                 eleInvalidClass: "",
-                //                 eleValidClass: "",
-                //             }),
-                //         },
-                //     })
-                // ),
-                o.addEventListener("click", function (e) {
+                arr_validations.push(
+                    FormValidation.formValidation(form_embarques, {
+                        fields: {
+                            edit_products: {
+                                validators: {
+                                    notEmpty: { message: "La marca es obligatorìa" },
+                                },
+                            },
+                        },
+                        plugins: {
+                            trigger: new FormValidation.plugins.Trigger(),
+                            bootstrap: new FormValidation.plugins.Bootstrap5({
+                                rowSelector: ".fv-row",
+                                eleInvalidClass: "",
+                                eleValidClass: "",
+                            }),
+                        },
+                    })
+                ),
+                btn_submit.addEventListener("click", function (e) {
                     arr_validations[0].validate().then(function (t) {
-                        console.log("validated!"),
-                            "Valid" == t
-                                ? (e.preventDefault(),
-                                    (o.disabled = !0),
-                                    o.setAttribute("data-kt-indicator", "on"),
-                                    setTimeout(function () {
-                                        o.removeAttribute("data-kt-indicator"),
-                                            (o.disabled = !1),
-                                            r.goNext()
-                                    }, 2e3))
-                                : Swal.fire({
-                                    text: "Sorry sdffdssdf, looks like there are some errors detected, please try again.",
-                                    icon: "error",
-                                    buttonsStyling: !1,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: { confirmButton: "btn btn-light" },
-                                }).then(function () {
-                                    KTUtil.scrollTop()
-                                })
+                        const formData = new FormData(document.querySelector(`#form_embarques`));
+                        const marcasArray = table_marcas.column(0).data().toArray()
+                        const maquiladoresArray = table_marcas.column(0).data().toArray()
+                        const productosArray = table_products.data().toArray();
+                        formData.append('marcas', JSON.stringify(marcasArray))
+                        formData.append('maquiladores', JSON.stringify(maquiladoresArray))
+                        formData.append('productos', JSON.stringify(productosArray))
+                        const datos = new URLSearchParams(formData)
+
+                        "Valid" == t
+                            ? (
+                                e.preventDefault(),
+                                (btn_submit.disabled = !0),
+                                btn_submit.setAttribute("data-kt-indicator", "on"),
+                                setTimeout(function () {
+                                    btn_submit.removeAttribute("data-kt-indicator"),
+                                        (btn_submit.disabled = !1),
+                                        // save data
+                                        save_embarque(datos, token, btn_submit, form_embarques )
+                                        r.goNext()
+                                }, 2e3))
+                            : Swal.fire({
+                                text: "Ya se enviaron los datos recarga la página por favor.",
+                                icon: "error",
+                                buttonsStyling: !1,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: { confirmButton: "btn btn-light" },
+                            }).then(function () {
+                                KTUtil.scrollTop()
+                            })
                     })
                 }),
                  // CHANGE PAIS
@@ -570,6 +554,9 @@ var KTCreateAccount = (function () {
                                 ),
                                 setTimeout(function () {
                                     btn_add_product.removeAttribute("data-kt-indicator")
+                                    console.log(select_calibre.text())
+                                    console.log(select_cultivo.text())
+                                    console.log(select_categoria.text())
                                     for(let i=0; i < edit_registros.value; i++){
                                         table_products.row.add([`<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 delete_product"
                                             data-kt-customer-table-filter="delete_row">
@@ -580,8 +567,10 @@ var KTCreateAccount = (function () {
                                                 </svg></span>
                                             </button>`, edit_pallet.value, edit_lote.value, edit_sader.value, select_categoria.text(), select_categoria.val(),
                                             select_cultivo.text(), select_cultivo.val(), select_presentacion.text(), select_presentacion.val().split('|')[0],
-                                        select_calibre.text(), select_calibre.val(), edit_cajas.value, select_presentacion.val().split('|')[1]]).draw()
+                                            $('#calibre_id').find('option:selected').text(), select_calibre.val(), edit_cajas.value, select_presentacion.val().split('|')[1], edit_tipo_fruta.value]).draw()
                                     }
+                                    count_products = count_products + 1
+                                    edit_text_products.value=count_products
                                     btn_add_product.setAttribute("data-kt-indicator","off")
                                     form_products.reset()
                                     toastr.success("Agregado correctamente");
@@ -597,21 +586,6 @@ var KTCreateAccount = (function () {
                                 })
                     })
                 })
-                // $(i.querySelector('[name="card_expiry_month"]')).on(
-                //     "change",
-                //     function () {
-                //         arr_validations[3].revalidateField("card_expiry_month")
-                //     }
-                // ),
-                // $(i.querySelector('[name="card_expiry_year"]')).on(
-                //     "change",
-                //     function () {
-                //         arr_validations[3].revalidateField("card_expiry_year")
-                //     }
-                // ),
-                // $(i.querySelector('[name="business_type"]')).on("change", function () {
-                //     arr_validations[2].revalidateField("business_type")
-                // })
                 $("#fecha_embarque").daterangepicker({
                     singleDatePicker: true,
                     showDropdowns: true,

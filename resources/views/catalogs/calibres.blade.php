@@ -88,7 +88,7 @@
                                 data-kt-scroll-wrappers="#kt_modal_add_calibre_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Calibre</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="calibre" id="calibre" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un calibre" name="calibre" id="calibre" />
                                     <input type="text" class="form-control form-control-solid d-none" name="id_calibre" id="id_calibre" />
                                 </div>
                                 <div class="fv-row mb-7">

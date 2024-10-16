@@ -88,7 +88,7 @@
                                 data-kt-scroll-wrappers="#kt_modal_add_tipo_cultivo_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Tipo de Cultivo</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="tipo_cultivo" id="tipo_cultivo" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el tipo de cultivo" name="tipo_cultivo" id="tipo_cultivo" />
                                     <input type="text" class="form-control form-control-solid d-none" name="id_tipo_cultivo" id="id_tipo_cultivo" />
                                 </div>
                                 <div class="fv-row mb-7">

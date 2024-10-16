@@ -1,6 +1,14 @@
 class Operation {
     constructor() {}
 
+    checked(campo, check) {
+        if (check.checked) {
+            campo.value = 1
+        } else {
+            campo.value = 0
+        }
+    }
+
     get_next_selects(catalog, id, select_change){
         fetch(`/catalogs/get_${catalog}?id=${id}`, {
             method: "GET",
