@@ -9,7 +9,7 @@ class Embarques extends Model
 {
     use HasFactory;
 
-    protected $table = "embarques";
+    protected $table = "op_embarques";
 
     protected $fillable = [
         'empaque_id',
@@ -18,6 +18,11 @@ class Embarques extends Model
         'puerto_id',
         'fecha_embarque',
         'numero_economico',
-        'placas_trasporte'
+        'placas_trasporte',
+        'inspector',
+        'consolidado',
+        'consolidado_id',
+        'empresa_transporte',
+        'chofer',
     ];
 }

@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productos_embarques', function (Blueprint $table) {
+        Schema::create('op_embarques_productos', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('embarque_id')->unsigned()->index();
             $table->bigInteger('categoria_id')->unsigned()->index();
             $table->bigInteger('tipo_cultivo_id')->unsigned()->index();
             $table->bigInteger('presentacion_id')->unsigned()->index();
@@ -22,6 +23,11 @@ return new class extends Migration
             $table->string('cajas');
             $table->string('lote');
             $table->string('tipo_fruta');
+            $table->string('empresa_transportista')->nullable();
+            $table->string('chofer')->nullable();
+            $table->boolean('consolidado')->nullable();
+            $table->integer('consolidado_id')->nullable();
+            $table->foreign('embarque_id')->references('id')->on('op_embarques');
             $table->foreign('categoria_id')->references('id')->on('cat_categorias');
             $table->foreign('tipo_cultivo_id')->references('id')->on('cat_tipo_cultivos');
             $table->foreign('presentacion_id')->references('id')->on('cat_presentaciones');
@@ -36,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('productos_embarques');
+        Schema::dropIfExists('op_embarques_productos');
     }
 };

@@ -23,12 +23,12 @@
                                     fill="black" />
                             </svg>
                         </span>
-                        <input type="text" data-kt-pais-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar paises" />
+                        <input type="text" data-kt-pais-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar países" />
                     </div>
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-pais-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Paises</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Países</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-pais-table-toolbar="selected">
@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa nombre corto" name="nombre_corto" id="nombre_corto" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Código</label>
