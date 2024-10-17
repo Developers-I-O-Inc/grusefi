@@ -100,7 +100,6 @@ var KTCreateAccount = (function () {
         save_embarque = async (datos, token, btnSubmit, form) => {
             try {
                 // Mostrar alerta de carga antes de la solicitud
-                console.log("inicai")
                 Swal.fire({
                     title: "<strong>Cargando</strong>",
                     html: `<div class="progress container-fluid"></div>`,
@@ -123,7 +122,7 @@ var KTCreateAccount = (function () {
 
                 // Convertir la respuesta a JSON
                 const result = await response.json();
-                console.log(result)
+                $('#link_dictamen').attr('href', `/operation/imprimir_dictamen_embarque/${select_pais.val()}/${result.embarque_id}`)
                 // Mostrar alerta de éxito
                 await Swal.fire({
                     text: "Datos guardados exitosamente!",

@@ -338,7 +338,7 @@
                                         <div class="fw-bold">
                                             <h4 class="text-gray-900 fw-bolder">Notificaciones!</h4>
                                             <div class="fs-6 text-gray-700">Si desea imprimir el formato
-                                            <a href="#" class="fw-bolder">presione aquí</a></div>
+                                            <a href="#" class="fw-bolder" id="link_dictamen" target="_blank">presione aquí</a></div>
                                             <div class="fs-6 text-gray-700">O si desea consultar más embarques
                                             <a href="#" class="fw-bolder">presione aquí</a></div>
                                         </div>
