@@ -51,3 +51,7 @@ Route::get('get_destinatarios', 'DestinatariosController@get_destinatarios');
 Route::resource('marcas', 'MarcasController');
 Route::post('destroy_marcas', 'MarcasController@destroy_marcas');
 Route::get('get_marcas', 'MarcasController@get_marcas');
+// USOS
+Route::resource('usos', 'UsosController');
+Route::post('destroy_usos', 'UsosController@destroy_usos');
+Route::get('get_usos', 'UsosController@get_usos');
