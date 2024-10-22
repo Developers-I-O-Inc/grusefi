@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Auth\NewPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +26,9 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/password/expired', function () {
+    return view('auth.password-expired'); // Crea una vista personalizada para esto
+})->name('password.expired');
+
+Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.update');
