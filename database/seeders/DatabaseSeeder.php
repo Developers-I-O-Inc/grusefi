@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         ]);
         // Create role administrator
         Role::create(['name' => 'admin']);
+        Role::create(['name' => 'tefs']);
 
     }
 }
