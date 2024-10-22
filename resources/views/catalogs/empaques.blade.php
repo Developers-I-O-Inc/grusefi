@@ -134,7 +134,7 @@
                                                         </div>
                                                         <div class="col-md-6 fv-row">
                                                             <label class="required fs-6 fw-bold form-label mb-2">Teléfonos(s)</label>
-                                                            <input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="Ingrese Teléfono" id="telefonos" name="telefonos">
+                                                            <input type="text" class="form-control form-control-solid" minlength="3" maxlength="15" placeholder="Ingrese Teléfono" id="telefonos" name="telefonos">
 
                                                         </div>
                                                     </div>
