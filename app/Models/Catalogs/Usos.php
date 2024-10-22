@@ -11,4 +11,9 @@ class Usos extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = "cat_usos";
+
+    protected $fillable = [
+        "uso",
+        "activo"
+    ];
 }
