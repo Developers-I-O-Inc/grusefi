@@ -106,7 +106,7 @@ class EmbarquesController extends Controller
             }
             DB::commit();
 
-            return response()->json(['success' => 'Datos guardados exitosamente!', 'marcas'=>json_decode($request->get('productos'), true)]);
+            return response()->json(['success' => 'Datos guardados exitosamente!', 'embarque_id'=>$embarque->id]);
         }
         catch (\Exception $e) {
             DB::rollback();

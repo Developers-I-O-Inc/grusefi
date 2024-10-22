@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
 use App\Models\Catalogs\Paises;
+use App\Models\Operation\Embarques;
+use App\Models\Operation\EmbarquesMarcas;
 use App\Models\PlantillaRPV;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -59,5 +61,14 @@ class PlantillasController extends Controller
         $plantilla = PlantillaRPV::find($id);
         $pdf = PDF::loadView('operation/reports/dicatamen', compact("plantilla"));
         return $pdf->stream('reporte_productos.pdf');
+    }
+
+    public function imprimir_dictamen_embarque($pais_id, $embarque_id)
+    {
+        $embarque = Embarques::get_embarque($embarque_id);
+        $plantilla = PlantillaRPV::where('pais_id', $pais_id)->first();
+        $embarques_marcas = EmbarquesMarcas::get_marcas_embarque($embarque_id);
+        $pdf = PDF::loadView('operation/reports/dicatamen_embarque', compact("plantilla", "embarque", "embarques_marcas"));
+        return $pdf->stream('embarque.pdf');
     }
 }
