@@ -29,15 +29,11 @@ class DatabaseSeeder extends Seeder
             'phone' => '3411671215',
             'name' => 'Test User',
             'email' => 'admin@admin.com',
-            'password'=> Hash::make('123456')
+            'password'=> Hash::make('123456'),
+            'password_changed_at'=> '2023-01-01 10:00:00'
         ]);
         // Create role administrator
         Role::create(['name' => 'admin']);
-        // ADD PAIS
-        \App\Models\Catalogs\Paises::factory()->create([
-            'nombre' => 'México',
-            'nombre_corto' => 'MEX',
-            'codigo' => '010'
-        ]);
+
     }
 }

@@ -77,7 +77,29 @@ var KTUsersList = (function () {
                         modal.show();
                     })
                 });
-            });
+            })
+            n.querySelectorAll(
+                '[data-kt-user-table-filter="reset-pass"]'
+            ).forEach((e) => {
+                e.addEventListener("click", function (e) {
+                    e.preventDefault()
+                    $.get(`reset_pass/${$(this).data("id")}`, function(data){
+                        Swal.fire({
+                            icon: "success",
+                            title: "Actualizado",
+                            text: "La contraseña se actualizo correctamente!",
+                        })
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: `Hubo un problema al actualizar la contraseña: ${errorThrown}`,
+                        });
+                    });
+                })
+
+            }),
             n.querySelectorAll(
                 '[data-kt-user-table-filter="permissions"]'
             ).forEach((e) => {
