@@ -61,7 +61,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $users = User::updateOrCreate(
+        User::updateOrCreate(
 
             ['id'=>$request->get('id_user')],
             ['name' => $request->get('name'),
@@ -69,7 +69,8 @@ class UsersController extends Controller
                 'address' => $request->get('address'),
                 'phone' => $request->get('phone'),
                 'email' => $request->get('email'),
-                'password' => Hash::make('123456')
+                'password' => Hash::make('123456'),
+                'password_changed_at'=>now()
              ],
         );
         return response()->json(["OK"=>"Se guardo correctamente"]);

@@ -14,3 +14,4 @@ Route::get('imprimir_dictamen/{id}', 'PlantillasController@imprimir_dictamen');
 Route::get('imprimir_dictamen_embarque/{pais_id}/{embarque_id}', 'PlantillasController@imprimir_dictamen_embarque');
 // EMBARQUES
 Route::resource('embarques', 'EmbarquesController');
+Route::get('embarques_admin', 'EmbarquesController@embarques_admin');

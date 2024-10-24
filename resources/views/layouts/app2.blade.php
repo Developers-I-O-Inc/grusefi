@@ -256,14 +256,38 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="menu-item py-2">
-                                <a class="menu-link @yield('embarques') menu-center" href="/operation/embarques" data-bs-trigger="hover"
-                                    data-bs-dismiss="click" data-bs-placement="right">
+                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
+                                class="menu-item py-2">
+                                <span class="menu-link menu-center  @yield("purchases")" data-bs-trigger="hover" data-bs-dismiss="click"
+                                    data-bs-placement="right">
                                     <span class="menu-icon me-0">
                                         <i class="bi bi-box"></i>
                                     </span>
                                     <span class="menu-title">Embarques</span>
-                                </a>
+                                </span>
+                                <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
+                                    <div class="menu-item">
+                                        <div class="menu-content">
+                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Embarques</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="/operation/embarques">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Nuevo</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="/operation/embarques_admin">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Generar RPV</span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                             <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
                                 class="menu-item py-2">
@@ -496,10 +520,15 @@
                                                 class="btn btn-sm btn-bg-light btn-color-gray-500 btn-active-color-primary me-2"
                                                 id="" data-bs-toggle="tooltip" data-bs-dismiss="click"
                                                 data-bs-trigger="hover" title="Select dashboard daterange">
-                                                <span class="fw-bold me-1"
-                                                    id="kt_dashboard_daterangepicker_title">Range:</span>
-                                                <span class="fw-bolder" id="kt_dashboard_daterangepicker_date">September
-                                                    20</span>
+                                                <span class="fw-bold me-1" id="kt_dashboard_daterangepicker_title" id="prueba">Hoy es:</span>
+                                                <span class="fw-bolder" id="kt_dashboard_daterangepicker_date">
+                                                    @php
+                                                        use Carbon\Carbon;
+                                                        Carbon::setLocale('es');
+                                                        $fecha = Carbon::now()->translatedFormat('j \d\e F \d\e Y');
+                                                        echo $fecha
+                                                    @endphp
+                                                </span>
                                             </a>
                                         </div>
                                     </div>

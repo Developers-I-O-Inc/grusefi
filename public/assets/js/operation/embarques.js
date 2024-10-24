@@ -98,7 +98,7 @@ var KTCreateAccount = (function () {
             });
         },
         save_embarque = async (datos, token, btnSubmit, form) => {
-            try {
+            // try {
                 // Mostrar alerta de carga antes de la solicitud
                 Swal.fire({
                     title: "<strong>Cargando</strong>",
@@ -138,16 +138,16 @@ var KTCreateAccount = (function () {
                 btnSubmit.disabled = false;
                 form.reset();
 
-            } catch (error) {
-                // Manejo de errores
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: error.message,
-                });
-                console.error(error);
-                btnSubmit.disabled = false;
-            }
+            // } catch (error) {
+            //     // Manejo de errores
+            //     Swal.fire({
+            //         icon: "error",
+            //         title: "Error",
+            //         text: error.message,
+            //     });
+            //     console.error(error);
+            //     btnSubmit.disabled = false;
+            // }
             // console.log(datos)
         }
     return {
