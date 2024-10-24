@@ -181,8 +181,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btn_save_permissions">Save changes</button>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="btn_save_permissions">Guardar</button>
                     </div>
                 </div>
             </div>

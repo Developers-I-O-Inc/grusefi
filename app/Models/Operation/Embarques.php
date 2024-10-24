@@ -25,6 +25,7 @@ class Embarques extends Model
         'consolidado_id',
         'empresa_transporte',
         'chofer',
+        'tefs_id',
     ];
 
     public static function get_embarque($id){
@@ -41,5 +42,28 @@ class Embarques extends Model
             WHERE op_embarques.id = $id");
 
         return !empty($result) ? $result[0] : null;
+    }
+
+    public static function get_embarques_admin(){
+        return DB::select("SELECT op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre
+            FROM op_embarques
+            LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
+            LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
+            LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
+            WHERE
+                YEAR(fecha_embarque) = YEAR(CURDATE())
+                AND WEEK(fecha_embarque, 1) = WEEK(CURDATE(), 1)
+        ");
+    }
+
+    public static function get_embarques_admin_by_dates($start_date, $end_date){
+        return DB::select("SELECT op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre
+            FROM op_embarques
+            LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
+            LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
+            LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
+            WHERE
+                fecha_embarque BETWEEN ? AND ?
+        ", [$start_date, $end_date]);
     }
 }
