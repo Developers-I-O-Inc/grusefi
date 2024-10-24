@@ -120,7 +120,7 @@
                             <div class="row mb-12">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Usuario TEF´s</label>
-                                    <select id="id_tefs" name="id_tefs" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
+                                    <select id="tefs_id" name="tefs_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
                                         <option value=""></option>
                                         @foreach($users as $users)
                                             <option value="{{$users->id}}">{{$users->name}}</option>

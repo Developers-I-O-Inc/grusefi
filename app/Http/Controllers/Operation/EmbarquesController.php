@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Models\Catalogs\Calibres;
 use App\Models\Catalogs\Categorias;
@@ -14,8 +15,8 @@ use App\Models\Operation\EmbarquesMarcas;
 use App\Models\Operation\EmbarquesMaquiladores;
 use App\Models\Operation\Embarques;
 use App\Models\Operation\EmbarquesProductos;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class EmbarquesController extends Controller
 {
@@ -56,6 +57,7 @@ class EmbarquesController extends Controller
             'consolidado_id',
             'empresa_transporte',
             'chofer',
+            'tefs_id',
         ]);
         DB::beginTransaction();
 
@@ -128,6 +130,24 @@ class EmbarquesController extends Controller
     public function destroy_calibres(Request $request)
     {
 
+    }
+
+    public function embarques_admin(Request $request){
+        if ($request->ajax()) {
+            $start_date = $request->input('start_date');
+            $end_date = $request->input('end_date');
+
+            if($start_date == '' or $end_date ==''){
+                $calibres = Embarques::get_embarques_admin();
+            }
+            else {
+                $calibres = Embarques::get_embarques_admin_by_dates($start_date, $end_date);
+            }
+
+            return Datatables::of($calibres)->make(true);
+
+        }
+        return view("operation/embarques_admin");
     }
 
 }

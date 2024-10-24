@@ -132,30 +132,39 @@ var KTcalibreesList = (function () {
                     .then(response => response.json())
                     .then(data => {
                         const datos = data.plantilla[0]
-                        edit_id.value = datos.id
-                        delete datos.id
-                        delete datos.created_at
-                        delete datos.deleted_at
-                        delete datos.updated_at
+                        if (datos) {
+                            edit_id.value = datos.id
+                            delete datos.id
+                            delete datos.created_at
+                            delete datos.deleted_at
+                            delete datos.updated_at
 
-                        for (const [key, value] of Object.entries(datos)) {
-                            const elementos = document.getElementsByName(key);
-                            if (elementos.length > 0) {
-                              if (elementos[0].type === 'radio') {
-                                elementos.forEach(radio => {
-                                  radio.checked = radio.value == value;
-                                });
-                              } else if (elementos[0].type === 'checkbox') {
-                                elementos[0].checked = Boolean(value);
-                              } else {
-                                elementos[0].value = value;
-                              }
+                            for (const [key, value] of Object.entries(datos)) {
+                                const elementos = document.getElementsByName(key);
+                                if (elementos.length > 0) {
+                                  if (elementos[0].type === 'radio') {
+                                    elementos.forEach(radio => {
+                                      radio.checked = radio.value == value;
+                                    });
+                                  } else if (elementos[0].type === 'checkbox') {
+                                    elementos[0].checked = Boolean(value);
+                                  } else {
+                                    elementos[0].value = value;
+                                  }
+                                }
                             }
+                            btn_imprimir.classList.remove("d-none")
+                            btn_edit.classList.remove("d-none")
+                            btn_add.classList.add("d-none")
+                            Swal.close()
                         }
-                        btn_imprimir.classList.remove("d-none")
-                        btn_edit.classList.remove("d-none")
-                        btn_add.classList.add("d-none")
-                        Swal.close()
+                        else{
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "No se encontró una plantilla para este país",
+                            })
+                        }
                     })
                     .catch((error) => {
                         console.error('Error:', error)

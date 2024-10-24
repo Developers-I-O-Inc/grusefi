@@ -18,10 +18,14 @@ return new class extends Migration
             $table->bigInteger('pais_id')->unsigned()->index();
             $table->bigInteger('puerto_id')->unsigned()->index();
             $table->bigInteger('tefs_id')->unsigned()->index();
+            $table->bigInteger('consolidado_id');
             $table->date('fecha_embarque');
             $table->string('numero_economico')->nullable();
             $table->string('placas_trasporte')->nullable();
             $table->string('inspector')->nullable();
+            $table->boolean('consolidado')->default(0);
+            $table->string('empresa_transporte')->nullable();
+            $table->string('chofer')->nullable();
             $table->foreign('empaque_id')->references('id')->on('cat_empaques');
             $table->foreign('destinatario_id')->references('id')->on('cat_destinatarios');
             $table->foreign('tefs_id')->references('id')->on('users');
