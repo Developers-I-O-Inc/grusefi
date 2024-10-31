@@ -84,10 +84,45 @@ var KTpuertoesList = (function () {
                 (edit_placas = form.querySelector("#placas")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
+                        pais_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione el país",
+                                },
+                            },
+                        },
+                        estado_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione el país",
+                                },
+                            },
+                        },
+                        municipio_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione el país",
+                                },
+                            },
+                        },
                         puerto: {
                             validators: {
                                 notEmpty: {
                                     message: "Ingrese el puerto",
+                                },
+                            },
+                        },
+                        nombre_corto: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el nombre corto del puerto",
+                                },
+                            },
+                        },
+                        medio_transporte: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione el medio de transporte",
                                 },
                             },
                         },

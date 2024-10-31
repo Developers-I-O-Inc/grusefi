@@ -53,7 +53,7 @@ class UsersController extends Controller
                     ->make(true);
         }
         $roles=Roles::all();
-        return view("Admin/users", array("roles"=>$roles));
+        return view("admin/users", array("roles"=>$roles));
     }
 
      /**

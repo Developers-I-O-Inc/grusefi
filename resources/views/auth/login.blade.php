@@ -52,7 +52,6 @@
 								<div class="fv-row mb-10">
 									<div class="d-flex flex-stack mb-2">
 										<label class="form-label fw-bolder text-dark fs-6 mb-0">Contraseña</label>
-										<a href="../../demo6/dist/authentication/flows/aside/password-reset.html" class="link-primary fs-6 fw-bolder">Olvidaste la contraseña?</a>
 									</div>
 									<input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
 								</div>

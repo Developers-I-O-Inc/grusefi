@@ -58,13 +58,21 @@ var KTmarcaesList = (function () {
                 (edit_active = form.querySelector("#activo")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
-                        marca: {
+                        nombre: {
                             validators: {
                                 notEmpty: {
-                                    message: "Ingrese el marca",
+                                    message: "Ingrese el nombre de la marca",
                                 },
                             },
                         },
+                        empaque_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione el empaque",
+                                },
+                            },
+                        },
+
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),
