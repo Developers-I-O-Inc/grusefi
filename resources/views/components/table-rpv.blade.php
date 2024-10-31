@@ -271,7 +271,7 @@
                                 <div style="display: flex; align-items: center;">
                                     <div class="text-bold" style="width: 100px;">1 Inicio:</div>
                                     <div class="group-control" style="flex-grow: 1;">Lugar: <span class="disabled-input m-l-sm">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span></div>
-                                    <div class="group-control m-l-md" style="width: 250px;">Fecha: <span class="disabled-input m-l-sm">XX/XX/XXXX</span></div>
+                                    <div class="group-control m-l-md" style="width: 250px;">Fecha: <span class="disabled-input m-l-sm" id="fecha_embarque">XX/XX/XXXX</span></div>
                                     <div class="group-control m-l-md" style="width: 175px;">Hora: <span class="disabled-input m-l-sm">XX:XX x.x.</span></div>
                                 </div>
                             </div>
