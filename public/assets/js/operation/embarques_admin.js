@@ -6,9 +6,50 @@ var KTadminlist = (function () {
         btn_search,
         start_date,
         end_date,
-        n
+        blockUI,
+        target,
+        n,
+        edit = () => {
+            n.querySelectorAll(
+                '[data-kt-admin-table-filter="edit"]'
+            ).forEach((e) => {
+                e.addEventListener("click", function (e) {
+                    e.preventDefault()
+                    fetch(`get_embarque_edit/${$(this).data("id")}`, {
+                        method: "GET",
+                        headers:{
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response =>{
+                        if(!response.ok){
+                            throw new Error('Error en la base de datos')
+                        }
+                        return response.json()
+                    })
+                    .then(data => {
+                        const arr_data = data
+
+                        document.querySelector('#kt_accordion_1_header_2 button').classList.remove('collapsed');
+                        document.querySelector('#kt_accordion_1_body_2').classList.add('show');
+                        document.querySelectorAll('.accordion-collapse').forEach((accordion) => {
+                            if (accordion !== document.querySelector('#kt_accordion_1_body_2')) {
+                                accordion.classList.remove('show');
+                            }
+                        });
+
+                    })
+                    .catch(error => {
+                        console.error(error)
+                    })
+                    blockUI.release();
+                })
+            })
+        }
         return {
             init: function () {
+                (target = document.querySelector("#kt_block_ui_1_target")),
+                (blockUI = new KTBlockUI(target)),
                 (start_date = document.querySelector('#start_date')),
                 (end_date = document.querySelector('#end_date')),
                 (btn_search = document.querySelector('#btn_search')),
@@ -35,12 +76,13 @@ var KTadminlist = (function () {
                             ],
                             columns: [
 
-                                { data: "pallet_id", name: "pallet_id" },
-                                { data: "pallet_date", name: "pallet_date" },
-                                { data: "presentation", name: "presentation" },
-                                { data: "employee", name: "employee" },
-                                { data: "total", name: "total" },
-                                { data: "total_labor_cost", name: "total_labor_cost" },
+                                { data: "empaque_id", name: "empaque_id" },
+                                { data: "nombre_fiscal", name: "nombre_fiscal" },
+                                { data: "nombre", name: "nombre" },
+                                { data: "puerto", name: "puerto" },
+                                { data: "fecha_embarque", name: "fecha_embarque" },
+                                { data: "buttons", name: "buttons" },
+
                             ],
                             language: {
                                 search:"Buscar",
@@ -51,29 +93,45 @@ var KTadminlist = (function () {
                                 processing:
                                     `<span class="loader"></span>`
                             },
-                        }))
+                        }).on("draw", function () {
+                            edit()
+                        })
                     )
-            btn_search.addEventListener('click', function () {
-                table_items.ajax.reload();
-            })
-            $("#start_date").daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                locale: {
-                    format: 'YYYY-MM-DD',
-                    applyLabel: 'Aceptar',
-                    cancelLabel: 'Cancelar'
-                },
-            })
-            $("#end_date").daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                locale: {
-                    format: 'YYYY-MM-DD',
-                    applyLabel: 'Aceptar',
-                    cancelLabel: 'Cancelar'
-                },
-            })
+                    )
+
+                btn_search.addEventListener('click', function () {
+                    table_items.ajax.reload();
+                })
+                $("#start_date").daterangepicker({
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    locale: {
+                        format: 'YYYY-MM-DD',
+                        applyLabel: 'Aceptar',
+                        cancelLabel: 'Cancelar'
+                    },
+                })
+                $("#end_date").daterangepicker({
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    locale: {
+                        format: 'YYYY-MM-DD',
+                        applyLabel: 'Aceptar',
+                        cancelLabel: 'Cancelar'
+                    },
+                })
+
+                $("#kt_daterangepicker_3").daterangepicker({
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    minYear: 1901,
+                    maxYear: parseInt(moment().format("YYYY"),10)
+                }, function(start, end, label) {
+                    var years = moment().diff(start, "years");
+                    alert("You are " + years + " years old!");
+                }
+            );
+                blockUI.block()
             },
 
         }

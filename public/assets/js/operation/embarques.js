@@ -98,7 +98,7 @@ var KTCreateAccount = (function () {
             });
         },
         save_embarque = async (datos, token, btnSubmit, form) => {
-            // try {
+            try {
                 // Mostrar alerta de carga antes de la solicitud
                 Swal.fire({
                     title: "<strong>Cargando</strong>",
@@ -138,16 +138,16 @@ var KTCreateAccount = (function () {
                 btnSubmit.disabled = false;
                 form.reset();
 
-            // } catch (error) {
-            //     // Manejo de errores
-            //     Swal.fire({
-            //         icon: "error",
-            //         title: "Error",
-            //         text: error.message,
-            //     });
-            //     console.error(error);
-            //     btnSubmit.disabled = false;
-            // }
+            } catch (error) {
+                // Manejo de errores
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: error.message,
+                });
+                console.error(error);
+                btnSubmit.disabled = false;
+            }
             // console.log(datos)
         }
     return {
@@ -553,9 +553,6 @@ var KTCreateAccount = (function () {
                                 ),
                                 setTimeout(function () {
                                     btn_add_product.removeAttribute("data-kt-indicator")
-                                    console.log(select_calibre.text())
-                                    console.log(select_cultivo.text())
-                                    console.log(select_categoria.text())
                                     for(let i=0; i < edit_registros.value; i++){
                                         table_products.row.add([`<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 delete_product"
                                             data-kt-customer-table-filter="delete_row">

@@ -116,12 +116,110 @@ var KTempaqueesList = (function () {
                 (edit_active = form.querySelector("#activo")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
-                        empaque: {
+                        nombre_corto: {
                             validators: {
                                 notEmpty: {
-                                    message: "Ingrese el nombre del empaque",
+                                    message: "Ingrese el nombre corto",
                                 },
                             },
+                        },
+                        nombre_fiscal: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el nombre fiscal",
+                                },
+                            },
+                        },
+                        domicilio_fiscal:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el domicilio fiscal",
+                                },
+                            },
+                        },
+                        rfc:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el RFC",
+                                },
+                            },
+                        },
+                        telefonos:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el telefono",
+                                },
+                            },
+                        },
+                        num_ext:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el numero exterior",
+                                },
+                            },
+                        },
+                        cp:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el código postal",
+                                },
+                            }
+                        },
+                        municipio_id:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione un municipio",
+                                },
+                            }
+                        },
+                        localidad_id:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione una localidad",
+                                },
+                            }
+                        },
+                        nombre_embarque:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el nombre del embarque",
+                                },
+                            }
+                        },
+                        domicilio_documentacion:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el domicilio de documentación",
+                                },
+                            }
+                        },
+                        sader:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el sader",
+                                },
+                            }
+                        },
+                        codigo:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el código",
+                                },
+                            }
+                        },
+                        municipio_id2:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione un municipio",
+                                },
+                            }
+                        },
+                        localidad_doc_id:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione una localidad",
+                                },
+                            }
                         },
                     },
                     plugins: {

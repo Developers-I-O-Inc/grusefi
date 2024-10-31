@@ -296,7 +296,7 @@
             </div>
             <div class="separator my-2"></div>
             <div class="card table-responsive py-6">
-                <table class="dxflGroup_Moderno dxflGroupSys dxflAGSys" style="border-collapse:separate;">
+                {{-- <table class="dxflGroup_Moderno dxflGroupSys dxflAGSys" style="border-collapse:separate;">
                     <tbody>
                         <tr>
                             <td id="ContentPlaceHolder1_ASPxFormLayout1_3_0" class="dxflHALSys dxflGroupCell_Moderno dxflChildInFirstRowSys dxflFirstChildInRowSys dxflLastChildInRowSys dxflLastChildSys dxflChildInLastRowSys">
@@ -684,8 +684,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="pd-sm" style="width: 40%; display: flex; flex-wrap: wrap;">
-                                                    {{-- <div>Fecha de inspección: <span class="disabled-input m-b-xs" style="width: 150px;">XX/XX/XXXX</span></div> --}}
-                                                    {{-- <input id="cd_c_fecha_inspeccion" type="text" name="cd_c_fecha_inspeccion" value="" maxlength="500" style="width: 100%;" class="p_input"> --}}
                                                     <input id="cf_c_otra" type="text" name="cf_c_otra" value="" maxlength="500" style="width: 100%;" class="p_input">
                                                 </div>
                                             </div>
@@ -778,16 +776,13 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table> --}}
+                <x-table-rpv></x-table-rpv>
             </div>
         </form>
     </div>
 @endsection
 @section('scripts')
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js"
-        integrity="sha512-axXaF5grZBaYl7qiM6OMHgsgVXdSLxqq0w7F4CQxuFyrcPmn0JfnqsOtYHUun80g6mRRdvJDrTCyL8LQqBOt/Q=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script> --}}
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/operation/plantilla_rpv.js')}}" type="module"></script>
 @endsection

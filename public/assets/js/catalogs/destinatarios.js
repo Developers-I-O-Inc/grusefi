@@ -70,13 +70,48 @@ var KTdestinatarioesList = (function () {
                 (edit_active = form.querySelector("#activo")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
-                        destinatario: {
+                        nombre: {
                             validators: {
                                 notEmpty: {
-                                    message: "Ingrese el destinatario",
+                                    message: "Ingrese el nombre del destinatario",
                                 },
                             },
                         },
+                        nombre_corto: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el nombre corto del destinatario",
+                                },
+                            },
+                        },
+                        domicilio: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese el domicilio del destinatario",
+                                },
+                            },
+                        },
+                        telefonos: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese los telefonos del destinatario",
+                                },
+                            },
+                        },
+                        correos: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Ingrese los correos del destinatario",
+                                },
+                            },
+                        },
+                        empaque_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione el empaque",
+                                },
+                            },
+                        }
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),

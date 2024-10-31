@@ -29,7 +29,7 @@ class Embarques extends Model
     ];
 
     public static function get_embarque($id){
-        $result = DB::select("SELECT fecha_embarque, empaques.nombre_fiscal, empaques.domicilio_fiscal, empaques.num_ext, empaques.num_int, empaques.cp,
+        $result = DB::select("SELECT op_embarques.id, op_embarques.pais_id, fecha_embarque, empaques.nombre_fiscal, empaques.domicilio_fiscal, empaques.num_ext, empaques.num_int, empaques.cp,
             cat_municipios.nombre AS municipio, cat_localidades.nombre as localidad, cat_destinatarios.nombre AS destinatario, cat_destinatarios.domicilio AS destinatario_domicilio,
             puerto, mpuertos.nombre as puerto_municipio, medio_transporte, placas
             FROM op_embarques

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Catalogs\Paises;
 use App\Models\Operation\Embarques;
 use App\Models\Operation\EmbarquesMarcas;
-use App\Models\PlantillaRPV;
+use App\Models\Operation\PlantillaRPV;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
