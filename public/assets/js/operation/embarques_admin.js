@@ -1,13 +1,12 @@
 "use strict"
 
 var KTadminlist = (function () {
-
+    let blockUI, target
     var table_items,
         btn_search,
+        span_fecha_embarque,
         start_date,
         end_date,
-        blockUI,
-        target,
         n,
         edit = () => {
             n.querySelectorAll(
@@ -28,7 +27,27 @@ var KTadminlist = (function () {
                         return response.json()
                     })
                     .then(data => {
-                        const arr_data = data
+                        const {plantilla, embarque } = data
+                        console.log(plantilla)
+                        delete plantilla.id
+                        delete plantilla.created_at
+                        delete plantilla.deleted_at
+                        delete plantilla.updated_at
+                        span_fecha_embarque.innerText  = embarque.fecha_embarque
+                        for (const [key, value] of Object.entries(plantilla)) {
+                            const elementos = document.getElementsByName(key);
+                            if (elementos.length > 0) {
+                                if (elementos[0].type === 'radio') {
+                                elementos.forEach(radio => {
+                                    radio.checked = radio.value == value;
+                                });
+                                } else if (elementos[0].type === 'checkbox') {
+                                elementos[0].checked = Boolean(value);
+                                } else {
+                                elementos[0].value = value;
+                                }
+                            }
+                        }
 
                         document.querySelector('#kt_accordion_1_header_2 button').classList.remove('collapsed');
                         document.querySelector('#kt_accordion_1_body_2').classList.add('show');
@@ -42,14 +61,18 @@ var KTadminlist = (function () {
                     .catch(error => {
                         console.error(error)
                     })
-                    blockUI.release();
+
                 })
             })
         }
         return {
             init: function () {
                 (target = document.querySelector("#kt_block_ui_1_target")),
-                (blockUI = new KTBlockUI(target)),
+                (blockUI = new KTBlockUI(target, {
+                    overlayClass: "bg-success bg-opacity-15",
+                    message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> Bloqueado seleccione un embarque...</div>'
+                })),
+                (span_fecha_embarque = document.querySelector('#fecha_embarque')),
                 (start_date = document.querySelector('#start_date')),
                 (end_date = document.querySelector('#end_date')),
                 (btn_search = document.querySelector('#btn_search')),
@@ -121,16 +144,6 @@ var KTadminlist = (function () {
                     },
                 })
 
-                $("#kt_daterangepicker_3").daterangepicker({
-                    singleDatePicker: true,
-                    showDropdowns: true,
-                    minYear: 1901,
-                    maxYear: parseInt(moment().format("YYYY"),10)
-                }, function(start, end, label) {
-                    var years = moment().diff(start, "years");
-                    alert("You are " + years + " years old!");
-                }
-            );
                 blockUI.block()
             },
 
