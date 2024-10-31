@@ -9,6 +9,8 @@ var KTcalibreesList = (function () {
     btn_imprimir,
     select_pais,
     form,
+    target,
+    blockUI,
     obtener_datos = (formulario, pais, saveoredit) => {
         const clase = "p_input"
         const url = saveoredit ? "save_plantilla" : "edit_plantilla"
@@ -87,6 +89,11 @@ var KTcalibreesList = (function () {
     }
     return {
         init: function () {
+            (target = document.querySelector("#kt_block_ui_1_target")),
+            (blockUI = new KTBlockUI(target, {
+                overlayClass: "bg-success bg-opacity-15",
+                message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> Bloqueado seleccione un pais...</div>'
+            })),
             btn_add = document.querySelector("#btn_add")
             edit_id = document.querySelector("#plantilla_id")
             btn_edit = document.querySelector("#btn_edit")
@@ -127,7 +134,6 @@ var KTcalibreesList = (function () {
                             'Content-Type': 'application/json',
                             'X-CSRF-TOKEN': token
                         },
-                        // body: JSON.stringify(datosFormulario)
                     })
                     .then(response => response.json())
                     .then(data => {
@@ -184,6 +190,11 @@ var KTcalibreesList = (function () {
                 }
 
             })
+             // CHANGE PIS
+             select_pais.on('change', function() {
+                blockUI.release()
+            })
+            blockUI.block()
         }
     }
 })()

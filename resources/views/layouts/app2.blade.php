@@ -222,12 +222,12 @@
                                     <span class="menu-icon me-0">
                                         <i class="bi bi-file-earmark"></i>
                                     </span>
-                                    <span class="menu-title">Documentos</span>
+                                    <span class="menu-title">Plantillas</span>
                                 </span>
                                 <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
                                     <div class="menu-item">
                                         <div class="menu-content">
-                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Documentos</span>
+                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Plantillas</span>
                                         </div>
                                     </div>
                                     <div class="menu-item">
@@ -235,23 +235,7 @@
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Plantilla RPV</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/operation/dictamen_verificacion">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Dictamen de Verificación</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="../../demo6/dist/account/settings.html">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Consultar</span>
+                                            <span class="menu-title">RPV</span>
                                         </a>
                                     </div>
                                 </div>
@@ -305,7 +289,7 @@
                                         </div>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link" href="permisos">
+                                        <a class="menu-link" href="/admin/roles">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>

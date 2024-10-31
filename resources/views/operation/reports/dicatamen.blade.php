@@ -575,13 +575,35 @@
         <table class="table_datos_expedicion">
             <tr>
                 <td class="font-mm">
-                    Cualquier declaración con falsedad que se manifieste en este dictamen de verificación, será sancionado conforme lo marca el título cuarto del Decreto por el que se reforma, adiciona y derogan diversas disposiciones de la Ley Federal de
-                    Sanidad Vegetal; el capítulo III del título cuarto de la Ley Federal de Sanidad Vegetal, sin perjuicio de las penas que correspondan cuando sean constitutivas de delito. Este dictamen de verificación es o bligatorio para la expedición del
-                    Certificado Fitosanitario y formará parte del expediente del trámite correspondiente. Ningún Oficial Fitosanitario Autorizado, Unidad de Verificación, Tercero Especialista Fitosanitario, Persona Moral o Física y Organismo de Certificación deberán
-                    emitir certificados fitosanitarios sin el dictamen de verificación respectivo. NOTA: si se realizó verificacion a productos que no requieren certificado fitosanitario para su movilizacion, el usuario y el verificador indican
+                    Cualquier declaración con falsedad que se manifieste en este dictamen de verificación, será sancionado conforme lo marca el título cuarto del Decreto por el que se reforma,
+                    adiciona y derogan diversas disposiciones de la Ley Federal de Sanidad Vegetal; el capítulo III del título cuarto de la Ley Federal de Sanidad Vegetal, sin perjuicio de
+                    las penas que correspondan cuando sean constitutivas de delito. Este dictamen de verificación es obligatorio para la expedición del Certificado Fitosanitario y formará
+                    parte del expediente del trámite correspondiente.  Ningún Oficial Fitosanitario Autorizado, Unidad de Verificación, Tercero Especialista Fitosanitario, Persona Moral o
+                    Física y Organismo de Certificación deberán emitir certificados fitosanitarios sin el dictamen de verificación respectivo.
                     <br>
+                    <b>NOTA</b>: si se realizo verificación a productos que no requieren certificado fitosanitario para su movilización, el usuario y el verificador indican
                     <em>"BAJO PROTESTA DE DECIR VERDAD QUE EN ESTE EMBARQUE NO SE OCULTAN PRODUCTOS REGULADOS O CUARENTENADOS Y POR NINGUN MOTIVO SE TRANSPORTAN PRODUCTOS ILICITOS"</em>
                 </td>
+            </tr>
+        </table>
+        <table style="margin-top: 10px;">
+            <tr>
+            <td class="font-mm">
+                ORIGINAL: Archivo local o usuario  Copia: SADER
+                <br>
+                Nota ingresada, no pertenece al formato original: "La UI opera como tipo A y declara tener la capacidad y competencia técnica de acuerdo a su acreditación UVFITO-004 y
+                aprobación UV-240122-09-VCMREMN-001 para prestar los servicios de inspección y certificación, por lo que los trabajos realizados son de manera imparcial y en apego al
+                código de ética de la empresa, además se le comunica al cliente que la información se maneja de forma confidencial y que los costos generados del servicio serán sufragados
+                por este.
+                <br>
+                <b>UV-240122-09-VCMREMN-001 ES LA CLAVE DE APROBACIÓN PARA PRODUCTOS DE MOVILIZACIÓN NACIONAL.</b>
+                <br>
+                Nota ingresada, no pertenece al formato original: "La UI opera como tipo A y declara tener la capacidad y competencia técnica de acuerdo a su acreditación UVFITO-004 y
+                aprobación UV-240122-09-VMRE-001 para prestar los servicios de inspección y certificación, por lo que los trabajos realizados son de manera imparcial y en apego al código
+                de ética de la empresa, además se le comunica al cliente que la información se maneja de forma confidencial y que los costos generados del servicio serán sufragados por este.
+                <br>
+                <b>UV-240122-09-VMRE-001 ES LA CLAVE DE APROBACIÓN PARA PRODUCTOS QUE VAN A HACER EXPORTADOS.</b>
+            </td>
             </tr>
         </table>
     </div>
