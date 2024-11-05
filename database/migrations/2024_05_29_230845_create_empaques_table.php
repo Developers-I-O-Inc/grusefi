@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nombre_fiscal', 500);
             $table->string('domicilio_fiscal', 500);
             $table->string('num_ext');
-            $table->string('num_int');
+            $table->string('num_int')->nullable();
             $table->string('cp', 10);
             $table->string('rfc', 30);
             $table->string('telefonos');
