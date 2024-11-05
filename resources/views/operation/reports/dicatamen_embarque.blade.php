@@ -239,7 +239,7 @@
                 <td colspan="2" class="td_datos font-g">{{$embarque->destinatario}}</td>
             </tr>
             <tr>
-                <td colspan="3" class="td_datos font-g">{{$embarque->domicilio_fiscal.', CP.'.$embarque->cp.','.$embarque->localidad.' '.$embarque->municipio}}</td>
+                <td colspan="3" class="td_datos font-g">{{$embarque->domicilio_empaque}}</td>
                 <td colspan="2" class="td_datos font-g">{{$embarque->destinatario_domicilio}}</td>
             </tr>
             <tr class="tr_datos">
@@ -267,8 +267,8 @@
                 <td class="font-g td_datos_2">Procedencia</td>
             </tr>
             <tr>
-                <td colspan="2" class="td_datos_3 font-g">{{$embarque->puerto}}, {{$embarque->puerto_municipio}}</td>
-                <td class="td_datos_3 font-g">{{$embarque->medio_transporte}}, PLACAS:{{$embarque->placas}}</td>
+                <td colspan="2" class="td_datos_3 font-g">{{$embarque->puerto}}</td>
+                <td class="td_datos_3 font-g">{{$embarque->transporte}}</td>
                 <td class="td_datos_3 font-g">ATENGUILLO, ZAPOTLÁN EL
                     GRANDE, CUAUTLA, MAZAMITLA,
                     TAMAZULA DE GORDIANO, JALISCO;

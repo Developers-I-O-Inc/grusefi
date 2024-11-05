@@ -1,3 +1,4 @@
+@props(['embarque' => false])
 <style>
     .watermark{
         position: relative;
@@ -279,8 +280,8 @@
                                 <div class="text-bold">2 Servicio solicitado:</div>
                                 <div style="display: flex; align-items: center;">
                                     <div class="group-control" style="flex-grow: 1;">Dictamen de verificación: (<input id="ss_dictamen_verificacion" class="p_input" type="checkbox" name="ss_dictamen_verificacion" value="Prueba">)</div>
-                                    <div class="group-control m-l-md" style="flex-grow: 1;">Certificado fitosanitario para la movilización nacional: (<input id="ss_certificado_movilizacion" type="checkbox" class="p_input" name="ss_certificado_movilizacion" value="">)</div>
-                                    <div class="group-control m-l-md" style="flex-grow: 1;">Certificado fitosanitario internacional: (<input id="ss_certificado_internacional" type="checkbox" class="p_input" name="ss_certificado_internacional" value="">)</div>
+                                    <div class="group-control" style="flex-grow: 1;">Certificado fitosanitario para la movilización nacional: (<input id="ss_certificado_movilizacion" type="checkbox" class="p_input" name="ss_certificado_movilizacion" value="">)</div>
+                                    <div class="group-control" style="flex-grow: 1;">Certificado fitosanitario internacional: (<input id="ss_certificado_internacional" type="checkbox" class="p_input" name="ss_certificado_internacional" value="">)</div>
                                 </div>
                                 <div class="m-t-xs" style="display: flex;">
                                     Otro(especifique):
@@ -292,39 +293,81 @@
                                 <div style="display: flex;">
                                     <div style="width: 50%; padding-right: 16px;">
                                         Nombre y dirección del remitente:
-                                        <div class="disabled-input m-t-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                        @if($embarque)
+                                            <div class="m-t-xs" style="display: flex;">
+                                                <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="nombre_fiscal"></span>
+                                            </div>
+                                            <div class="m-t-xs" style="display: flex;">
+                                                <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="domicilio_empaque"></span>
+                                            </div>
+                                        @else
+                                            <div class="m-t-xs" style="display: flex;">
+                                                <span class="disabled-input m-b-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+                                            </div>
+                                            <div class="m-t-xs" style="display: flex;">
+                                                <span class="disabled-input m-b-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div style="width: 50%;">
                                         Nombre y dirección del destinatario:
-                                        <div class="disabled-input m-t-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                        @if($embarque)
+                                            <div class="m-t-xs" style="display: flex;">
+                                                <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="destinatario"></span>
+                                            </div>
+                                            <div class="m-t-xs" style="display: flex;">
+                                                <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="destinatario_domicilio"></span>
+                                            </div>
+                                        @else
+                                            <div class="m-t-xs" style="display: flex;">
+                                                <span class="disabled-input m-b-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+                                            </div>
+                                            <div class="m-t-xs" style="display: flex;">
+                                                <span class="disabled-input m-b-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div style="display: flex;">
                                     <div style="width: 50%; padding-right: 16px;">
                                         <div class="m-t-xs" style="display: flex;">
-                                            <div style="width: 30%; padding-right: 16px;">
-                                                <div>Producto</div>
-                                                <input id="Producto" type="text" name="Producto" value="AGUACATE(Persea americana) Var. Hass" maxlength="100" style="width: 100%;">
+                                            <div style="width: 20%; padding-right: 16px; text-align: center;">
+                                                <div>Productos</div>
+                                                @if($embarque)
+                                                    <button href="#" class="btn btn-icon btn-light-success pulse pulse-success" data-embarque="0" id="btn_products" >
+                                                        <span class="svg-icon svg-icon-1"><i class="bi bi-box-arrow-up-right fs-2"></i></span>
+                                                        <span class="pulse-ring w-45px h-45px"></span>
+                                                    </button>
+                                                @else
+                                                    <input id="Producto" type="text" name="Producto" value="AGUACATE(Persea americana) Var. Hass" maxlength="100" style="width: 100%;">
+                                                @endif
                                             </div>
-                                            <div style="width: 30%; padding-right: 16px;">
+                                            <div style="width: 40%; padding-right: 6px;">
                                                 <div>Uso</div>
-                                                <input id="Uso" type="text" name="Uso" value="Consumo Humano" maxlength="100" style="width: 100%;">
+                                                <input id="Uso" type="text" name="Uso" value="Consumo Humano" maxlength="100" style="width: 100%; margin-top:10px">
                                             </div>
                                             <div style="width: 40%;">
                                                 Cantidad
-                                                <div class="disabled-input">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                                <div class="disabled-input" style="margin-top:18px">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div style="width: 50%;">
+                                    <div style="width: 50%; padding-right: 16px; text-align: center;" >
                                         <div class="m-t-xs" style="display: flex;">
-                                            <div style="width: 60%; padding-right: 16px;">
+                                            <div style="width: 70%; padding-right: 16px;">
                                                 <div>Presentación</div>
-                                                <div class="disabled-input">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                                <div class="disabled-input" style="margin-top:18px">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
                                             </div>
-                                            <div style="width: 40%;">
+                                            <div style="width: 30%;">
                                                 <div>Marcas distintivas</div>
-                                                <div class="disabled-input">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                                @if($embarque)
+                                                    <button href="#" class="btn btn-icon btn-light-success pulse pulse-success" id="btn_marcas">
+                                                        <span class="svg-icon svg-icon-1"><i class="bi bi-box-arrow-up-right fs-2"></i></span>
+                                                        <span class="pulse-ring w-45px h-45px"></span>
+                                                    </button>
+                                                @else
+                                                    <input id="marcas" type="text" name="marcas" value="AGUACATE(Persea americana) Var. Hass" maxlength="100" style="width: 100%;">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -332,13 +375,29 @@
                                 <div style="display: flex;">
                                     <div style="width: 50%; padding-right: 16px;">
                                         <div class="m-t-xs" style="display: flex;">
-                                            <div style="width: 60%; padding-right: 16px;">
-                                                <div>Punto de entrada</div>
-                                                <div class="disabled-input">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                            <div style="width: 50%; padding-right: 16px;">
+                                                <div>Puerto de entrada</div>
+                                                @if($embarque)
+                                                    <div class="m-t-xs" style="display: flex;">
+                                                        <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="puerto"></span>
+                                                    </div>
+                                                @else
+                                                <div class="m-t-xs" style="display: flex;">
+                                                    <span class="disabled-input m-b-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+                                                </div>
+                                                @endif
                                             </div>
-                                            <div style="width: 40%;">
+                                            <div style="width: 50%;">
                                                 Medio de transporte y placas
-                                                <div class="disabled-input">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                                @if($embarque)
+                                                    <div class="m-t-xs" style="display: flex;">
+                                                        <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="transporte"></span>
+                                                    </div>
+                                                @else
+                                                <div class="m-t-xs" style="display: flex;">
+                                                    <span class="disabled-input m-b-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

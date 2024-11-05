@@ -23,10 +23,7 @@ return new class extends Migration
             $table->string('cajas');
             $table->string('lote');
             $table->string('tipo_fruta');
-            $table->string('empresa_transportista')->nullable();
-            $table->string('chofer')->nullable();
-            $table->boolean('consolidado')->nullable();
-            $table->integer('consolidado_id')->nullable();
+            $table->string('n_registros')->default(1);
             $table->foreign('embarque_id')->references('id')->on('op_embarques');
             $table->foreign('categoria_id')->references('id')->on('cat_categorias');
             $table->foreign('tipo_cultivo_id')->references('id')->on('cat_tipo_cultivos');

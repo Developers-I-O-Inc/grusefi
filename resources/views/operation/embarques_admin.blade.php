@@ -90,21 +90,30 @@
                         </h2>
                         <div id="kt_accordion_1_body_2" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
                             <div class="accordion-body">
-                                <x-table-rpv/>
+                                <x-table-rpv :embarque="true" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="kt_modal_add_admin" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-650px">
+        <div class="modal fade" id="kt_modal_edit_products" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered mw-850px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_admin_form"
-                        data-kt-redirect="../../demo6/dist/apps/admin/list.html">
-                        <div class="modal-header" id="kt_modal_add_admin_header">
-                            <h2 class="fw-bolder">Agregar admin</h2>
-                            <div id="kt_modal_add_admin_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                    <form class="form" action="#" id="kt_modal_add_product_form">
+                        <div class="modal-header" id="kt_modal_add_product_header">
+                            <h2 class="fw-bolder">Productos del Embarque</h2>
+                            <div class="card-toolbar">
+                                <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_7">Productos seleccionados</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_8">Agregar Productos</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="kt_modal_add_product_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none">
@@ -117,29 +126,130 @@
                             </div>
                         </div>
                         <div class="modal-body py-10 px-lg-17">
-                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_admin_scroll" data-kt-scroll="true"
+                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_product_scroll" data-kt-scroll="true"
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
-                                data-kt-scroll-dependencies="#kt_modal_add_admin_header"
-                                data-kt-scroll-wrappers="#kt_modal_add_admin_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
-                                    <label class="required fs-6 fw-bold mb-2">admin</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="admin" id="admin" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_admin" id="id_admin" />
+                                data-kt-scroll-dependencies="#kt_modal_add_product_header"
+                                data-kt-scroll-wrappers="#kt_modal_add_product_scroll" data-kt-scroll-offset="300px">
+                                <div class="card-body">
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="kt_tab_pane_7" role="tabpanel">
+                                            <div class="row">
+                                                <div class="card-toolbar">
+                                                    <div class="d-flex justify-content-end align-items-center d-none"
+                                                        data-kt-user-permission-toolbar="selected">
+                                                        <div class="fw-bolder me-5">
+                                                            <span class="me-2" data-kt-user-permissio-select="selected_count"></span>Seleccionados
+                                                        </div>
+                                                        <button href="#" class="btn btn-link btn-color-danger btn-active-color-primary me-5 mb-2">Eliminar</button>
+                                                    </div>
+                                                </div>
+                                                <table class="table table-row-dashed fs-6 gy-5 table-row-gray-300" id="kt_products_table">
+                                                    <thead>
+                                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                            <th class="">Eliminar</th>
+                                                            <th class="">Pallet</th>
+                                                            <th class="">Lote</th>
+                                                            <th class="">N° Cajas</th>
+                                                            <th class="">Peso</th>
+                                                            <th class="">Total Kilos</th>
+                                                            <th class="">SADER</th>
+                                                            <th class="">Categoría</th>
+                                                            <th class="">idCategoria</th>
+                                                            <th class="">Tipo de Cultivo</th>
+                                                            <th class="">idCultivo</th>
+                                                            <th class="">Presentación</th>
+                                                            <th class="">idPresentacion</th>
+                                                            <th class="">Calibre</th>
+                                                            <th class="">idcalibre</th>
+                                                            <th class="">Tipo Fruta</th>
+                                                            <th class="">Registros</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="fw-bold text-gray-600">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="kt_tab_pane_8" role="tabpanel">
+                                              <div class="row mb-12">
+                                                <div class="col-md-3 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Folio Pallet</label>
+                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el folio del pallet" name="folio_pallet" id="folio_pallet" />
+                                                </div>
+                                                <div class="col-md-3 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Lote</label>
+                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el n° de lote" name="lote" id="lote" />
+                                                </div>
+
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Categoría</label>
+                                                    <select id="categoria_id" name="categoria_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_edit_products" data-placeholder="Selecciona una categoría" data-allow-clear="true">
+                                                        <option></option>
+                                                        @foreach($categorias as $categoria)
+                                                            <option value="{{$categoria->id}}">{{$categoria->categoria}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-12">
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Tipo de Cultivo</label>
+                                                    <select id="tipo_cultivo_id" name="tipo_cultivo_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_edit_products" data-placeholder="Selecciona una categoría" data-allow-clear="true">
+                                                        <option></option>
+                                                        @foreach($cultivos as $cultivo)
+                                                            <option value="{{$cultivo->id}}">{{$cultivo->tipo_cultivo}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">SADER</label>
+                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el codigo SADER" name="sader" id="sader" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-12">
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Calibre</label>
+                                                    <select id="calibre_id" name="calibre_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_edit_products" data-placeholder="Selecciona una categoría" data-allow-clear="true">
+                                                        <option></option>
+                                                        @foreach($calibres as $calibre)
+                                                            <option value="{{$calibre->id}}">{{$calibre->calibre}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Presentación</label>
+                                                    <select id="presentacion_id" name="presentacion_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_edit_products" data-placeholder="Seleccione una presentación" data-allow-clear="true">
+                                                        <option></option>
+                                                        @foreach($presentaciones as $presentacion)
+                                                            <option value="{{$presentacion->id."|".$presentacion->peso}}">{{$presentacion->presentacion}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-12">
+                                                <div class="col-md-4 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Tipo de Fruta</label>
+                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el tipo de fruta" name="tipo_fruta" id="tipo_fruta" />
+                                                </div>
+                                                <div class="col-md-4 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">N° Cajas</label>
+                                                    <input type="number" class="form-control form-control-solid" placeholder="Ingresa el n° de cajas" name="cajas" id="cajas" />
+                                                </div>
+                                                <div class="col-md-4 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">N° Registros</label>
+                                                    <input type="number" class="form-control form-control-solid" placeholder="Ingresa el n° de registros" name="n_registros" id="n_registros" value="1" min="1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
-                                    <label class="form-check-label" for="activo">
-                                        Activo
-                                    </label>
-                                </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
-                            <button type="button" id="kt_modal_add_admin_cancel"
-                                class="btn btn-light me-3">Cancelar</button>
-                            <button type="submit" id="kt_modal_add_admin_submit" class="btn btn-primary">
-                                <span class="indicator-label">Guardar</span>
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-light me-3">Cancelar</button>
+                            <button type="submit" id="btn_add_product" class="btn btn-primary">
+                                <span class="indicator-label">Agregar</span>
                                 <span class="indicator-progress">Espere un momento...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                             </button>
