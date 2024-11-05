@@ -29,17 +29,33 @@ class Embarques extends Model
     ];
 
     public static function get_embarque($id){
-        $result = DB::select("SELECT op_embarques.id, op_embarques.pais_id, fecha_embarque, empaques.nombre_fiscal, empaques.domicilio_fiscal, empaques.num_ext, empaques.num_int, empaques.cp,
-            cat_municipios.nombre AS municipio, cat_localidades.nombre as localidad, cat_destinatarios.nombre AS destinatario, cat_destinatarios.domicilio AS destinatario_domicilio,
-            puerto, mpuertos.nombre as puerto_municipio, medio_transporte, placas
+        $result = DB::select("SELECT
+            op_embarques.id,
+            op_embarques.pais_id,
+            fecha_embarque,
+            empaques.nombre_fiscal,
+            CONCAT_WS(', ',
+                empaques.domicilio_fiscal,
+                empaques.num_ext,
+                empaques.num_int,
+                cat_municipios.nombre,
+                cat_localidades.nombre
+            ) AS domicilio_empaque,
+            cat_destinatarios.nombre AS destinatario,
+            cat_destinatarios.domicilio AS destinatario_domicilio,
+            CONCAT_WS(', ', puerto,
+            mpuertos.nombre) AS puerto,
+            CONCAT_WS(', PLACAS:S', medio_transporte,
+            placas) AS transporte
             FROM op_embarques
-                LEFT JOIN cat_empaques AS empaques ON op_embarques.empaque_id = empaques.id
-                LEFT JOIN cat_localidades ON empaques.localidad_id = cat_localidades.id
-                LEFT JOIN cat_municipios ON cat_localidades.municipio_id = cat_municipios.id
-                LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
-                LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
-                LEFT JOIN cat_municipios AS mpuertos ON cat_puertos.municipio_id = mpuertos.id
-            WHERE op_embarques.id = $id");
+            LEFT JOIN cat_empaques AS empaques ON op_embarques.empaque_id = empaques.id
+            LEFT JOIN cat_localidades ON empaques.localidad_id = cat_localidades.id
+            LEFT JOIN cat_municipios ON cat_localidades.municipio_id = cat_municipios.id
+            LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
+            LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
+            LEFT JOIN cat_municipios AS mpuertos ON cat_puertos.municipio_id = mpuertos.id
+            WHERE op_embarques.id = ?
+        ", [$id]);
 
         return !empty($result) ? $result[0] : null;
     }

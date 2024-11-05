@@ -60,9 +60,9 @@ class EmbarquesController extends Controller
             'chofer',
             'tefs_id',
         ]);
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
-        try {
+        // try {
             $embarque = Embarques::updateOrCreate(
                 ['id' => $request->get('id_embarque')],
                 $data
@@ -91,15 +91,16 @@ class EmbarquesController extends Controller
                 foreach ($productos as $product) {
                     $insertData[] = [
                         'embarque_id' => $embarque->id,
-                        'categoria_id' => $product[5],
-                        'tipo_cultivo_id' => $product[7],
-                        'presentacion_id' => $product[9],
-                        'calibre_id' => $product[11],
+                        'categoria_id' => $product[8],
+                        'tipo_cultivo_id' => $product[10],
+                        'presentacion_id' => $product[12],
+                        'calibre_id' => $product[14],
                         'folio_pallet' => $product[1],
-                        'sader' => $product[3],
-                        'cajas' => $product[12],
                         'lote' => $product[2],
-                        'tipo_fruta' => $product[14],
+                        'cajas' => $product[3],
+                        'sader' => $product[6],
+                        'tipo_fruta' => $product[15],
+                        'n_registros' => $product[16],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
@@ -107,14 +108,14 @@ class EmbarquesController extends Controller
 
                 EmbarquesProductos::insert($insertData);
             }
-            DB::commit();
+            // DB::commit();
 
             return response()->json(['success' => 'Datos guardados exitosamente!', 'embarque_id'=>$embarque->id]);
-        }
-        catch (\Exception $e) {
-            DB::rollback();
-            return response()->json(['error' => 'Error al guardar los permisos.'], 500);
-        }
+        // }
+        // catch (\Exception $e) {
+        //     DB::rollback();
+        //     return response()->json(['error' => 'Error al guardar los permisos.'], 500);
+        // }
 
     }
     /**
@@ -169,7 +170,11 @@ class EmbarquesController extends Controller
             ->make(true);
 
         }
-        return view("operation/embarques_admin");
+        $categorias = Categorias::where('activo', 1)->get();
+        $cultivos = TipoCultivos::where('activo', 1)->get();
+        $calibres = Calibres::where('activo', 1)->get();
+        $presentaciones = Presentaciones::where('activo', 1)->get();
+        return view("operation/embarques_admin", compact('categorias', 'cultivos', 'calibres', 'presentaciones'));
     }
 
     public function get_embarque_edit($embarque_id)
@@ -178,5 +183,31 @@ class EmbarquesController extends Controller
         $plantilla = PlantillaRPV::where('pais_id', $embarque->pais_id)->first();
         $embarques_marcas = EmbarquesMarcas::get_marcas_embarque($embarque_id);
         return response()->json(["plantilla" =>$plantilla, "embarque"=>$embarque, "embarques_marcas"=>$embarques_marcas]);
+    }
+
+    public function get_products_embarque($embarque_id)
+    {
+        $embarque_productos = EmbarquesProductos::get_embarque_products($embarque_id);
+        return response()->json($embarque_productos);
+    }
+
+    public function save_products_embarque(Request $request){
+
+        $producto = new EmbarquesProductos();
+        $producto->embarque_id = $request->get('embarque_id');
+        $producto->categoria_id = $request->get('categoria_id');
+        $producto->tipo_cultivo_id = $request->get('tipo_cultivo_id');
+        $producto->calibre_id = $request->get('calibre_id');
+        $producto->folio_pallet = $request->get('folio_pallet');
+        $producto->lote = $request->get('lote');
+        $producto->cajas = $request->get('cajas');
+        $producto->sader = $request->get('sader');
+        $producto->tipo_fruta = $request->get('tipo_fruta');
+        $producto->n_registros = $request->get('n_registros');
+        $producto->presentacion_id = explode('|', $request->input('presentacion_id'))[0];
+        $producto->save();
+
+        return response()->json(["OK"=>"Se guardo correctamente"]);
+
     }
 }

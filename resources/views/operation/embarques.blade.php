@@ -120,7 +120,7 @@
                             <div class="row mb-12">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Usuario TEF´s</label>
-                                    <select id="tefs_id" name="tefs_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
+                                    <select id="tefs_id" name="tefs_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un usuario" data-allow-clear="true">
                                         <option value=""></option>
                                         @foreach($users as $users)
                                             <option value="{{$users->id}}">{{$users->name}}</option>
@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Inspector</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="inspector" id="inspector" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre del ispector" name="inspector" id="inspector" />
                                 </div>
                             </div>
                             <div class="row mb-12">
@@ -141,11 +141,11 @@
                                 </div>
                                 <div class="col-md-4 fv-row">
                                     <label class="fs-6 fw-bold mb-2">N° Económico</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="numero_economico" id="numero_economico" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el número económico" name="numero_economico" id="numero_economico" autocomplete="off" />
                                 </div>
                                 <div class="col-md-4 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Placas</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="placas_trasporte" id="placas_trasporte" />
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa las placas" name="placas_trasporte" id="placas_trasporte" />
                                 </div>
                             </div>
                         </div>
@@ -248,8 +248,11 @@
                                             <thead>
                                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th class="">Eliminar</th>
-                                                    <th class="">Folio Pallet</th>
+                                                    <th class="">Pallet</th>
                                                     <th class="">Lote</th>
+                                                    <th class="">N° Cajas</th>
+                                                    <th class="">Peso</th>
+                                                    <th class="">Total Kilos</th>
                                                     <th class="">SADER</th>
                                                     <th class="">Categoría</th>
                                                     <th class="">idCategoria</th>
@@ -259,9 +262,8 @@
                                                     <th class="">idPresentacion</th>
                                                     <th class="">Calibre</th>
                                                     <th class="">idcalibre</th>
-                                                    <th class="">N° Cajas</th>
-                                                    <th class="">Peso Unitario</th>
                                                     <th class="">Tipo Fruta</th>
+                                                    <th class="">Registros</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="fw-bold text-gray-600">
@@ -337,10 +339,10 @@
                                     <div class="d-flex flex-stack flex-grow-1">
                                         <div class="fw-bold">
                                             <h4 class="text-gray-900 fw-bolder">Notificaciones!</h4>
-                                            <div class="fs-6 text-gray-700">Si desea imprimir el formato
+                                            <div class="fs-6 text-gray-700">Si desea imprimir el formato para vizualizarlo
                                             <a href="#" class="fw-bolder" id="link_dictamen" target="_blank">presione aquí</a></div>
-                                            <div class="fs-6 text-gray-700">O si desea consultar más embarques
-                                            <a href="#" class="fw-bolder">presione aquí</a></div>
+                                            <div class="fs-6 text-gray-700">O si desea generar o editar el RPV
+                                            <a href="#" class="fw-bolder" id="link_consulta">presione aquí</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -407,7 +409,7 @@
                                 <div class="row mb-12">
                                     <div class="col-md-3 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Folio Pallet</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder="Ingresa el folio del pallet" name="pallet" id="pallet" />
+                                        <input type="text" class="form-control form-control-solid" placeholder="Ingresa el folio del pallet" name="folio_pallet" id="folio_pallet" />
                                     </div>
                                     <div class="col-md-3 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Lote</label>
@@ -470,7 +472,7 @@
                                     </div>
                                     <div class="col-md-4 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">N° Registros</label>
-                                        <input type="number" class="form-control form-control-solid" placeholder="Ingresa el n° de registros" name="registros" id="registros" value="1" min="1" />
+                                        <input type="number" class="form-control form-control-solid" placeholder="Ingresa el n° de registros" name="n_registros" id="n_registros" value="1" min="1" />
                                     </div>
                                 </div>
 

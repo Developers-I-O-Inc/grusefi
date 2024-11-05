@@ -16,3 +16,5 @@ Route::get('imprimir_dictamen_embarque/{pais_id}/{embarque_id}', 'PlantillasCont
 Route::resource('embarques', 'EmbarquesController');
 Route::get('embarques_admin', 'EmbarquesController@embarques_admin');
 Route::get('get_embarque_edit/{embarque_id}', 'EmbarquesController@get_embarque_edit');
+Route::get('get_products_embarque/{embarque_id}', 'EmbarquesController@get_products_embarque');
+Route::post('save_products_embarque', 'EmbarquesController@save_products_embarque');
