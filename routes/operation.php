@@ -17,4 +17,6 @@ Route::resource('embarques', 'EmbarquesController');
 Route::get('embarques_admin', 'EmbarquesController@embarques_admin');
 Route::get('get_embarque_edit/{embarque_id}', 'EmbarquesController@get_embarque_edit');
 Route::get('get_products_embarque/{embarque_id}', 'EmbarquesController@get_products_embarque');
+Route::get('get_marcas_embarque/{embarque_id}', 'EmbarquesController@get_marcas_embarque');
 Route::post('save_products_embarque', 'EmbarquesController@save_products_embarque');
+Route::post('save_marcas_embarques', 'EmbarquesController@save_marcas_embarques');

@@ -32,6 +32,7 @@ class Embarques extends Model
         $result = DB::select("SELECT
             op_embarques.id,
             op_embarques.pais_id,
+            op_embarques.empaque_id,
             fecha_embarque,
             empaques.nombre_fiscal,
             CONCAT_WS(', ',

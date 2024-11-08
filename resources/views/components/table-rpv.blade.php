@@ -361,7 +361,7 @@
                                             <div style="width: 30%;">
                                                 <div>Marcas distintivas</div>
                                                 @if($embarque)
-                                                    <button href="#" class="btn btn-icon btn-light-success pulse pulse-success" id="btn_marcas">
+                                                    <button href="#" class="btn btn-icon btn-light-success pulse pulse-success" id="btn_marcas" data-embarque="0">
                                                         <span class="svg-icon svg-icon-1"><i class="bi bi-box-arrow-up-right fs-2"></i></span>
                                                         <span class="pulse-ring w-45px h-45px"></span>
                                                     </button>
