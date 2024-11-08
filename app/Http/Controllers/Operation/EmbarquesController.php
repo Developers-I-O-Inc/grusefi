@@ -191,6 +191,12 @@ class EmbarquesController extends Controller
         return response()->json($embarque_productos);
     }
 
+    public function get_marcas_embarque($embarque_id)
+    {
+        $embarque_marcas = EmbarquesMarcas::get_marcas_embarque($embarque_id);
+        return response()->json($embarque_marcas);
+    }
+
     public function save_products_embarque(Request $request){
 
         $producto = new EmbarquesProductos();
@@ -209,5 +215,22 @@ class EmbarquesController extends Controller
 
         return response()->json(["OK"=>"Se guardo correctamente"]);
 
+    }
+
+    public function save_marcas_embarques(Request $request)
+    {
+        $embarque_id = $request->get('embarque_id');
+        $marcas = $request->get('marcas');
+
+        EmbarquesMarcas::where('embarque_id', $embarque_id)->delete();
+
+        foreach ($marcas as $marca) {
+            EmbarquesMarcas::create([
+                'embarque_id' => $embarque_id,
+                'marca_id' => $marca['marca_id'],
+            ]);
+        }
+
+        return response()->json(['success' => 'Marcas guardadas exitosamente!']);
     }
 }

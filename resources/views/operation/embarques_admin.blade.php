@@ -63,7 +63,7 @@
                         </h2>
                         <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
                             <div class="accordion-body">
-                                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_admin_table">
+                                <table class="table table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-7 gs-7" id="kt_admin_table">
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <th class="min-w-125px">Folio</th>
@@ -255,6 +255,78 @@
                             </button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="kt_modal_edit_marcas" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered mw-850px">
+                <div class="modal-content">
+                        <div class="modal-header" id="kt_modal_add_product_header">
+                            <h2 class="fw-bolder">Marcas del Embarque</h2>
+                            <div id="kt_modal_add_product_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                            transform="rotate(45 7.41422 6)" fill="black" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="modal-body py-10 px-lg-17">
+                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_product_scroll" data-kt-scroll="true"
+                                data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+                                data-kt-scroll-dependencies="#kt_modal_add_product_header"
+                                data-kt-scroll-wrappers="#kt_modal_add_product_scroll" data-kt-scroll-offset="300px">
+                                <div class="card-body">
+                                    <div class="row mb-12">
+                                        <div class="col-9">
+                                            <select id="select_marca" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona una marca" data-allow-clear="true">
+                                                <option></option>
+                                            </select>
+                                            <div class="col-md-6 fv-row d-none">
+                                                <input class="form-control form-control-solid" placeholder="Seleccione Fecha" id="edit_marcas" name="edit_marcas"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <button class="btn btn-flex btn-light-primary" id="btn_add_marca">
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
+                                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
+                                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
+                                                </svg>
+                                                </span>Agregar
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-12">
+                                        <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-7 gs-7" id="kt_marcas_table">
+                                            <thead>
+                                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                    <th class="">id</th>
+                                                    <th class="">Marca</th>
+                                                    <th class="">Eliminar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="fw-bold text-gray-600">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer flex-center">
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-light me-3">Cancelar</button>
+                            <button type="button" id="btn_save_marcas" class="btn btn-primary">
+                                <span class="indicator-label">Guardar</span>
+                                <span class="indicator-progress">Espere un momento...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                        </div>
                 </div>
             </div>
         </div>
