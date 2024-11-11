@@ -55,3 +55,6 @@ Route::get('get_marcas', 'MarcasController@get_marcas');
 Route::resource('usos', 'UsosController');
 Route::post('destroy_usos', 'UsosController@destroy_usos');
 Route::get('get_usos', 'UsosController@get_usos');
+// VARIEDADES
+Route::resource('variedades', 'VariedadesController');
+Route::post('destroy_variedades', 'VariedadesController@destroy_variedades');

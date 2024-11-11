@@ -2,10 +2,10 @@
 
 import Catalogs from "./general.js"
 
-var KTtipo_cultivoesList = (function () {
+var KTvariedadesList = (function () {
 
-    const catalog = "tipo_cultivos"
-    const catalog_item = "tipo_cultivo"
+    const catalog = "variedades"
+    const catalog_item = "variedad"
     const token = $('meta[name="csrf-token"]').attr('content')
 
     var table_items,
@@ -17,22 +17,30 @@ var KTtipo_cultivoesList = (function () {
         validations,
         form,
         edit_id,
-        edit_tipo_cultivo,
-        select_tipo,
+        edit_variedad,
         edit_active,
         check_active,
+        select_tipo_cultivo,
         n,
         edit = () => {
             n.querySelectorAll(
-                '[data-kt-tipo_cultivo-table-filter="edit"]'
+                '[data-kt-variedades-table-filter="edit"]'
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
                     e.preventDefault()
-                    $.get("tipo_cultivos/"+ $(this).data("id") + "/edit", function(data){
-                        edit_id.value=data.tipo_cultivo.id
-                        edit_tipo_cultivo.value=data.tipo_cultivo.tipo_cultivo
-                        Catalogs.checked_edit(data.tipo_cultivo.activo, edit_active, check_active)
-                        $("#tipo").val(data.tipo_cultivo.tipo).trigger("change.select2")
+                    // Catalogs.checked(check_active)
+                    $.get("variedades/"+ $(this).data("id") + "/edit", function(data){
+                        edit_id.value=data.variedad.id
+                        edit_variedad.value=data.variedad.variedad
+                        if(data.variedad.activo){
+                            check_active.checked = true
+                            edit_active.value = 1
+                        }
+                        else{
+                            check_active.checked = false
+                            edit_active.value = 0
+                        }
+                        $("#tipo_cultivo_id").val(data.variedad.tipo_cultivo_id).trigger("change.select2")
                         modal.show()
                     })
                 })
@@ -42,27 +50,34 @@ var KTtipo_cultivoesList = (function () {
         return {
             init: function () {
                 (modal = new bootstrap.Modal(
-                    document.querySelector("#kt_modal_add_tipo_cultivo")
+                    document.querySelector("#kt_modal_add_variedad")
                 )),
                 // inicialize elements html
                 (btn_add = document.querySelector("#btn_add")),
-                (form = document.querySelector("#kt_modal_add_tipo_cultivo_form")),
-                (btn_modal = form.querySelector("#kt_modal_add_tipo_cultivo_close")),
-                (btn_submit = form.querySelector("#kt_modal_add_tipo_cultivo_submit")),
-                (select_tipo = document.querySelector("#tipo")),
-                (btn_cancel = form.querySelector("#kt_modal_add_tipo_cultivo_cancel")),
-                (edit_id = form.querySelector("#id_tipo_cultivo")),
-                (edit_tipo_cultivo = form.querySelector("#tipo_cultivo")),
+                (select_tipo_cultivo = document.querySelector("#tipo_cultivo_id")),
+                (form = document.querySelector("#kt_modal_add_variedad_form")),
+                (btn_modal = form.querySelector("#kt_modal_add_variedad_close")),
+                (btn_submit = form.querySelector("#kt_modal_add_variedad_submit")),
+                (btn_cancel = form.querySelector("#kt_modal_add_variedad_cancel")),
+                (edit_id = form.querySelector("#id_variedad")),
+                (edit_variedad = form.querySelector("#variedad")),
                 (check_active = form.querySelector("#check_activo")),
                 (edit_active = form.querySelector("#activo")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
-                        tipo_cultivo: {
+                        variedad: {
                             validators: {
                                 notEmpty: {
-                                    message: "Ingrese el tipo de cultivo",
+                                    message: "Nombre de la variedad es requerido",
                                 },
                             },
+                        },
+                        tipo_cultivo_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione un tipo de cultivo'
+                                }
+                            }
                         },
                     },
                     plugins: {
@@ -74,19 +89,19 @@ var KTtipo_cultivoesList = (function () {
                         }),
                     },
                 })),
-                (n = document.querySelector("#kt_tipo_cultivos_table")) &&
+                (n = document.querySelector("#kt_variedades_table")) &&
                     (n.querySelectorAll("tbody tr").forEach((t) => {
                         // formats
                         }),
                         (table_items = $(n).DataTable({
-                            ajax: "tipo_cultivos",
+                            ajax: "variedades",
                             serverSide: true,
                             processing: true,
                             columns: [
                                 { data: "check", name: "check" },
                                 { data: "id", name: "id" },
+                                { data: "variedad", name: "variedad" },
                                 { data: "tipo_cultivo", name: "tipo_cultivo" },
-                                { data: "tipo", name: "tipo" },
                                 { data: "activos", name: "activos" },
                                 { data: "buttons", name: "buttons" },
                             ],
@@ -112,7 +127,7 @@ var KTtipo_cultivoesList = (function () {
                         }),
                         Catalogs.delete_items(n, table_items, catalog, catalog_item, token),
                         edit(),
-                        document.querySelector('[data-kt-tipo_cultivo-table-filter="search"]').addEventListener("keyup", function (e) {
+                        document.querySelector('[data-kt-variedad-table-filter="search"]').addEventListener("keyup", function (e) {
                             table_items.search(e.target.value).draw()
                         })
                     )
@@ -170,5 +185,5 @@ var KTtipo_cultivoesList = (function () {
         }
 })()
 KTUtil.onDOMContentLoaded(function () {
-    KTtipo_cultivoesList.init()
+    KTvariedadesList.init()
 })
