@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cat_tipo_cultivos', function (Blueprint $table) {
+        Schema::create('cat_variedades', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo_cultivo');
-            $table->enum('tipo', ['Orgánico', 'Convencional']);
-            $table->tinyInteger('activo')->default(1);
+            $table->bigInteger('tipo_cultivo_id')->unsigned()->index();
+            $table->string('variedad', 100);
+            $table->boolean('activo')->default(1);
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('tipo_cultivo_id')->references('id')->on('cat_tipo_cultivos');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cat_tipo_cultivos');
+        Schema::dropIfExists('cat_variedades');
     }
 };

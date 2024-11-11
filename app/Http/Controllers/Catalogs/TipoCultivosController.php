@@ -62,6 +62,7 @@ class TipoCultivosController extends Controller
         TipoCultivos::updateOrCreate(
             ['id'=>$request->get('id_tipo_cultivo')],
             ['tipo_cultivo' => $request->input('tipo_cultivo'),
+            'tipo' => $request->input('tipo'),
             'activo' => $request->input('activo')],
         );
         return response()->json(["OK"=>"Se guardo correctamente"]);
