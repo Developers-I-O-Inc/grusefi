@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Catalogs;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catalogs\Presentaciones;
+use App\Models\Catalogs\Variedades;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
 class PresentacionesController extends Controller
@@ -16,7 +18,7 @@ class PresentacionesController extends Controller
     {
         if ($request->ajax()) {
 
-            $presentaciones = Presentaciones::all();
+            $presentaciones = Presentaciones::get_presentaciones();
             return Datatables::of($presentaciones)
                     ->addIndexColumn()
                     ->addColumn('check', function($row){
@@ -50,8 +52,8 @@ class PresentacionesController extends Controller
                     ->rawColumns(['check', 'buttons', 'activos'])
                     ->make(true);
         }
-
-        return view('catalogs/presentaciones');
+        $variedades = Variedades::all();
+        return view('catalogs/presentaciones', compact('variedades'));
 
     }
     /**
@@ -62,6 +64,7 @@ class PresentacionesController extends Controller
         Presentaciones::updateOrCreate(
             ['id'=>$request->get('id_presentacion')],
             [
+                'variedad_id' => $request->input('variedad_id'),
                 'presentacion' => $request->input('presentacion'),
                 'peso' => $request->input('peso'),
             'activo' => $request->input('activo')],
@@ -86,6 +89,12 @@ class PresentacionesController extends Controller
         $ids = $request->input('ids');
         Presentaciones::whereIn('id', $ids)->delete();
         return response()->json(["OK"=>"Eliminados"]);
+    }
+
+    public function get_presentaciones(Request $request)
+    {
+        $presentacion = Presentaciones::get_presentaciones_by_variedad($request->query('id'));
+        return response()->json(["ok" => "OK", "catalogo" => $presentacion]);
     }
 
 }

@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Catalogs;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Catalogs\Variedad;
 use App\Models\Catalogs\TipoCultivos;
-use App\Models\Variedades;
+use App\Models\Catalogs\Variedades;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 

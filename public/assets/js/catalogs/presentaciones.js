@@ -21,6 +21,7 @@ var KTpresentacionesList = (function () {
         edit_peso,
         edit_active,
         check_active,
+        select_variedad,
         n,
         edit = () => {
             n.querySelectorAll(
@@ -33,6 +34,7 @@ var KTpresentacionesList = (function () {
                         edit_presentacion.value=data.presentacion.presentacion
                         edit_peso.value=data.presentacion.peso
                         Catalogs.checked_edit(data.presentacion.activo, edit_active, check_active)
+                        $("#variedad_id").val(data.presentacion.variedad_id).trigger("change.select2")
                         modal.show()
                     })
                 })
@@ -46,6 +48,7 @@ var KTpresentacionesList = (function () {
                 )),
                 // inicialize elements html
                 (btn_add = document.querySelector("#btn_add")),
+                (select_variedad = $("#variedad_id").select2()),
                 (form = document.querySelector("#kt_modal_add_presentacion_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_presentacion_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_presentacion_submit")),
@@ -57,6 +60,13 @@ var KTpresentacionesList = (function () {
                 (edit_active = form.querySelector("#activo")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
+                        variedad_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione una variedad",
+                                },
+                            },
+                        },
                         presentacion: {
                             validators: {
                                 notEmpty: {
@@ -92,6 +102,7 @@ var KTpresentacionesList = (function () {
                             columns: [
                                 { data: "check", name: "check" },
                                 { data: "id", name: "id" },
+                                { data: "variedad", name: "variedad" },
                                 { data: "presentacion", name: "presentacion" },
                                 { data: "peso", name: "peso" },
                                 { data: "activos", name: "activos" },
@@ -131,7 +142,7 @@ var KTpresentacionesList = (function () {
                 btn_add.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
                     form.reset()
-                    $("#pais_id").val(null).trigger("change.select2")
+                    $("#variedad_id").val(null).trigger("change.select2")
                     modal.show()
                 })
                 // CLOSE MODAL

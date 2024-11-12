@@ -86,16 +86,25 @@
                     <div data-kt-stepper-element="content" class="current">
                         <div class="w-100">
                             <div class="row mb-12">
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-4 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Fecha Embarque</label>
                                     <input class="form-control form-control-solid" placeholder="Seleccione Fecha" id="fecha_embarque" name="fecha_embarque"/>
                                 </div>
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-4 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">País</label>
                                     <select id="pais_id" name="pais_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un país" data-allow-clear="true">
                                         <option value=""></option>
                                         @foreach($paises as $pais)
                                             <option value="{{$pais->id}}">{{$pais->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4 fv-row">
+                                    <label class="required fs-6 fw-bold mb-2">Variedad</label>
+                                    <select id="variedad_id" name="variedad_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona una variedad" data-allow-clear="true">
+                                        <option value=""></option>
+                                        @foreach($variedades as $variedad)
+                                            <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -128,22 +137,22 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-bold mb-2">Inspector</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre del ispector" name="inspector" id="inspector" />
-                                </div>
-                            </div>
-                            <div class="row mb-12">
-                                <div class="col-md-4 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Puerto de Entrada</label>
                                     <select id="puerto_id" name="puerto_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un puerto" data-allow-clear="true">
                                         <option value=""></option>
                                     </select>
                                 </div>
-                                <div class="col-md-4 fv-row">
+                                {{-- <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-bold mb-2">Inspector</label>
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre del ispector" name="inspector" id="inspector" />
+                                </div> --}}
+                            </div>
+                            <div class="row mb-12">
+                                <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">N° Económico</label>
                                     <input type="text" class="form-control form-control-solid" placeholder="Ingresa el número económico" name="numero_economico" id="numero_economico" autocomplete="off" />
                                 </div>
-                                <div class="col-md-4 fv-row">
+                                <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Placas</label>
                                     <input type="text" class="form-control form-control-solid" placeholder="Ingresa las placas" name="placas_trasporte" id="placas_trasporte" />
                                 </div>
@@ -455,9 +464,9 @@
                                         <label class="required fs-6 fw-bold mb-2">Presentación</label>
                                         <select id="presentacion_id" name="presentacion_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
                                             <option></option>
-                                            @foreach($presentaciones as $presentacion)
+                                            {{-- @foreach($presentaciones as $presentacion)
                                                 <option value="{{$presentacion->id."|".$presentacion->peso}}">{{$presentacion->presentacion}}</option>
-                                            @endforeach
+                                            @endforeach --}}
                                         </select>
                                     </div>
                                 </div>
