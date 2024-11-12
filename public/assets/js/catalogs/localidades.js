@@ -194,6 +194,7 @@ var KTlocalidadesList = (function () {
                     Catalogs.checked(edit_active, check_active)
                     form.reset()
                     $("#municipio_id").val(null).trigger("change.select2")
+                    $("#estado_id").val(null).trigger("change.select2")
                     modal.show()
                 })
                 // CLOSE MODAL

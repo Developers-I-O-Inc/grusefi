@@ -3,10 +3,10 @@
     <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
 @endsection
-@section('title', 'Presentaciones')
-@section('title_top', 'Presentaciones')
-@section('config', 'active')
-@section('subtitle_top', 'Control de Presentaciones')
+@section('title', 'Variedades')
+@section('title_top', 'Variedades')
+@section('zones', 'active')
+@section('subtitle_top', 'Control de Variedades')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card">
@@ -23,37 +23,36 @@
                                     fill="black" />
                             </svg>
                         </span>
-                        <input type="text" data-kt-presentacion-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar presentaciones" />
+                        <input type="text" data-kt-variedad-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar variedades" />
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    <div class="d-flex justify-content-end" data-kt-presentacion-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar presentación</button>
+                    <div class="d-flex justify-content-end" data-kt-variedad-table-toolbar="base">
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar variedad</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
-                        data-kt-presentacion-table-toolbar="selected">
+                        data-kt-variedad-table-toolbar="selected">
                         <div class="fw-bolder me-5">
-                            <span class="me-2" data-kt-presentacion-table-select="selected_count"></span>Seleccionados
+                            <span class="me-2" data-kt-variedad-table-select="selected_count"></span>Seleccionados
                         </div>
                         <button type="button" class="btn btn-danger"
-                            data-kt-presentacion-table-select="delete_selected">Borrar Seleccionados</button>
+                            data-kt-variedad-table-select="delete_selected">Borrar Seleccionados</button>
                     </div>
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_presentaciones_table">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_variedades_table">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="w-10px pe-2">
                                 <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                     <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                        data-kt-check-target="#kt_presentaciones_table .form-check-input" value="1" />
+                                        data-kt-check-target="#kt_variedades_table .form-check-input" value="1" />
                                 </div>
                             </th>
                             <th class="min-w-125px">id</th>
                             <th class="min-w-125px">Variedad</th>
-                            <th class="min-w-125px">Presentacion</th>
-                            <th class="min-w-125px">Peso</th>
+                            <th class="min-w-125px">Tipo de Cultivo</th>
                             <th class="min-w-125px">Status</th>
                             <th class="min-w-125px">Opciones</th>
                         </tr>
@@ -64,14 +63,14 @@
                 </table>
             </div>
         </div>
-        <div class="modal fade" id="kt_modal_add_presentacion" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="kt_modal_add_variedad" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_presentacion_form"
-                        data-kt-redirect="../../demo6/dist/apps/presentaciones/list.html">
-                        <div class="modal-header" id="kt_modal_add_presentacion_header">
-                            <h2 class="fw-bolder">Agregar presentación</h2>
-                            <div id="kt_modal_add_presentacion_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                    <form class="form" action="#" id="kt_modal_add_variedad_form"
+                        data-kt-redirect="../../demo6/dist/apps/variedades/list.html">
+                        <div class="modal-header" id="kt_modal_add_variedad_header">
+                            <h2 class="fw-bolder">Agregar variedad</h2>
+                            <div id="kt_modal_add_variedad_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none">
@@ -84,27 +83,23 @@
                             </div>
                         </div>
                         <div class="modal-body py-10 px-lg-17">
-                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_presentacion_scroll" data-kt-scroll="true"
+                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_variedad_scroll" data-kt-scroll="true"
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
-                                data-kt-scroll-dependencies="#kt_modal_add_presentacion_header"
-                                data-kt-scroll-wrappers="#kt_modal_add_presentacion_scroll" data-kt-scroll-offset="300px">
+                                data-kt-scroll-dependencies="#kt_modal_add_variedad_header"
+                                data-kt-scroll-wrappers="#kt_modal_add_variedad_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-7">
-                                    <label class="required fs-6 fw-bold mb-2">Variedad</label>
-                                    <select id="variedad_id" name="variedad_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_presentacion" data-placeholder="Selecciona una variedad" data-allow-clear="true">
+                                    <label class="required fs-6 fw-bold mb-2">Nombre variedad</label>
+                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="variedad" id="variedad" />
+                                    <input type="text" class="form-control form-control-solid d-none" name="id_variedad" id="id_variedad" />
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fs-6 fw-bold mb-2">Tipo de cultivo</label>
+                                    <select id="tipo_cultivo_id" name="tipo_cultivo_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_variedad" data-placeholder="Selecciona un País" data-allow-clear="true">
                                         <option></option>
-                                        @foreach($variedades as $variedad)
-                                            <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
+                                        @foreach($tipo_cultivos as $cultivo)
+                                            <option value="{{$cultivo->id}}">{{$cultivo->tipo_cultivo}}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                                <div class="fv-row mb-7">
-                                    <label class="required fs-6 fw-bold mb-2">Presentación</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="presentacion" id="presentacion" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_presentacion" id="id_presentacion" />
-                                </div>
-                                <div class="fv-row mb-7">
-                                    <label class="required fs-6 fw-bold mb-2">Peso</label>
-                                    <input type="number" class="form-control form-control-solid" step="0.001" placeholder="Ingresa el peso de la presentación" name="peso" id="peso" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
@@ -116,9 +111,9 @@
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
-                            <button type="button" id="kt_modal_add_presentacion_cancel"
+                            <button type="button" id="kt_modal_add_variedad_cancel"
                                 class="btn btn-light me-3">Cancelar</button>
-                            <button type="submit" id="kt_modal_add_presentacion_submit" class="btn btn-primary">
+                            <button type="submit" id="kt_modal_add_variedad_submit" class="btn btn-primary">
                                 <span class="indicator-label">Guardar</span>
                                 <span class="indicator-progress">Espere un momento...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -132,5 +127,5 @@
 @endsection
 @section('scripts')
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-    <script src="{{asset('assets/js/catalogs/presentaciones.js')}}" type="module"></script>
+    <script src="{{asset('assets/js/catalogs/variedades.js')}}" type="module"></script>
 @endsection

@@ -52,6 +52,7 @@
                             </th>
                             <th class="min-w-125px">id</th>
                             <th class="min-w-125px">Tipo de Cultivo</th>
+                            <th class="min-w-125px">Tipo</th>
                             <th class="min-w-125px">Status</th>
                             <th class="min-w-125px">Opciones</th>
                         </tr>
@@ -90,6 +91,14 @@
                                     <label class="required fs-6 fw-bold mb-2">Tipo de Cultivo</label>
                                     <input type="text" class="form-control form-control-solid" placeholder="Ingresa el tipo de cultivo" name="tipo_cultivo" id="tipo_cultivo" />
                                     <input type="text" class="form-control form-control-solid d-none" name="id_tipo_cultivo" id="id_tipo_cultivo" />
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fs-6 fw-bold mb-2">Tipo</label>
+                                    <select id="tipo" name="tipo" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_tipo_cultivo" data-placeholder="Selecciona un País" data-allow-clear="true">
+                                        <option></option>
+                                        <option value="Orgánico">Orgánico</option>
+                                        <option value="Convencional">Convencional</option>
+                                    </select>
                                 </div>
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>

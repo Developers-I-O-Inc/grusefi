@@ -8,21 +8,28 @@ var KTcalibreesList = (function () {
     edit_id,
     btn_imprimir,
     select_pais,
+    select_variedad,
     form,
     target,
     blockUI,
-    obtener_datos = (formulario, pais, saveoredit) => {
+    obtener_datos = (formulario, pais, variedad, saveoredit) => {
         const clase = "p_input"
         const url = saveoredit ? "save_plantilla" : "edit_plantilla"
 
         const inputs = formulario.querySelectorAll(`input.${clase}`)
         let datosFormulario = {}
         if(!saveoredit){
-            datosFormulario = { pais_id: pais, id: edit_id.value }
+            datosFormulario = {
+                pais_id: pais,
+                variedad_id: variedad,
+                id: edit_id.value
+            }
         }
         else{
-
-            datosFormulario = { pais_id: pais }
+            datosFormulario = {
+                pais_id: pais,
+                variedad_id: variedad
+            }
         }
 
         Array.from(inputs).forEach(input => {
@@ -100,11 +107,12 @@ var KTcalibreesList = (function () {
             btn_imprimir = document.querySelector("#btn_imprimir")
             btn_search = document.querySelector("#btn_search")
             select_pais = $('#pais_id').select2()
+            select_variedad = $("#variedad_id").select2()
             form = document.querySelector("#form_plantilla")
 
             btn_add.addEventListener("click", function (t) {
                 if(select_pais.val() != '' && select_pais.val() !== null){
-                    obtener_datos(form, select_pais.val(), true)
+                    obtener_datos(form, select_pais.val(), select_variedad.val(), true)
                 }
                 else{
                     Swal.fire({
@@ -116,7 +124,7 @@ var KTcalibreesList = (function () {
             })
             btn_edit.addEventListener("click", function (t) {
                 if(select_pais.val() != '' && select_pais.val() !== null){
-                    obtener_datos(form, select_pais.val(), false)
+                    obtener_datos(form, select_pais.val(), select_variedad.val(), false)
                 }
                 else{
                     Swal.fire({
@@ -127,8 +135,8 @@ var KTcalibreesList = (function () {
                 }
             })
             btn_search.addEventListener("click", function (t) {
-                if(select_pais.val() != '' && select_pais.val() !== null){
-                    fetch(`get_plantilla/${select_pais.val()}`, {
+                if(select_pais.val() != '' && select_pais.val() !== null && select_variedad.val() != '' && select_variedad.val() !== null){
+                    fetch(`get_plantilla/${select_pais.val()}/${select_variedad.val()}`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -166,9 +174,26 @@ var KTcalibreesList = (function () {
                         }
                         else{
                             Swal.fire({
-                                icon: "error",
-                                title: "Error",
-                                text: "No se encontró una plantilla para este país",
+                                icon: "info",
+                                title: "Este país no tiene una plantilla",
+                                text: "No se encontró una plantilla para este país con esa variedad, desea crear una nueva plantilla?",
+                                showDenyButton: true,
+                                showCancelButton: false,
+                                confirmButtonText: "Si, crear una nueva plantilla",
+                                denyButtonText: `No, cancelar`,
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    blockUI.release()
+                                    btn_imprimir.classList.add("d-none")
+                                    btn_edit.classList.add("d-none")
+                                    btn_add.classList.remove("d-none")
+                                } else if (result.isDenied) {
+                                    btn_imprimir.classList.add("d-none")
+                                    btn_edit.classList.add("d-none")
+                                    btn_add.classList.add("d-none")
+                                    blockUI.block()
+
+                                }
                             })
                         }
                     })
@@ -185,13 +210,14 @@ var KTcalibreesList = (function () {
                     Swal.fire({
                         icon: "error",
                         title: "Error",
-                        text: "Selecciona un pais",
+                        text: "Selecciona un pais y una variedad",
                     })
                 }
 
             })
-             // CHANGE PIS
-             select_pais.on('change', function() {
+            // CHANGE PAIS
+            select_pais.on('change', function() {
+                select_variedad.prop('disabled', false)
                 blockUI.release()
             })
             blockUI.block()

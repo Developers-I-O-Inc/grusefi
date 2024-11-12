@@ -29,6 +29,7 @@ Route::post('destroy_categorias', 'CategoriasController@destroy_categorias');
 // PRESENTACIONES
 Route::resource('presentaciones', 'PresentacionesController');
 Route::post('destroy_presentaciones', 'PresentacionesController@destroy_presentaciones');
+Route::get('get_presentaciones', 'PresentacionesController@get_presentaciones');
 // FLORACIONES
 Route::resource('floraciones', 'FloracionesController');
 Route::post('destroy_floraciones', 'FloracionesController@destroy_floraciones');
@@ -55,3 +56,6 @@ Route::get('get_marcas', 'MarcasController@get_marcas');
 Route::resource('usos', 'UsosController');
 Route::post('destroy_usos', 'UsosController@destroy_usos');
 Route::get('get_usos', 'UsosController@get_usos');
+// VARIEDADES
+Route::resource('variedades', 'VariedadesController');
+Route::post('destroy_variedades', 'VariedadesController@destroy_variedades');

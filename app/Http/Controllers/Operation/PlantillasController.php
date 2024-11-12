@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
 use App\Models\Catalogs\Paises;
+use App\Models\Catalogs\Variedades;
 use App\Models\Operation\Embarques;
 use App\Models\Operation\EmbarquesMarcas;
 use App\Models\Operation\PlantillaRPV;
@@ -14,7 +15,8 @@ class PlantillasController extends Controller
 {
     public function plantillas_rpv(){
         $paises = Paises::all();
-        return view("operation/rpv", compact('paises'));
+        $variedades = Variedades::all();
+        return view("operation/rpv", compact('paises', 'variedades'));
     }
 
     public function save_plantilla(Request $request) {
@@ -50,8 +52,8 @@ class PlantillasController extends Controller
 
     }
 
-    public function get_plantilla($pais){
-        $plantilla = PlantillaRPV::where("pais_id", $pais)->get();
+    public function get_plantilla($pais, $variedad){
+        $plantilla = PlantillaRPV::where("pais_id", $pais)->where("variedad_id", $variedad)->get();
 
         return response()->json(["plantilla"=>$plantilla]);
     }
