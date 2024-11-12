@@ -29,6 +29,7 @@ Route::post('destroy_categorias', 'CategoriasController@destroy_categorias');
 // PRESENTACIONES
 Route::resource('presentaciones', 'PresentacionesController');
 Route::post('destroy_presentaciones', 'PresentacionesController@destroy_presentaciones');
+Route::get('get_presentaciones', 'PresentacionesController@get_presentaciones');
 // FLORACIONES
 Route::resource('floraciones', 'FloracionesController');
 Route::post('destroy_floraciones', 'FloracionesController@destroy_floraciones');

@@ -32,6 +32,8 @@ var KTCreateAccount = (function () {
         select_maquiladores,
         select_pais,
         select_puerto,
+        select_variedad,
+        select_presentacion,
         select_puerto2,
         arr_validations = [],
         add_fields = (table, select) => {
@@ -93,7 +95,6 @@ var KTCreateAccount = (function () {
                     html: `<div class="progress container-fluid"></div>`,
                     showConfirmButton: false,
                 });
-                console.log(table_marcas.column(0).data().toArray())
                 // Realizar la solicitud fetch
                 const response = await fetch('embarques', {
                     method: "POST",
@@ -123,12 +124,10 @@ var KTCreateAccount = (function () {
                     },
                 });
 
-                // Acción posterior a la confirmación del SweetAlert
                 btnSubmit.disabled = false;
                 form.reset();
 
             } catch (error) {
-                // Manejo de errores
                 Swal.fire({
                     icon: "error",
                     title: "Error",
@@ -137,7 +136,6 @@ var KTCreateAccount = (function () {
                 console.error(error);
                 btnSubmit.disabled = false;
             }
-            // console.log(datos)
         }
     return {
         init: function () {
@@ -146,8 +144,10 @@ var KTCreateAccount = (function () {
                 )),
                 (select_pais = $('#pais_id').select2()),
                 (select_empaque = $('#empaque_id').select2()),
+                (select_presentacion = $('#presentacion_id').select2()),
                 (select_consolidado = $('#consolidado_id').select2()),
                 (select_destinatario = $('#destinatario_id').select2()),
+                (select_variedad = $('#variedad_id').select2()),
                 (select_marca = $('#select_marca').select2()),
                 (select_maquiladores = $('#select_maquiladores').select2()),
                 (select_puerto = $('#puerto_id').select2()),
@@ -397,6 +397,11 @@ var KTCreateAccount = (function () {
                     Operation.get_next_selects("marcas", select_empaque.val(), select_marca)
                     Operation.get_next_selects("maquiladores", select_empaque.val(), select_maquiladores)
                     Operation.get_next_selects("maquiladores", select_empaque.val(), select_consolidado)
+                })
+                // SELECT VARIEDADES
+                select_variedad.on('change', function() {
+                    // const select_estado2 = $('#estado_id').select2()
+                    Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion)
                 })
                 // CLOSE MODAL
                 btn_modal_c.addEventListener("click", function (t) {

@@ -2,7 +2,6 @@
 @section('styles')
     <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
-    {{-- <link href="{{asset('assets/css/plantilla_pdf.css')}}" rel="stylesheet" type="text/css" /> --}}
     <style>
         table {
             table-layout: fixed !important;
@@ -264,33 +263,35 @@
     <div id="kt_content_container bg-light-primary" class="container-xxl">
         <form id="form_plantilla">
             <div class="card">
-                <div class="card-header pt-6 bg-light-primary rounded border-primary border border-dashed">
-                    <div class="card-title">
-                        <div class="d-flex align-items-center position-relative my-1">
+                <div class="card-body bg-light-primary rounded border-primary border border-dashed">
+                    <div class="row">
+                        <div class="col-md-3 fv-row">
                             <input type="text" id="plantilla_id" name="plantilla_id" class="d-none">
-                            <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-placeholder="Selecciona un país" data-allow-clear="true">
-                                <option></option>
+                            <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
+                                <option value=""></option>
                                 @foreach($paises as $pais)
                                     <option value="{{$pais->id}}">{{$pais->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-                    <div class="card-toolbar">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1 d-none" id="btn_imprimir" href="/operation/imprimir_dictamen/1" target="_blank">Previsualizar</a>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1" id="btn_search">Buscar</button>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1" id="btn_add">Guardar</button>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_edit">Editar</button>
-                            </li>
-                        </ul>
+                        <div class="col-md-3 fv-row">
+                            <select id="variedad_id" name="variedad_id" disabled class="form-select" data-control="select2" data-placeholder="Selecciona una variedad" data-allow-clear="true">
+                                <option value=""></option>
+                                @foreach($variedades as $variedad)
+                                    <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-1 offset-3 fv-row px-14">
+                            <a type="button" class=" btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1 d-none" id="btn_imprimir" href="/operation/imprimir_dictamen/1" target="_blank">Imprimir</a>
+                        </div>
+                        <div class="col-md-1 fv-row px-10">
+                            <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_add">Guardar</button>
+                            <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_edit">Editar</button>
+                        </div>
+                        <div class="col-md-1 fv-row">
+                            <button type="button" class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1" id="btn_search">Buscar</button>
+                        </div>
                     </div>
                 </div>
             </div>

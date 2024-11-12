@@ -301,7 +301,10 @@ var KTempaqueesList = (function () {
                 btn_add.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
                     form.reset()
-                    $("#pais_id").val(null).trigger("change.select2")
+                    $("#municipio_id").val(null).trigger("change.select2")
+                    $("#municipio_id2").val(null).trigger("change.select2")
+                    $("#localidad_id").val(null).trigger("change.select2")
+                    $("#localidad_doc_id").val(null).trigger("change.select2")
                     modal.show()
                 })
                 // CLOSE MODAL

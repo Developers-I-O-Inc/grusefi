@@ -11,6 +11,7 @@ use App\Models\Catalogs\Empaques;
 use App\Models\Catalogs\Paises;
 use App\Models\Catalogs\Presentaciones;
 use App\Models\Catalogs\TipoCultivos;
+use App\Models\Catalogs\Variedades;
 use App\Models\Operation\EmbarquesMarcas;
 use App\Models\Operation\EmbarquesMaquiladores;
 use App\Models\Operation\Embarques;
@@ -33,7 +34,8 @@ class EmbarquesController extends Controller
         $cultivos = TipoCultivos::where('activo', 1)->get();
         $calibres = Calibres::where('activo', 1)->get();
         $presentaciones = Presentaciones::where('activo', 1)->get();
-        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'cultivos', 'calibres', 'presentaciones'));
+        $variedades = Variedades::where('activo', 1)->get();
+        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'cultivos', 'calibres', 'presentaciones', 'variedades'));
 
     }
     /**
@@ -48,6 +50,7 @@ class EmbarquesController extends Controller
         $data = $request->only([
             'empaque_id',
             'destinatario_id',
+            'variedad_id',
             'pais_id',
             'puerto_id',
             'fecha_embarque',

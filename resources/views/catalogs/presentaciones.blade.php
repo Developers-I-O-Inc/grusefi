@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-presentacion-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar presentacion</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar presentación</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-presentacion-table-toolbar="selected">
@@ -51,6 +51,7 @@
                                 </div>
                             </th>
                             <th class="min-w-125px">id</th>
+                            <th class="min-w-125px">Variedad</th>
                             <th class="min-w-125px">Presentacion</th>
                             <th class="min-w-125px">Peso</th>
                             <th class="min-w-125px">Status</th>
@@ -87,6 +88,15 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_presentacion_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_presentacion_scroll" data-kt-scroll-offset="300px">
+                                <div class="fv-row mb-7">
+                                    <label class="required fs-6 fw-bold mb-2">Variedad</label>
+                                    <select id="variedad_id" name="variedad_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_presentacion" data-placeholder="Selecciona una variedad" data-allow-clear="true">
+                                        <option></option>
+                                        @foreach($variedades as $variedad)
+                                            <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Presentación</label>
                                     <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="presentacion" id="presentacion" />

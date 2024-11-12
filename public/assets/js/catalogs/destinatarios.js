@@ -176,7 +176,7 @@ var KTdestinatarioesList = (function () {
                 btn_add.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
                     form.reset()
-                    $("#pais_id").val(null).trigger("change.select2")
+                    $("#empaque_id").val(null).trigger("change.select2")
                     modal.show()
                 })
                 // CLOSE MODAL
