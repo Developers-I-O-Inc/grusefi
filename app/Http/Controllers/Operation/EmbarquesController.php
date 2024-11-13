@@ -31,11 +31,10 @@ class EmbarquesController extends Controller
         $paises = Paises::where('activo', 1)->get();
         $users = User::role('tefs')->get();
         $categorias = Categorias::where('activo', 1)->get();
-        $cultivos = TipoCultivos::where('activo', 1)->get();
         $calibres = Calibres::where('activo', 1)->get();
         $presentaciones = Presentaciones::where('activo', 1)->get();
         $variedades = Variedades::where('activo', 1)->get();
-        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'cultivos', 'calibres', 'presentaciones', 'variedades'));
+        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'calibres', 'presentaciones', 'variedades'));
 
     }
     /**
@@ -95,15 +94,14 @@ class EmbarquesController extends Controller
                     $insertData[] = [
                         'embarque_id' => $embarque->id,
                         'categoria_id' => $product[8],
-                        'tipo_cultivo_id' => $product[10],
-                        'presentacion_id' => $product[12],
-                        'calibre_id' => $product[14],
+                        'presentacion_id' => $product[10],
+                        'calibre_id' => $product[12],
                         'folio_pallet' => $product[1],
                         'lote' => $product[2],
                         'cajas' => $product[3],
                         'sader' => $product[6],
-                        'tipo_fruta' => $product[15],
-                        'n_registros' => $product[16],
+                        'tipo_fruta' => $product[13],
+                        'n_registros' => $product[14],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
@@ -174,10 +172,8 @@ class EmbarquesController extends Controller
 
         }
         $categorias = Categorias::where('activo', 1)->get();
-        $cultivos = TipoCultivos::where('activo', 1)->get();
         $calibres = Calibres::where('activo', 1)->get();
-        $presentaciones = Presentaciones::where('activo', 1)->get();
-        return view("operation/embarques_admin", compact('categorias', 'cultivos', 'calibres', 'presentaciones'));
+        return view("operation/embarques_admin", compact('categorias', 'calibres'));
     }
 
     public function get_embarque_edit($embarque_id)
@@ -205,7 +201,6 @@ class EmbarquesController extends Controller
         $producto = new EmbarquesProductos();
         $producto->embarque_id = $request->get('embarque_id');
         $producto->categoria_id = $request->get('categoria_id');
-        $producto->tipo_cultivo_id = $request->get('tipo_cultivo_id');
         $producto->calibre_id = $request->get('calibre_id');
         $producto->folio_pallet = $request->get('folio_pallet');
         $producto->lote = $request->get('lote');

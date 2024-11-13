@@ -253,7 +253,6 @@ var KTCreateAccount = (function () {
                         { orderable: !1, targets: 8, visible : 0 },
                         { orderable: !1, targets: 10, visible : 0 },
                         { orderable: !1, targets: 12, visible : 0 },
-                        { orderable: !1, targets: 14, visible : 0 },
                     ],
                     language: {
                         zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
@@ -280,6 +279,11 @@ var KTCreateAccount = (function () {
                             pais_id: {
                                 validators: {
                                     notEmpty: { message: "Seleccione un país" },
+                                },
+                            },
+                            variedad_id: {
+                                validators: {
+                                    notEmpty: { message: "Seleccione una variedad" },
                                 },
                             },
                             empaque_id: {
@@ -401,7 +405,7 @@ var KTCreateAccount = (function () {
                 // SELECT VARIEDADES
                 select_variedad.on('change', function() {
                     // const select_estado2 = $('#estado_id').select2()
-                    Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion)
+                    Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion, true)
                 })
                 // CLOSE MODAL
                 btn_modal_c.addEventListener("click", function (t) {

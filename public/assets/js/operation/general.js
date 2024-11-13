@@ -11,7 +11,7 @@ class Operation {
         }
     }
 
-    get_next_selects(catalog, id, select_change){
+    get_next_selects(catalog, id, select_change, peso = null) {
         fetch(`/catalogs/get_${catalog}?id=${id}`, {
             method: "GET",
             headers:{
@@ -25,10 +25,16 @@ class Operation {
             return response.json()
         })
         .then(data => {
+            let option
             const arr_data = data.catalogo
             select_change.empty()
                 arr_data.forEach(item => {
-                    const option = new Option(item.nombre, item.id);
+                    if(peso != null){
+                        option = new Option(item.nombre, `${item.id}|${item.peso}`);
+                    }
+                    else{
+                        option = new Option(item.nombre, item.id);
+                    }
                     select_change.append(option)
                 })
             select_change.val(select_change.attr('data-id')).trigger('change.select2');
@@ -47,7 +53,6 @@ class Operation {
         edit_registros = document.getElementById('n_registros'),
         edit_tipo_fruta = document.getElementById('tipo_fruta'),
         select_categoria = $('#categoria_id').select2(),
-        select_cultivo = $('#tipo_cultivo_id').select2(),
         select_calibre = $('#calibre_id').select2(),
         select_presentacion = $('#presentacion_id').select2(),
         count_products = 0
@@ -183,8 +188,6 @@ class Operation {
                         edit_sader.value,
                         select_categoria.find('option:selected').text(),
                         select_categoria.val(),
-                        select_cultivo.find('option:selected').text(),
-                        select_cultivo.val(),
                         select_presentacion.find('option:selected').text(),
                         select_presentacion.val().split('|')[0],
                         select_calibre.find('option:selected').text(),

@@ -18,6 +18,7 @@ var KTadminlist = (function () {
         end_date,
         modal,
         modal_marcas,
+        select_presentacion,
         table_products,
         table_marcas,
         n,
@@ -72,6 +73,7 @@ var KTadminlist = (function () {
                             }
                         }
                         Operation.get_next_selects("marcas", embarque.empaque_id, select_marca)
+                        Operation.get_next_selects("presentaciones", embarque.variedad_id, select_presentacion, true)
                         document.getElementById('btn_products').setAttribute('data-embarque', embarque.id);
                         document.getElementById('btn_marcas').setAttribute('data-embarque', embarque.id);
                         document.querySelector('#kt_accordion_1_header_2 button').classList.remove('collapsed');
@@ -101,6 +103,7 @@ var KTadminlist = (function () {
                 (modal = new bootstrap.Modal(document.querySelector("#kt_modal_edit_products"))),
                 (modal_marcas = new bootstrap.Modal(document.querySelector("#kt_modal_edit_marcas"))),
                 (span_fecha_embarque = document.querySelector('#fecha_embarque')),
+                (select_presentacion = $('#presentacion_id').select2()),
                 (form_products = document.querySelector("#kt_modal_add_product_form")),
                 (start_date = document.querySelector('#start_date')),
                 (end_date = document.querySelector('#end_date')),
@@ -164,7 +167,6 @@ var KTadminlist = (function () {
                         { orderable: !1, targets: 8, visible : 0 },
                         { orderable: !1, targets: 10, visible : 0 },
                         { orderable: !1, targets: 12, visible : 0 },
-                        { orderable: !1, targets: 14, visible : 0 },
                     ],
                     language: {
                         zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
@@ -223,7 +225,7 @@ var KTadminlist = (function () {
                                     <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
                                     </svg></span>
                                 </button>`, item.folio_pallet, item.lote, item.cajas, item.peso, item.total_kilos, item.sader, item.categoria, item.categoria_id,
-                                item.tipo_cultivo, item.tipo_cultivo_id, item.presentacion, item.presentacion_id,
+                                item.presentacion, item.presentacion_id,
                                 item.calibre, item.calibre_id, item.tipo_fruta, item.n_registros]).draw()
                         });
                         modal.show()
