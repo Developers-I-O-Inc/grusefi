@@ -14,6 +14,7 @@ class Embarques extends Model
 
     protected $fillable = [
         'empaque_id',
+        'variedad_id',
         'destinatario_id',
         'pais_id',
         'puerto_id',
@@ -32,6 +33,7 @@ class Embarques extends Model
         $result = DB::select("SELECT
             op_embarques.id,
             op_embarques.pais_id,
+            op_embarques.variedad_id,
             op_embarques.empaque_id,
             fecha_embarque,
             empaques.nombre_fiscal,

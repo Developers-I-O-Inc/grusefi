@@ -265,8 +265,6 @@
                                                     <th class="">SADER</th>
                                                     <th class="">Categoría</th>
                                                     <th class="">idCategoria</th>
-                                                    <th class="">Tipo de Cultivo</th>
-                                                    <th class="">idCultivo</th>
                                                     <th class="">Presentación</th>
                                                     <th class="">idPresentacion</th>
                                                     <th class="">Calibre</th>
@@ -415,7 +413,7 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_product_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_product_scroll" data-kt-scroll-offset="300px">
-                                <div class="row mb-12">
+                                <div class="row mb-5">
                                     <div class="col-md-3 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Folio Pallet</label>
                                         <input type="text" class="form-control form-control-solid" placeholder="Ingresa el folio del pallet" name="folio_pallet" id="folio_pallet" />
@@ -435,30 +433,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row mb-12">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Tipo de Cultivo</label>
-                                        <select id="tipo_cultivo_id" name="tipo_cultivo_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
-                                            <option></option>
-                                            @foreach($cultivos as $cultivo)
-                                                <option value="{{$cultivo->id}}">{{$cultivo->tipo_cultivo}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">SADER</label>
                                         <input type="text" class="form-control form-control-solid" placeholder="Ingresa el codigo SADER" name="sader" id="sader" />
-                                    </div>
-                                </div>
-                                <div class="row mb-12">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Calibre</label>
-                                        <select id="calibre_id" name="calibre_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
-                                            <option></option>
-                                            @foreach($calibres as $calibre)
-                                                <option value="{{$calibre->id}}">{{$calibre->calibre}}</option>
-                                            @endforeach
-                                        </select>
                                     </div>
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Presentación</label>
@@ -470,21 +448,31 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row mb-12">
-                                    <div class="col-md-4 fv-row">
+                                <div class="row mb-5">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Calibre</label>
+                                        <select id="calibre_id" name="calibre_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
+                                            <option></option>
+                                            @foreach($calibres as $calibre)
+                                                <option value="{{$calibre->id}}">{{$calibre->calibre}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Tipo de Fruta</label>
                                         <input type="text" class="form-control form-control-solid" placeholder="Ingresa el tipo de fruta" name="tipo_fruta" id="tipo_fruta" />
                                     </div>
-                                    <div class="col-md-4 fv-row">
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">N° Cajas</label>
                                         <input type="number" class="form-control form-control-solid" placeholder="Ingresa el n° de cajas" name="cajas" id="cajas" />
                                     </div>
-                                    <div class="col-md-4 fv-row">
+                                    <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">N° Registros</label>
                                         <input type="number" class="form-control form-control-solid" placeholder="Ingresa el n° de registros" name="n_registros" id="n_registros" value="1" min="1" />
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
