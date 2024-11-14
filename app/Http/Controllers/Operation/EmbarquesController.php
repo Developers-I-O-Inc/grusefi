@@ -15,6 +15,7 @@ use App\Models\Catalogs\Variedades;
 use App\Models\Operation\EmbarquesMarcas;
 use App\Models\Operation\EmbarquesMaquiladores;
 use App\Models\Operation\Embarques;
+use App\Models\Operation\EmbarquesRPV;
 use App\Models\Operation\EmbarquesProductos;
 use App\Models\Operation\PlantillaRPV;
 use Illuminate\Support\Facades\DB;
@@ -69,7 +70,34 @@ class EmbarquesController extends Controller
                 ['id' => $request->get('id_embarque')],
                 $data
             );
+            $embarque_new = $embarque->id;
+            // add embarque_rpv
+            $plantilla = PlantillaRPV::where('pais_id', $embarque->pais_id)
+            ->where('variedad_id', $embarque->variedad_id)
+            ->first();
 
+                if ($plantilla) {
+                    $embarqueRPVData = $plantilla->toArray();
+
+                    // Eliminamos los campos que no necesitamos
+                    unset(
+                        $embarqueRPVData['id'],
+                        $embarqueRPVData['pais_id'],
+                        $embarqueRPVData['variedad_id'],
+                        $embarqueRPVData['created_at'],
+                        $embarqueRPVData['updated_at'],
+                        $embarqueRPVData['deleted_at']
+                    );
+
+                    // Agregamos el nuevo campo 'embarque_id'
+                    $embarqueRPVData['embarque_id'] = $embarque_new;
+                    $embarqueRPVData['created_at'] = now();
+                    $embarqueRPVData['updated_at'] = now();
+
+                    // Insertamos los datos en la tabla 'embarques_rpv'
+                    EmbarquesRPV::insert($embarqueRPVData);
+                }
+            //--------------------------------
             if (!empty($marcas)) {
                 foreach ($marcas as $marca_arr) {
                     $marca = new EmbarquesMarcas();
@@ -179,7 +207,7 @@ class EmbarquesController extends Controller
     public function get_embarque_edit($embarque_id)
     {
         $embarque = Embarques::get_embarque($embarque_id);
-        $plantilla = PlantillaRPV::where('pais_id', $embarque->pais_id)->first();
+        $plantilla = EmbarquesRPV::where('embarque_id', $embarque_id)->first();
         $embarques_marcas = EmbarquesMarcas::get_marcas_embarque($embarque_id);
         return response()->json(["plantilla" =>$plantilla, "embarque"=>$embarque, "embarques_marcas"=>$embarques_marcas]);
     }
