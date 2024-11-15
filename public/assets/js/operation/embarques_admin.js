@@ -2,16 +2,21 @@
 import Operation from "./general.js"
 
 var KTadminlist = (function () {
+    const token = $('meta[name="csrf-token"]').attr('content')
     let blockUI, target
     let embarque_id = 0
     var table_items,
+        edit_folio,
         btn_search,
         btn_products,
         btn_marcas,
         btn_add_product,
         btn_add_marca,
         btn_save_marcas,
+        btn_save,
+        btn_finish,
         form_products,
+        form_rpv,
         span_fecha_embarque,
         select_marca,
         start_date,
@@ -22,6 +27,68 @@ var KTadminlist = (function () {
         table_products,
         table_marcas,
         n,
+        save_embarque = (formulario, embarque_id) => {
+            const clase = "p_input"
+            const inputs = formulario.querySelectorAll(`input.${clase}`)
+            let datosFormulario = {}
+            datosFormulario = {
+                embarque_id: embarque_id,
+                folio_embarque: edit_folio.value
+            }
+            Array.from(inputs).forEach(input => {
+                switch(input.type) {
+                    case 'checkbox':
+                        datosFormulario[input.id] = input.checked
+                        break
+                    case 'radio':
+                        if(input.checked) {
+                            datosFormulario[input.name] = input.value
+                        }
+                        break
+                    case 'select-multiple':
+                        datosFormulario[input.id] = Array.from(input.selectedOptions).map(option => option.value)
+                        break
+                    default:
+                        datosFormulario[input.id] = input.value
+                }
+            })
+            fetch(`save_embarque_rpv`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                },
+                body: JSON.stringify(datosFormulario)
+            })
+            .then(
+                async response => {
+                    return response.json();
+                }
+            )
+            .then(data => {
+                Swal.fire({
+                    text: "Datos guardados exitosamente!",
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Entendido!",
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                    },
+                }).then(({ isConfirmed }) => {
+                    if (isConfirmed) {
+                        location.reload()
+                    }
+                })
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+            })
+            Swal.fire({
+                title: "<strong>Cargando</strong>",
+                html: `<div class="progress container-fluid"></div>`,
+                showConfirmButton: false,
+            })
+        },
         edit = () => {
             n.querySelectorAll(
                 '[data-kt-admin-table-filter="edit"]'
@@ -41,13 +108,15 @@ var KTadminlist = (function () {
                         return response.json()
                     })
                     .then(data => {
-
+                        console.log(data)
                         const {plantilla, embarque } = data
                         delete plantilla.id
                         delete plantilla.created_at
                         delete plantilla.deleted_at
                         delete plantilla.updated_at
                         span_fecha_embarque.innerText  = embarque.fecha_embarque
+                        edit_folio.value  = embarque.folio_embarque
+                        edit_folio.disabled = false
                         for (const [key, value] of Object.entries(plantilla)) {
                             const elementos = document.getElementsByName(key);
                             if (elementos.length > 0) {
@@ -84,6 +153,8 @@ var KTadminlist = (function () {
                             }
                         });
                         embarque_id = embarque.id
+                        btn_save.classList.remove("d-none")
+                        btn_finish.classList.remove("d-none")
                         blockUI.release()
                     })
                     .catch(error => {
@@ -105,14 +176,18 @@ var KTadminlist = (function () {
                 (span_fecha_embarque = document.querySelector('#fecha_embarque')),
                 (select_presentacion = $('#presentacion_id').select2()),
                 (form_products = document.querySelector("#kt_modal_add_product_form")),
+                (form_rpv = document.querySelector("#form_rpv")),
                 (start_date = document.querySelector('#start_date')),
                 (end_date = document.querySelector('#end_date')),
+                (edit_folio = document.querySelector('#FolioRPV')),
                 (btn_search = document.querySelector('#btn_search')),
                 (btn_products = document.getElementById('btn_products')),
                 (btn_marcas = document.getElementById('btn_marcas')),
                 (btn_add_product = document.querySelector("#btn_add_product")),
                 (btn_add_marca = document.querySelector("#btn_add_marca")),
                 (btn_save_marcas = document.querySelector("#btn_save_marcas")),
+                (btn_save = document.querySelector("#btn_save")),
+                (btn_finish = document.querySelector("#btn_finish")),
                 (select_marca = $('#select_marca').select2()),
                 (n = document.querySelector("#kt_admin_table")) &&
                 (n.querySelectorAll("tbody tr").forEach((t) => {
@@ -137,7 +212,7 @@ var KTadminlist = (function () {
                         ],
                         columns: [
 
-                            { data: "empaque_id", name: "empaque_id" },
+                            { data: "id", name: "id" },
                             { data: "nombre_fiscal", name: "nombre_fiscal" },
                             { data: "nombre", name: "nombre" },
                             { data: "puerto", name: "puerto" },
@@ -264,6 +339,11 @@ var KTadminlist = (function () {
                     .catch(error => {
                         console.error(error)
                     })
+                })
+                // SAVE EMBARQUE RPV
+                btn_save.addEventListener("click", function (t) {
+                    t.preventDefault()
+                    save_embarque(form_rpv, embarque_id)
                 })
                 // ADD Product
                 btn_add_product.addEventListener("click", function (t) {

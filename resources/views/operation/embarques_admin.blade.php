@@ -43,13 +43,11 @@
                     <div class="d-flex justify-content-end" data-kt-admin-table-toolbar="base">
                         <button type="button" class="btn btn-primary" id="btn_search">Buscar</button>
                     </div>
-                    <div class="d-flex justify-content-end align-items-center d-none"
-                        data-kt-admin-table-toolbar="selected">
-                        <div class="fw-bolder me-5">
-                            <span class="me-2" data-kt-admin-table-select="selected_count"></span>Seleccionados
-                        </div>
-                        <button type="button" class="btn btn-danger"
-                            data-kt-admin-table-select="delete_selected">Borrar Seleccionados</button>
+                    <div class="d-flex justify-content-end px-1" data-kt-admin-table-toolbar="base">
+                        <button type="button" class="btn btn-primary d-none" id="btn_save">Guardar</button>
+                    </div>
+                    <div class="d-flex justify-content-end px-1" data-kt-admin-table-toolbar="base">
+                        <button type="button" class="btn btn-primary d-none" id="btn_finish">Terminar DV</button>
                     </div>
                 </div>
             </div>
@@ -90,7 +88,9 @@
                         </h2>
                         <div id="kt_accordion_1_body_2" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
                             <div class="accordion-body">
-                                <x-table-rpv :embarque="true" />
+                                <form id="form_rpv">
+                                    <x-table-rpv :embarque="true" />
+                                </form>
                             </div>
                         </div>
                     </div>

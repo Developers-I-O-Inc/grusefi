@@ -258,5 +258,24 @@ class EmbarquesController extends Controller
         }
 
         return response()->json(['success' => 'Marcas guardadas exitosamente!']);
+
+
+    }
+
+    public function save_embarque_rpv(Request $request)
+    {
+        $datos = $request->json()->all();
+        $embarque = Embarques::find($request->embarque_id);
+        $embarque->folio_embarque = $request->folio_embarque;
+        $embarque->save();
+        $registro = EmbarquesRPV::where('embarque_id', $request->embarque_id)->first();
+        unset($datos['folio_embarque']);
+        foreach ($datos as $campo => $valor) {
+            $registro->$campo = $valor;
+        }
+
+        $registro->save();
+
+        return response()->json(['mensaje' => 'Datos guardados con éxito'], 200);
     }
 }
