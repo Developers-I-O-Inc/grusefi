@@ -20,3 +20,5 @@ Route::get('get_products_embarque/{embarque_id}', 'EmbarquesController@get_produ
 Route::get('get_marcas_embarque/{embarque_id}', 'EmbarquesController@get_marcas_embarque');
 Route::post('save_products_embarque', 'EmbarquesController@save_products_embarque');
 Route::post('save_marcas_embarques', 'EmbarquesController@save_marcas_embarques');
+Route::post('save_embarque_rpv', 'EmbarquesController@save_embarque_rpv');
+Route::post('finish_embarque', 'EmbarquesController@finish_embarque');
