@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('tefs_id')->unsigned()->index();
             $table->bigInteger('variedad_id')->unsigned()->index();
             $table->bigInteger('consolidado_id');
+            $table->string('folio_embarque')->default('EMB-');
             $table->date('fecha_embarque');
             $table->string('numero_economico')->nullable();
             $table->string('placas_trasporte')->nullable();
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->boolean('consolidado')->default(0);
             $table->string('empresa_transporte')->nullable();
             $table->string('chofer')->nullable();
+            $table->enum('status', ['Pendiente', 'Modificado', 'Finalizado'])->default('Pendiente');
             $table->foreign('empaque_id')->references('id')->on('cat_empaques');
             $table->foreign('destinatario_id')->references('id')->on('cat_destinatarios');
             $table->foreign('tefs_id')->references('id')->on('users');
