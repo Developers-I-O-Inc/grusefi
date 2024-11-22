@@ -24,6 +24,7 @@ var KTmunicipioesList = (function () {
         check_active,
         edit_active,
         select_estado,
+        select_estado2,
         select_pais,
         n,
         edit = () => {
@@ -62,6 +63,7 @@ var KTmunicipioesList = (function () {
                 // inicialize elements html
                 (btn_add = document.querySelector("#btn_add")),
                 (select_estado = document.querySelector("#estado_id")),
+                (select_estado2 = $('#estado_id').select2()),
                 (select_pais = $('#pais_id').select2()),
                 (form = document.querySelector("#kt_modal_add_municipio_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_municipio_close")),
@@ -80,6 +82,10 @@ var KTmunicipioesList = (function () {
                                 notEmpty: {
                                     message: "Nombre requerido",
                                 },
+                                stringLength: {
+                                    max: 100,
+                                    message: "El nombre no puede tener más de 100 caracteres",
+                                }
                             },
                         },
                         nombre_corto: {
@@ -87,6 +93,10 @@ var KTmunicipioesList = (function () {
                                 notEmpty: {
                                     message: "Nombre corto requerido",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El nombre corto no puede tener más de 10 caracteres",
+                                }
                             },
                         },
                         codigo: {
@@ -94,6 +104,10 @@ var KTmunicipioesList = (function () {
                                 notEmpty: {
                                     message: "Código",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El código no puede tener más de 10 caracteres",
+                                }
                             },
                         },
                         pais_id: {
@@ -115,8 +129,11 @@ var KTmunicipioesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -188,8 +205,11 @@ var KTmunicipioesList = (function () {
                 })
                 // CHANGE PAIS
                 select_pais.on('change', function() {
-                    const select_estado2 = $('#estado_id').select2()
+                    validations.revalidateField('pais_id')
                     Catalogs.get_next_selects(catalog_fat, select_pais.val(), catalog_item, select_estado2)
+                })
+                select_estado2.on('change', function() {
+                    validations.revalidateField('estado_id')
                 })
                 // SUBMIT
                 btn_submit.addEventListener("click", function (e) {
@@ -208,6 +228,7 @@ var KTmunicipioesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
+                                    validations.resetForm(true);
                                 }, 1000))
                             : Swal.fire({
                                     text: "Error, faltan algunos datos, intente de nuevo por favor.",

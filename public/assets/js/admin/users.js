@@ -1,4 +1,4 @@
-"use strict";
+"use strict"
 var KTUsersList = (function () {
     /*Variables*/
     var table_items,
@@ -24,9 +24,9 @@ var KTUsersList = (function () {
         delete_permission = () => {
             document.querySelectorAll('[data-kt-customer-table-filter="delete_row"]').forEach((e) => {
                 e.addEventListener("click", function (e) {
-                e.preventDefault();
+                e.preventDefault()
                 const o = e.target.closest("tr"),
-                    n = o.querySelectorAll("td")[0].innerText;
+                    n = o.querySelectorAll("td")[0].innerText
                 Swal.fire({
                     text: "Seguro que deseas eliminar el permiso " + n + "?",
                     icon: "warning",
@@ -47,7 +47,7 @@ var KTUsersList = (function () {
                         confirmButtonText: "Entendido",
                         customClass: { confirmButton: "btn fw-bold btn-primary" },
                         }).then(function () {
-                        table_permissions.row($(o)).remove().draw();
+                        table_permissions.row($(o)).remove().draw()
                         })
                     : "cancel" === e.dismiss &&
                         Swal.fire({
@@ -56,27 +56,27 @@ var KTUsersList = (function () {
                         buttonsStyling: !1,
                         confirmButtonText: "Entendido",
                         customClass: { confirmButton: "btn fw-bold btn-primary" },
-                        });
-                });
-                });
-            });
+                        })
+                })
+                })
+            })
         },
         edit = () => {
             n.querySelectorAll(
                 '[data-kt-user-table-filter="edit"]'
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
-                    e.preventDefault();
+                    e.preventDefault()
                     $.get("users/"+ $(this).data("id") + "/edit", function(data){
-                        edit_name.value=data.user.name;
-                        edit_id.value=data.user.id;
-                        edit_email.value=data.user.email;
-                        edit_address.value=data.user.address;
-                        edit_phone.value=data.user.phone;
-                        edit_last_name.value=data.user.last_name;
-                        modal.show();
+                        edit_name.value=data.user.name
+                        edit_id.value=data.user.id
+                        edit_email.value=data.user.email
+                        edit_address.value=data.user.address
+                        edit_phone.value=data.user.phone
+                        edit_last_name.value=data.user.last_name
+                        modal.show()
                     })
-                });
+                })
             })
             n.querySelectorAll(
                 '[data-kt-user-table-filter="reset-pass"]'
@@ -95,8 +95,8 @@ var KTUsersList = (function () {
                             icon: "error",
                             title: "Error",
                             text: `Hubo un problema al actualizar la contraseña: ${errorThrown}`,
-                        });
-                    });
+                        })
+                    })
                 })
 
             }),
@@ -104,9 +104,9 @@ var KTUsersList = (function () {
                 '[data-kt-user-table-filter="permissions"]'
             ).forEach((e) => {
                 e.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    table_permissions.clear().draw();
-                    edit_id_permission.value=$(this).data("id");
+                    e.preventDefault()
+                    table_permissions.clear().draw()
+                    edit_id_permission.value=$(this).data("id")
                     // GET USER PERMISSION
                     $.ajax({
                         url: "get_user_permission",
@@ -125,50 +125,50 @@ var KTUsersList = (function () {
                                 <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
                                 <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
                                 </svg></span>
-                            </button>`]).draw();
-                            });
-                            delete_permission();
-                            Swal.close();
-                            modal_permission.show();
+                            </button>`]).draw()
+                            })
+                            delete_permission()
+                            Swal.close()
+                            modal_permission.show()
                         },
                         beforeSend(){
                             Swal.fire({
                                 title: "<strong>Cargando</strong>",
                                 html: `<div class="progress container-fluid"></div>`,
                                 showConfirmButton: false,
-                                });
+                                })
                         },
                         error(data){
                             Swal.fire({
                                 icon: "error",
                                 title: "Error",
                                 text: "Ocurrio un error en la base de datos!",
-                            });
-                                console.log(data);
+                            })
+                                console.log(data)
                         }
-                    });
+                    })
 
-                });
-            });
+                })
+            })
         },
         delete_items = () => {
             const e = n.querySelectorAll('[type="checkbox"]'),
                 o = document.querySelector(
                     '[data-kt-user-table-select="delete_selected"]'
-                );
+                )
             e.forEach((t) => {
                 t.addEventListener("click", function () {
                     setTimeout(function () {
-                        uncheck();
-                    }, 50);
-                });
+                        uncheck()
+                    }, 50)
+                })
             }),
             o.addEventListener("click", function () {
-                let arr_items_deleted=[];
+                let arr_items_deleted=[]
                 e.forEach((e) => {
-                    e.checked && arr_items_deleted.push($(e).data("id"));
-                });
-                console.log(arr_items_deleted);
+                    e.checked && arr_items_deleted.push($(e).data("id"))
+                })
+                console.log(arr_items_deleted)
                 Swal.fire({
                     text: "Estas seguro de eliminar los registros seleccionados?",
                     icon: "warning",
@@ -203,23 +203,23 @@ var KTUsersList = (function () {
                                     confirmButton:"btn btn-primary",
                                 },
                             }).then(function (e) {
-                                e.isConfirmed && table_items.ajax.reload();
-                            });
+                                e.isConfirmed && table_items.ajax.reload()
+                            })
                         },
                         beforeSend(){
                             Swal.fire({
                                 title: "<strong>Cargando</strong>",
                                 html: `<div class="progress container-fluid"></div>`,
                                 showConfirmButton: false,
-                            });
+                            })
                         },
                         error(data){
                             Swal.fire({
                                 icon: "error",
                                 title: "Error",
                                 text: "Ocurrio un error en la base de datos!",
-                            });
-                                console.log(data);
+                            })
+                                console.log(data)
                         }
                     })
 
@@ -232,10 +232,10 @@ var KTUsersList = (function () {
                             customClass: {
                                 confirmButton: "btn fw-bold btn-primary",
                             },
-                        });
-                });
-            });
-        };
+                        })
+                })
+            })
+        }
         const uncheck = () => {
             const t = document.querySelector(
                     '[data-kt-user-table-toolbar="base"]'
@@ -246,17 +246,17 @@ var KTUsersList = (function () {
                 o = document.querySelector(
                     '[data-kt-user-table-select="selected_count"]'
                 ),
-                c = n.querySelectorAll('tbody [type="checkbox"]');
+                c = n.querySelectorAll('tbody [type="checkbox"]')
             let r = !1,
-                l = 0;
+                l = 0
             c.forEach((t) => {
-                t.checked && ((r = !0), l++);
+                t.checked && ((r = !0), l++)
             }),
                 r ? ((o.innerHTML = l),
                     t.classList.add("d-none"),
                     e.classList.remove("d-none"))
-                    : (t.classList.remove("d-none"), e.classList.add("d-none"));
-        };
+                    : (t.classList.remove("d-none"), e.classList.add("d-none"))
+        }
         return {
             init: function () {
                 // Modals
@@ -284,6 +284,10 @@ var KTUsersList = (function () {
                                 notEmpty: {
                                     message: "Nombre requerido",
                                 },
+                                stringLenght: {
+                                    max: 50,
+                                    message: "El nombre debe tener menos de 50 caracteres",
+                                }
                             },
                         },
                         last_name: {
@@ -291,6 +295,10 @@ var KTUsersList = (function () {
                                 notEmpty: {
                                     message: "Apellido requerido",
                                 },
+                                stringLenght: {
+                                    max: 50,
+                                    message: "El apellido debe tener menos de 50 caracteres",
+                                }
                             },
                         },
                         email: {
@@ -305,8 +313,11 @@ var KTUsersList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -345,18 +356,18 @@ var KTUsersList = (function () {
                             processing:
                                 "<span class='fa-stack fa-lg'>\n\
                                 <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
-                            </span>&emsp;Processing Message here...",
+                            </span>&emspProcessing Message here...",
                         },
                     })).on("draw", function () {
-                        delete_items(), edit(), uncheck();
+                        delete_items(), edit(), uncheck()
                     }),
                     delete_items(),
                     edit(),
                     // permissions(),
                     document.querySelector('[data-kt-user-table-filter="search"]').addEventListener("keyup", function (e) {
-                        table_items.search(e.target.value).draw();
+                        table_items.search(e.target.value).draw()
                     })
-                );
+                ),
                 // TABLE PERMISSIONS
                 (table_permissions = $("#kt_users_permissions_table").DataTable({
                     order: [[1, "asc"]],
@@ -375,25 +386,25 @@ var KTUsersList = (function () {
                         </span>&emsp;Processing Message here...",
                     },
                 }).on("draw", function(){
-                    delete_permission();
-                }));
+                    delete_permission()
+                }))
                 // CLOSE MODAL
                 btn_modal.addEventListener("click", function (t) {
-                    t.preventDefault(), modal.hide();
-                });
+                    t.preventDefault(), modal.hide()
+                })
                 // CLOSE MODAL
                 btn_cancel.addEventListener("click", function (t) {
-                    t.preventDefault(), modal.hide();
-                });
+                    t.preventDefault(), modal.hide()
+                })
                 // ADD PERMISSION TO DATATABLE
                 btn_add_permission.addEventListener("click", function (t) {
-                    t.preventDefault();
+                    t.preventDefault()
                     if(select_permission.value != ""){
-                        var data = table_permissions.rows().data(); // All data datatable permissions
-                        let repeat=false;
+                        var data = table_permissions.rows().data() // All data datatable permissions
+                        let repeat=false
                         for (var i = 0; i < data.length; i++) {
                             if (data[i][0] === select_permission.value) {
-                                repeat=true;
+                                repeat=true
                             }
                         }
                         if(repeat){
@@ -401,7 +412,7 @@ var KTUsersList = (function () {
                                 title: "Advertencia!",
                                 text: "El permiso " + select_permission.value +" ya esta asignado al usuario!",
                                 icon: "warning"
-                              });
+                              })
                         }else{
                             table_permissions.row.add([select_permission.value, `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" data-kt-customer-table-filter="delete_row">
                                 <span class="svg-icon svg-icon-muted svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -409,7 +420,7 @@ var KTUsersList = (function () {
                                     <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
                                     <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
                                     </svg></span>
-                                </button>`]).draw();
+                                </button>`]).draw()
                         }
                     }
                     else{
@@ -417,14 +428,14 @@ var KTUsersList = (function () {
                             title: "Advertencia!",
                             text: "Seleccione un permiso!",
                             icon: "warning"
-                          });
+                          })
                     }
 
-                });
+                })
                 // SAVE PERMISSIONS TO USER
                 btn_save_permissions.addEventListener("click", function (t) {
-                    t.preventDefault();
-                    var data = table_permissions.column(0).data().toArray();
+                    t.preventDefault()
+                    var data = table_permissions.column(0).data().toArray()
                     // Realizar la petición AJAX
                     $.ajax({
                         url: 'save_user_permissions',
@@ -450,13 +461,13 @@ var KTUsersList = (function () {
                             }).then(function (e) {
                                 e.isConfirmed &&
                                     (modal_permission.hide())
-                            });
+                            })
                         },
                         error: function(error) {
-                            console.error('Error al guardar datos:', error);
+                            console.error('Error al guardar datos:', error)
                         }
-                    });
-                });
+                    })
+                })
                 // SUBMIT
                 btn_submit.addEventListener("click", function (e) {
                     e.preventDefault(),
@@ -497,25 +508,25 @@ var KTUsersList = (function () {
                                                 e.isConfirmed &&
                                                     (modal.hide(),
                                                     (btn_submit.disabled =
-                                                        !1), table_items.ajax.reload(), form.reset());
-                                            });
+                                                        !1), table_items.ajax.reload(), form.reset(), validations.resetForm(true))
+                                            })
                                         },
                                         beforeSend(){
                                             Swal.fire({
                                                 title: "<strong>Cargando</strong>",
                                                 html: `<div class="progress container-fluid"></div>`,
                                                 showConfirmButton: false,
-                                                });
+                                                })
                                         },
                                         error(data){
                                             Swal.fire({
                                                 icon: "error",
                                                 title: "Error",
                                                 text: "Ocurrio un error en la base de datos!",
-                                            });
-                                                console.log(data);
+                                            })
+                                                console.log(data)
                                         }
-                                    });
+                                    })
 
                                 }, 1000))
                             : Swal.fire({
@@ -526,12 +537,12 @@ var KTUsersList = (function () {
                                     customClass: {
                                         confirmButton: "btn btn-primary",
                                     },
-                                });
-                    });
-                });
+                                })
+                    })
+                })
             },
-        };
-})();
+        }
+})()
 KTUtil.onDOMContentLoaded(function () {
-    KTUsersList.init();
-});
+    KTUsersList.init()
+})

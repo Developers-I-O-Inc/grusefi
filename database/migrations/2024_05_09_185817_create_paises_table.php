@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('cat_paises', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('nombre_corto');
-            $table->string('codigo');
+            $table->string('nombre', 50);
+            $table->string('nombre_corto', 10);
+            $table->string('codigo', 10);
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
             $table->softdeletes();

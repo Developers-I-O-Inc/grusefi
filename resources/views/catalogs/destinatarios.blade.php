@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-destinatario-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar destinatario</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Destinatario</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-destinatario-table-toolbar="selected">
@@ -73,7 +73,7 @@
                     <form class="form" action="#" id="kt_modal_add_destinatario_form"
                         data-kt-redirect="../../demo6/dist/apps/destinatarios/list.html">
                         <div class="modal-header" id="kt_modal_add_destinatario_header">
-                            <h2 class="fw-bolder">Agregar destinatario</h2>
+                            <h2 class="fw-bolder">Agregar Destinatario</h2>
                             <div id="kt_modal_add_destinatario_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -91,43 +91,43 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_destinatario_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_destinatario_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Empaque</label>
-                                    <select id="empaque_id" name="empaque_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_destinatario" data-placeholder="Selecciona un empaque" data-allow-clear="true">
+                                    <select id="empaque_id" name="empaque_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_destinatario" data-placeholder="Selecciona un empaque" data-allow-clear="true">
                                         <option value=""></option>
                                          @foreach($empaques as $empaque)
                                             <option value="{{$empaque->id}}">{{$empaque->nombre_fiscal}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre del destinatario</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre" id="nombre" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_destinatario" id="id_destinatario" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el nombre del destinatario" name="nombre" id="nombre" autocomplete="off" />
+                                    <input type="text" class="form-control d-none" name="id_destinatario" id="id_destinatario" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre corto</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" autocomplete="off"/>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Domicilio</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="domicilio" id="domicilio" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el domicilio del destinatario" name="domicilio" id="domicilio" autocomplete="off" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Teléfono(s)</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="telefonos" id="telefonos" />
+                                    <input type="text" class="form-control" placeholder="Ingrese teléfonos" name="telefonos" id="telefonos" autocomplete="off"/>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Correos</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="correos" id="correos" />
+                                    <input type="text" class="form-control" placeholder="Ingrese correos" name="correos" id="correos" autocomplete="off"/>
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
                                     <label class="form-check-label" for="activo">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
+                                <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

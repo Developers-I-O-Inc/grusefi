@@ -19,11 +19,11 @@ return new class extends Migration
             $table->bigInteger('puerto_id')->unsigned()->index();
             $table->bigInteger('tefs_id')->unsigned()->index();
             $table->bigInteger('variedad_id')->unsigned()->index();
-            $table->bigInteger('consolidado_id');
+            $table->bigInteger('consolidado_id')->nullable();
             $table->string('folio_embarque')->default('EMB-');
             $table->date('fecha_embarque');
-            $table->string('numero_economico')->nullable();
-            $table->string('placas_trasporte')->nullable();
+            $table->string('numero_economico', 50)->nullable();
+            $table->string('placas_trasporte', 30)->nullable();
             $table->string('inspector')->nullable();
             $table->boolean('consolidado')->default(0);
             $table->string('empresa_transporte')->nullable();

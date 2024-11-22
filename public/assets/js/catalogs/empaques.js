@@ -121,6 +121,10 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el nombre corto",
                                 },
+                                stringLength: {
+                                    max: 50,
+                                    message: "El nombre corto debe tener menos de 50 caracteres",
+                                }
                             },
                         },
                         nombre_fiscal: {
@@ -128,6 +132,10 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el nombre fiscal",
                                 },
+                                stringLength: {
+                                    max: 200,
+                                    message: "El nombre fiscal debe tener menos de 100 caracteres",
+                                }
                             },
                         },
                         domicilio_fiscal:{
@@ -135,6 +143,10 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el domicilio fiscal",
                                 },
+                                stringLength: {
+                                    max: 1000,
+                                    message: "El domicilio fiscal debe tener menos de 1000 caracteres",
+                                }
                             },
                         },
                         rfc:{
@@ -142,6 +154,10 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el RFC",
                                 },
+                                stringLength: {
+                                    max: 13,
+                                    message: "El RFC debe tener 13 caracteres",
+                                }
                             },
                         },
                         telefonos:{
@@ -149,6 +165,10 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el telefono",
                                 },
+                                stringLength: {
+                                    max: 100,
+                                    message: "El telefono debe tener menos de 100 caracteres",
+                                }
                             },
                         },
                         num_ext:{
@@ -156,6 +176,10 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el numero exterior",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El numero exterior debe tener menos de 10 caracteres",
+                                }
                             },
                         },
                         cp:{
@@ -163,6 +187,11 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el código postal",
                                 },
+                                stringLength: {
+                                    min: 5,
+                                    max: 5,
+                                    message: "El código postal debe tener 5 caracteres",
+                                }
                             }
                         },
                         municipio_id:{
@@ -184,6 +213,10 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el nombre del embarque",
                                 },
+                                stringLength: {
+                                    max: 200,
+                                    message: "El nombre del embarque debe tener menos de 200 caracteres",
+                                }
                             }
                         },
                         domicilio_documentacion:{
@@ -191,6 +224,10 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el domicilio de documentación",
                                 },
+                                stringLength: {
+                                    max: 1000,
+                                    message: "El domicilio de documentación debe tener menos de 1000 caracteres",
+                                }
                             }
                         },
                         sader:{
@@ -198,6 +235,10 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el sader",
                                 },
+                                stringLength: {
+                                    max: 50,
+                                    message: "El sader debe tener menos de 50 caracteres",
+                                }
                             }
                         },
                         codigo:{
@@ -205,6 +246,10 @@ var KTempaqueesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el código",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El código debe tener menos de 10 caracteres",
+                                }
                             }
                         },
                         municipio_id2:{
@@ -226,8 +271,11 @@ var KTempaqueesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -343,7 +391,7 @@ var KTempaqueesList = (function () {
                                     // const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     const formData = new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
 
                                 }, 1000))
                             : Swal.fire({

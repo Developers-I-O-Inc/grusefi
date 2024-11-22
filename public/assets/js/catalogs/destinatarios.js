@@ -75,6 +75,11 @@ var KTdestinatarioesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el nombre del destinatario",
                                 },
+                                stringLength: {
+                                    max: 500,
+                                    message:
+                                        "El nombre del destinatario debe tener menos de 500 caracteres",
+                                }
                             },
                         },
                         nombre_corto: {
@@ -82,6 +87,11 @@ var KTdestinatarioesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el nombre corto del destinatario",
                                 },
+                                stringLength: {
+                                    max: 50,
+                                    message:
+                                        "El nombre corto del destinatario debe tener menos de 50 caracteres",
+                                }
                             },
                         },
                         domicilio: {
@@ -117,8 +127,11 @@ var KTdestinatarioesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -168,6 +181,9 @@ var KTdestinatarioesList = (function () {
                             table_items.search(e.target.value).draw()
                         })
                     )
+                select_empaque.on('change', function (e) {
+                    validations.revalidateField('empaque_id')
+                })
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
@@ -204,7 +220,7 @@ var KTdestinatarioesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
 
                                 }, 1000))
                             : Swal.fire({

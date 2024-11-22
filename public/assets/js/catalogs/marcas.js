@@ -63,6 +63,10 @@ var KTmarcaesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el nombre de la marca",
                                 },
+                                stringLength: {
+                                    max:50,
+                                    message: "El nombre de la marca debe tener menos de 50 caracteres"
+                                }
                             },
                         },
                         empaque_id: {
@@ -78,8 +82,11 @@ var KTmarcaesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -125,6 +132,9 @@ var KTmarcaesList = (function () {
                             table_items.search(e.target.value).draw()
                         })
                     )
+                select_empaque.on('change', function (e) {
+                    validations.revalidateField('empaque_id')
+                })
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
@@ -161,7 +171,7 @@ var KTmarcaesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
 
                                 }, 1000))
                             : Swal.fire({

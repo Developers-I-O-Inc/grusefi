@@ -59,6 +59,11 @@ var KTusoesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el uso",
                                 },
+                                stringLength: {
+                                    max: 30,
+                                    message:
+                                        "El uso debe contener menos de 30 caracteres",
+                                }
                             },
                         },
                     },
@@ -66,8 +71,11 @@ var KTusoesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -148,7 +156,7 @@ var KTusoesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
 
                                 }, 1000))
                             : Swal.fire({

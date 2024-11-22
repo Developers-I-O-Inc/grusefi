@@ -59,6 +59,10 @@ var KTcalibreesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el calibre",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El calibre debe tener menos de 50 caracteres",
+                                }
                             },
                         },
                     },
@@ -66,8 +70,11 @@ var KTcalibreesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -148,7 +155,7 @@ var KTcalibreesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
 
                                 }, 1000))
                             : Swal.fire({

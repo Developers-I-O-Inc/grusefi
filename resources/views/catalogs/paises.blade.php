@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-pais-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Países</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar País</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-pais-table-toolbar="selected">
@@ -67,8 +67,7 @@
         <div class="modal fade" id="kt_modal_add_pais" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_pais_form"
-                        data-kt-redirect="../../demo6/dist/apps/paiss/list.html">
+                    <form class="form" action="#" id="kt_modal_add_pais_form">
                         <div class="modal-header" id="kt_modal_add_pais_header">
                             <h2 class="fw-bolder">Agregar País</h2>
                             <div id="kt_modal_add_pais_close" class="btn btn-icon btn-sm btn-active-icon-primary">
@@ -88,26 +87,26 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_pais_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_pais_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre" id="nombre" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_pais" id="id_pais" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="nombre" id="nombre" autocomplete="off"/>
+                                    <input type="text" class="form-control d-none" name="id_pais" id="id_pais" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa nombre corto" name="nombre_corto" id="nombre_corto" />
+                                    <input type="text" class="form-control" placeholder="Ingresa nombre corto" name="nombre_corto" id="nombre_corto" autocomplete="off" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Código</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un código" name="codigo" id="codigo" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un código" name="codigo" id="codigo" autocomplete="off"/>
                                 </div>
-                                <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" id="check_activo" name="check_activo"/>
+                                <div class="fv-row mb-4">
+                                    <input class="form-check-input" type="checkbox" id="check_activo" name="check_activo" checked/>
                                     <label class="form-check-label" for="active">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" value="0" name="activo" id="activo"/>
+                                <input type="text" class="form-control form-control-solid d-none" value="1" name="activo" id="activo"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

@@ -54,7 +54,7 @@ class EstadosController extends Controller
                     ->make(true);
         }
 
-        $paises = Paises::all();
+        $paises = Paises::where('activo', '=', 1)->get();
 
         return view('catalogs/estados', array("paises" => $paises));
     }
@@ -94,7 +94,8 @@ class EstadosController extends Controller
     }
 
     public function get_estados(Request $request){
-        $estados = Estados::where('pais_id', '=', $request->query('id'))->get();
+        $estados = Estados::where('pais_id', '=', $request->query('id'))
+            ->where('activo', 1)->get();
         return response()->json(["ok" => "OK", "catalogo" => $estados]);
     }
 

@@ -84,26 +84,26 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_user_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="name" id="name" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_user" id="id_user" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="name" id="name" autocomplete="off"/>
+                                    <input type="text" class="form-control d-none" name="id_user" id="id_user" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Apellidos</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa los apellidos" name="last_name" id="last_name" />
+                                    <input type="text" class="form-control" placeholder="Ingresa los apellidos" name="last_name" id="last_name" autocomplete="off"/>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Email</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre con el que iniciará sesión el usuario" name="email" id="email" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el nombre con el que iniciará sesión el usuario" name="email" id="email" autocomplete="off"/>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="fs-6 fw-bold mb-2">Dirección</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa la dirección del usuario" name="address" id="address" />
+                                    <input type="text" class="form-control" placeholder="Ingresa la dirección del usuario" name="address" id="address" autocomplete="off"/>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="fs-6 fw-bold mb-2">Teléfono</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un teléfono" name="phone" id="phone" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un teléfono" name="phone" id="phone" autocomplete="off"/>
                                 </div>
                             </div>
                         </div>

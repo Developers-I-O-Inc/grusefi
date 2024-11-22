@@ -32857,8 +32857,8 @@ a:hover {
 .btn.btn-primary:hover:not(.btn-active),
 .show > .btn.btn-primary {
   color: #fff;
-  border-color: #0095e8;
-  background-color: #0095e8 !important;
+  border-color: #4E8D7C;
+  background-color: #4E8D7C !important;
 }
 .btn-check:active + .btn.btn-primary i,
 .btn-check:checked + .btn.btn-primary i,

@@ -49,7 +49,7 @@ var KTtipo_cultivoesList = (function () {
                 (form = document.querySelector("#kt_modal_add_tipo_cultivo_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_tipo_cultivo_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_tipo_cultivo_submit")),
-                (select_tipo = document.querySelector("#tipo")),
+                (select_tipo = $('#tipo').select2()),
                 (btn_cancel = form.querySelector("#kt_modal_add_tipo_cultivo_cancel")),
                 (edit_id = form.querySelector("#id_tipo_cultivo")),
                 (edit_tipo_cultivo = form.querySelector("#tipo_cultivo")),
@@ -62,15 +62,30 @@ var KTtipo_cultivoesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el tipo de cultivo",
                                 },
+                                stringLength: {
+                                    max: 30,
+                                    message:
+                                        "El tipo de cultivo debe tener menos de 30 caracteres",
+                                }
                             },
                         },
+                        tipo:{
+                            validators: {
+                                notEmpty: {
+                                    message: "Seleccione el tipo de cultivo",
+                                },
+                            },
+                        }
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -116,6 +131,9 @@ var KTtipo_cultivoesList = (function () {
                             table_items.search(e.target.value).draw()
                         })
                     )
+                select_tipo.on('change', function (e) {
+                    validations.revalidateField('tipo')
+                })
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
@@ -152,7 +170,7 @@ var KTtipo_cultivoesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
 
                                 }, 1000))
                             : Swal.fire({

@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-presentacion-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar presentación</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Presentación</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-presentacion-table-toolbar="selected">
@@ -70,7 +70,7 @@
                     <form class="form" action="#" id="kt_modal_add_presentacion_form"
                         data-kt-redirect="../../demo6/dist/apps/presentaciones/list.html">
                         <div class="modal-header" id="kt_modal_add_presentacion_header">
-                            <h2 class="fw-bolder">Agregar presentación</h2>
+                            <h2 class="fw-bolder">Agregar Presentación</h2>
                             <div id="kt_modal_add_presentacion_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -88,31 +88,31 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_presentacion_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_presentacion_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Variedad</label>
-                                    <select id="variedad_id" name="variedad_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_presentacion" data-placeholder="Selecciona una variedad" data-allow-clear="true">
+                                    <select id="variedad_id" name="variedad_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_presentacion" data-placeholder="Selecciona una variedad" data-allow-clear="true">
                                         <option></option>
                                         @foreach($variedades as $variedad)
                                             <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Presentación</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="presentacion" id="presentacion" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_presentacion" id="id_presentacion" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="presentacion" id="presentacion" autocomplete="off"/>
+                                    <input type="text" class="form-control d-none" name="id_presentacion" id="id_presentacion" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Peso</label>
-                                    <input type="number" class="form-control form-control-solid" step="0.001" placeholder="Ingresa el peso de la presentación" name="peso" id="peso" />
+                                    <input type="number" class="form-control" step="0.001" placeholder="Ingresa el peso de la presentación" name="peso" id="peso" />
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
                                     <label class="form-check-label" for="activo">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
+                                <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
