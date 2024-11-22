@@ -429,7 +429,17 @@ var KTCreateAccount = (function () {
                 // SELECT VARIEDADES
                 select_variedad.on('change', function() {
                     arr_validations[0].revalidateField('variedad_id')
-                    Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion, true)
+                    if(select_pais.val() == "" || select_pais.val() == null){
+                        Swal.fire({
+                            title: "Advertencia!",
+                            text: "Seleccione un país!",
+                            icon: "warning"
+                          });
+                    }
+                    else{
+                        Operation.validate_plantilla(`validate_plantilla/${select_pais.val()}/${select_variedad.val()}`, 'GET')
+                        // Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion, true)
+                    }
                 })
                 // CLOSE MODAL
                 btn_modal_c.addEventListener("click", function (t) {
