@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('cat_destinatarios', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('empaque_id')->unsigned()->index();
-            $table->string("nombre");
-            $table->string("nombre_corto");
-            $table->string("domicilio");
-            $table->string("telefonos");
-            $table->string("correos");
+            $table->string("nombre", 500);
+            $table->string("nombre_corto", 50);
+            $table->string("domicilio", 1000);
+            $table->string("telefonos", 1000);
+            $table->string("correos", 1000);
             $table->tinyInteger('activo')->default(1);
             $table->softDeletes();
             $table->foreign('empaque_id')->references('id')->on('cat_empaques');

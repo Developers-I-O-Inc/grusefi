@@ -52,7 +52,7 @@ class VariedadesController extends Controller
                 ->make(true);
         }
 
-        $tipo_cultivos = TipoCultivos::all();
+        $tipo_cultivos = TipoCultivos::where('activo', 1)->get();
 
         return view('catalogs/variedades', array("tipo_cultivos" => $tipo_cultivos));
     }

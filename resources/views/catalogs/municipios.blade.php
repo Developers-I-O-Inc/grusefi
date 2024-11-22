@@ -69,8 +69,7 @@
         <div class="modal fade" id="kt_modal_add_municipio" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_municipio_form"
-                        data-kt-redirect="../../demo6/dist/apps/municipios/list.html">
+                    <form class="form" action="#" id="kt_modal_add_municipio_form">
                         <div class="modal-header" id="kt_modal_add_municipio_header">
                             <h2 class="fw-bolder">Agregar Municipio</h2>
                             <div id="kt_modal_add_municipio_close" class="btn btn-icon btn-sm btn-active-icon-primary">
@@ -90,41 +89,41 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_municipio_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_municipio_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre municipio</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre" id="nombre" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_municipio" id="id_municipio" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="nombre" id="nombre" autocomplete="off"/>
+                                    <input type="text" class="form-control d-none" name="id_municipio" id="id_municipio" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" autocomplete="off" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">País</label>
-                                    <select id="pais_id" name="pais_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_municipio" data-placeholder="Selecciona un pais" data-allow-clear="true">
+                                    <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_municipio" data-placeholder="Selecciona un pais" data-allow-clear="true">
                                         <option value=""></option>
                                          @foreach($paises as $pais)
                                             <option value="{{$pais->id}}">{{$pais->nombre}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Estado</label>
-                                    <select id="estado_id" name="estado_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_municipio" data-placeholder="Selecciona un estado" data-allow-clear="true">
+                                    <select id="estado_id" name="estado_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_municipio" data-placeholder="Selecciona un estado" data-allow-clear="true">
                                         <option></option>
                                     </select>
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Código</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un código" name="codigo" id="codigo" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un código" name="codigo" id="codigo" autocomplete="off"/>
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="" id="active_check" name="active_check"/>
+                                    <input class="form-check-input" type="checkbox" value="" id="active_check" name="active_check" checked/>
                                     <label class="form-check-label" for="active">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" value="0" name="activo" id="activo"/>
+                                <input type="text" class="form-control d-none" value="1" name="activo" id="activo"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

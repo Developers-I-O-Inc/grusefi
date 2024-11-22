@@ -92,6 +92,10 @@ var KTlocalidadesList = (function () {
                                 notEmpty: {
                                     message: "Nombre requerido",
                                 },
+                                stringLength: {
+                                    max: 100,
+                                    message: "El nombre debe tener un máximo de 100 caracteres",
+                                }
                             },
                         },
                         nombre_corto: {
@@ -99,12 +103,20 @@ var KTlocalidadesList = (function () {
                                 notEmpty: {
                                     message: "Nombre corto requerido",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El nombre corto debe tener un máximo de 10 caracteres",
+                                },
                             },
                         },
                         codigo: {
                             validators: {
                                 notEmpty: {
                                     message: "Código",
+                                },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El código debe tener un máximo de 10 caracteres",
                                 },
                             },
                         },
@@ -134,8 +146,11 @@ var KTlocalidadesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -207,10 +222,12 @@ var KTlocalidadesList = (function () {
                 })
                 // CHANGE PAIS
                 select_pais.on('change', function() {
+                    validations.revalidateField('pais_id')
+                    validations.disableValidator('estado_id')
+                    validations.disableValidator('municipio_id')
                     const select_estado2 = $('#estado_id').select2()
                     Catalogs.get_next_selects(catalog_fat, select_pais.val(), catalog_item, select_estado2)
                 })
-                // CHANGE ESTADO
                 select_estado.on('change', function() {
                     const select_estado2 = $('#municipio_id').select2()
                     let estado_id_changue
@@ -224,7 +241,9 @@ var KTlocalidadesList = (function () {
                 })
                 // SUBMIT
                 btn_submit.addEventListener("click", function (e) {
-                    e.preventDefault(),
+                    e.preventDefault()
+                    validations.enableValidator('estado_id')
+                    validations.enableValidator('municipio_id')
                     validations &&
                     validations.validate().then(function (e) {
                         "Valid" == e
@@ -240,7 +259,7 @@ var KTlocalidadesList = (function () {
 
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
                                 }, 1000))
                             : Swal.fire({
                                     text: "Error, faltan algunos datos, intente de nuevo por favor.",

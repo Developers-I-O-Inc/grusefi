@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-categoria-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar categoria</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Categoría</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-categoria-table-toolbar="selected">
@@ -65,10 +65,9 @@
         <div class="modal fade" id="kt_modal_add_categoria" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_categoria_form"
-                        data-kt-redirect="../../demo6/dist/apps/categorias/list.html">
+                    <form class="form" action="#" id="kt_modal_add_categoria_form">
                         <div class="modal-header" id="kt_modal_add_categoria_header">
-                            <h2 class="fw-bolder">Agregar categoría</h2>
+                            <h2 class="fw-bolder">Agregar Categoría</h2>
                             <div id="kt_modal_add_categoria_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -88,16 +87,16 @@
                                 data-kt-scroll-wrappers="#kt_modal_add_categoria_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Categoría</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="categoria" id="categoria" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_categoria" id="id_categoria" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el nombre de la categoría" name="categoria" id="categoria" autocomplete="off" />
+                                    <input type="text" class="form-control d-none" name="id_categoria" id="id_categoria" />
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
                                     <label class="form-check-label" for="activo">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
+                                <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

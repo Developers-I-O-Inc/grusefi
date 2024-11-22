@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cat_variedades', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('tipo_cultivo_id')->unsigned()->index();
-            $table->string('variedad', 100);
+            $table->string('variedad', 50);
             $table->boolean('activo')->default(1);
             $table->timestamps();
             $table->softDeletes();

@@ -52,7 +52,7 @@ class PresentacionesController extends Controller
                     ->rawColumns(['check', 'buttons', 'activos'])
                     ->make(true);
         }
-        $variedades = Variedades::all();
+        $variedades = Variedades::where('activo', 1)->get();
         return view('catalogs/presentaciones', compact('variedades'));
 
     }

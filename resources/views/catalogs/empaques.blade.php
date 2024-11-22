@@ -30,7 +30,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-empaque-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar empaque</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Empaque</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-empaque-table-toolbar="selected">
@@ -82,7 +82,7 @@
                 <div class="modal-content">
                     <form class="form" action="#" id="kt_modal_add_empaque_form" enctype="multipart/form-data">
                         <div class="modal-header" id="kt_modal_add_empaque_header">
-                            <h2 class="fw-bolder">Agregar empaque</h2>
+                            <h2 class="fw-bolder">Agregar Empaque</h2>
                             <div id="kt_modal_add_empaque_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -109,32 +109,32 @@
                                             <div class="card-title">DATOS FISCALES</div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="row mb-12">
+                                            <div class="row mb-4">
                                                 <div class="col-md-2 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" />
-                                                    <input type="text" class="form-control form-control-solid d-none" name="id_empaque" id="id_empaque" />
+                                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" autocomplete="off" />
+                                                    <input type="text" class="form-control d-none" name="id_empaque" id="id_empaque" />
                                                 </div>
                                                 <div class="col-md-5 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Nombre Fiscal</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre fiscal del empaque" name="nombre_fiscal" id="nombre_fiscal" />
+                                                    <input type="text" class="form-control" placeholder="Ingresa el nombre fiscal del empaque" name="nombre_fiscal" id="nombre_fiscal" autocomplete="off"/>
                                                 </div>
                                                 <div class="col-md-5 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Domicilio Fiscal</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el domicilio fiscal del empaque" name="domicilio_fiscal" id="domicilio_fiscal" />
+                                                    <input type="text" class="form-control" placeholder="Ingresa el domicilio fiscal del empaque" name="domicilio_fiscal" id="domicilio_fiscal" autocomplete="off" />
                                                 </div>
                                             </div>
-                                            <div class="row mb-12">
+                                            <div class="row mb-4">
                                                 <div class="col-md-5 fv-row">
                                                     <div class="row fv-row fv-plugins-icon-container">
                                                         <div class="col-md-6 fv-row">
                                                             <label class="required fs-6 fw-bold form-label mb-2">RFC</label>
-                                                            <input type="text" class="form-control form-control-solid" placeholder="RFC" name="rfc" id="rfc" />
+                                                            <input type="text" class="form-control" placeholder="RFC" name="rfc" id="rfc" autocomplete="off" />
                                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                                         </div>
                                                         <div class="col-md-6 fv-row">
                                                             <label class="required fs-6 fw-bold form-label mb-2">Teléfonos(s)</label>
-                                                            <input type="text" class="form-control form-control-solid" minlength="3" maxlength="15" placeholder="Ingrese Teléfono" id="telefonos" name="telefonos">
+                                                            <input type="text" class="form-control" minlength="3" maxlength="15" placeholder="Ingrese Teléfono" id="telefonos" name="telefonos" autocomplete="off">
 
                                                         </div>
                                                     </div>
@@ -143,11 +143,11 @@
                                                     <label class="required fs-6 fw-bold form-label mb-2">Número</label>
                                                     <div class="row fv-row fv-plugins-icon-container">
                                                         <div class="col-6">
-                                                            <input type="text" class="form-control form-control-solid" placeholder="Exterior" name="num_ext" id="num_ext" />
-                                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                            <input type="text" class="form-control" placeholder="Exterior" name="num_ext" id="num_ext" autocomplete="off"/>
+                                                        </div>
                                                         <div class="col-6">
-                                                            <input type="text" class="form-control form-control-solid" placeholder="Interior" name="num_int" id="num_int" />
-                                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                            <input type="text" class="form-control" placeholder="Interior" name="num_int" id="num_int" autocomplete="off"/>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 fv-row fv-plugins-icon-container">
@@ -155,15 +155,15 @@
                                                         <span class="required">Código Postal</span>
                                                     </label>
                                                     <div class="position-relative">
-                                                        <input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="Código Postal" id="cp" name="cp">
+                                                        <input type="text" class="form-control" minlength="3" maxlength="6" placeholder="Código Postal" id="cp" name="cp" autocomplete="off">
 
                                                     </div>
-                                                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                </div>
                                             </div>
-                                            <div class="row mb-12">
+                                            <div class="row mb-4">
                                                 <div class="col-md-6 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Municipio</label>
-                                                    <select id="municipio_id" name="municipio_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                                    <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona un municipio" data-allow-clear="true">
                                                         <option value=""></option>
                                                         @foreach($municipios as $municipio)
                                                             <option value="{{$municipio->id}}">{{$municipio->nombre}}</option>
@@ -172,7 +172,7 @@
                                                 </div>
                                                 <div class="col-md-6 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Localidad</label>
-                                                    <select id="localidad_id" name="localidad_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona una localidad" data-allow-clear="true">
+                                                    <select id="localidad_id" name="localidad_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona una localidad" data-allow-clear="true">
                                                         <option value=""></option>
                                                     </select>
                                                 </div>
@@ -188,32 +188,32 @@
                                             <div class="card-title">DATOS DOCUMENTACIÓN ELECTRÓNICA</div>
                                         </div>
                                         <div class="card-body"  >
-                                            <div class="row mb-12">
+                                            <div class="row mb-4">
                                                 <div class="col-md-6 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Nombre para Embarcar</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa nombre para embarcar" name="nombre_embarque" id="nombre_embarque" />
+                                                    <input type="text" class="form-control" placeholder="Ingresa nombre para embarcar" name="nombre_embarque" id="nombre_embarque" autocomplete="off" />
                                                 </div>
 
                                                 <div class="col-md-6 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Domicilio</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa domicilio" name="domicilio_documentacion" id="domicilio_documentacion" />
+                                                    <input type="text" class="form-control" placeholder="Ingresa domicilio" name="domicilio_documentacion" id="domicilio_documentacion" autocomplete="off"/>
                                                 </div>
                                             </div>
-                                            <div class="row mb-12">
+                                            <div class="row mb-4">
                                                 <div class="col-md-6 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Registro Sader</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa SADER" name="sader" id="sader" />
+                                                    <input type="text" class="form-control" placeholder="Ingresa SADER" name="sader" id="sader" autocomplete="off"/>
                                                 </div>
 
                                                 <div class="col-md-6 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Código</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa código" name="codigo" id="codigo" />
+                                                    <input type="text" class="form-control" placeholder="Ingresa código" name="codigo" id="codigo" autocomplete="off"/>
                                                 </div>
                                             </div>
-                                            <div class="row mb-12">
+                                            <div class="row mb-4">
                                                 <div class="col-md-6 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Municipio</label>
-                                                    <select id="municipio_id2" name="municipio_id2" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                                    <select id="municipio_id2" name="municipio_id2" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona un municipio" data-allow-clear="true">
                                                         <option value=""></option>
                                                         @foreach($municipios as $municipio)
                                                             <option value="{{$municipio->id}}">{{$municipio->nombre}}</option>
@@ -223,7 +223,7 @@
 
                                                 <div class="col-md-6 fv-row">
                                                     <label class="required fs-6 fw-bold mb-2">Localidad</label>
-                                                    <select id="localidad_doc_id" name="localidad_doc_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona una localidad" data-allow-clear="true">
+                                                    <select id="localidad_doc_id" name="localidad_doc_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona una localidad" data-allow-clear="true">
                                                         <option value=""></option>
                                                     </select>
                                                 </div>
@@ -234,7 +234,7 @@
                                                     Empaque Activo para Exportación
                                                 </label>
                                             </div>
-                                            <input type="text" class="form-control form-control-solid d-none" name="exportacion" id="exportacion" value="0"/>
+                                            <input type="text" class="form-control d-none" name="exportacion" id="exportacion" value="0"/>
 
                                             <div class="fv-row mb-7">
                                                 <input class="form-check-input" type="checkbox" value="0" id="check_asociado" name="check_asociado"/>
@@ -242,14 +242,14 @@
                                                     Empaque Asociado
                                                 </label>
                                             </div>
-                                            <input type="text" class="form-control form-control-solid d-none" name="asociado" id="asociado" value="0"/>
+                                            <input type="text" class="form-control d-none" name="asociado" id="asociado" value="0"/>
                                             <div class="fv-row mb-7">
-                                                <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
+                                                <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
                                                 <label class="form-check-label" for="activo">
                                                     Activo
                                                 </label>
                                             </div>
-                                            <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
+                                            <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
                                         </div>
                                     </div>
                                 </div>

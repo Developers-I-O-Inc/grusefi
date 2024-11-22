@@ -87,21 +87,21 @@ var KTpuertoesList = (function () {
                         pais_id: {
                             validators: {
                                 notEmpty: {
-                                    message: "Seleccione el país",
+                                    message: "Seleccione un país",
                                 },
                             },
                         },
                         estado_id: {
                             validators: {
                                 notEmpty: {
-                                    message: "Seleccione el país",
+                                    message: "Seleccione un estado",
                                 },
                             },
                         },
                         municipio_id: {
                             validators: {
                                 notEmpty: {
-                                    message: "Seleccione el país",
+                                    message: "Seleccione un municipio",
                                 },
                             },
                         },
@@ -110,6 +110,10 @@ var KTpuertoesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el puerto",
                                 },
+                                stringLength: {
+                                    max: 50,
+                                    message: "El puerto debe tener menos de 50 caracteres",
+                                }
                             },
                         },
                         nombre_corto: {
@@ -117,6 +121,10 @@ var KTpuertoesList = (function () {
                                 notEmpty: {
                                     message: "Ingrese el nombre corto del puerto",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El nombre corto debe tener menos de 10 caracteres",
+                                }
                             },
                         },
                         medio_transporte: {
@@ -131,8 +139,11 @@ var KTpuertoesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -210,6 +221,10 @@ var KTpuertoesList = (function () {
                 })
                  // CHANGE PAIS
                  select_pais.on('change', function() {
+                    validations.revalidateField('pais_id')
+                    validations.disableValidator('estado_id')
+                    validations.disableValidator('municipio_id')
+                    validations.disableValidator('medio_transporte')
                     const select_estado2 = $('#estado_id').select2()
                     Catalogs.get_next_selects(catalog_fat, select_pais.val(), catalog_item, select_estado2)
                 })
@@ -227,7 +242,10 @@ var KTpuertoesList = (function () {
                 })
                 // SUBMIT
                 btn_submit.addEventListener("click", function (e) {
-                    e.preventDefault(),
+                    e.preventDefault()
+                    validations.enableValidator('estado_id')
+                    validations.enableValidator('municipio_id')
+                    validations.enableValidator('medio_transporte')
                     validations &&
                     validations.validate().then(function (e) {
                         "Valid" == e
@@ -242,7 +260,7 @@ var KTpuertoesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
 
                                 }, 1000))
                             : Swal.fire({

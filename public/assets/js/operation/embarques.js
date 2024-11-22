@@ -32,6 +32,7 @@ var KTCreateAccount = (function () {
         select_maquiladores,
         select_pais,
         select_puerto,
+        select_tefs,
         select_variedad,
         select_presentacion,
         select_puerto2,
@@ -144,6 +145,7 @@ var KTCreateAccount = (function () {
                 )),
                 (select_pais = $('#pais_id').select2()),
                 (select_empaque = $('#empaque_id').select2()),
+                (select_tefs = $('#tefs_id').select2()),
                 (select_presentacion = $('#presentacion_id').select2()),
                 (select_consolidado = $('#consolidado_id').select2()),
                 (select_destinatario = $('#destinatario_id').select2()),
@@ -179,22 +181,28 @@ var KTCreateAccount = (function () {
                                 s.classList.remove("d-none"))
                 }),
                 r.on("kt.stepper.next", function (e) {
-                    console.log("stepper.next")
                     var t = arr_validations[e.getCurrentStepIndex() - 1]
-                    t
-                        ? t.validate().then(function (t) {
-                            console.log("validated!"),
-                                "Valid" == t
-                                    ? (e.goNext(), KTUtil.scrollTop())
-                                    : Swal.fire({
-                                        text: "Error, verifique los datos por favor",
-                                        icon: "error",
-                                        buttonsStyling: !1,
-                                        confirmButtonText: "Entendido!",
-                                        customClass: { confirmButton: "btn btn-primary" },
-                                    }).then(function () {
-                                        KTUtil.scrollTop()
-                                    })
+                    t ? t.validate().then(function (t) {
+                        if ("Valid" == t) {
+                            e.goNext();
+                            KTUtil.scrollTop();
+                        } else {
+                            let errorMessage = "Error, verifique los datos por favor";
+                            if (e.getCurrentStepIndex() === 2) {
+                                errorMessage = "Error, ingrese al menos una marca";
+                            } else if (e.getCurrentStepIndex() === 3) {
+                                errorMessage = "Error, ingrese al menos un producto";
+                            }
+                            Swal.fire({
+                                text: errorMessage,
+                                icon: "error",
+                                buttonsStyling: !1,
+                                confirmButtonText: "Entendido!",
+                                customClass: { confirmButton: "btn btn-primary" },
+                            }).then(function () {
+                                KTUtil.scrollTop();
+                            });
+                        }
                         })
                         : (e.goNext(), KTUtil.scrollTop())
                 }),
@@ -271,9 +279,13 @@ var KTCreateAccount = (function () {
                 arr_validations.push(
                     FormValidation.formValidation(form_embarques, {
                         fields: {
-                            account_type: {
+                            fecha_embarque: {
                                 validators: {
                                     notEmpty: { message: "Ingrese una fecha" },
+                                    format: {
+                                        pattern: "YYYY-MM-DD",
+                                        message: "La fecha no es válida",
+                                    }
                                 },
                             },
                             pais_id: {
@@ -311,8 +323,11 @@ var KTCreateAccount = (function () {
                             trigger: new FormValidation.plugins.Trigger(),
                             bootstrap: new FormValidation.plugins.Bootstrap5({
                                 rowSelector: ".fv-row",
-                                eleInvalidClass: "",
-                                eleValidClass: "",
+                            }),
+                            icon: new FormValidation.plugins.Icon({
+                                valid: 'fa fa-check',
+                                invalid: 'fa fa-times',
+                                validating: 'fa fa-refresh',
                             }),
                         },
                     })
@@ -356,6 +371,7 @@ var KTCreateAccount = (function () {
                     })
                 ),
                 btn_submit.addEventListener("click", function (e) {
+                    e.preventDefault
                     arr_validations[0].validate().then(function (t) {
                         const formData = new FormData(document.querySelector(`#form_embarques`));
                         const marcasArray = table_marcas.column(0).data().toArray()
@@ -365,7 +381,8 @@ var KTCreateAccount = (function () {
                         formData.append('maquiladores', JSON.stringify(maquiladoresArray))
                         formData.append('productos', JSON.stringify(productosArray))
                         const datos = new URLSearchParams(formData)
-
+                        arr_validations[0].enableValidator('puerto_id')
+                        arr_validations[0].enableValidator('destinatario_id')
                         "Valid" == t
                             ? (
                                 e.preventDefault(),
@@ -389,13 +406,20 @@ var KTCreateAccount = (function () {
                             })
                     })
                 }),
+                select_tefs.on('change', function() {
+                    arr_validations[0].revalidateField('tefs_id')
+                })
                  // CHANGE PAIS
                 select_pais.on('change', function() {
                     // const select_estado2 = $('#estado_id').select2()
+                    arr_validations[0].revalidateField('pais_id')
+                    arr_validations[0].disableValidator('puerto_id')
                     Operation.get_next_selects("puertos", select_pais.val(), select_puerto)
                 })
                  // CHANGE EMPAQUE
                 select_empaque.on('change', function() {
+                    arr_validations[0].revalidateField('empaque_id')
+                    arr_validations[0].disableValidator('destinatario_id')
                     // const select_estado2 = $('#estado_id').select2()
                     Operation.get_next_selects("destinatarios", select_empaque.val(), select_destinatario)
                     Operation.get_next_selects("marcas", select_empaque.val(), select_marca)
@@ -404,7 +428,7 @@ var KTCreateAccount = (function () {
                 })
                 // SELECT VARIEDADES
                 select_variedad.on('change', function() {
-                    // const select_estado2 = $('#estado_id').select2()
+                    arr_validations[0].revalidateField('variedad_id')
                     Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion, true)
                 })
                 // CLOSE MODAL

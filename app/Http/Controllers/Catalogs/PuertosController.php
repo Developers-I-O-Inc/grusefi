@@ -117,7 +117,7 @@ class PuertosController extends Controller
     }
 
     public function get_puertos(Request $request){
-        $puertos = DB::select("SELECT cat_municipios.id, cat_municipios.nombre
+        $puertos = DB::select("SELECT cat_puertos.id, cat_puertos.puerto as nombre
             FROM cat_puertos
             LEFT JOIN cat_municipios ON cat_puertos.municipio_id = cat_municipios.id
             LEFT JOIN cat_estados ON cat_municipios.estado_id = cat_estados.id
