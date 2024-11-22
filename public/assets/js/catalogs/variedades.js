@@ -54,7 +54,7 @@ var KTvariedadesList = (function () {
                 )),
                 // inicialize elements html
                 (btn_add = document.querySelector("#btn_add")),
-                (select_tipo_cultivo = document.querySelector("#tipo_cultivo_id")),
+                (select_tipo_cultivo = $('#tipo_cultivo_id').select2()),
                 (form = document.querySelector("#kt_modal_add_variedad_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_variedad_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_variedad_submit")),
@@ -70,6 +70,10 @@ var KTvariedadesList = (function () {
                                 notEmpty: {
                                     message: "Nombre de la variedad es requerido",
                                 },
+                                stringLength: {
+                                    max:50,
+                                    message: "El nombre de la variedad debe tener menos de 50 caracteres"
+                                }
                             },
                         },
                         tipo_cultivo_id: {
@@ -84,8 +88,11 @@ var KTvariedadesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -131,6 +138,9 @@ var KTvariedadesList = (function () {
                             table_items.search(e.target.value).draw()
                         })
                     )
+                select_tipo_cultivo.on('change', function(){
+                    validations.revalidateField('tipo_cultivo_id')
+                })
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
@@ -167,7 +177,7 @@ var KTvariedadesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
 
                                 }, 1000))
                             : Swal.fire({

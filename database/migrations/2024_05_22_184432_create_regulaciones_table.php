@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('cat_regulaciones', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('pais_id')->unsigned()->index();
-            $table->string("dictamen_apartado_4");
-            $table->string("dictamen_apartado_5");
-            $table->string("dictamen_apartado_11");
-            $table->string("nombre_pais_dictamen");
-            $table->string("nombre_pais_certificado");
-            $table->boolean("activo_embarques");
+            $table->string("dictamen_apartado_4", 1000);
+            $table->string("dictamen_apartado_5", 1000);
+            $table->string("dictamen_apartado_11", 1000);
+            $table->string("nombre_pais_dictamen", 1000);
+            $table->string("nombre_pais_certificado", 1000);
+            $table->boolean("activo_embarques")->default(0);
             $table->boolean("rq_inspector");
             $table->boolean("rq_huertas");
             $table->boolean("rq_estudios_analisis");

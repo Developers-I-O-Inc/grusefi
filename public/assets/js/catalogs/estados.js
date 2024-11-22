@@ -58,7 +58,7 @@ var KTestadoesList = (function () {
                 )),
                 // inicialize elements html
                 (btn_add = document.querySelector("#btn_add")),
-                (select_pais = document.querySelector("#select_pais")),
+                (select_pais = $('#pais_id').select2()),
                 (form = document.querySelector("#kt_modal_add_estado_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_estado_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_estado_submit")),
@@ -76,13 +76,21 @@ var KTestadoesList = (function () {
                                 notEmpty: {
                                     message: "Nombre requerido",
                                 },
-                            },
+                                stringLength: {
+                                    max: 100,
+                                    message: "El nombre no debe tener más de 100 caracteres",
+                                }
+                            }
                         },
                         nombre_corto: {
                             validators: {
                                 notEmpty: {
                                     message: "Nombre corto requerido",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El nombre corto no debe tener más de 10 caracteres",
+                                }
                             },
                         },
                         codigo: {
@@ -90,6 +98,10 @@ var KTestadoesList = (function () {
                                 notEmpty: {
                                     message: "Código",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El código no debe tener más de 10 caracteres",
+                                }
                             },
                         },
                         pais_id: {
@@ -104,8 +116,11 @@ var KTestadoesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -156,6 +171,11 @@ var KTestadoesList = (function () {
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
+                }),
+                 // SELECT VARIEDADES
+                // SELECT VARIEDADES
+                select_pais.on('change', function() {
+                    validations.revalidateField('pais_id');
                 })
                 // BUTTON ADD
                 btn_add.addEventListener("click", function (t) {
@@ -189,7 +209,7 @@ var KTestadoesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
 
                                 }, 1000))
                             : Swal.fire({

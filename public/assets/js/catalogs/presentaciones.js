@@ -86,8 +86,11 @@ var KTpresentacionesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -138,6 +141,9 @@ var KTpresentacionesList = (function () {
                 check_active.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
                 })
+                select_variedad.on('change', function (e) {
+                    validations.revalidateField('variedad_id')
+                })
                 // BUTTON ADD
                 btn_add.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
@@ -170,7 +176,7 @@ var KTpresentacionesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
 
                                 }, 1000))
                             : Swal.fire({

@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-uso-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar uso</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Uso</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-uso-table-toolbar="selected">
@@ -65,10 +65,9 @@
         <div class="modal fade" id="kt_modal_add_uso" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_uso_form"
-                        data-kt-redirect="../../demo6/dist/apps/usos/list.html">
+                    <form class="form" action="#" id="kt_modal_add_uso_form">
                         <div class="modal-header" id="kt_modal_add_uso_header">
-                            <h2 class="fw-bolder">Agregar uso</h2>
+                            <h2 class="fw-bolder">Agregar Uso</h2>
                             <div id="kt_modal_add_uso_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -87,17 +86,17 @@
                                 data-kt-scroll-dependencies="#kt_modal_add_uso_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_uso_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-7">
-                                    <label class="required fs-6 fw-bold mb-2">uso</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un uso" name="uso" id="uso" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_uso" id="id_uso" />
+                                    <label class="required fs-6 fw-bold mb-2">Uso</label>
+                                    <input type="text" class="form-control" placeholder="Ingresa un uso" name="uso" id="uso" autocomplete="off"/>
+                                    <input type="text" class="form-control d-none" name="id_uso" id="id_uso" />
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
                                     <label class="form-check-label" for="activo">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
+                                <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

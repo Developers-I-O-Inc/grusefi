@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-estado-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar estado</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Estado</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-estado-table-toolbar="selected">
@@ -68,8 +68,7 @@
         <div class="modal fade" id="kt_modal_add_estado" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_estado_form"
-                        data-kt-redirect="../../demo6/dist/apps/estados/list.html">
+                    <form class="form" action="#" id="kt_modal_add_estado_form">
                         <div class="modal-header" id="kt_modal_add_estado_header">
                             <h2 class="fw-bolder">Agregar Estado</h2>
                             <div id="kt_modal_add_estado_close" class="btn btn-icon btn-sm btn-active-icon-primary">
@@ -85,22 +84,22 @@
                             </div>
                         </div>
                         <div class="modal-body py-10 px-lg-17">
-                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_estado_scroll" data-kt-scroll="true"
+                            <div class="scroll-y me-n7 pe-2" id="kt_modal_add_estado_scroll" data-kt-scroll="true"
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_estado_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_estado_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre Estado</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="nombre" id="nombre" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_estado" id="id_estado" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="nombre" id="nombre" autocomplete="off"/>
+                                    <input type="text" class="form-control d-none" name="id_estado" id="id_estado" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" autocomplete="off"/>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">País</label>
-                                    <select id="pais_id" name="pais_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_estado" data-placeholder="Selecciona un País" data-allow-clear="true">
+                                    <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_estado" data-placeholder="Selecciona un País" data-allow-clear="true">
                                         <option></option>
                                         @foreach($paises as $pais)
                                             <option value="{{$pais->id}}">{{$pais->nombre}}</option>
@@ -109,15 +108,15 @@
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Código</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un código" name="codigo" id="codigo" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un código" name="codigo" id="codigo" autocomplete="off"/>
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
                                     <label class="form-check-label" for="activo">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
+                                <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

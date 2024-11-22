@@ -57,7 +57,7 @@ class MunicipiosController extends Controller
                     ->make(true);
         }
 
-        $paises = Paises::all();
+        $paises = Paises::where('activo', '=', 1)->get();
 
         return view('catalogs/municipios', array("paises" => $paises));
     }
@@ -100,7 +100,8 @@ class MunicipiosController extends Controller
     }
 
     public function get_municipios(Request $request){
-        $municipios = Municipios::where('estado_id', '=', $request->query('id'))->get();
+        $municipios = Municipios::where('estado_id', '=', $request->query('id'))
+            ->where('activo', 1)->get();
         return response()->json(["ok" => "OK", "catalogo" => $municipios]);
     }
 

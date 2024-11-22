@@ -73,6 +73,10 @@ var KTpaisesList = (function () {
                                 notEmpty: {
                                     message: "Nombre requerido",
                                 },
+                                stringLength: {
+                                    max: 50,
+                                    message: "El nombre debe tener un máximo de 50 caracteres",
+                                },
                             },
                         },
                         nombre_corto: {
@@ -80,6 +84,10 @@ var KTpaisesList = (function () {
                                 notEmpty: {
                                     message: "Nombre corto requerido",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El nombre corto debe tener un máximo de 10 caracteres",
+                                }
                             },
                         },
                         codigo: {
@@ -87,6 +95,10 @@ var KTpaisesList = (function () {
                                 notEmpty: {
                                     message: "Código requerido",
                                 },
+                                stringLength: {
+                                    max: 10,
+                                    message: "El nombre corto debe tener un máximo de 10 caracteres",
+                                }
                             },
                         },
                     },
@@ -94,8 +106,11 @@ var KTpaisesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                        }),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -175,7 +190,7 @@ var KTpaisesList = (function () {
                                     )
                                     const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                                     Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-
+                                    validations.resetForm(true);
                                 }, 1000))
                             : Swal.fire({
                                     text: "Error, faltan algunos datos, intente de nuevo por favor.",

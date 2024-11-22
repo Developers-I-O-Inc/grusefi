@@ -88,11 +88,11 @@
                             <div class="row mb-12">
                                 <div class="col-md-4 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Fecha Embarque</label>
-                                    <input class="form-control form-control-solid" placeholder="Seleccione Fecha" id="fecha_embarque" name="fecha_embarque"/>
+                                    <input class="form-control" placeholder="Seleccione Fecha" id="fecha_embarque" name="fecha_embarque"/>
                                 </div>
                                 <div class="col-md-4 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">País</label>
-                                    <select id="pais_id" name="pais_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un país" data-allow-clear="true">
+                                    <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-placeholder="Selecciona un país" data-allow-clear="true">
                                         <option value=""></option>
                                         @foreach($paises as $pais)
                                             <option value="{{$pais->id}}">{{$pais->nombre}}</option>
@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="col-md-4 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Variedad</label>
-                                    <select id="variedad_id" name="variedad_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona una variedad" data-allow-clear="true">
+                                    <select id="variedad_id" name="variedad_id" class="form-select" data-control="select2" data-placeholder="Selecciona una variedad" data-allow-clear="true">
                                         <option value=""></option>
                                         @foreach($variedades as $variedad)
                                             <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
@@ -112,7 +112,7 @@
                             <div class="row mb-12">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Empaque</label>
-                                    <select id="empaque_id" name="empaque_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
+                                    <select id="empaque_id" name="empaque_id" class="form-select" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
                                         <option value=""></option>
                                         @foreach($empaques as $empaque)
                                             <option value="{{$empaque->id}}">{{$empaque->nombre_fiscal}}</option>
@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Destinatario</label>
-                                    <select id="destinatario_id" name="destinatario_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un destinatario" data-allow-clear="true">
+                                    <select id="destinatario_id" name="destinatario_id" class="form-select" data-control="select2" data-placeholder="Selecciona un destinatario" data-allow-clear="true">
                                         <option value=""></option>
                                     </select>
                                 </div>
@@ -129,7 +129,7 @@
                             <div class="row mb-12">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Usuario TEF´s</label>
-                                    <select id="tefs_id" name="tefs_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un usuario" data-allow-clear="true">
+                                    <select id="tefs_id" name="tefs_id" class="form-select" data-control="select2" data-placeholder="Selecciona un usuario" data-allow-clear="true">
                                         <option value=""></option>
                                         @foreach($users as $users)
                                             <option value="{{$users->id}}">{{$users->name}}</option>
@@ -138,23 +138,23 @@
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Puerto de Entrada</label>
-                                    <select id="puerto_id" name="puerto_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un puerto" data-allow-clear="true">
+                                    <select id="puerto_id" name="puerto_id" class="form-select" data-control="select2" data-placeholder="Selecciona un puerto" data-allow-clear="true">
                                         <option value=""></option>
                                     </select>
                                 </div>
                                 {{-- <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Inspector</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre del ispector" name="inspector" id="inspector" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el nombre del ispector" name="inspector" id="inspector" />
                                 </div> --}}
                             </div>
                             <div class="row mb-12">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">N° Económico</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el número económico" name="numero_economico" id="numero_economico" autocomplete="off" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el número económico" name="numero_economico" id="numero_economico" autocomplete="off" />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Placas</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa las placas" name="placas_trasporte" id="placas_trasporte" />
+                                    <input type="text" class="form-control" placeholder="Ingresa las placas" name="placas_trasporte" id="placas_trasporte" />
                                 </div>
                             </div>
                         </div>
@@ -163,11 +163,11 @@
                         <div class="w-100">
                             <div class="row mb-12">
                                 <div class="col-9">
-                                    <select id="select_marca" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona una marca" data-allow-clear="true">
+                                    <select id="select_marca" class="form-select" data-control="select2" data-placeholder="Selecciona una marca" data-allow-clear="true">
                                         <option></option>
                                     </select>
                                     <div class="col-md-6 fv-row d-none">
-                                        <input class="form-control form-control-solid" placeholder="Seleccione Fecha" id="edit_marcas" name="edit_marcas"/>
+                                        <input class="form-control" placeholder="Seleccione Fecha" id="edit_marcas" name="edit_marcas"/>
                                     </div>
                                 </div>
                                 <div class="col-3">
@@ -199,7 +199,7 @@
                             <div class="separator my-2"></div>
                             <div class="row mb-12">
                                 <div class="col-9">
-                                    <select id="select_maquiladores" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un maquilador" data-allow-clear="true">
+                                    <select id="select_maquiladores" class="form-select" data-control="select2" data-placeholder="Selecciona un maquilador" data-allow-clear="true">
                                         <option></option>
                                     </select>
                                 </div>
@@ -237,7 +237,7 @@
                             <div class="row mb-12">
                                 <div class="col-5">
                                     <div class="col-md-6 fv-row d-none">
-                                        <input class="form-control form-control-solid" placeholder="Seleccione Fecha" id="edit_products" name="edit_products"/>
+                                        <input class="form-control" placeholder="Seleccione Fecha" id="edit_products" name="edit_products"/>
                                     </div>
                                     <button class="btn btn-flex btn-light-primary" id="btn_add_products">
                                         <span class="svg-icon svg-icon-3">
@@ -293,7 +293,7 @@
                                 <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                     <span class="required">Empaque</span>
                                 </label>
-                                <select id="consolidado_id" name="consolidado_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
+                                <select id="consolidado_id" name="consolidado_id" class="form-select" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
                                     <option value=""></option>
                                 </select>
                             </div>
@@ -303,7 +303,7 @@
                                     Consolidado
                                 </label>
                             </div>
-                            <input type="text" class="form-control form-control-solid d-none" name="consolidado" id="consolidado" value="0"/>
+                            <input type="text" class="form-control d-none" name="consolidado" id="consolidado" value="0"/>
                         </div>
 
                     </div>
@@ -316,11 +316,11 @@
                             <div class="row mb-12">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Empresa Transportista</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="empresa_transporte" id="empresa_transporte" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el nombre de la categoría" name="empresa_transporte" id="empresa_transporte" />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Nombre del chofer</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el nombre de la categoría" name="chofer" id="chofer" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el nombre de la categoría" name="chofer" id="chofer" />
                                 </div>
                             </div>
                         </div>
@@ -416,16 +416,16 @@
                                 <div class="row mb-5">
                                     <div class="col-md-3 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Folio Pallet</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder="Ingresa el folio del pallet" name="folio_pallet" id="folio_pallet" />
+                                        <input type="text" class="form-control" placeholder="Ingresa el folio del pallet" name="folio_pallet" id="folio_pallet" />
                                     </div>
                                     <div class="col-md-3 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Lote</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder="Ingresa el n° de lote" name="lote" id="lote" />
+                                        <input type="text" class="form-control" placeholder="Ingresa el n° de lote" name="lote" id="lote" />
                                     </div>
 
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Categoría</label>
-                                        <select id="categoria_id" name="categoria_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
+                                        <select id="categoria_id" name="categoria_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
                                             <option></option>
                                             @foreach($categorias as $categoria)
                                                 <option value="{{$categoria->id}}">{{$categoria->categoria}}</option>
@@ -436,11 +436,11 @@
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">SADER</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder="Ingresa el codigo SADER" name="sader" id="sader" />
+                                        <input type="text" class="form-control" placeholder="Ingresa el codigo SADER" name="sader" id="sader" />
                                     </div>
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Presentación</label>
-                                        <select id="presentacion_id" name="presentacion_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
+                                        <select id="presentacion_id" name="presentacion_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
                                             <option></option>
                                             {{-- @foreach($presentaciones as $presentacion)
                                                 <option value="{{$presentacion->id."|".$presentacion->peso}}">{{$presentacion->presentacion}}</option>
@@ -451,7 +451,7 @@
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Calibre</label>
-                                        <select id="calibre_id" name="calibre_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
+                                        <select id="calibre_id" name="calibre_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
                                             <option></option>
                                             @foreach($calibres as $calibre)
                                                 <option value="{{$calibre->id}}">{{$calibre->calibre}}</option>
@@ -460,17 +460,17 @@
                                     </div>
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Tipo de Fruta</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder="Ingresa el tipo de fruta" name="tipo_fruta" id="tipo_fruta" />
+                                        <input type="text" class="form-control" placeholder="Ingresa el tipo de fruta" name="tipo_fruta" id="tipo_fruta" />
                                     </div>
                                 </div>
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">N° Cajas</label>
-                                        <input type="number" class="form-control form-control-solid" placeholder="Ingresa el n° de cajas" name="cajas" id="cajas" />
+                                        <input type="number" class="form-control" placeholder="Ingresa el n° de cajas" name="cajas" id="cajas" />
                                     </div>
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">N° Registros</label>
-                                        <input type="number" class="form-control form-control-solid" placeholder="Ingresa el n° de registros" name="n_registros" id="n_registros" value="1" min="1" />
+                                        <input type="number" class="form-control" placeholder="Ingresa el n° de registros" name="n_registros" id="n_registros" value="1" min="1" />
                                     </div>
                                 </div>
                             </div>

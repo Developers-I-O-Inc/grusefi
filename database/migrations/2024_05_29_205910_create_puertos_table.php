@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('cat_puertos', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('municipio_id')->unsigned()->index();
-            $table->string('puerto');
-            $table->string('nombre_corto');
-            $table->string('medio_transporte');
+            $table->string('puerto', 50);
+            $table->string('nombre_corto', 10);
+            $table->string('medio_transporte', 50);
             $table->tinyInteger('placas')->default(1);
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();

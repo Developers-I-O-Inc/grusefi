@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cat_calibres', function (Blueprint $table) {
             $table->id();
-            $table->string('calibre',  length: 10);
+            $table->string('calibre', 10);
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
             $table->softDeletes();

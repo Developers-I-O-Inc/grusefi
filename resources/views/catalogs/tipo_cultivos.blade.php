@@ -23,12 +23,12 @@
                                     fill="black" />
                             </svg>
                         </span>
-                        <input type="text" data-kt-tipo_cultivo-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar tipo_cultivos" />
+                        <input type="text" data-kt-tipo_cultivo-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar tipo de cultivo" />
                     </div>
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-tipo_cultivo-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar tipo de cultivo</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Tipo de cultivo</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-tipo_cultivo-table-toolbar="selected">
@@ -69,7 +69,7 @@
                     <form class="form" action="#" id="kt_modal_add_tipo_cultivo_form"
                         data-kt-redirect="../../demo6/dist/apps/tipo_cultivos/list.html">
                         <div class="modal-header" id="kt_modal_add_tipo_cultivo_header">
-                            <h2 class="fw-bolder">Agregar tipo de cultivo</h2>
+                            <h2 class="fw-bolder">Agregar Tipo de cultivo</h2>
                             <div id="kt_modal_add_tipo_cultivo_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -87,26 +87,26 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_tipo_cultivo_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_tipo_cultivo_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Tipo de Cultivo</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el tipo de cultivo" name="tipo_cultivo" id="tipo_cultivo" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_tipo_cultivo" id="id_tipo_cultivo" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el tipo de cultivo" name="tipo_cultivo" id="tipo_cultivo" autocomplete="off"/>
+                                    <input type="text" class="form-control d-none" name="id_tipo_cultivo" id="id_tipo_cultivo" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Tipo</label>
-                                    <select id="tipo" name="tipo" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_tipo_cultivo" data-placeholder="Selecciona un País" data-allow-clear="true">
+                                    <select id="tipo" name="tipo" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_tipo_cultivo" data-placeholder="Selecciona un País" data-allow-clear="true">
                                         <option></option>
                                         <option value="Orgánico">Orgánico</option>
                                         <option value="Convencional">Convencional</option>
                                     </select>
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
                                     <label class="form-check-label" for="activo">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
+                                <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

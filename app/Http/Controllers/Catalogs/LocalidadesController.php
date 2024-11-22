@@ -58,7 +58,7 @@ class LocalidadesController extends Controller
                     ->make(true);
         }
 
-        $paises = Paises::all();
+        $paises = Paises::where('activo', '=', 1)->get();
 
         return view('catalogs/localidades', array("paises" => $paises));
     }
@@ -102,7 +102,8 @@ class LocalidadesController extends Controller
     }
 
     public function get_localidades(Request $request){
-        $localidades = Localidades::where('municipio_id', '=', $request->query('id'))->get();
+        $localidades = Localidades::where('municipio_id', '=', $request->query('id'))
+            ->where('activo', 1)->get();
         return response()->json(["ok" => "OK", "catalogo" => $localidades]);
     }
 

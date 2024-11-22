@@ -97,35 +97,35 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_regulacion_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_regulacion_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Pais</label>
-                                    <select id="pais_id" name="pais_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_regulacion" data-placeholder="Selecciona un país" data-allow-clear="true">
+                                    <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_regulacion" data-placeholder="Selecciona un país" data-allow-clear="true">
                                         <option></option>
                                         @foreach($paises as $pais)
                                             <option value="{{$pais->id}}">{{$pais->nombre}}</option>
                                         @endforeach
                                     </select>
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_regulacion" id="id_regulacion" />
+                                    <input type="text" class="form-control d-none" name="id_regulacion" id="id_regulacion" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Dictamen Apartado #4</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el dictamen #4" name="dictamen_apartado_4" id="dictamen_apartado_4" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el dictamen #4" name="dictamen_apartado_4" id="dictamen_apartado_4" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Dictamen Apartado #5</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el dictamen #5" name="dictamen_apartado_5" id="dictamen_apartado_5" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el dictamen #5" name="dictamen_apartado_5" id="dictamen_apartado_5" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Dictamen Apartado #11</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el dictamen #11" name="dictamen_apartado_11" id="dictamen_apartado_11" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el dictamen #11" name="dictamen_apartado_11" id="dictamen_apartado_11" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre País Dictamen</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un país" name="nombre_pais_dictamen" id="nombre_pais_dictamen" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un país" name="nombre_pais_dictamen" id="nombre_pais_dictamen" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Nombre País Certificado</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un páis" name="nombre_pais_certificado" id="nombre_pais_certificado" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un páis" name="nombre_pais_certificado" id="nombre_pais_certificado" />
                                 </div>
 
                                 <div class="fv-row mb-7">
@@ -134,7 +134,7 @@
                                         Activo para embarques
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo_embarques" id="activo_embarques" value="0"/>
+                                <input type="text" class="form-control d-none" name="activo_embarques" id="activo_embarques" value="0"/>
 
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="0" id="check_inspector" name="check_inspector"/>
@@ -142,7 +142,7 @@
                                         Requiere Inspector
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="rq_inspector" id="rq_inspector" value="0"/>
+                                <input type="text" class="form-control d-none" name="rq_inspector" id="rq_inspector" value="0"/>
 
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="0" id="check_huertas" name="check_huertas"/>
@@ -150,7 +150,7 @@
                                         Requiere Huertas
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="rq_huertas" id="rq_huertas" value="0"/>
+                                <input type="text" class="form-control d-none" name="rq_huertas" id="rq_huertas" value="0"/>
 
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="0" id="check_analisis" name="check_analisis"/>
@@ -158,7 +158,7 @@
                                         Requiere Estudios de Análisis
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="rq_estudios_analisis" id="rq_estudios_analisis" value="0"/>
+                                <input type="text" class="form-control d-none" name="rq_estudios_analisis" id="rq_estudios_analisis" value="0"/>
 
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="0" id="check_impresion" name="check_impresion"/>
@@ -166,7 +166,7 @@
                                         Requiere Impresión de Anexo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="rq_impresion" id="rq_impresion" value="0"/>
+                                <input type="text" class="form-control d-none" name="rq_impresion" id="rq_impresion" value="0"/>
 
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="" id="active_check" name="active_check"/>
@@ -174,7 +174,7 @@
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
+                                <input type="text" class="form-control d-none" name="activo" id="activo" value="0"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

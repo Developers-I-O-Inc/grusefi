@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-variedad-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar variedad</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Variedad</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-variedad-table-toolbar="selected">
@@ -66,10 +66,9 @@
         <div class="modal fade" id="kt_modal_add_variedad" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_variedad_form"
-                        data-kt-redirect="../../demo6/dist/apps/variedades/list.html">
+                    <form class="form" action="#" id="kt_modal_add_variedad_form">
                         <div class="modal-header" id="kt_modal_add_variedad_header">
-                            <h2 class="fw-bolder">Agregar variedad</h2>
+                            <h2 class="fw-bolder">Agregar Variedad</h2>
                             <div id="kt_modal_add_variedad_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -87,14 +86,14 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_variedad_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_variedad_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre variedad</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="variedad" id="variedad" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_variedad" id="id_variedad" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="variedad" id="variedad" autocomplete="off"/>
+                                    <input type="text" class="form-control d-none" name="id_variedad" id="id_variedad" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Tipo de cultivo</label>
-                                    <select id="tipo_cultivo_id" name="tipo_cultivo_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_variedad" data-placeholder="Selecciona un País" data-allow-clear="true">
+                                    <select id="tipo_cultivo_id" name="tipo_cultivo_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_variedad" data-placeholder="Selecciona un tipo de cultivo" data-allow-clear="true">
                                         <option></option>
                                         @foreach($tipo_cultivos as $cultivo)
                                             <option value="{{$cultivo->id}}">{{$cultivo->tipo_cultivo}}</option>
@@ -102,12 +101,12 @@
                                     </select>
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
                                     <label class="form-check-label" for="activo">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
+                                <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

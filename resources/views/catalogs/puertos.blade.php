@@ -71,10 +71,9 @@
         <div class="modal fade" id="kt_modal_add_puerto" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_puerto_form"
-                        data-kt-redirect="../../demo6/dist/apps/puertos/list.html">
+                    <form class="form" action="#" id="kt_modal_add_puerto_form">
                         <div class="modal-header" id="kt_modal_add_puerto_header">
-                            <h2 class="fw-bolder">Agregar puerto</h2>
+                            <h2 class="fw-bolder">Agregar Puerto</h2>
                             <div id="kt_modal_add_puerto_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -92,9 +91,9 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_puerto_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_puerto_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Pais</label>
-                                    <select id="pais_id" name="pais_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_puerto" data-placeholder="Selecciona un país" data-allow-clear="true">
+                                    <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_puerto" data-placeholder="Selecciona un país" data-allow-clear="true">
                                         <option></option>
                                         @foreach($paises as $pais)
                                             <option value="{{$pais->id}}">{{$pais->nombre}}</option>
@@ -102,30 +101,30 @@
                                     </select>
                                     <input type="text" class="form-control form-control-solid d-none" name="id_regulacion" id="id_regulacion" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Estado</label>
-                                    <select id="estado_id" name="estado_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_puerto" data-placeholder="Selecciona un estado" data-allow-clear="true">
+                                    <select id="estado_id" name="estado_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_puerto" data-placeholder="Selecciona un estado" data-allow-clear="true">
                                         <option value=""></option>
                                     </select>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Municipio</label>
-                                    <select id="municipio_id" name="municipio_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_puerto" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                    <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_puerto" data-placeholder="Selecciona un municipio" data-allow-clear="true">
                                         <option value=""></option>
                                     </select>
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Puerto</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un puerto" name="puerto" id="puerto" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_puerto" id="id_puerto" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un puerto" name="puerto" id="puerto" />
+                                    <input type="text" class="form-control d-none" name="id_puerto" id="id_puerto" />
                                 </div>
-                                <div class="fv-row mb-7">
+                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" />
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Medio de Transporte</label>
-                                    <select id="medio_transporte" name="medio_transporte" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_puerto" data-placeholder="Selecciona un medio de transporte" data-allow-clear="true">
+                                    <select id="medio_transporte" name="medio_transporte" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_puerto" data-placeholder="Selecciona un medio de transporte" data-allow-clear="true">
                                         <option value=""></option>
                                         <option value="AEREO">AEREO</option>
                                         <option value="MARITIMO">MARITIMO</option>
@@ -138,14 +137,14 @@
                                         PLACAS
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="placas" id="placas" value="0"/>
+                                <input type="text" class="form-control d-none" name="placas" id="placas" value="0"/>
                                 <div class="fv-row mb-7">
-                                    <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
                                     <label class="form-check-label" for="activo">
                                         Activo
                                     </label>
                                 </div>
-                                <input type="text" class="form-control form-control-solid d-none" name="activo" id="activo" value="0"/>
+                                <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
