@@ -249,6 +249,42 @@ class Operation {
             return (false)
         }
     }
+
+    validate_plantilla(url, type_route){
+        fetch(url, {
+            method: type_route,
+            headers:{
+                'Content-Type': 'application/json',
+                "X-CSRF-TOKEN": this.token,
+            }
+        })
+        .then(response =>{
+            if(!response.ok){
+                Swal.fire({
+                    title: "Advertencia!",
+                    text: "Actualmente no existe ninguna plantilla con el país ni variedad seleccionada!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#1F4529",
+                    confirmButtonText: "Crear plantilla",
+                    cancelButtonText: "Cancelar"
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'plantillas_rpv'
+                    }
+                  })
+                throw new Error('Error en la base de datos')
+            }
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
 }
 
 export default new Operation()

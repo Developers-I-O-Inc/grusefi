@@ -73,4 +73,14 @@ class PlantillasController extends Controller
         $pdf = PDF::loadView('operation/reports/dicatamen_embarque', compact("plantilla", "embarque", "embarques_marcas"));
         return $pdf->stream('embarque.pdf');
     }
+
+    public function validate_plantilla($pais, $variedad){
+        $count_pais = PlantillaRPV::where("pais_id",$pais)->where('variedad_id', $variedad)->count();
+        if($count_pais > 0 ){
+            return response()->json(['mensaje' => 'si esta'], 200);
+        }
+        else{
+            return response()->json(['mensaje' => 'El país ya tiene una plantilla registrada'], 422);
+        }
+    }
 }
