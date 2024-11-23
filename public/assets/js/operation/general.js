@@ -250,7 +250,7 @@ class Operation {
         }
     }
 
-    validate_plantilla(url, type_route){
+    validate_plantilla(url, type_route, pais_id, variedad_id) {
         fetch(url, {
             method: type_route,
             headers:{
@@ -270,7 +270,9 @@ class Operation {
                     cancelButtonText: "Cancelar"
                   }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = 'plantillas_rpv'
+                        let messageType = 'Alerta'
+                        let message = 'Actualmente no existe ninguna plantilla con el país ni variedad seleccionada!'
+                        window.location.href = `plantillas_rpv?message_type=${messageType}&message=${message}&variedad_id=${variedad_id}&pais_id=${pais_id}`;
                     }
                   })
                 throw new Error('Error en la base de datos')

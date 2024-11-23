@@ -437,8 +437,9 @@ var KTCreateAccount = (function () {
                           });
                     }
                     else{
-                        Operation.validate_plantilla(`validate_plantilla/${select_pais.val()}/${select_variedad.val()}`, 'GET')
-                        // Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion, true)
+                        Operation.validate_plantilla(`validate_plantilla/${select_pais.val()}/${select_variedad.val()}`, 'GET',
+                            select_pais.find('option:selected').text(), select_variedad.find('option:selected').text())
+                        Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion, true)
                     }
                 })
                 // CLOSE MODAL

@@ -334,7 +334,7 @@
                                             <div style="width: 20%; padding-right: 16px; text-align: center;">
                                                 <div>Productos</div>
                                                 @if($embarque)
-                                                    <button href="#" class="btn btn-icon btn-light-success pulse pulse-success" data-embarque="0" id="btn_products" >
+                                                    <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" data-embarque="0" id="btn_products" >
                                                         <span class="svg-icon svg-icon-1"><i class="bi bi-box-arrow-up-right fs-2"></i></span>
                                                         <span class="pulse-ring w-45px h-45px"></span>
                                                     </button>
@@ -361,7 +361,7 @@
                                             <div style="width: 30%;">
                                                 <div>Marcas distintivas</div>
                                                 @if($embarque)
-                                                    <button href="#" class="btn btn-icon btn-light-success pulse pulse-success" id="btn_marcas" data-embarque="0">
+                                                    <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" id="btn_marcas" data-embarque="0">
                                                         <span class="svg-icon svg-icon-1"><i class="bi bi-box-arrow-up-right fs-2"></i></span>
                                                         <span class="pulse-ring w-45px h-45px"></span>
                                                     </button>
