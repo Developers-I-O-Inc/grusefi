@@ -13,7 +13,13 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class PlantillasController extends Controller
 {
-    public function plantillas_rpv(){
+    public function plantillas_rpv(Request $request){
+        if ($request->has('message_type') && $request->has('message')) {
+            session()->flash('message_type', $request->query('message_type'));
+            session()->flash('message', $request->query('message'));
+            session()->flash('pais_id', $request->query('pais_id'));
+            session()->flash('variedad_id', $request->query('variedad_id'));
+        }
         $paises = Paises::all();
         $variedades = Variedades::all();
         return view("operation/rpv", compact('paises', 'variedades'));

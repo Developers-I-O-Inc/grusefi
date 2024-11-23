@@ -277,6 +277,7 @@ var KTadminlist = (function () {
                     table_items.ajax.reload()
                 })
                 btn_products.addEventListener('click', function () {
+                    // e.preventDefault()
                     fetch(`get_products_embarque/${$(this).data("embarque")}`, {
                         method: "GET",
                         headers:{
