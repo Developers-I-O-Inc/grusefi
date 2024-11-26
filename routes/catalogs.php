@@ -59,3 +59,6 @@ Route::get('get_usos', 'UsosController@get_usos');
 // VARIEDADES
 Route::resource('variedades', 'VariedadesController');
 Route::post('destroy_variedades', 'VariedadesController@destroy_variedades');
+// VARIEDADES
+Route::resource('vigencias', 'VigenciasController');
+Route::post('destroy_vigencias', 'VigenciasController@destroy_vigencias');
