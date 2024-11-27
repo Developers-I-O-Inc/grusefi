@@ -1,4 +1,4 @@
-@props(['embarque' => false])
+@props(['embarque' => false, 'vigencias' => $vigencias])
 <style>
     .watermark{
         position: relative;
@@ -771,11 +771,11 @@
                                 <div class="m-t-md" style="display: flex; justify-content: flex-end;">
                                     <div class="m-r-sm">
                                         Clave de aprobación:
-                                        <input id="clave_aprobacion" type="text" name="clave_aprobacion" value="" maxlength="50" class="p_input">
+                                        <input id="clave_aprobacion" type="text" name="clave_aprobacion" value="{{$vigencias != null ? $vigencias[0]->clave_aprobacion : ''}}" maxlength="50" class="p_input">
                                     </div>
                                     <div>
                                         Vigencia:
-                                        <input id="vigencia" type="text" name="vigencia" value="" maxlength="50" class="p_input">
+                                        <input id="vigencia" type="text" name="vigencia" value="{{$vigencias != null ? $vigencias[0]->vigencia : ''}}" maxlength="50" class="p_input">
                                     </div>
                                 </div>
                             </div>

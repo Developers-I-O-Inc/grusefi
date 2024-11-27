@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Operation;
 use App\Http\Controllers\Controller;
 use App\Models\Catalogs\Paises;
 use App\Models\Catalogs\Variedades;
+use App\Models\Catalogs\Vigencias;
 use App\Models\Operation\Embarques;
 use App\Models\Operation\EmbarquesMarcas;
 use App\Models\Operation\PlantillaRPV;
@@ -20,9 +21,10 @@ class PlantillasController extends Controller
             session()->flash('pais_id', $request->query('pais_id'));
             session()->flash('variedad_id', $request->query('variedad_id'));
         }
-        $paises = Paises::all();
-        $variedades = Variedades::all();
-        return view("operation/rpv", compact('paises', 'variedades'));
+        $paises = Paises::where('activo', 1)->get();
+        $variedades = Variedades::where('activo', 1)->get();
+        $vigencias = Vigencias::where('activo', 1)->get();
+        return view("operation/rpv", compact('paises', 'variedades', 'vigencias'));
     }
 
     public function save_plantilla(Request $request) {
