@@ -112,6 +112,7 @@
                             <div class="row mb-12">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Empaque</label>
+                                    <input type="text" class="form-control d-none" placeholder="Ingresa el número económico" name="vigencia_id" id="vigencia_id" value="{{$vigencia->id}}" />
                                     <select id="empaque_id" name="empaque_id" class="form-select" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
                                         <option value=""></option>
                                         @foreach($empaques as $empaque)

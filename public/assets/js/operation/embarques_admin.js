@@ -23,6 +23,7 @@ var KTadminlist = (function () {
         end_date,
         modal,
         modal_marcas,
+        modal_upload,
         select_presentacion,
         table_products,
         table_marcas,
@@ -68,6 +69,68 @@ var KTadminlist = (function () {
             .then(data => {
                 Swal.fire({
                     text: "Datos guardados exitosamente!",
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Entendido!",
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                    },
+                }).then(({ isConfirmed }) => {
+                    if (isConfirmed) {
+                        location.reload()
+                    }
+                })
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+            })
+            Swal.fire({
+                title: "<strong>Cargando</strong>",
+                html: `<div class="progress container-fluid"></div>`,
+                showConfirmButton: false,
+            })
+        },
+        finish_embarque = (formulario, embarque_id) => {
+            const clase = "p_input"
+            const inputs = formulario.querySelectorAll(`input.${clase}`)
+            let datosFormulario = {}
+            datosFormulario = {
+                embarque_id: embarque_id,
+                folio_embarque: edit_folio.value
+            }
+            Array.from(inputs).forEach(input => {
+                switch(input.type) {
+                    case 'checkbox':
+                        datosFormulario[input.id] = input.checked
+                        break
+                    case 'radio':
+                        if(input.checked) {
+                            datosFormulario[input.name] = input.value
+                        }
+                        break
+                    case 'select-multiple':
+                        datosFormulario[input.id] = Array.from(input.selectedOptions).map(option => option.value)
+                        break
+                    default:
+                        datosFormulario[input.id] = input.value
+                }
+            })
+            fetch(`finish_embarque_rpv`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                },
+                body: JSON.stringify(datosFormulario)
+            })
+            .then(
+                async response => {
+                    return response.json();
+                }
+            )
+            .then(data => {
+                Swal.fire({
+                    text: "Datos guardados y embarque terminado exitosamente!",
                     icon: "success",
                     buttonsStyling: false,
                     confirmButtonText: "Entendido!",
@@ -163,6 +226,28 @@ var KTadminlist = (function () {
 
                 })
             })
+        },
+        upload = () => {
+            n.querySelectorAll(
+                '[data-kt-admin-table-filter="upload"]'
+            ).forEach((e) => {
+                e.addEventListener("click", function (e) {
+                    e.preventDefault()
+                    modal_upload.show()
+
+                })
+            })
+        }
+        print = () => {
+            n.querySelectorAll(
+                '[data-kt-admin-table-filter="print"]'
+            ).forEach((e) => {
+                e.addEventListener("click", function (e) {
+                    e.preventDefault()
+                    Swal.fire("Esta en mantenimiento")
+
+                })
+            })
         }
         return {
             init: function () {
@@ -173,6 +258,7 @@ var KTadminlist = (function () {
                 })),
                 (modal = new bootstrap.Modal(document.querySelector("#kt_modal_edit_products"))),
                 (modal_marcas = new bootstrap.Modal(document.querySelector("#kt_modal_edit_marcas"))),
+                (modal_upload = new bootstrap.Modal(document.querySelector("#kt_modal_upload"))),
                 (span_fecha_embarque = document.querySelector('#fecha_embarque')),
                 (select_presentacion = $('#presentacion_id').select2()),
                 (form_products = document.querySelector("#kt_modal_add_product_form")),
@@ -230,7 +316,7 @@ var KTadminlist = (function () {
                                 `<span class="loader"></span>`
                         },
                     }).on("draw", function () {
-                        edit()
+                        edit(), upload(), print()
                     })
                 )
                 ),
@@ -345,6 +431,11 @@ var KTadminlist = (function () {
                 btn_save.addEventListener("click", function (t) {
                     t.preventDefault()
                     save_embarque(form_rpv, embarque_id)
+                })
+                // SAVE EMBARQUE RPV
+                btn_finish.addEventListener("click", function (t) {
+                    t.preventDefault()
+                    finish_embarque(form_rpv, embarque_id)
                 })
                 // ADD Product
                 btn_add_product.addEventListener("click", function (t) {

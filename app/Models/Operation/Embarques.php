@@ -15,6 +15,7 @@ class Embarques extends Model
     protected $fillable = [
         'empaque_id',
         'variedad_id',
+        'vigencia_id',
         'destinatario_id',
         'pais_id',
         'puerto_id',
@@ -51,7 +52,9 @@ class Embarques extends Model
             CONCAT_WS(', ', puerto,
             mpuertos.nombre) AS puerto,
             CONCAT_WS(', PLACAS:S', medio_transporte,
-            placas) AS transporte
+            placas) AS transporte,
+            vigencia,
+            clave_aprobacion
             FROM op_embarques
             LEFT JOIN cat_empaques AS empaques ON op_embarques.empaque_id = empaques.id
             LEFT JOIN cat_localidades ON empaques.localidad_id = cat_localidades.id
@@ -59,6 +62,7 @@ class Embarques extends Model
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
             LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
             LEFT JOIN cat_municipios AS mpuertos ON cat_puertos.municipio_id = mpuertos.id
+            LEFT JOIN cat_vigencias ON op_embarques.vigencia_id = cat_vigencias.id
             WHERE op_embarques.id = ?
         ", [$id]);
 
@@ -66,7 +70,7 @@ class Embarques extends Model
     }
 
     public static function get_embarques_admin(){
-        return DB::select("SELECT op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre
+        return DB::select("SELECT op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
             FROM op_embarques
             LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
@@ -78,7 +82,7 @@ class Embarques extends Model
     }
 
     public static function get_embarques_admin_by_dates($start_date, $end_date){
-        return DB::select("SELECT op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre
+        return DB::select("SELECT op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
             FROM op_embarques
             LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
