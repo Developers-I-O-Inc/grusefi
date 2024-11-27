@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('puerto_id')->unsigned()->index();
             $table->bigInteger('tefs_id')->unsigned()->index();
             $table->bigInteger('variedad_id')->unsigned()->index();
+            $table->bigInteger('vigencia_id')->unsigned()->index();
             $table->bigInteger('consolidado_id')->nullable();
             $table->string('folio_embarque')->default('EMB-');
             $table->date('fecha_embarque');
@@ -35,6 +36,7 @@ return new class extends Migration
             $table->foreign('pais_id')->references('id')->on('cat_paises');
             $table->foreign('puerto_id')->references('id')->on('cat_puertos');
             $table->foreign('variedad_id')->references('id')->on('cat_variedades');
+            $table->foreign('vigencia_id')->references('id')->on('cat_vigencias');
             $table->timestamps();
         });
     }

@@ -89,7 +89,7 @@
                         <div id="kt_accordion_1_body_2" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
                             <div class="accordion-body">
                                 <form id="form_rpv">
-                                    <x-table-rpv :embarque="true" />
+                                    <x-table-rpv :embarque="true" :vigencias="null"/>
                                 </form>
                             </div>
                         </div>
@@ -311,6 +311,44 @@
                                 <span class="indicator-label">Guardar</span>
                                 <span class="indicator-progress">Espere un momento...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="kt_modal_upload" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered mw-850px">
+                <div class="modal-content">
+                        <div class="modal-header" id="kt_modal_add_product_header">
+                            <h2 class="fw-bolder">Archivos del Embarque</h2>
+                            <div id="kt_modal_add_product_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                            transform="rotate(45 7.41422 6)" fill="black" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="modal-body py-10 px-lg-17">
+                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_product_scroll" data-kt-scroll="true"
+                                data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+                                data-kt-scroll-dependencies="#kt_modal_add_product_header"
+                                data-kt-scroll-wrappers="#kt_modal_add_product_scroll" data-kt-scroll-offset="300px">
+                                <div class="card-body">
+                                   <h1>Este modulo esta en construcción, aquí se podran subir todos los documentos firmados</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer flex-center">
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-light me-3">Cancelar</button>
+                            <button type="button" id="btn_upload" class="btn btn-primary">
+                                <span class="indicator-label">Guardar</span>
+                                <span class="indicator-progress">Espere un momento...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                             </button>
                         </div>
                 </div>

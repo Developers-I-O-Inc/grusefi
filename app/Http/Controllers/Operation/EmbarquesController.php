@@ -12,6 +12,7 @@ use App\Models\Catalogs\Paises;
 use App\Models\Catalogs\Presentaciones;
 use App\Models\Catalogs\TipoCultivos;
 use App\Models\Catalogs\Variedades;
+use App\Models\Catalogs\Vigencias;
 use App\Models\Operation\EmbarquesMarcas;
 use App\Models\Operation\EmbarquesMaquiladores;
 use App\Models\Operation\Embarques;
@@ -35,7 +36,8 @@ class EmbarquesController extends Controller
         $calibres = Calibres::where('activo', 1)->get();
         $presentaciones = Presentaciones::where('activo', 1)->get();
         $variedades = Variedades::where('activo', 1)->get();
-        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'calibres', 'presentaciones', 'variedades'));
+        $vigencia = Vigencias::select('id')->where('activo', 1)->first();
+        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'calibres', 'presentaciones', 'variedades', 'vigencia'));
 
     }
     /**
@@ -51,6 +53,7 @@ class EmbarquesController extends Controller
             'empaque_id',
             'destinatario_id',
             'variedad_id',
+            'vigencia_id',
             'pais_id',
             'puerto_id',
             'fecha_embarque',
@@ -86,7 +89,9 @@ class EmbarquesController extends Controller
                         $embarqueRPVData['variedad_id'],
                         $embarqueRPVData['created_at'],
                         $embarqueRPVData['updated_at'],
-                        $embarqueRPVData['deleted_at']
+                        $embarqueRPVData['deleted_at'],
+                        $embarqueRPVData['clave_aprobacion'],
+                        $embarqueRPVData['vigencia']
                     );
 
                     // Agregamos el nuevo campo 'embarque_id'
@@ -177,7 +182,9 @@ class EmbarquesController extends Controller
 
             return Datatables::of($calibres) ->addIndexColumn()
             ->addColumn('buttons', function($row){
-                   $btn = '<button data-id="'.$row->id.'" type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-kt-admin-table-filter="edit">
+                $btn = "";
+                if($row->status != "Finalizado"){
+                    $btn = '<button data-id="'.$row->id.'" type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-kt-admin-table-filter="edit">
                         <span class="svg-icon svg-icon-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black"></path>
@@ -193,7 +200,28 @@ class EmbarquesController extends Controller
                                 </svg>
                             </span>
                     </button>';
-                    return $btn;
+                }
+
+                else{
+                    $btn = '<button data-id="'.$row->id.'" type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-kt-admin-table-filter="print">
+                        <span class="svg-icon svg-icon-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14V4H6V20H18V8H20V21C20 21.6 19.6 22 19 22Z" fill="black"/>
+                                    <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black"/>
+                                </svg>
+                            </span>
+                    </button>
+                    <button data-id="'.$row->id.'" type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-kt-admin-table-filter="upload">
+                        <span class="svg-icon svg-icon-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path opacity="0.3" d="M5 16C3.3 16 2 14.7 2 13C2 11.3 3.3 10 5 10H5.1C5 9.7 5 9.3 5 9C5 6.2 7.2 4 10 4C11.9 4 13.5 5 14.3 6.5C14.8 6.2 15.4 6 16 6C17.7 6 19 7.3 19 9C19 9.4 18.9 9.7 18.8 10C18.9 10 18.9 10 19 10C20.7 10 22 11.3 22 13C22 14.7 20.7 16 19 16H5ZM8 13.6H16L12.7 10.3C12.3 9.89999 11.7 9.89999 11.3 10.3L8 13.6Z" fill="black"/>
+                                <path d="M11 13.6V19C11 19.6 11.4 20 12 20C12.6 20 13 19.6 13 19V13.6H11Z" fill="black"/>
+                            </svg>
+                        </span>
+                    </button>
+                    ';
+                }
+                return $btn;
             })
             ->rawColumns(['buttons'])
             ->make(true);
@@ -201,7 +229,8 @@ class EmbarquesController extends Controller
         }
         $categorias = Categorias::where('activo', 1)->get();
         $calibres = Calibres::where('activo', 1)->get();
-        return view("operation/embarques_admin", compact('categorias', 'calibres'));
+        $vigencias = Vigencias::where('activo', 1)->get();
+        return view("operation/embarques_admin", compact('categorias', 'calibres', 'vigencias'));
     }
 
     public function get_embarque_edit($embarque_id)
@@ -267,9 +296,32 @@ class EmbarquesController extends Controller
         $datos = $request->json()->all();
         $embarque = Embarques::find($request->embarque_id);
         $embarque->folio_embarque = $request->folio_embarque;
+        $embarque->status = "Modificado";
         $embarque->save();
         $registro = EmbarquesRPV::where('embarque_id', $request->embarque_id)->first();
         unset($datos['folio_embarque']);
+        unset($datos['clave_aprobacion']);
+        unset($datos['vigencia']);
+        foreach ($datos as $campo => $valor) {
+            $registro->$campo = $valor;
+        }
+
+        $registro->save();
+
+        return response()->json(['mensaje' => 'Datos guardados con éxito'], 200);
+    }
+
+    public function finish_embarque_rpv(Request $request)
+    {
+        $datos = $request->json()->all();
+        $embarque = Embarques::find($request->embarque_id);
+        $embarque->folio_embarque = $request->folio_embarque;
+        $embarque->status = "Finalizado";
+        $embarque->save();
+        $registro = EmbarquesRPV::where('embarque_id', $request->embarque_id)->first();
+        unset($datos['folio_embarque']);
+        unset($datos['clave_aprobacion']);
+        unset($datos['vigencia']);
         foreach ($datos as $campo => $valor) {
             $registro->$campo = $valor;
         }

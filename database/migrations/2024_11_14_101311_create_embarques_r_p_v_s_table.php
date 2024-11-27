@@ -115,8 +115,6 @@ return new class extends Migration
             $table->boolean('cfe_debe_CFI');
             $table->boolean('cfe_aplica_flete_CFI');
             $table->boolean('cfe_no_debe_CFI');
-            $table->string('clave_aprobacion', 50);
-            $table->string('vigencia', 50);
             $table->timestamps();
             $table->softdeletes();
             $table->foreign('embarque_id')->references('id')->on('op_embarques');
