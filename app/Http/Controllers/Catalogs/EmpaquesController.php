@@ -102,7 +102,8 @@ class EmpaquesController extends Controller
             'sader',
             'exportacion',
             'asociado',
-            'activo'
+            'activo',
+            'tipo'
         ]);
 
         // Manejo de la imagen

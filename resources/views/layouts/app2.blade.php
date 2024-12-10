@@ -132,7 +132,7 @@
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Empaques</span>
+                                            <span class="menu-title">Clientes</span>
                                             <span class="menu-arrow"></span>
                                         </span>
                                         <div class="menu-sub menu-sub-accordion">
@@ -186,7 +186,7 @@
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Puertos</span>
+                                            <span class="menu-title">Puntos de Entrada</span>
                                         </a>
                                     </div>
                                     <div class="menu-item">

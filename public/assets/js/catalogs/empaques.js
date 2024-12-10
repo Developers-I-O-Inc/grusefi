@@ -33,7 +33,9 @@ var KTempaqueesList = (function () {
         edit_sader,
         edit_codigo,
         edit_active,
+        edit_tipo,
         check_active,
+        check_tipo,
         check_exportacion,
         check_asociado,
         select_municipio,
@@ -72,6 +74,14 @@ var KTempaqueesList = (function () {
                         Catalogs.checked_edit(data.empaque[0].exportacion, edit_exportacion, check_exportacion)
                         Catalogs.checked_edit(data.empaque[0].asociado, edit_asociado, check_asociado)
                         Catalogs.checked_edit(data.empaque[0].activo, edit_active, check_active)
+                        if(data.empaque[0].tipo == "Física"){
+                            edit_tipo.value = "Física"
+                            check_tipo.checked = true
+                        }
+                        else{
+                            edit_tipo.value = "Moral"
+                            check_tipo.checked = false
+                        }
                         image_empaque.style.backgroundImage = `url('${data.empaque[0].imagen}')`;
                         modal.show()
                     })
@@ -110,7 +120,9 @@ var KTempaqueesList = (function () {
                 (edit_domicilio_documentacion = form.querySelector("#domicilio_documentacion")),
                 (edit_sader = form.querySelector("#sader")),
                 (edit_codigo = form.querySelector("#codigo")),
+                (edit_tipo = form.querySelector("#tipo")),
                 (check_active = form.querySelector("#check_activo")),
+                (check_tipo = form.querySelector("#check_tipo")),
                 (check_exportacion = form.querySelector("#check_exportacion")),
                 (check_asociado = form.querySelector("#check_asociado")),
                 (edit_active = form.querySelector("#activo")),
@@ -333,6 +345,14 @@ var KTempaqueesList = (function () {
                             table_items.search(e.target.value).draw()
                         })
                     )
+                // CHECK TIPO
+                check_tipo.addEventListener("click", function (t) {
+                    if (check_tipo.checked) {
+                        edit_tipo.value = "Física"
+                    } else {
+                        edit_tipo.value = "Moral"
+                    }
+                })
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
