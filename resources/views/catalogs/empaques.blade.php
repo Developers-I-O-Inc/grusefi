@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.1.0/css/fixedColumns.dataTables.min.css">
 
 @endsection
-@section('title', 'Empaques')
-@section('title_top', 'Empaques')
+@section('title', 'Clientes')
+@section('title_top', 'Clientes')
 @section('config', 'active')
-@section('subtitle_top', 'Control de Empaques')
+@section('subtitle_top', 'Control de Clientes')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card">
@@ -25,12 +25,12 @@
                                     fill="black" />
                             </svg>
                         </span>
-                        <input type="text" data-kt-empaque-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar empaques" />
+                        <input type="text" data-kt-empaque-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar clientes" />
                     </div>
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-empaque-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Empaque</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Cliente</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-empaque-table-toolbar="selected">
@@ -227,6 +227,13 @@
                                                         <option value=""></option>
                                                     </select>
                                                 </div>
+                                            </div>
+                                            <div class="fv-row mb-7">
+                                                <input class="form-check-input" type="checkbox" value="Física" id="check_tipo" name="check_tipo"/>
+                                                <label class="form-check-label" for="activo">
+                                                    Física
+                                                </label>
+                                                <input type="text" class="form-control d-none" name="tipo" id="tipo" value="Moral"/>
                                             </div>
                                             <div class="fv-row mb-7">
                                                 <input class="form-check-input" type="checkbox" value="0" id="check_exportacion" name="check_exportacion"/>

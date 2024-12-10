@@ -3,10 +3,10 @@
     <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
 @endsection
-@section('title', 'Puertos')
-@section('title_top', 'Puertos')
+@section('title', 'Puntos de Entrada')
+@section('title_top', 'Puntos de Entrada')
 @section('config', 'active')
-@section('subtitle_top', 'Control de Puertos')
+@section('subtitle_top', 'Control de Puntos de Entrada')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card">
@@ -23,12 +23,12 @@
                                     fill="black" />
                             </svg>
                         </span>
-                        <input type="text" data-kt-puerto-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar puertos" />
+                        <input type="text" data-kt-puerto-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar punto de entrada" />
                     </div>
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-puerto-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Puerto</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Punto de entrada</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-puerto-table-toolbar="selected">
@@ -52,7 +52,7 @@
                             </th>
                             <th class="min-w-65px">Opciones</th>
                             <th class="min-w-125px">id</th>
-                            <th class="min-w-125px">Puerto</th>
+                            <th class="min-w-125px">Punto de Entrada</th>
                             <th class="min-w-125px">Pais</th>
                             <th class="min-w-125px">Estado</th>
                             <th class="min-w-125px">Municipio</th>
@@ -73,7 +73,7 @@
                 <div class="modal-content">
                     <form class="form" action="#" id="kt_modal_add_puerto_form">
                         <div class="modal-header" id="kt_modal_add_puerto_header">
-                            <h2 class="fw-bolder">Agregar Puerto</h2>
+                            <h2 class="fw-bolder">Agregar Punto de Entrada</h2>
                             <div id="kt_modal_add_puerto_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('domicilio_documentacion', 1000);
             $table->string('sader', 50);
             $table->string('codigo', 10);
+            $table->enum('tipo', ["Física", "Moral"]);
             $table->tinyInteger('exportacion')->default(1);
             $table->tinyInteger('asociado')->default(1);
             $table->tinyInteger('activo')->default(1);
