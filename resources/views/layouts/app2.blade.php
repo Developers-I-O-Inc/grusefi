@@ -46,395 +46,410 @@
                         data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu" data-kt-scroll-offset="5px">
                         <div class="menu menu-column menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold"
                             id="#kt_aside_menu" data-kt-menu="true">
-                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
-                                class="menu-item py-2">
-                                <span class="menu-link menu-center @yield("zones")" data-bs-trigger="hover" data-bs-dismiss="click"
-                                    data-bs-placement="right">
-                                    <span class="menu-icon me-0">
-                                        <i class="bi bi-geo-alt"></i>
+                            @can(["ver_zonas"])
+                                <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
+                                    class="menu-item py-2">
+                                    <span class="menu-link menu-center @yield("zones")" data-bs-trigger="hover" data-bs-dismiss="click"
+                                        data-bs-placement="right">
+                                        <span class="menu-icon me-0">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </span>
+                                        <span class="menu-title center">Zona Geográfica</span>
                                     </span>
-                                    <span class="menu-title center">Zona Geográfica</span>
-                                </span>
-                                <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
-                                    <div class="menu-item">
-                                        <div class="menu-content">
-                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Zonas</span>
+                                    <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
+                                        <div class="menu-item">
+                                            <div class="menu-content">
+                                                <span class="menu-section fs-5 fw-bolder ps-1 py-1">Zonas</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/paises">
-                                            {{-- <span class="menu-icon"><i class="bi bi-tag fs-2"></i></span> --}}
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Paises</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/estados">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Estados</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/municipios">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Municipios</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/localidades">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Localidades</span>
-                                        </a>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/paises">
+                                                {{-- <span class="menu-icon"><i class="bi bi-tag fs-2"></i></span> --}}
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Paises</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/estados">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Estados</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/municipios">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Municipios</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/localidades">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Localidades</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
-                                class="menu-item py-2">
-                                <span class="menu-link menu-center @yield("config")" data-bs-trigger="hover" data-bs-dismiss="click"
-                                    data-bs-placement="right">
-                                    <span class="menu-icon me-0">
-                                        <i class="bi bi-wrench"></i>
+                            @endcan
+                            @can(["ver_configuacion"])
+                                <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
+                                    class="menu-item py-2">
+                                    <span class="menu-link menu-center @yield("config")" data-bs-trigger="hover" data-bs-dismiss="click"
+                                        data-bs-placement="right">
+                                        <span class="menu-icon me-0">
+                                            <i class="bi bi-wrench"></i>
+                                        </span>
+                                        <span class="menu-title center">Configuración</span>
                                     </span>
-                                    <span class="menu-title center">Configuración</span>
-                                </span>
-                                <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
-                                    <div class="menu-item center">
-                                        <div class="menu-content text-center">
-                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Configuración General</span>
+                                    <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
+                                        <div class="menu-item center">
+                                            <div class="menu-content text-center">
+                                                <span class="menu-section fs-5 fw-bolder ps-1 py-1">Configuración General</span>
+                                            </div>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/calibres">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Calibres</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/categorias">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Categorías</span>
+                                            </a>
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <span class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Clientes</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                                            <div class="menu-sub menu-sub-accordion">
+                                                <div class="menu-item">
+                                                    <a class="menu-link"
+                                                        href="/catalogs/empaques">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Nuevo</span>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-item">
+                                                    <a class="menu-link"
+                                                        href="/catalogs/destinatarios">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Destinatarios</span>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-item">
+                                                    <a class="menu-link"
+                                                        href="/catalogs/marcas">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Marcas</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/floraciones">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Floraciones</span>
+                                            </a>
+                                        </div> --}}
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/presentaciones">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Presentaciones</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/puertos">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Puntos de Entrada</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/regulaciones">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Regulaciones del País</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/tipo_cultivos">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Tipo de Cultivos</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/usos">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Usos</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/variedades">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Variedades</span>
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/calibres">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Calibres</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/categorias">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Categorías</span>
-                                        </a>
-                                    </div>
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                        <span class="menu-link">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Clientes</span>
-                                            <span class="menu-arrow"></span>
+                                </div>
+                            @endcan
+                            @can(["ver_plantillas"])
+                                <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
+                                    class="menu-item py-2">
+                                    <span class="menu-link menu-center  @yield("purchases")" data-bs-trigger="hover" data-bs-dismiss="click"
+                                        data-bs-placement="right">
+                                        <span class="menu-icon me-0">
+                                            <i class="bi bi-file-earmark"></i>
                                         </span>
-                                        <div class="menu-sub menu-sub-accordion">
+                                        <span class="menu-title">Plantillas</span>
+                                    </span>
+                                    <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
+                                        <div class="menu-item">
+                                            <div class="menu-content">
+                                                <span class="menu-section fs-5 fw-bolder ps-1 py-1">Plantillas</span>
+                                            </div>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/operation/plantillas_rpv">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">DV</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endcan
+                            @can(["ver_embarques"])
+                                <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
+                                    class="menu-item py-2">
+                                    <span class="menu-link menu-center  @yield("purchases")" data-bs-trigger="hover" data-bs-dismiss="click"
+                                        data-bs-placement="right">
+                                        <span class="menu-icon me-0">
+                                            <i class="bi bi-box"></i>
+                                        </span>
+                                        <span class="menu-title">Embarques</span>
+                                    </span>
+                                    <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
+                                        <div class="menu-item">
+                                            <div class="menu-content">
+                                                <span class="menu-section fs-5 fw-bolder ps-1 py-1">Embarques</span>
+                                            </div>
+                                        </div>
+                                        @can(['admin_embarques'])
                                             <div class="menu-item">
-                                                <a class="menu-link"
-                                                    href="/catalogs/empaques">
+                                                <a class="menu-link" href="/operation/embarques">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title">Nuevo</span>
                                                 </a>
                                             </div>
-                                            <div class="menu-item">
-                                                <a class="menu-link"
-                                                    href="/catalogs/destinatarios">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Destinatarios</span>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a class="menu-link"
-                                                    href="/catalogs/marcas">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Marcas</span>
-                                                </a>
-                                            </div>
+                                        @endcan
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/operation/embarques_admin">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Generar RPV</span>
+                                            </a>
                                         </div>
-                                    </div>
-                                    {{-- <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/floraciones">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Floraciones</span>
-                                        </a>
-                                    </div> --}}
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/presentaciones">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Presentaciones</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/puertos">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Puntos de Entrada</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/regulaciones">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Regulaciones del País</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/tipo_cultivos">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Tipo de Cultivos</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/usos">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Usos</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/variedades">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Variedades</span>
-                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
-                                class="menu-item py-2">
-                                <span class="menu-link menu-center  @yield("purchases")" data-bs-trigger="hover" data-bs-dismiss="click"
-                                    data-bs-placement="right">
-                                    <span class="menu-icon me-0">
-                                        <i class="bi bi-file-earmark"></i>
-                                    </span>
-                                    <span class="menu-title">Plantillas</span>
-                                </span>
-                                <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
-                                    <div class="menu-item">
-                                        <div class="menu-content">
-                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Plantillas</span>
-                                        </div>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/operation/plantillas_rpv">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">RPV</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
-                                class="menu-item py-2">
-                                <span class="menu-link menu-center  @yield("purchases")" data-bs-trigger="hover" data-bs-dismiss="click"
-                                    data-bs-placement="right">
-                                    <span class="menu-icon me-0">
-                                        <i class="bi bi-box"></i>
-                                    </span>
-                                    <span class="menu-title">Embarques</span>
-                                </span>
-                                <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
-                                    <div class="menu-item">
-                                        <div class="menu-content">
-                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Embarques</span>
-                                        </div>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/operation/embarques">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Nuevo</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/operation/embarques_admin">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Generar RPV</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
-                                class="menu-item py-2">
-                                <span class="menu-link @yield('admin') menu-center" data-bs-trigger="hover" data-bs-dismiss="click"
-                                    data-bs-placement="right">
-                                    <span class="menu-icon me-0">
-                                        <i class="bi bi-shield-lock fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Administración</span>
-                                </span>
-                                <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
-                                    <div class="menu-item">
-                                        <div class="menu-content">
-                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Administración</span>
-                                        </div>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/admin/roles">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Permisos</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="roles">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Roles</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/admin/users">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Usuarios</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="/catalogs/vigencias">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Vigencias</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
-                                class="menu-item py-2">
-                                <span class="menu-link menu-center" data-bs-trigger="hover" data-bs-dismiss="click"
-                                    data-bs-placement="right">
-                                    <span class="menu-icon me-0">
-                                        <i class="bi bi-file-earmark-lock fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Reportes</span>
-                                </span>
-                                <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
-                                    <div class="menu-item">
-                                        <div class="menu-content">
-                                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Reportes</span>
-                                        </div>
-                                    </div>
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                        <span class="menu-link">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Ventas</span>
-                                            <span class="menu-arrow"></span>
+                            @endcan
+                            @can(["ver_admin"])
+                                <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
+                                    class="menu-item py-2">
+                                    <span class="menu-link @yield('admin') menu-center" data-bs-trigger="hover" data-bs-dismiss="click"
+                                        data-bs-placement="right">
+                                        <span class="menu-icon me-0">
+                                            <i class="bi bi-shield-lock fs-2"></i>
                                         </span>
-                                        <div class="menu-sub menu-sub-accordion">
-                                            <div class="menu-item">
-                                                <a class="menu-link"
-                                                    href="../../demo6/dist/authentication/flows/basic/sign-in.html">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Fechas</span>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a class="menu-link"
-                                                    href="../../demo6/dist/authentication/flows/basic/sign-up.html">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Sucursal</span>
-                                                </a>
+                                        <span class="menu-title">Administración</span>
+                                    </span>
+                                    <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
+                                        <div class="menu-item">
+                                            <div class="menu-content">
+                                                <span class="menu-section fs-5 fw-bolder ps-1 py-1">Administración</span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                        <span class="menu-link">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Ventas</span>
-                                            <span class="menu-arrow"></span>
-                                        </span>
-                                        <div class="menu-sub menu-sub-accordion">
+                                        @role('Super Admin')
                                             <div class="menu-item">
-                                                <a class="menu-link"
-                                                    href="../../demo6/dist/authentication/flows/basic/sign-in.html">
+                                                <a class="menu-link" href="/admin/permissions">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                                    <span class="menu-title">Fechas</span>
+                                                    <span class="menu-title">Permisos</span>
                                                 </a>
                                             </div>
-                                            <div class="menu-item">
-                                                <a class="menu-link"
-                                                    href="../../demo6/dist/authentication/flows/basic/sign-up.html">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Sucursal</span>
-                                                </a>
-                                            </div>
+                                        @endrole
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/admin/roles">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Roles</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/admin/users">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Usuarios</span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/vigencias">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Vigencias</span>
+                                            </a>
                                         </div>
                                     </div>
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                        <span class="menu-link">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Ventas</span>
-                                            <span class="menu-arrow"></span>
+                                </div>
+                            @endcan
+                            @can(["ver_reportes"])
+                                <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
+                                    class="menu-item py-2">
+                                    <span class="menu-link menu-center" data-bs-trigger="hover" data-bs-dismiss="click"
+                                        data-bs-placement="right">
+                                        <span class="menu-icon me-0">
+                                            <i class="bi bi-file-earmark-lock fs-2"></i>
                                         </span>
-                                        <div class="menu-sub menu-sub-accordion">
-                                            <div class="menu-item">
-                                                <a class="menu-link"
-                                                    href="../../demo6/dist/authentication/flows/basic/sign-in.html">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Fechas</span>
-                                                </a>
+                                        <span class="menu-title">Reportes</span>
+                                    </span>
+                                    <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
+                                        <div class="menu-item">
+                                            <div class="menu-content">
+                                                <span class="menu-section fs-5 fw-bolder ps-1 py-1">Reportes</span>
                                             </div>
-                                            <div class="menu-item">
-                                                <a class="menu-link"
-                                                    href="../../demo6/dist/authentication/flows/basic/sign-up.html">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Sucursal</span>
-                                                </a>
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <span class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Ventas</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                                            <div class="menu-sub menu-sub-accordion">
+                                                <div class="menu-item">
+                                                    <a class="menu-link"
+                                                        href="../../demo6/dist/authentication/flows/basic/sign-in.html">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Fechas</span>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-item">
+                                                    <a class="menu-link"
+                                                        href="../../demo6/dist/authentication/flows/basic/sign-up.html">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Sucursal</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <span class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Ventas</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                                            <div class="menu-sub menu-sub-accordion">
+                                                <div class="menu-item">
+                                                    <a class="menu-link"
+                                                        href="../../demo6/dist/authentication/flows/basic/sign-in.html">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Fechas</span>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-item">
+                                                    <a class="menu-link"
+                                                        href="../../demo6/dist/authentication/flows/basic/sign-up.html">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Sucursal</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <span class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Ventas</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                                            <div class="menu-sub menu-sub-accordion">
+                                                <div class="menu-item">
+                                                    <a class="menu-link"
+                                                        href="../../demo6/dist/authentication/flows/basic/sign-in.html">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Fechas</span>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-item">
+                                                    <a class="menu-link"
+                                                        href="../../demo6/dist/authentication/flows/basic/sign-up.html">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Sucursal</span>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -563,20 +578,22 @@
                                                 </div>
                                             </div>
                                             <div class="separator my-2"></div>
-                                            <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
-                                                <a href="#" class="menu-link px-5">
-                                                    <span class="menu-title">Administración</span>
-                                                    <span class="menu-arrow"></span>
-                                                </a>
-                                                <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                                    <div class="menu-item px-3">
-                                                        <a href="/admin/roles" class="menu-link px-5">Roles</a>
-                                                    </div>
-                                                    <div class="menu-item px-3">
-                                                        <a href="/admin/users" class="menu-link px-5">Usuarios</a>
+                                            @can(["ver_admin"])
+                                                <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
+                                                    <a href="#" class="menu-link px-5">
+                                                        <span class="menu-title">Administración</span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
+                                                        <div class="menu-item px-3">
+                                                            <a href="/admin/roles" class="menu-link px-5">Roles</a>
+                                                        </div>
+                                                        <div class="menu-item px-3">
+                                                            <a href="/admin/users" class="menu-link px-5">Usuarios</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endcan
                                             <div class="menu-item px-5">
                                                 <a href="user/profile" class="menu-link px-5">Mi Perfil</a>
                                             </div>

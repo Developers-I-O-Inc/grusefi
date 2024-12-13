@@ -301,8 +301,13 @@
                             <a type="button" class=" btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1 d-none" id="btn_imprimir" href="/operation/imprimir_dictamen/1" target="_blank">Imprimir</a>
                         </div>
                         <div class="col-md-1 fv-row px-10">
-                            <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_add">Guardar</button>
-                            <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_edit">Editar</button>
+                            @can('admin_plantillas')
+                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_add">Guardar</button>
+                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_edit">Editar</button>
+                            @else
+                                <button type="button" disabled class="btn btn-secondary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_add">Guardar</button>
+                                <button type="button" disabled class="btn btn-secondary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_edit">Editar</button>
+                            @endcan
                         </div>
                         <div class="col-md-1 fv-row">
                             <button type="button" class="nav-link btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1" id="btn_search">Buscar</button>

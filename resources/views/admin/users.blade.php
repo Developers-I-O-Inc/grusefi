@@ -23,7 +23,11 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">Agregar Usuario</button>
+                        @can('admin_users')
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">Agregar Usuario</button>
+                        @else
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" disabled data-bs-target="#kt_modal_add_user">No puedes realizar modificaciones</button>
+                        @endcan
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-user-table-toolbar="selected">
@@ -40,10 +44,12 @@
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="w-10px pe-2">
-                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                        data-kt-check-target="#kt_users_table .form-check-input" value="1" />
-                                </div>
+                                @can('admin_users')
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
+                                            data-kt-check-target="#kt_users_table .form-check-input" value="1" />
+                                    </div>
+                                @endcan
                             </th>
                             <th class="min-w-125px">id</th>
                             <th class="min-w-125px">Email</th>
