@@ -28,7 +28,11 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-localidad-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Localidad</button>
+                        @can('admin_localidades')
+                            <button type="button" class="btn btn-primary" id="btn_add">Agregar Localidad</button>
+                        @else
+                            <button type="button" class="btn btn-secondary" disabled id="btn_add">No puedes realizar modificaciones</button>
+                        @endcan
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-localidad-table-toolbar="selected">
@@ -45,10 +49,12 @@
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="w-10px pe-2">
-                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                        data-kt-check-target="#kt_localidades_table .form-check-input" value="1" />
-                                </div>
+                                @can('admin_localidades')
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
+                                            data-kt-check-target="#kt_localidades_table .form-check-input" value="1" />
+                                    </div>
+                                @endcan
                             </th>
                             <th class="min-w-125px">id</th>
                             <th class="min-w-125px">Nombre</th>
