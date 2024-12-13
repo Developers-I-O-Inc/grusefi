@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 // ROLES
 Route::resource('roles', 'RolesController');
 Route::post('destroy_roles', 'RolesController@destroy_roles');
+// PERMISSIONS
+Route::resource('permissions', 'PermissionsController');
+Route::post('destroy_permissions', 'PermissionsController@destroy_permissions');
 
 //USERS
 Route::resource("users", "App\Http\Controllers\UsersController");

@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permissions;
 use Illuminate\Http\Request;
-use App\Models\Roles;
+use App\Models\Permissions;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Input;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
-class RolesController extends Controller
+class PermissionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +15,8 @@ class RolesController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $roles = Roles::with('permissions');
-            return Datatables::of($roles)
+            $permissions = Permissions::all();
+            return Datatables::of($permissions)
                     ->addIndexColumn()
                     ->addColumn('check', function($row){
                            $btn = '<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -28,17 +25,8 @@ class RolesController extends Controller
                             return $btn;
                     })
                     ->addIndexColumn()
-                    ->addColumn('permissions', function($row){
-                        $permissions = $row->permissions->pluck('name')->toArray();
-                        $html = '';
-                        foreach ($permissions as $permission) {
-                            $html .= '<span class="badge badge-light-success">' . htmlspecialchars($permission) . '</span> ';
-                        }
-                        return $html;
-                    })
-                    ->addIndexColumn()
                     ->addColumn('buttons', function($row){
-                           $btn = '<button data-id="'.$row->id.'" type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-kt-role-table-filter="edit">
+                           $btn = '<button data-id="'.$row->id.'" type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-kt-permission-table-filter="edit">
                            <span class="svg-icon svg-icon-3">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                    <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black"></path>
@@ -48,34 +36,30 @@ class RolesController extends Controller
                        </button>';
                             return $btn;
                     })
-                    ->rawColumns(['check', 'buttons', 'permissions'])
+                    ->rawColumns(['check', 'buttons'])
                     ->make(true);
         }
 
-        $permissions = Permissions::select("name")->get();
-        return view('admin/roles', compact('permissions'));
+        return view('admin/permissions');
     }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $role = Role::updateOrCreate(
+        Permissions::updateOrCreate(
 
             ['id'=>$request->get('id_rol')],
             ['name' => $request->input('name'), 'guard_name' => 'web'],
         );
-        $data = json_decode($request->get('permissions'), true);
-        $values = array_map(fn($item) => $item['value'], $data);
-        $role->syncPermissions($values);
-        return response()->json(["OK"=>$values]);
+        return response()->json(["OK"=>"Se guardo correctamente"]);
     }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $rol=Roles::with('permissions')->where('id', $id)->first();
+        $rol=Permissions::find($id);
 
         return response()->json(['rol'=>$rol]);
     }
@@ -83,10 +67,10 @@ class RolesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy_roles(Request $request)
+    public function destroy_permissions(Request $request)
     {
         $ids = $request->input('ids');
-        Roles::whereIn('id', $ids)->delete();
+        Permissions::whereIn('id', $ids)->delete();
         return response()->json(["OK"=>"Eliminados"]);
     }
 }

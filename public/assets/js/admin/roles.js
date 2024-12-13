@@ -10,6 +10,9 @@ var KTrolesList = (function () {
         edit_name,
         edit_id,
         n,
+        input_permission,
+        input_arr,
+        btn_add,
         edit = () => {
             n.querySelectorAll(
                 '[data-kt-role-table-filter="edit"]'
@@ -19,6 +22,21 @@ var KTrolesList = (function () {
                     $.get("roles/"+ $(this).data("id") + "/edit", function(data){
                         edit_name.value=data.rol.name;
                         edit_id.value=data.rol.id;
+                        let permissionNames = data.rol.permissions.map(permission => permission.name);
+                        input_permission.value = permissionNames;
+                        if (input_permission.tagify) {
+                            input_permission.tagify.destroy();
+                        }
+                        let prueba = JSON.parse(input_arr.value)
+                        input_permission.tagify = new Tagify(input_permission, {
+                            whitelist: prueba,
+                            dropdown: {
+                                maxItems: 20,
+                                classname: "tagify__inline__suggestions",
+                                enabled: 0,
+                                closeOnSelect: false
+                            }
+                        });
                         modal.show();
                     })
                 });
@@ -139,8 +157,11 @@ var KTrolesList = (function () {
                 (btn_modal = form.querySelector("#kt_modal_add_role_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_role_submit")),
                 (btn_cancel = form.querySelector("#kt_modal_add_role_cancel")),
+                (btn_add = document.querySelector("#btn_add")),
                 (edit_name = form.querySelector("#name")),
                 (edit_id = form.querySelector("#id_rol")),
+                (input_permission = document.querySelector("#permissions")),
+                (input_arr = document.querySelector("#prueba")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
                         name: {
@@ -171,6 +192,7 @@ var KTrolesList = (function () {
                                 { data: "check", name: "check" },
                                 { data: "id", name: "id" },
                                 { data: "name", name: "name" },
+                                { data: "permissions", name: "permissions" },
                                 { data: "buttons", name: "buttons" },
                             ],
                             order: [[2, "asc"]],
@@ -211,6 +233,13 @@ var KTrolesList = (function () {
                 btn_cancel.addEventListener("click", function (t) {
                     t.preventDefault(), modal.hide();
                 });
+                // BTN ADD
+                btn_add.addEventListener("click", function (t) {
+                    t.preventDefault()
+                    form.reset()
+                    input_permission.tagify.removeAllTags();
+                    modal.show()
+                });
                 // SUBMIT
                 btn_submit.addEventListener("click", function (e) {
                     e.preventDefault(),
@@ -221,7 +250,6 @@ var KTrolesList = (function () {
                                     "data-kt-indicator",
                                     "on"
                                 ),
-                                (btn_submit.disabled = !0),
                                 setTimeout(function () {
                                     btn_submit.removeAttribute(
                                         "data-kt-indicator"
@@ -282,6 +310,22 @@ var KTrolesList = (function () {
                                     },
                                 });
                     });
+                })
+                let prueba = JSON.parse(input_arr.value)
+               // Comprueba y destruye si Tagify ya existe
+                if (input_permission.tagify) {
+                    input_permission.tagify.destroy();
+                }
+
+                // Inicializa Tagify
+                input_permission.tagify = new Tagify(input_permission, {
+                    whitelist: prueba,
+                    dropdown: {
+                        maxItems: 20,
+                        classname: "tagify__inline__suggestions",
+                        enabled: 0,
+                        closeOnSelect: false
+                    }
                 });
             },
         };

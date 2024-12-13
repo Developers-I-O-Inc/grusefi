@@ -27,9 +27,15 @@
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    <div class="d-flex justify-content-end" data-kt-municipio-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Municipio</button>
-                    </div>
+                    @can('admin_municipios')
+                        <div class="d-flex justify-content-end" data-kt-municipio-table-toolbar="base">
+                            <button type="button" class="btn btn-primary" id="btn_add">Agregar Municipio</button>
+                        </div>
+                    @else
+                        <div class="d-flex justify-content-end" data-kt-municipio-table-toolbar="base">
+                            <button type="button" class="btn btn-secondary" disabled id="btn_add">No puedes realizar modificaciones</button>
+                        </div>
+                    @endcan
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-municipio-table-toolbar="selected">
                         <div class="fw-bolder me-5">
@@ -45,10 +51,12 @@
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="w-10px pe-2">
-                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                        data-kt-check-target="#kt_municipios_table .form-check-input" value="1" />
-                                </div>
+                                @can('admin_municipios')
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
+                                            data-kt-check-target="#kt_municipios_table .form-check-input" value="1" />
+                                    </div>
+                                @endcan
                             </th>
                             <th class="min-w-125px">id</th>
                             <th class="min-w-125px">Nombre</th>
