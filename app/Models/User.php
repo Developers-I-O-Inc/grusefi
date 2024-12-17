@@ -31,6 +31,7 @@ class User extends Authenticatable
         'phone',
         'address',
         'email',
+        'employee_number',
         'password',
         'password_changed_at'
     ];
