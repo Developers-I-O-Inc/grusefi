@@ -70,7 +70,7 @@ class Embarques extends Model
     }
 
     public static function get_embarques_admin(){
-        return DB::select("SELECT op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
+        return DB::select("SELECT folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
             FROM op_embarques
             LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
@@ -82,7 +82,7 @@ class Embarques extends Model
     }
 
     public static function get_embarques_admin_by_dates($start_date, $end_date){
-        return DB::select("SELECT op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
+        return DB::select("SELECT folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
             FROM op_embarques
             LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id

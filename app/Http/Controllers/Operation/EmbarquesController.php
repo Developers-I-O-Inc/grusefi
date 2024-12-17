@@ -94,12 +94,10 @@ class EmbarquesController extends Controller
                         $embarqueRPVData['vigencia']
                     );
 
-                    // Agregamos el nuevo campo 'embarque_id'
                     $embarqueRPVData['embarque_id'] = $embarque_new;
                     $embarqueRPVData['created_at'] = now();
                     $embarqueRPVData['updated_at'] = now();
 
-                    // Insertamos los datos en la tabla 'embarques_rpv'
                     EmbarquesRPV::insert($embarqueRPVData);
                 }
             //--------------------------------
@@ -315,7 +313,13 @@ class EmbarquesController extends Controller
     {
         $datos = $request->json()->all();
         $embarque = Embarques::find($request->embarque_id);
-        $embarque->folio_embarque = $request->folio_embarque;
+        // GET COUNTRY ID BY EMBPAQUE
+        $country_id = Empaques::select('cat_estados.codigo')
+            ->join('cat_localidades', 'cat_empaques.localidad_id', 'cat_localidades.id')
+            ->join('cat_municipios', 'cat_localidades.municipio_id', 'cat_municipios.id')
+            ->join('cat_estados', 'cat_municipios.estado_id', 'cat_estados.id')->where('cat_empaques.id', $embarque->empaque_id)->first();
+        // -----------------------------
+        $embarque->folio_embarque = 'UV-220724-16-VMRE-'.auth()->user()->employee_number.'-'.$country_id->codigo.'-'.substr(date('Y'), 2, 2);
         $embarque->status = "Finalizado";
         $embarque->save();
         $registro = EmbarquesRPV::where('embarque_id', $request->embarque_id)->first();
