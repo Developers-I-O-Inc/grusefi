@@ -297,8 +297,7 @@ var KTadminlist = (function () {
                             }
                         ],
                         columns: [
-
-                            { data: "id", name: "id" },
+                            { data: "folio_embarque", name: "folio_embarque" },
                             { data: "nombre_fiscal", name: "nombre_fiscal" },
                             { data: "nombre", name: "nombre" },
                             { data: "puerto", name: "puerto" },

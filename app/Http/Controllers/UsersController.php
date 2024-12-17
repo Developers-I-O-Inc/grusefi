@@ -95,6 +95,7 @@ class UsersController extends Controller
                 'address' => $request->get('address'),
                 'phone' => $request->get('phone'),
                 'email' => $request->get('email'),
+                'employee_number' => $request->get('employee_number'),
                 'password' => Hash::make('123456'),
                 'password_changed_at'=>now()
              ],

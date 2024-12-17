@@ -335,6 +335,7 @@ var KTUsersList = (function () {
                             { data: "name", name: "name" },
                             { data: "last_name", name: "last_name" },
                             { data: "phone", name: "phone" },
+                            { data: "employee_number", name: "employee_number" },
                             { data: "address", name: "address" },
                             { data: "buttons", name: "buttons" },
                         ],
