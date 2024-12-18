@@ -63,9 +63,15 @@ class EmbarquesController extends Controller
             'consolidado',
             'consolidado_id',
             'empresa_transporte',
-            'chofer',
-            'tefs_id',
+            'chofer'
         ]);
+
+        // TEFS OR ADMIN
+        if (auth()->user()->hasRole('tefs')) {
+            $data['tefs_id'] = auth()->user()->id;
+        } else {
+            $data['tefs_id'] = $request->get('tefs_id');
+        }
         // DB::beginTransaction();
 
         // try {
@@ -172,10 +178,10 @@ class EmbarquesController extends Controller
             $end_date = $request->input('end_date');
 
             if($start_date == '' or $end_date ==''){
-                $calibres = Embarques::get_embarques_admin();
+                $calibres = Embarques::get_embarques_admin(auth()->user()->hasRole('tefs'));
             }
             else {
-                $calibres = Embarques::get_embarques_admin_by_dates($start_date, $end_date);
+                $calibres = Embarques::get_embarques_admin_by_dates($start_date, $end_date, auth()->user()->hasRole('tefs'));
             }
 
             return Datatables::of($calibres) ->addIndexColumn()
@@ -314,12 +320,26 @@ class EmbarquesController extends Controller
         $datos = $request->json()->all();
         $embarque = Embarques::find($request->embarque_id);
         // GET COUNTRY ID BY EMBPAQUE
-        $country_id = Empaques::select('cat_estados.codigo')
+        $country_id = Empaques::select('cat_estados.codigo', 'cat_estados.id')
             ->join('cat_localidades', 'cat_empaques.localidad_id', 'cat_localidades.id')
             ->join('cat_municipios', 'cat_localidades.municipio_id', 'cat_municipios.id')
             ->join('cat_estados', 'cat_municipios.estado_id', 'cat_estados.id')->where('cat_empaques.id', $embarque->empaque_id)->first();
         // -----------------------------
-        $embarque->folio_embarque = 'UV-220724-16-VMRE-'.auth()->user()->employee_number.'-'.$country_id->codigo.'-'.substr(date('Y'), 2, 2);
+        // CONSECUTIVE
+        $consecutivo = Embarques::count_consecutivo_year($embarque->tefs_id, $country_id->id);
+        $num_consecutivo = $consecutivo[0]->total;
+        if (strlen((string)$num_consecutivo) > 4) {
+            $cadena_consecutivo = (string)$num_consecutivo;
+        }
+        else{
+            if($num_consecutivo == 0){
+                $cadena_consecutivo = '00071';
+            }
+            else
+                $cadena_consecutivo = str_pad($num_consecutivo + 1, 4, '0', STR_PAD_LEFT);
+        }
+        // -----------------------------
+        $embarque->folio_embarque = 'UV-220724-16-VMRE-'.auth()->user()->employee_number.'-'.$country_id->codigo.'-'.$cadena_consecutivo.'-'.substr(date('Y'), 2, 2);
         $embarque->status = "Finalizado";
         $embarque->save();
         $registro = EmbarquesRPV::where('embarque_id', $request->embarque_id)->first();

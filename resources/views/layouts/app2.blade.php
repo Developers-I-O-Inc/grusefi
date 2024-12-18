@@ -285,7 +285,7 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Generar RPV</span>
+                                                <span class="menu-title">Generar DV</span>
                                             </a>
                                         </div>
                                     </div>
@@ -546,6 +546,17 @@
                                                 </span>
                                             </a>
                                         </div>
+                                        @role('tefs')
+                                            <div class="d-flex align-items-center">
+                                                <a href="#"
+                                                    class="btn btn-sm btn-bg-light-success hoverable"
+                                                    id="" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                                                    data-bs-trigger="hover" title="Select dashboard daterange">
+                                                    <input type="text" class="d-none" id="id_user_general" value="{{Auth::user()->id}}">
+                                                    <span class="fw-bold me-1" id="kt_dashboard_daterangepicker_title" id="prueba">Usuario: {{Auth::user()->name.' '.Auth::user()->last_name}}</span>
+                                                </a>
+                                            </div>
+                                        @endrole
                                     </div>
                                     <div class="d-flex align-items-center ms-1 ms-lg-3">
                                         <div class="btn btn-icon btn-active-light-primary position-relative w-30px h-30px w-md-40px h-md-40px pulse pulse-success"

@@ -128,20 +128,19 @@
                                 </div>
                             </div>
                             <div class="row mb-12">
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-bold mb-2">Usuario TEF´s</label>
-                                    <select id="tefs_id" name="tefs_id" class="form-select" data-control="select2" data-placeholder="Selecciona un usuario" data-allow-clear="true">
-                                        <option value=""></option>
-                                        @foreach($users as $users)
-                                            <option value="{{$users->id}}">{{$users->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-4 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Puerto de Entrada</label>
                                     <select id="puerto_id" name="puerto_id" class="form-select" data-control="select2" data-placeholder="Selecciona un puerto" data-allow-clear="true">
                                         <option value=""></option>
                                     </select>
+                                </div>
+                                <div class="col-md-4 fv-row">
+                                    <label class="fs-6 fw-bold mb-2">N° Económico</label>
+                                    <input type="text" class="form-control" placeholder="Ingresa el número económico" name="numero_economico" id="numero_economico" autocomplete="off" />
+                                </div>
+                                <div class="col-md-4 fv-row">
+                                    <label class="fs-6 fw-bold mb-2">Placas</label>
+                                    <input type="text" class="form-control" placeholder="Ingresa las placas" name="placas_trasporte" id="placas_trasporte" />
                                 </div>
                                 {{-- <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Inspector</label>
@@ -149,14 +148,17 @@
                                 </div> --}}
                             </div>
                             <div class="row mb-12">
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-bold mb-2">N° Económico</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa el número económico" name="numero_economico" id="numero_economico" autocomplete="off" />
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-bold mb-2">Placas</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa las placas" name="placas_trasporte" id="placas_trasporte" />
-                                </div>
+                                @role(["Super Admin", "Admin"])
+                                    <div class="col-md-12 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Usuario TEF´s</label>
+                                        <select id="tefs_id" name="tefs_id" class="form-select" data-control="select2" data-placeholder="Selecciona un usuario" data-allow-clear="true">
+                                            <option value=""></option>
+                                            @foreach($users as $users)
+                                                <option value="{{$users->id}}">{{$users->name.' '.$users->last_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endrole
                             </div>
                         </div>
                     </div>

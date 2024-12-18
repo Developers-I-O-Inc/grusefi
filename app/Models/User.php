@@ -32,6 +32,7 @@ class User extends Authenticatable
         'address',
         'email',
         'employee_number',
+        'last_id',
         'password',
         'password_changed_at'
     ];

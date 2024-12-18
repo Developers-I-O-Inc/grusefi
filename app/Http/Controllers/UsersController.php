@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catalogs\Estados;
+use App\Models\Catalogs\UsersCountries;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Roles;
@@ -24,7 +26,6 @@ class UsersController extends Controller
                             'disabled' => !auth()->user()->can("admin_users"),
                         ])->render();
                     })
-                    ->addIndexColumn()
                     ->addColumn('buttons', function($row){
                         if(auth()->user()->can('admin_users')){
                             $btn = '<button data-id="'.$row->id.'" type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-kt-user-table-filter="edit">
@@ -47,6 +48,12 @@ class UsersController extends Controller
                                 <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black"/>
                                 <path d="M15.8054 11.639C15.6757 11.5093 15.5184 11.4445 15.3331 11.4445H15.111V10.1111C15.111 9.25927 14.8055 8.52784 14.1944 7.91672C13.5833 7.30557 12.8519 7 12 7C11.148 7 10.4165 7.30557 9.80547 7.9167C9.19432 8.52784 8.88885 9.25924 8.88885 10.1111V11.4445H8.66665C8.48153 11.4445 8.32408 11.5093 8.19444 11.639C8.0648 11.7685 8 11.926 8 12.1112V16.1113C8 16.2964 8.06482 16.4539 8.19444 16.5835C8.32408 16.7131 8.48153 16.7779 8.66665 16.7779H15.3333C15.5185 16.7779 15.6759 16.7131 15.8056 16.5835C15.9351 16.4539 16 16.2964 16 16.1113V12.1112C16.0001 11.926 15.9351 11.7686 15.8054 11.639ZM13.7777 11.4445H10.2222V10.1111C10.2222 9.6204 10.3958 9.20138 10.7431 8.85421C11.0903 8.507 11.5093 8.33343 12 8.33343C12.4909 8.33343 12.9097 8.50697 13.257 8.85421C13.6041 9.20135 13.7777 9.6204 13.7777 10.1111V11.4445Z" fill="black"/>
                                 </svg></span>
+                        </button>
+                        <button data-id="'.$row->id.'" type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-kt-user-table-filter="add-countries" data-bs-toggle="tooltip" title="Restaurar contraseña">
+                            <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path opacity="0.3" d="M18.0624 15.3454L13.1624 20.7453C12.5624 21.4453 11.5624 21.4453 10.9624 20.7453L6.06242 15.3454C4.56242 13.6454 3.76242 11.4452 4.06242 8.94525C4.56242 5.34525 7.46242 2.44534 11.0624 2.04534C15.8624 1.54534 19.9624 5.24525 19.9624 9.94525C20.0624 12.0452 19.2624 13.9454 18.0624 15.3454ZM13.0624 10.0453C13.0624 9.44534 12.6624 9.04534 12.0624 9.04534C11.4624 9.04534 11.0624 9.44534 11.0624 10.0453V13.0453H13.0624V10.0453Z" fill="black"/>
+                            <path d="M12.6624 5.54531C12.2624 5.24531 11.7624 5.24531 11.4624 5.54531L8.06241 8.04531V12.0453C8.06241 12.6453 8.46241 13.0453 9.06241 13.0453H11.0624V10.0453C11.0624 9.44531 11.4624 9.04531 12.0624 9.04531C12.6624 9.04531 13.0624 9.44531 13.0624 10.0453V13.0453H15.0624C15.6624 13.0453 16.0624 12.6453 16.0624 12.0453V8.04531L12.6624 5.54531Z" fill="black"/>
+                            </svg></span>
                         </button>';
                         }
                         else{
@@ -79,7 +86,8 @@ class UsersController extends Controller
                     ->make(true);
         }
         $roles=Roles::all();
-        return view("admin/users", array("roles"=>$roles));
+        $countries = Estados::all();
+        return view("admin/users", array("roles"=>$roles, "countries"=>$countries));
     }
 
      /**
@@ -96,6 +104,7 @@ class UsersController extends Controller
                 'phone' => $request->get('phone'),
                 'email' => $request->get('email'),
                 'employee_number' => $request->get('employee_number'),
+                'last_id' => $request->get('last_id'),
                 'password' => Hash::make('123456'),
                 'password_changed_at'=>now()
              ],
@@ -126,12 +135,32 @@ class UsersController extends Controller
         $user=User::find($request->get('user_id'));
         return response()->json(["user"=>$user->getRoleNames()]);
     }
+
+    public function get_user_countries(Request $request){
+        $user_countries=UsersCountries::user_countries($request->get('user_id'));
+        return response()->json(["user"=>$user_countries]);
+    }
+
     // SAVE PERMISSIONS TO USER
     public function save_user_permissions(Request $request){
         $datos =json_decode($request->get('permissions'), true);
         $user=User::find($request->get('user_id'));
         $user->syncRoles($datos);
         return response()->json(["user"=>$user]);
+    }
+
+    // SAVE COUNTRIES TO USER
+    public function save_user_countries(Request $request){
+        $datos =json_decode($request->get('countries'), true);
+        UsersCountries::where('user_id', $request->get('user_id'))->delete();
+        foreach ($datos as $country) {
+            UsersCountries::create([
+                'user_id' => $request->get('user_id'),
+                'estado_id' => $country,
+                'created_at' => now(),
+            ]);
+        }
+        return response()->json(["user"=>"ok"]);
     }
 
     public function reset_pass($id){
