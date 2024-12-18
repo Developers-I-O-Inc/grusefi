@@ -20,6 +20,7 @@ class Embarques extends Model
         'pais_id',
         'puerto_id',
         'folio_embarque',
+        'consecutivo',
         'fecha_embarque',
         'numero_economico',
         'placas_trasporte',
@@ -69,7 +70,11 @@ class Embarques extends Model
         return !empty($result) ? $result[0] : null;
     }
 
-    public static function get_embarques_admin(){
+    public static function get_embarques_admin($admin){
+        $where = "";
+        if($admin){
+            $where = "AND tefs_id = ".auth()->user()->id;
+        }
         return DB::select("SELECT folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
             FROM op_embarques
             LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
@@ -77,18 +82,33 @@ class Embarques extends Model
             LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
             WHERE
                 YEAR(fecha_embarque) = YEAR(CURDATE())
-                AND WEEK(fecha_embarque, 1) = WEEK(CURDATE(), 1)
-        ");
+                AND WEEK(fecha_embarque, 1) = WEEK(CURDATE(), 1)"
+            .$where);
     }
 
-    public static function get_embarques_admin_by_dates($start_date, $end_date){
+    public static function get_embarques_admin_by_dates($start_date, $end_date, $admin){
+        $where = "";
+        if($admin){
+            $where = " AND tefs_id = ".auth()->user()->id;
+        }
         return DB::select("SELECT folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
             FROM op_embarques
             LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
             LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
             WHERE
-                fecha_embarque BETWEEN ? AND ?
-        ", [$start_date, $end_date]);
+                fecha_embarque BETWEEN ? AND ?".$where, [$start_date, $end_date]);
+    }
+
+    public static function count_consecutivo_year($user_id, $country_id){
+        return DB::select("SELECT COUNT(tefs_id) AS total
+            FROM op_embarques
+            INNER JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
+            INNER JOIN cat_localidades ON cat_empaques.localidad_id = cat_localidades.id
+            INNER JOIN cat_municipios ON cat_localidades.municipio_id = cat_municipios.id
+            WHERE YEAR(fecha_embarque) = YEAR(CURDATE())
+            AND status = 'Finalizado'
+            AND tefs_id = ?
+            AND estado_id = ?", [$user_id, $country_id]);
     }
 }

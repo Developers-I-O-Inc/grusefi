@@ -22,6 +22,7 @@ return new class extends Migration
             $table->bigInteger('vigencia_id')->unsigned()->index();
             $table->bigInteger('consolidado_id')->nullable();
             $table->string('folio_embarque')->default('EMB-');
+            $table->string('consecutivo')->default('0000');
             $table->date('fecha_embarque');
             $table->string('numero_economico', 50)->nullable();
             $table->string('placas_trasporte', 30)->nullable();
