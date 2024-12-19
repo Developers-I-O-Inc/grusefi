@@ -52,6 +52,7 @@
                             </th>
                             <th class="min-w-125px">id</th>
                             <th class="min-w-125px">Variedad</th>
+                            <th class="min-w-125px">Nombre Científico</th>
                             <th class="min-w-125px">Tipo de Cultivo</th>
                             <th class="min-w-125px">Status</th>
                             <th class="min-w-125px">Opciones</th>
@@ -90,6 +91,10 @@
                                     <label class="required fs-6 fw-bold mb-2">Nombre variedad</label>
                                     <input type="text" class="form-control" placeholder="Ingresa un nombre" name="variedad" id="variedad" autocomplete="off"/>
                                     <input type="text" class="form-control d-none" name="id_variedad" id="id_variedad" />
+                                </div>
+                                <div class="fv-row mb-4">
+                                    <label class="required fs-6 fw-bold mb-2">Nombre Científico</label>
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="nombre_cientifico" id="nombre_cientifico" autocomplete="off"/>
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Tipo de cultivo</label>
