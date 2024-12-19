@@ -15,13 +15,14 @@ class Variedades extends Model
     protected $table = 'cat_variedades';
     protected $fillable = [
         "variedad",
+        "nombre_cientifico",
         "tipo_cultivo_id",
         "activo"
     ];
 
     public static function get_variedades()
     {
-        return DB::select('SELECT cat_variedades.id, tipo_cultivo_id, tipo_cultivo, variedad, cat_variedades.activo
+        return DB::select('SELECT cat_variedades.id, tipo_cultivo_id, tipo_cultivo, variedad, nombre_cientifico, cat_variedades.activo
             FROM cat_variedades
             LEFT JOIN cat_tipo_cultivos ON cat_variedades.tipo_cultivo_id = cat_tipo_cultivos.id
             WHERE cat_variedades.deleted_at is null');
