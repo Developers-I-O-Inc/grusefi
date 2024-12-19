@@ -65,6 +65,7 @@ class VariedadesController extends Controller
             ['id'=>$request->get('id_variedad')],
             ['tipo_cultivo_id' => $request->input('tipo_cultivo_id'),
             'variedad' => $request->input('variedad'),
+            'nombre_cientifico' => $request->input('nombre_cientifico'),
             'activo' => $request->input('activo'),]
         );
         return response()->json(["OK"=>"Se guardo correctamente"]);

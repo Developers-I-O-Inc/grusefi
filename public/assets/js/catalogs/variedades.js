@@ -18,6 +18,7 @@ var KTvariedadesList = (function () {
         form,
         edit_id,
         edit_variedad,
+        edit_nombre_cientifico,
         edit_active,
         check_active,
         select_tipo_cultivo,
@@ -32,6 +33,7 @@ var KTvariedadesList = (function () {
                     $.get("variedades/"+ $(this).data("id") + "/edit", function(data){
                         edit_id.value=data.variedad.id
                         edit_variedad.value=data.variedad.variedad
+                        edit_nombre_cientifico.value=data.variedad.nombre_cientifico
                         if(data.variedad.activo){
                             check_active.checked = true
                             edit_active.value = 1
@@ -61,6 +63,7 @@ var KTvariedadesList = (function () {
                 (btn_cancel = form.querySelector("#kt_modal_add_variedad_cancel")),
                 (edit_id = form.querySelector("#id_variedad")),
                 (edit_variedad = form.querySelector("#variedad")),
+                (edit_nombre_cientifico = form.querySelector("#nombre_cientifico")),
                 (check_active = form.querySelector("#check_activo")),
                 (edit_active = form.querySelector("#activo")),
                 (validations = FormValidation.formValidation(form, {
@@ -73,6 +76,17 @@ var KTvariedadesList = (function () {
                                 stringLength: {
                                     max:50,
                                     message: "El nombre de la variedad debe tener menos de 50 caracteres"
+                                }
+                            },
+                        },
+                        nombre_cientifico: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Nombre científico es requerido",
+                                },
+                                stringLength: {
+                                    max:50,
+                                    message: "El nombre científico debe tener menos de 50 caracteres"
                                 }
                             },
                         },
@@ -108,6 +122,7 @@ var KTvariedadesList = (function () {
                                 { data: "check", name: "check" },
                                 { data: "id", name: "id" },
                                 { data: "variedad", name: "variedad" },
+                                { data: "nombre_cientifico", name: "nombre_cientifico" },
                                 { data: "tipo_cultivo", name: "tipo_cultivo" },
                                 { data: "activos", name: "activos" },
                                 { data: "buttons", name: "buttons" },
