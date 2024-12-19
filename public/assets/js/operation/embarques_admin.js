@@ -19,8 +19,8 @@ var KTadminlist = (function () {
         form_rpv,
         span_fecha_embarque,
         select_marca,
-        start_date,
-        end_date,
+        dates,
+        filter,
         modal,
         modal_marcas,
         modal_upload,
@@ -263,8 +263,8 @@ var KTadminlist = (function () {
                 (select_presentacion = $('#presentacion_id').select2()),
                 (form_products = document.querySelector("#kt_modal_add_product_form")),
                 (form_rpv = document.querySelector("#form_rpv")),
-                (start_date = document.querySelector('#start_date')),
-                (end_date = document.querySelector('#end_date')),
+                (dates = document.querySelector('#dates')),
+                (filter = document.querySelector('#dates_filter')),
                 (edit_folio = document.querySelector('#FolioRPV')),
                 (btn_search = document.querySelector('#btn_search')),
                 (btn_products = document.getElementById('btn_products')),
@@ -283,8 +283,8 @@ var KTadminlist = (function () {
                         ajax: {
                             url:"embarques_admin",
                             data: {
-                                start_date: function() { return start_date.value; },
-                                end_date: function() { return end_date.value; }
+                                dates: function() {return dates.value},
+                                filter : function() {return filter.value}
                             }
                         },
                         serverSide: true,
@@ -359,6 +359,7 @@ var KTadminlist = (function () {
                     },
                 })),
                 btn_search.addEventListener('click', function () {
+                    filter.value=1;
                     table_items.ajax.reload()
                 })
                 btn_products.addEventListener('click', function () {
@@ -521,18 +522,7 @@ var KTadminlist = (function () {
                         });
                     });
                 })
-                $("#start_date").daterangepicker({
-                    singleDatePicker: true,
-                    showDropdowns: true,
-                    locale: {
-                        format: 'YYYY-MM-DD',
-                        applyLabel: 'Aceptar',
-                        cancelLabel: 'Cancelar'
-                    },
-                })
-                $("#end_date").daterangepicker({
-                    singleDatePicker: true,
-                    showDropdowns: true,
+                $("#dates").daterangepicker({
                     locale: {
                         format: 'YYYY-MM-DD',
                         applyLabel: 'Aceptar',
