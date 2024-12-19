@@ -45,4 +45,19 @@ class Empaques extends Model
             WHERE cat_empaques.deleted_at IS NULL AND cat_empaques.id = $id
        ");
     }
+
+    public static function get_empaques_by_country(){
+        $countries = UsersCountries::user_countries(auth()->user()->id);
+        $array = [];
+        foreach ($countries as $country) {
+            $array[] = $country->estado_id;
+        }
+        $countriesList = implode(",", $array);
+        return DB::select("SELECT cat_empaques.id, nombre_fiscal
+            FROM  cat_empaques
+            INNER JOIN cat_localidades ON cat_empaques.localidad_id = cat_localidades.id
+            INNER JOIN cat_municipios ON cat_localidades.municipio_id = cat_municipios.id
+            WHERE cat_empaques.deleted_at IS NULL AND cat_empaques.activo = 1
+                AND cat_municipios.estado_id IN ($countriesList)");
+    }
 }

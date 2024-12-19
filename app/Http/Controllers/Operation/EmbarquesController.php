@@ -29,6 +29,12 @@ class EmbarquesController extends Controller
      */
     public function index(Request $request)
     {
+        if(auth()->user()->hasRole('tefs')){
+            $empaques = Empaques::get_empaques_by_country();
+        }
+        else{
+            $empaques = Empaques::where('activo', 1)->get();
+        }
         $empaques = Empaques::where('activo', 1)->get();
         $paises = Paises::where('activo', 1)->get();
         $users = User::role('tefs')->get();
@@ -174,10 +180,12 @@ class EmbarquesController extends Controller
 
     public function embarques_admin(Request $request){
         if ($request->ajax()) {
-            $start_date = $request->input('start_date');
-            $end_date = $request->input('end_date');
+            $dates = $request->input('dates');
+            $start_date = substr($dates, 0, 10);
+            $end_date = substr($dates, 13, 10);
+            $apply_filter = $request->input('filter', false);
 
-            if($start_date == '' or $end_date ==''){
+            if(!$apply_filter || $start_date == '' or $end_date ==''){
                 $calibres = Embarques::get_embarques_admin(auth()->user()->hasRole('tefs'));
             }
             else {
@@ -333,7 +341,7 @@ class EmbarquesController extends Controller
         }
         else{
             if($num_consecutivo == 0){
-                $cadena_consecutivo = '00071';
+                $cadena_consecutivo = '0001';
             }
             else
                 $cadena_consecutivo = str_pad($num_consecutivo + 1, 4, '0', STR_PAD_LEFT);
