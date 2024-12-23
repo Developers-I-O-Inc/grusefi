@@ -331,11 +331,15 @@
                                 <div style="display: flex;">
                                     <div style="width: 50%; padding-right: 16px;">
                                         <div class="m-t-xs" style="display: flex;">
-                                            <div style="width: 20%; padding-right: 16px; text-align: center;">
+                                            <div style="width: 30%; padding-right: 16px; text-align: center;">
                                                 <div>Productos</div>
                                                 @if($embarque)
                                                     <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" data-embarque="0" id="btn_products" >
                                                         <span class="svg-icon svg-icon-1"><i class="bi bi-box-arrow-up-right fs-2"></i></span>
+                                                        <span class="pulse-ring w-45px h-45px"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" data-embarque="0" id="btn_import" >
+                                                        <span class="svg-icon svg-icon-1"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></span>
                                                         <span class="pulse-ring w-45px h-45px"></span>
                                                     </button>
                                                 @else
@@ -346,7 +350,7 @@
                                                 <div>Uso</div>
                                                 <input id="Uso" type="text" name="Uso" value="Consumo Humano" maxlength="100" style="width: 100%; margin-top:10px">
                                             </div>
-                                            <div style="width: 40%;">
+                                            <div style="width: 30%;">
                                                 Cantidad
                                                 <div class="disabled-input" style="margin-top:18px">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
                                             </div>

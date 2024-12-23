@@ -10,6 +10,48 @@
 @section('subtitle_top', 'Control de embarques registrados')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
+        @if (session('success'))
+        <div class="alert alert-dismissible bg-light-success border border-success border-3 d-flex flex-column flex-sm-row w-100 p-5 mb-10">
+            <span class="svg-icon svg-icon-2hx svg-icon-success me-4 mb-5 mb-sm-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M9.89557 13.4982L7.79487 11.2651C7.26967 10.7068 6.38251 10.7068 5.85731 11.2651C5.37559 11.7772 5.37559 12.5757 5.85731 13.0878L9.74989 17.2257C10.1448 17.6455 10.8118 17.6455 11.2066 17.2257L18.1427 9.85252C18.6244 9.34044 18.6244 8.54191 18.1427 8.02984C17.6175 7.47154 16.7303 7.47154 16.2051 8.02984L11.061 13.4982C10.7451 13.834 10.2115 13.834 9.89557 13.4982Z" fill="black"/>
+                    </svg>
+            </span>
+            <div class="d-flex flex-column pe-0 pe-sm-10">
+                <h5 class="mb-1">Éxito!</h5>
+                <span>{{ session('success') }}</span>
+            </div>
+            <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+                <i class="bi bi-x fs-1 text-success"></i>
+            </button>
+        </div>
+        @endif
+
+        @if (session('error'))
+        <div class="alert alert-dismissible bg-light-danger border border-danger border-3 d-flex flex-column flex-sm-row w-100 p-5 mb-10">
+            <span class="svg-icon svg-icon-2hx svg-icon-danger me-4 mb-5 mb-sm-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="black"/>
+                    <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="black"/>
+                </svg>
+            </span>
+            <div class="d-flex flex-column pe-0 pe-sm-10">
+                <h5 class="mb-1">Error!</h5>
+                <span>{{ session('error') }}</span>
+                @if (session('details'))
+                    <ul>
+                        @foreach (session('details') as $detail)
+                            <li>{{ $detail }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+            <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+                <i class="bi bi-x fs-1 text-danger"></i>
+            </button>
+        </div>
+        @endif
+
         <div class="card">
             <div class="card-header border-0 pt-6">
                 <div class="card-title">
@@ -52,6 +94,7 @@
                                 <table class="table table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-7 gs-7" id="kt_admin_table">
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                            <th class="min-w-125px">ID</th>
                                             <th class="min-w-125px">Folio</th>
                                             <th class="min-w-125px">Empaque</th>
                                             <th class="min-w-125px">Destinatario</th>
@@ -339,6 +382,46 @@
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                             </button>
                         </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="kt_modal_import" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered mw-650px">
+                <div class="modal-content">
+                    <form class="form" action="import_products" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        <div class="modal-header" id="kt_modal_add_product_header">
+                            <h2 class="fw-bolder">Importar Excel</h2>
+                            <div id="kt_modal_add_product_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                            transform="rotate(45 7.41422 6)" fill="black" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="modal-body py-10 px-lg-17">
+                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_product_scroll" data-kt-scroll="true"
+                                data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+                                data-kt-scroll-dependencies="#kt_modal_add_product_header"
+                                data-kt-scroll-wrappers="#kt_modal_add_product_scroll" data-kt-scroll-offset="300px">
+                                <input type="file" name="file_import" class="form-control form-control-solid" />
+                            </div>
+                        </div>
+                        <div class="modal-footer flex-center">
+                            <button type="button" id="cancel_modal"
+                                class="btn btn-light me-3">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                <span class="indicator-label">Agregar</span>
+                                <span class="indicator-progress">Espere un momento...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

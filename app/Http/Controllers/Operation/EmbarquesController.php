@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ProductsImport;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Models\Catalogs\Calibres;
@@ -10,7 +11,6 @@ use App\Models\Catalogs\Categorias;
 use App\Models\Catalogs\Empaques;
 use App\Models\Catalogs\Paises;
 use App\Models\Catalogs\Presentaciones;
-use App\Models\Catalogs\TipoCultivos;
 use App\Models\Catalogs\Variedades;
 use App\Models\Catalogs\Vigencias;
 use App\Models\Operation\EmbarquesMarcas;
@@ -21,6 +21,7 @@ use App\Models\Operation\EmbarquesProductos;
 use App\Models\Operation\PlantillaRPV;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EmbarquesController extends Controller
 {
@@ -144,7 +145,7 @@ class EmbarquesController extends Controller
                         'cajas' => $product[3],
                         'sader' => $product[6],
                         'tipo_fruta' => $product[13],
-                        'n_registros' => $product[14],
+                        'cartilla' => $product[14],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
@@ -152,6 +153,11 @@ class EmbarquesController extends Controller
 
                 EmbarquesProductos::insert($insertData);
             }
+            // if ($request->hasFile('file_import')) {
+            //     Excel::import(new ProductsImport, $request->file('file_import'));
+            // }
+
+            // return response()->json(['success' => $request->file('file_import')]);
             // DB::commit();
 
             return response()->json(['success' => 'Datos guardados exitosamente!', 'embarque_id'=>$embarque->id]);
@@ -276,7 +282,7 @@ class EmbarquesController extends Controller
         $producto->cajas = $request->get('cajas');
         $producto->sader = $request->get('sader');
         $producto->tipo_fruta = $request->get('tipo_fruta');
-        $producto->n_registros = $request->get('n_registros');
+        $producto->cartilla = $request->get('cartilla');
         $producto->presentacion_id = explode('|', $request->input('presentacion_id'))[0];
         $producto->save();
 
@@ -362,4 +368,25 @@ class EmbarquesController extends Controller
 
         return response()->json(['mensaje' => 'Datos guardados con éxito'], 200);
     }
+
+    public function import_products(Request $request)
+    {
+        try {
+            if ($request->hasFile('file_import')) {
+                Excel::import(new ProductsImport, $request->file('file_import'));
+                return redirect()->back()->with('success', 'Datos importados correctamente');
+            }
+            return redirect()->back()->with('error', 'No se proporcionó un archivo para importar.');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            $errorMessages = [];
+            foreach ($failures as $failure) {
+                $errorMessages[] = "Fila {$failure->row()}: " . implode(', ', $failure->errors());
+            }
+            return redirect()->back()->with('error', 'Error al importar los datos.')->with('details', $errorMessages);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Ocurrió un error inesperado: ' . $e->getMessage());
+        }
+    }
+
 }
