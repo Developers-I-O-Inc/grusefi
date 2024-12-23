@@ -15,6 +15,7 @@ var KTadminlist = (function () {
         btn_save_marcas,
         btn_save,
         btn_finish,
+        btn_import,
         form_products,
         form_rpv,
         span_fecha_embarque,
@@ -24,6 +25,7 @@ var KTadminlist = (function () {
         modal,
         modal_marcas,
         modal_upload,
+        modal_import,
         select_presentacion,
         table_products,
         table_marcas,
@@ -259,6 +261,7 @@ var KTadminlist = (function () {
                 (modal = new bootstrap.Modal(document.querySelector("#kt_modal_edit_products"))),
                 (modal_marcas = new bootstrap.Modal(document.querySelector("#kt_modal_edit_marcas"))),
                 (modal_upload = new bootstrap.Modal(document.querySelector("#kt_modal_upload"))),
+                (modal_import = new bootstrap.Modal(document.querySelector("#kt_modal_import"))),
                 (span_fecha_embarque = document.querySelector('#fecha_embarque')),
                 (select_presentacion = $('#presentacion_id').select2()),
                 (form_products = document.querySelector("#kt_modal_add_product_form")),
@@ -274,6 +277,7 @@ var KTadminlist = (function () {
                 (btn_save_marcas = document.querySelector("#btn_save_marcas")),
                 (btn_save = document.querySelector("#btn_save")),
                 (btn_finish = document.querySelector("#btn_finish")),
+                (btn_import = document.querySelector("#btn_import")),
                 (select_marca = $('#select_marca').select2()),
                 (n = document.querySelector("#kt_admin_table")) &&
                 (n.querySelectorAll("tbody tr").forEach((t) => {
@@ -297,6 +301,7 @@ var KTadminlist = (function () {
                             }
                         ],
                         columns: [
+                            { data: "id", name: "id" },
                             { data: "folio_embarque", name: "folio_embarque" },
                             { data: "nombre_fiscal", name: "nombre_fiscal" },
                             { data: "nombre", name: "nombre" },
@@ -431,6 +436,11 @@ var KTadminlist = (function () {
                 btn_save.addEventListener("click", function (t) {
                     t.preventDefault()
                     save_embarque(form_rpv, embarque_id)
+                })
+                // IMPORT
+                btn_import.addEventListener("click", function (t) {
+                    t.preventDefault()
+                    modal_import.show()
                 })
                 // SAVE EMBARQUE RPV
                 btn_finish.addEventListener("click", function (t) {
