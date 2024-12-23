@@ -3,7 +3,8 @@ import Operation from "./general.js"
 
 var KTCreateAccount = (function () {
     let check_active,
-        edit_active
+        edit_active,
+        check_import
     const token = $('meta[name="csrf-token"]').attr('content')
     var e,
         btn_modal,
@@ -90,13 +91,11 @@ var KTCreateAccount = (function () {
         },
         save_embarque = async (datos, token, btnSubmit, form) => {
             try {
-                // Mostrar alerta de carga antes de la solicitud
                 Swal.fire({
                     title: "<strong>Cargando</strong>",
                     html: `<div class="progress container-fluid"></div>`,
                     showConfirmButton: false,
                 });
-                // Realizar la solicitud fetch
                 const response = await fetch('embarques', {
                     method: "POST",
                     headers: {
@@ -104,13 +103,10 @@ var KTCreateAccount = (function () {
                     },
                     body: datos,
                 });
-
-                // Verificar si la respuesta es correcta
                 if (!response.ok) {
                     throw new Error("Error en la base de datos");
                 }
 
-                // Convertir la respuesta a JSON
                 const result = await response.json();
                 $('#link_dictamen').attr('href', `/operation/imprimir_dictamen_embarque/${select_pais.val()}/${result.embarque_id}`)
                 $('#link_consulta').attr('href', `/operation/embarques_admin`)
@@ -140,9 +136,7 @@ var KTCreateAccount = (function () {
         }
     return {
         init: function () {
-                (modal = new bootstrap.Modal(
-                    document.querySelector("#kt_modal_add_product")
-                )),
+                (modal = new bootstrap.Modal(document.querySelector("#kt_modal_add_product"))),
                 (select_pais = $('#pais_id').select2()),
                 (select_empaque = $('#empaque_id').select2()),
                 (select_tefs = $('#tefs_id').select2()),
@@ -157,6 +151,7 @@ var KTCreateAccount = (function () {
                 (edit_text_marca = document.querySelector("#edit_marcas")),
                 (edit_text_products = document.querySelector("#edit_products")),
                 (check_active = document.querySelector("#check_activo")),
+                (check_import = document.querySelector("#check_import")),
                 (edit_active = document.querySelector("#consolidado")),
                 (btn_add_marca = document.querySelector("#btn_add_marca")),
                 (btn_add_maquilador = document.querySelector("#btn_add_maquilador")),
@@ -209,9 +204,33 @@ var KTCreateAccount = (function () {
                 r.on("kt.stepper.previous", function (e) {
                     console.log("stepper.previous"), e.goPrevious(), KTUtil.scrollTop()
                 }),
-                 // CHECK ACTIVE
+                // CHECK ACTIVE
                  check_active.addEventListener("click", function (t) {
                     Operation.checked(edit_active, check_active)
+                }),
+                // CHECK IMPORT
+                 check_import.addEventListener("click", function (t) {
+                    if (check_import.checked) {
+                        Swal.fire({
+                            title: "Advertencia!",
+                            text: "Para poder importar un archivo primero necesitas generar el embarque!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#1F4529",
+                            confirmButtonText: "Entendido!",
+                            cancelButtonText: "Cancelar"
+                          }).then((result) => {
+                            if (result.isConfirmed) {
+                                edit_text_products.value = 1
+                            }
+                            else{
+                                check_import.checked = false
+                                edit_text_products.value = ''
+                            }
+                          })
+                    } else {
+                        edit_text_products.value = ''
+                    }
                 }),
                  // TABLE PERMISSIONS
                 (table_marcas = $("#kt_marcas_table").DataTable({
@@ -380,7 +399,10 @@ var KTCreateAccount = (function () {
                         formData.append('marcas', JSON.stringify(marcasArray))
                         formData.append('maquiladores', JSON.stringify(maquiladoresArray))
                         formData.append('productos', JSON.stringify(productosArray))
-                        const datos = new URLSearchParams(formData)
+                        // const dropzoneFiles = myDropzone.getAcceptedFiles();
+                        // if (dropzoneFiles.length > 0) {
+                        //     formData.append('file_import', dropzoneFiles[0], dropzoneFiles[0].name)
+                        // }
                         arr_validations[0].enableValidator('puerto_id')
                         arr_validations[0].enableValidator('destinatario_id')
                         "Valid" == t
@@ -392,14 +414,14 @@ var KTCreateAccount = (function () {
                                     btn_submit.removeAttribute("data-kt-indicator"),
                                         (btn_submit.disabled = !1),
                                         // save data
-                                        save_embarque(datos, token, btn_submit, form_embarques )
+                                        save_embarque(formData, token, btn_submit, form_embarques )
                                         r.goNext()
                                 }, 2e3))
                             : Swal.fire({
                                 text: "Ya se enviaron los datos recarga la página por favor.",
                                 icon: "error",
                                 buttonsStyling: !1,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Entendido!",
                                 customClass: { confirmButton: "btn btn-light" },
                             }).then(function () {
                                 KTUtil.scrollTop()
@@ -447,7 +469,7 @@ var KTCreateAccount = (function () {
                     t.preventDefault(), modal.hide()
                 })
                  // CLOSE MODAL
-                 btn_modal.addEventListener("click", function (t) {
+                btn_modal.addEventListener("click", function (t) {
                     t.preventDefault(), modal.hide()
                 })
                  // ADD PERMISSION TO DATATABLE
@@ -460,7 +482,7 @@ var KTCreateAccount = (function () {
                     t.preventDefault();
                     add_fields(table_maquilador, select_maquiladores)
                 })
-                 // ADD Products
+                // ADD Products
                 btn_add_products.addEventListener("click", function (t) {
                     t.preventDefault();
                     modal.show()
@@ -493,3 +515,10 @@ var KTCreateAccount = (function () {
 KTUtil.onDOMContentLoaded(function () {
     KTCreateAccount.init()
 })
+
+export function init() {
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    init();
+});

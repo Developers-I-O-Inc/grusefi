@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('cajas');
             $table->string('lote');
             $table->string('tipo_fruta');
-            $table->string('n_registros')->default(1);
+            $table->string('cartilla');
             $table->foreign('embarque_id')->references('id')->on('op_embarques');
             $table->foreign('categoria_id')->references('id')->on('cat_categorias');
             $table->foreign('presentacion_id')->references('id')->on('cat_presentaciones');

@@ -23,3 +23,4 @@ Route::post('save_products_embarque', 'EmbarquesController@save_products_embarqu
 Route::post('save_marcas_embarques', 'EmbarquesController@save_marcas_embarques');
 Route::post('save_embarque_rpv', 'EmbarquesController@save_embarque_rpv');
 Route::post('finish_embarque_rpv', 'EmbarquesController@finish_embarque_rpv');
+Route::post('import_products', 'EmbarquesController@import_products');

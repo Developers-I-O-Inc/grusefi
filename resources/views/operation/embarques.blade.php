@@ -237,53 +237,55 @@
                     <div data-kt-stepper-element="content">
                         <div class="w-100">
                             <div class="container">
-                            <div class="row mb-12">
-                                <div class="col-5">
-                                    <div class="col-md-6 fv-row d-none">
-                                        <input class="form-control" placeholder="Seleccione Fecha" id="edit_products" name="edit_products"/>
-                                    </div>
-                                    <button class="btn btn-flex btn-light-primary" id="btn_add_products">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                        </svg>
-                                        </span>Agregar Productos
-                                    </button>
+                                <div class="col-md-6 fv-row d-none">
+                                    <input class="form-control" placeholder="Seleccione Fecha" id="edit_products" name="edit_products"/>
                                 </div>
-                            </div>
-                            <div class="row mb-12">
-                                <div class="col-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-row-dashed fs-6 gy-5 table-row-gray-300" id="kt_products_table">
-                                            <thead>
-                                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                    <th class="">Eliminar</th>
-                                                    <th class="">Pallet</th>
-                                                    <th class="">Lote</th>
-                                                    <th class="">N° Cajas</th>
-                                                    <th class="">Peso</th>
-                                                    <th class="">Total Kilos</th>
-                                                    <th class="">SADER</th>
-                                                    <th class="">Categoría</th>
-                                                    <th class="">idCategoria</th>
-                                                    <th class="">Presentación</th>
-                                                    <th class="">idPresentacion</th>
-                                                    <th class="">Calibre</th>
-                                                    <th class="">idcalibre</th>
-                                                    <th class="">Tipo Fruta</th>
-                                                    <th class="">Registros</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="fw-bold text-gray-600">
+                                <button class="btn btn-flex btn-light-primary" id="btn_add_products">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
+                                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
+                                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
+                                    </svg>
+                                    </span>Agregar Productos
+                                </button>
+                                <div class="form-check form-switch form-check-custom form-check-solid mt-5">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_import"/>
+                                    <label class="form-check-label" for="check_import">
+                                        Importar Excel
+                                    </label>
+                                </div>
+                                <div class="row mb-12">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-row-dashed fs-6 gy-5 table-row-gray-300" id="kt_products_table">
+                                                <thead>
+                                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                        <th class="">Eliminar</th>
+                                                        <th class="">Pallet</th>
+                                                        <th class="">Lote</th>
+                                                        <th class="">N° Cajas</th>
+                                                        <th class="">Peso</th>
+                                                        <th class="">Total Kilos</th>
+                                                        <th class="">SADER</th>
+                                                        <th class="">Categoría</th>
+                                                        <th class="">idCategoria</th>
+                                                        <th class="">Presentación</th>
+                                                        <th class="">idPresentacion</th>
+                                                        <th class="">Calibre</th>
+                                                        <th class="">idcalibre</th>
+                                                        <th class="">Tipo Fruta</th>
+                                                        <th class="">Cartilla</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="fw-bold text-gray-600">
 
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                     <div data-kt-stepper-element="content">
@@ -442,16 +444,17 @@
                                         <input type="text" class="form-control" placeholder="Ingresa el codigo SADER" name="sader" id="sader" />
                                     </div>
                                     <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Presentación</label>
-                                        <select id="presentacion_id" name="presentacion_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
-                                            <option></option>
-                                            {{-- @foreach($presentaciones as $presentacion)
-                                                <option value="{{$presentacion->id."|".$presentacion->peso}}">{{$presentacion->presentacion}}</option>
-                                            @endforeach --}}
-                                        </select>
+                                        <label class="required fs-6 fw-bold mb-2">Cartilla</label>
+                                        <input type="text" class="form-control" placeholder="Ingresa el n° de registros" name="cartilla" id="cartilla" />
                                     </div>
                                 </div>
                                 <div class="row mb-5">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Presentación</label>
+                                        <select id="presentacion_id" name="presentacion_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
+                                            <option></option>
+                                        </select>
+                                    </div>
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Calibre</label>
                                         <select id="calibre_id" name="calibre_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
@@ -461,10 +464,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Tipo de Fruta</label>
-                                        <input type="text" class="form-control" placeholder="Ingresa el tipo de fruta" name="tipo_fruta" id="tipo_fruta" />
-                                    </div>
                                 </div>
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
@@ -472,8 +471,8 @@
                                         <input type="number" class="form-control" placeholder="Ingresa el n° de cajas" name="cajas" id="cajas" />
                                     </div>
                                     <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">N° Registros</label>
-                                        <input type="number" class="form-control" placeholder="Ingresa el n° de registros" name="n_registros" id="n_registros" value="1" min="1" />
+                                        <label class="required fs-6 fw-bold mb-2">Tipo de Fruta</label>
+                                        <input type="text" class="form-control" placeholder="Ingresa el tipo de fruta" name="tipo_fruta" id="tipo_fruta" />
                                     </div>
                                 </div>
                             </div>

@@ -20,7 +20,6 @@ class EmbarquesProductos extends Model
         'id',
         'embarque_id',
         'categoria_id',
-        'tipo_cultivo_id',
         'presentacion_id',
         'calibre_id',
         'folio_pallet',
@@ -28,12 +27,12 @@ class EmbarquesProductos extends Model
         'cajas',
         'lote',
         'tipo_fruta',
-        'n_registros'
+        'cartilla'
     ];
 
     public static function get_embarque_products($id){
         return DB::select("SELECT op_embarques_productos.id, embarque_id, categoria_id, categoria, tipo_cultivo_id,  tipo_cultivo, presentacion_id,
-            presentacion, calibre_id, calibre, folio_pallet, sader, cajas, lote, tipo_fruta, n_registros, peso,
+            presentacion, calibre_id, calibre, folio_pallet, sader, cajas, lote, tipo_fruta, cartilla, peso,
             (cajas * peso) as total_kilos
         FROM op_embarques_productos
         LEFT JOIN cat_categorias ON op_embarques_productos.categoria_id = cat_categorias.id

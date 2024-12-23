@@ -338,7 +338,7 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Vigencias</span>
+                                                <span class="menu-title">Vigencias Tercería</span>
                                             </a>
                                         </div>
                                     </div>

@@ -50,7 +50,7 @@ class Operation {
         edit_lote = document.getElementById('lote'),
         edit_sader = document.getElementById('sader'),
         edit_cajas = document.getElementById('cajas'),
-        edit_registros = document.getElementById('n_registros'),
+        edit_cartilla = document.getElementById('cartilla'),
         edit_tipo_fruta = document.getElementById('tipo_fruta'),
         select_categoria = $('#categoria_id').select2(),
         select_calibre = $('#calibre_id').select2(),
@@ -106,15 +106,10 @@ class Operation {
                         }
                     },
                 },
-                registros: {
+                cartilla: {
                     validators: {
                         notEmpty: {
-                            message: 'N° de registros requerido'
-                        },
-                        between: {
-                            min: 1,  // El valor mínimo permitido
-                            max: 100, // Puedes ajustar el máximo si es necesario
-                            message: "El valor debe ser mayor que 0"
+                            message: 'Cartilla requerida'
                         }
                     },
                 },
@@ -151,8 +146,6 @@ class Operation {
                 trigger: new FormValidation.plugins.Trigger(),
                 bootstrap: new FormValidation.plugins.Bootstrap5({
                     rowSelector: ".fv-row",
-                    eleInvalidClass: "",
-                    eleValidClass: "",
                 }),
             },
         })
@@ -193,7 +186,7 @@ class Operation {
                         select_calibre.find('option:selected').text(),
                         select_calibre.val(),
                         edit_tipo_fruta.value,
-                        edit_registros.value,
+                        edit_cartilla.value,
                     ]).draw()
 
                     btn_add_product.setAttribute("data-kt-indicator", "off")
