@@ -32,24 +32,27 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'employee_number' => '123456',
             'password'=> Hash::make('123456'),
-            'password_changed_at'=> '2023-01-01 10:00:00'
+            'password_changed_at'=> '2023-01-01 10:00:00',
+            'last_id'=> '00025',
         ]);
         // Create role administrator
+        Role::create(['name' => 'Super Admin']);
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'tefs']);
-        Permission::create(['name', 'ver_zonas']);
-        Permission::create(['name', 'ver_configuracion']);
-        Permission::create(['name', 'ver_plantillas']);
-        Permission::create(['name', 'ver_embarques']);
-        Permission::create(['name', 'ver_admin']);
-        Permission::create(['name', 'ver_reportes']);
-        Permission::create(['name', 'admin_paises']);
-        Permission::create(['name', 'admin_estados']);
-        Permission::create(['name', 'admin_municipios']);
-        Permission::create(['name', 'admin_localidades']);
-        Permission::create(['name', 'admin_plantillas']);
-        Permission::create(['name', 'admin_embarques']);
-        Permission::create(['name', 'admin_users']);
+        Permission::create(['name' => 'ver_zonas']);
+        Permission::create(['name' => 'ver_configuracion']);
+        Permission::create(['name' => 'ver_plantillas']);
+        Permission::create(['name' => 'ver_embarques']);
+        Permission::create(['name' => 'ver_admin']);
+        Permission::create(['name' => 'ver_reportes']);
+        Permission::create(['name' => 'admin_paises']);
+        Permission::create(['name' => 'admin_estados']);
+        Permission::create(['name' => 'admin_municipios']);
+        Permission::create(['name' => 'admin_localidades']);
+        Permission::create(['name' => 'admin_plantillas']);
+        Permission::create(['name' => 'admin_embarques']);
+        Permission::create(['name' => 'admin_users']);
+
 
     }
 }
