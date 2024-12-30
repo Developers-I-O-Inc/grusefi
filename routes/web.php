@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Models\Admin\UsersStandards;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,8 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $users_standards = UsersStandards::user_standards_date(auth()->user()->id);
+        return view('dashboard', compact('users_standards'));
     })->name('dashboard');
 });
 
