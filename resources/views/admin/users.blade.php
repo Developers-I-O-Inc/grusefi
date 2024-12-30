@@ -209,7 +209,7 @@
             </div>
         </div>
         <!--end::Modal-->
-        <!--begin::Modal Permissions-->
+        <!--begin::Modal COUNTRIES-->
         <div class="modal fade"  id="kt_modal_countries">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -280,6 +280,88 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" class="btn btn-primary" id="btn_save_countries">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Modal-->
+        <!--begin::Modal STANDDARDS-->
+        <div class="modal fade"  id="kt_modal_standards">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Agregar Normas</h5>
+                        <div data-bs-dismiss="modal" class="btn btn-icon btn-sm btn-active-icon-primary">
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                        rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                        transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <label for="" class="form-label">Norma</label>
+                                <select id="select_standard" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_standards" data-placeholder="Selecciona una norma" data-allow-clear="true">
+                                    <option></option>
+                                    @foreach($standards as $standard)
+                                        <option value="{{$standard->id}}">{{$standard->name}}</option>
+                                    @endforeach
+                                </select>
+                                <input type="text" class="d-none" id="user_id_standard">
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-sm btn-flex btn-light-primary" id="btn_add_standard">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
+                                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
+                                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
+                                        </svg>
+                                    </span>Agregar</button>
+                            </div>
+                            <div class="fv-row mb-4">
+                                <label class="required fs-6 fw-bold mb-2">Vigencia</label>
+                                <input type="text" class="form-control" placeholder="Ingresa un nombre corto" name="validity" id="validity" autocomplete="off"/>
+                            </div>
+
+                        </div>
+                        <div class="separator my-2"></div>
+                        <div class="row">
+                            <div class="card-toolbar">
+                                <div class="d-flex justify-content-end align-items-center d-none"
+                                    data-kt-user-permission-toolbar="selected">
+                                    <div class="fw-bolder me-5">
+                                        <span class="me-2" data-kt-user-permissio-select="selected_count"></span>Seleccionados
+                                    </div>
+                                    <button href="#" class="btn btn-link btn-color-danger btn-active-color-primary me-5 mb-2">Eliminar</button>
+                                </div>
+                            </div>
+                            <table class="table table-row-dashed fs-6 gy-5 table-row-gray-300" id="kt_users_standards_table">
+                                <thead>
+                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                        <th class="">id</th>
+                                        <th class="">Norma</th>
+                                        <th class="">Vigencia</th>
+                                        <th class="">Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-bold text-gray-600">
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="btn_save_standards">Guardar</button>
                     </div>
                 </div>
             </div>

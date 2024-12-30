@@ -82,6 +82,47 @@ const delete_country = () => {
     })
 }
 
+const delete_standard = () => {
+    document.querySelectorAll('[data-kt-standard-table-filter="delete_standard"]').forEach((e) => {
+        e.addEventListener("click", function (e) {
+        e.preventDefault()
+        const o = e.target.closest("tr"),
+            n = o.querySelectorAll("td")[1].innerText
+        Swal.fire({
+            text: "Seguro que deseas eliminar la norma " + n + " del usuario?",
+            icon: "warning",
+            showCancelButton: !0,
+            buttonsStyling: !1,
+            confirmButtonText: "Si, borrar!",
+            cancelButtonText: "No, cancelelar",
+            customClass: {
+            confirmButton: "btn fw-bold btn-danger",
+            cancelButton: "btn fw-bold btn-active-light-primary",
+            },
+        }).then(function (e) {
+            e.value
+            ? Swal.fire({
+                text: "Eliminado correctamente!.",
+                icon: "success",
+                buttonsStyling: !1,
+                confirmButtonText: "Entendido",
+                customClass: { confirmButton: "btn fw-bold btn-primary" },
+                }).then(function () {
+                table_standards.row($(o)).remove().draw()
+                })
+            : "cancel" === e.dismiss &&
+                Swal.fire({
+                text: "La norma "+ n + " no se elimino.",
+                icon: "error",
+                buttonsStyling: !1,
+                confirmButtonText: "Entendido",
+                customClass: { confirmButton: "btn fw-bold btn-primary" },
+                })
+        })
+        })
+    })
+}
+
 const edit = () => {
     n.querySelectorAll(
         '[data-kt-user-table-filter="edit"]'
@@ -223,6 +264,56 @@ const edit = () => {
 
         })
     })
+    n.querySelectorAll(
+        '[data-kt-user-table-filter="add-standards"]'
+    ).forEach((e) => {
+        e.addEventListener("click", function (e) {
+            e.preventDefault()
+            $("#select_standard").val(null).trigger("change.select2")
+            table_standards.clear().draw()
+            edit_id_standard.value=$(this).data("id")
+            // GET USER PERMISSION
+            $.ajax({
+                url: "get_user_standards",
+                type: "GET",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    user_id:$(this).data("id")
+                },
+                success: function (result) {
+                    $.each(result.user, function(index){
+                        table_standards.row.add([result.user[index].standard_id, result.user[index].name, result.user[index].validity, `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" data-kt-standard-table-filter="delete_standard">
+                        <span class="svg-icon svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
+                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
+                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
+                        </svg></span>
+                    </button>`]).draw()
+                    })
+                    Swal.close()
+                    modal_standards.show()
+                },
+                beforeSend(){
+                    Swal.fire({
+                        title: "<strong>Cargando</strong>",
+                        html: `<div class="progress container-fluid"></div>`,
+                        showConfirmButton: false,
+                        })
+                },
+                error(data){
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Ocurrio un error en la base de datos!",
+                    })
+                        console.log(data)
+                }
+            })
+
+        })
+    })
 }
 
 const delete_items = () => {
@@ -336,17 +427,20 @@ const uncheck = () => {
 let table_items,
         table_permissions,
         table_countries,
+        table_standards,
         btn_modal,
-        btn_modal_permissions,
         btn_cancel,
         btn_submit,
         btn_add_permission,
+        btn_add_standard,
         btn_add_country,
         btn_save_permissions,
         btn_save_countries,
+        btn_save_standards,
         modal,
         modal_permission,
         modal_countries,
+        modal_standards,
         validations,
         form,
         edit_name,
@@ -357,26 +451,44 @@ let table_items,
         edit_id,
         edit_id_permission,
         edit_id_country,
+        edit_id_standard,
         edit_employee_number,
         edit_last_id,
+        edit_validity,
         n,
         select_permission,
-        select_country
+        select_country,
+        select_standard
 
 export function init() {
+    $("#validity").daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 2020,
+        locale: {
+            format: 'YYYY-MM-DD',
+            cancelLabel: 'Clear'
+        }
+    })
     // Modals
     modal = new bootstrap.Modal(document.querySelector("#kt_modal_add_user"))
     modal_permission = new bootstrap.Modal(document.querySelector("#kt_modal_permission"))
     modal_countries = new bootstrap.Modal(document.querySelector("#kt_modal_countries"))
+    modal_standards = new bootstrap.Modal(document.querySelector("#kt_modal_standards"))
     // inicialize elements html
     btn_add_permission = document.querySelector("#btn_add_permission")
+    btn_add_standard = document.querySelector("#btn_add_standard")
     btn_add_country = document.querySelector("#btn_add_country")
     btn_save_permissions = document.querySelector("#btn_save_permissions")
     btn_save_countries = document.querySelector("#btn_save_countries")
+    btn_save_standards = document.querySelector("#btn_save_standards")
     select_permission = document.querySelector("#select_permission")
     select_country = document.querySelector("#select_country")
+    select_standard = document.querySelector("#select_standard")
     edit_id_permission = document.querySelector("#user_id")
     edit_id_country = document.querySelector("#user_id_country")
+    edit_id_standard = document.querySelector("#user_id_standard")
+    edit_validity = document.querySelector("#validity")
     form = document.querySelector("#kt_modal_add_user_form")
     btn_modal = form.querySelector("#kt_modal_add_user_close")
     btn_submit = form.querySelector("#kt_modal_add_user_submit")
@@ -514,6 +626,26 @@ export function init() {
     }).on("draw", function(){
         delete_country()
     })
+    // TABLE COUNTRIES
+    table_standards = $("#kt_users_standards_table").DataTable({
+        order: [[1, "asc"]],
+        columnDefs: [
+            { orderable: !1, targets: 0 },
+        ],
+        language: {
+            zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
+            "<span>No hay datos que mostrar</span></div></div>",
+            info: "Mostrando página _PAGE_ de _PAGES_",
+            infoEmpty: "<div class='container-fluid'>No hay Información</div>",
+            infoFiltered: "(Filtrando _MAX_ registros)",
+            processing:
+                "<span class='fa-stack fa-lg'>\n\
+                <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
+            </span>&emsp;Processing Message here...",
+        },
+    }).on("draw", function(){
+        delete_standard()
+    })
     // CLOSE MODAL
     btn_modal.addEventListener("click", function (t) {
         t.preventDefault(), modal.hide()
@@ -553,6 +685,42 @@ export function init() {
             Swal.fire({
                 title: "Advertencia!",
                 text: "Seleccione un permiso!",
+                icon: "warning"
+                })
+        }
+
+    })
+    // ADD STANDARD TO DATATABLE
+    btn_add_standard.addEventListener("click", function (t) {
+        t.preventDefault()
+        if(select_standard.value != ""){
+            var data = table_standards.rows().data() // All data datatable permissions
+            let repeat=false
+            for (var i = 0; i < data.length; i++) {
+                if (data[i][0] == select_standard.value) {
+                    repeat=true
+                }
+            }
+            if(repeat){
+                Swal.fire({
+                    title: "Advertencia!",
+                    text: "La norma " + $("#select_standard option:selected").text() +" ya esta asignado al usuario",
+                    icon: "info"
+                    })
+            }else{
+                table_standards.row.add([select_standard.value , $("#select_standard option:selected").text(), edit_validity.value ,`<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" data-kt-standard-table-filter="delete_standard">
+                    <span class="svg-icon svg-icon-muted svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
+                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
+                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
+                        </svg></span>
+                    </button>`]).draw()
+            }
+        }
+        else{
+            Swal.fire({
+                title: "Advertencia!",
+                text: "Selecciona una norma!",
                 icon: "warning"
                 })
         }
@@ -659,6 +827,48 @@ export function init() {
                 }).then(function (e) {
                     e.isConfirmed &&
                         (modal_countries.hide())
+                })
+            },
+            error: function(error) {
+                console.error('Error al guardar datos:', error)
+            }
+        })
+    })
+    // SAVE STANDARDS TO USER
+    btn_save_standards.addEventListener("click", function (t) {
+        t.preventDefault()
+        let standards = [];
+        table_standards.rows().data().each(function (value) {
+            standards.push({
+                standard_id: value[0],
+                validity: value[2]
+            });
+        });
+        // Realizar la petición AJAX
+        $.ajax({
+            url: 'save_user_standards',
+            type: 'POST',
+            data: {
+                standards:JSON.stringify(standards),
+                user_id:edit_id_standard.value
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                Swal.fire({
+                    text: "Datos guardados exitosamente!",
+                    icon: "success",
+                    buttonsStyling: !1,
+                    confirmButtonText:
+                        "Entendido!",
+                    customClass: {
+                    confirmButton:
+                        "btn btn-primary",
+                },
+                }).then(function (e) {
+                    e.isConfirmed &&
+                        (modal_standards.hide())
                 })
             },
             error: function(error) {

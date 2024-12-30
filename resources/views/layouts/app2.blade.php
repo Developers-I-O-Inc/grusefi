@@ -326,6 +326,15 @@
                                             </a>
                                         </div>
                                         <div class="menu-item">
+                                            <a class="menu-link" href="/catalogs/standards">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Normas
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
                                             <a class="menu-link" href="/admin/users">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
