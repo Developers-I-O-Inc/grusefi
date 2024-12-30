@@ -23,4 +23,25 @@ class UsersStandards extends Model
         FROM cat_users_standards INNER JOIN cat_standards ON cat_users_standards.standard_id = cat_standards.id
         WHERE user_id ='.$id);
     }
+
+    public static function user_standards_date($id)
+{
+    return DB::select('
+        SELECT
+            cat_users_standards.id,
+            cat_users_standards.user_id,
+            cat_users_standards.standard_id,
+            cat_standards.name,
+            cat_users_standards.validity,
+            DATEDIFF(cat_users_standards.validity, CURDATE()) AS days_remaining
+        FROM
+            cat_users_standards
+        INNER JOIN
+            cat_standards
+        ON
+            cat_users_standards.standard_id = cat_standards.id
+        WHERE
+            cat_users_standards.user_id = ?
+    ', [$id]);
+}
 }
