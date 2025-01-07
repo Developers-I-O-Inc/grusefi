@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('tipo_cultivo_id')->unsigned()->index();
             $table->string('nombre_cientifico', 50);
             $table->string('variedad', 50);
+            $table->enum('tipo', ['Orgánico', 'Convencional']);
             $table->boolean('activo')->default(1);
             $table->timestamps();
             $table->softDeletes();

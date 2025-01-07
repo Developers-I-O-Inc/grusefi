@@ -19,18 +19,24 @@ class Paises extends Seeder
                 'nombre_corto' => 'MEX',
                 'codigo' => '01',
                 'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nombre' => 'Estados Unidos',
                 'nombre_corto' => 'USA',
                 'codigo' => '02',
                 'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nombre' => 'Canada',
                 'nombre_corto' => 'CAN',
                 'codigo' => '03',
                 'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }
