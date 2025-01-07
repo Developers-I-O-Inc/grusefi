@@ -4,6 +4,7 @@ namespace App\Models\Operation;
 
 use App\Models\Catalogs\Calibres;
 use App\Models\Catalogs\Categorias;
+use App\Models\Catalogs\Municipios;
 use App\Models\Catalogs\TipoCultivos;
 use App\Models\Catalogs\Presentaciones;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,15 +33,31 @@ class EmbarquesProductos extends Model
 
     public static function get_embarque_products($id){
         return DB::select("SELECT op_embarques_productos.id, embarque_id, categoria_id, categoria, tipo_cultivo_id,  tipo_cultivo, presentacion_id,
-            presentacion, calibre_id, calibre, folio_pallet, sader, cajas, lote, tipo_fruta, cartilla, peso,
-            (cajas * peso) as total_kilos
-        FROM op_embarques_productos
-        LEFT JOIN cat_categorias ON op_embarques_productos.categoria_id = cat_categorias.id
-        LEFT JOIN cat_presentaciones ON op_embarques_productos.presentacion_id = cat_presentaciones.id
-        LEFT JOIN cat_variedades ON cat_presentaciones.variedad_id = cat_variedades.id
-        LEFT JOIN cat_tipo_cultivos ON cat_variedades.tipo_cultivo_id = cat_tipo_cultivos.id
-        LEFT JOIN cat_calibres ON op_embarques_productos.calibre_id = cat_calibres.id
-        WHERE embarque_id = $id");
+				variedad_id, variedad, nombre_cientifico,
+                presentacion, calibre_id, calibre, folio_pallet, sader, cajas, lote, tipo_fruta, cartilla, peso,
+                (cajas * peso) as total_kilos
+            FROM op_embarques_productos
+            LEFT JOIN cat_categorias ON op_embarques_productos.categoria_id = cat_categorias.id
+            LEFT JOIN cat_presentaciones ON op_embarques_productos.presentacion_id = cat_presentaciones.id
+            LEFT JOIN cat_variedades ON cat_presentaciones.variedad_id = cat_variedades.id
+            LEFT JOIN cat_tipo_cultivos ON cat_variedades.tipo_cultivo_id = cat_tipo_cultivos.id
+            LEFT JOIN cat_calibres ON op_embarques_productos.calibre_id = cat_calibres.id
+            WHERE embarque_id = $id");
+    }
+
+    public static function get_tons($embarque_id){
+        return DB::select("SELECT SUM(cajas * peso) as total_kilos
+            FROM op_embarques_productos
+            LEFT JOIN cat_presentaciones ON op_embarques_productos.presentacion_id = cat_presentaciones.id
+            WHERE embarque_id = $embarque_id");
+    }
+
+    public static function get_presentations($embarque_id){
+        return DB::select("SELECT COUNT(cajas) as total_cajas, presentacion_id, presentacion
+            FROM op_embarques_productos
+            LEFT JOIN cat_presentaciones ON op_embarques_productos.presentacion_id = cat_presentaciones.id
+            WHERE embarque_id = $embarque_id
+            GROUP BY presentacion_id");
     }
 
     public function calibre(){
@@ -58,4 +75,5 @@ class EmbarquesProductos extends Model
     public function presentacion(){
         return $this->hasOne(Presentaciones::class, 'id', 'presentacion_id');
     }
+
 }

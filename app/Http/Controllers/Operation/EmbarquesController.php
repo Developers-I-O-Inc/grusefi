@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Catalogs\Calibres;
 use App\Models\Catalogs\Categorias;
 use App\Models\Catalogs\Empaques;
+use App\Models\Catalogs\Municipios;
 use App\Models\Catalogs\Paises;
 use App\Models\Catalogs\Presentaciones;
 use App\Models\Catalogs\Variedades;
@@ -43,8 +44,10 @@ class EmbarquesController extends Controller
         $calibres = Calibres::where('activo', 1)->get();
         $presentaciones = Presentaciones::where('activo', 1)->get();
         $variedades = Variedades::where('activo', 1)->get();
+        $municipios = Municipios::where('activo', 1)->get();
         $vigencia = Vigencias::select('id')->where('activo', 1)->first();
-        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'calibres', 'presentaciones', 'variedades', 'vigencia'));
+
+        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'calibres', 'presentaciones', 'variedades', 'vigencia', 'municipios'));
 
     }
     /**
@@ -62,6 +65,7 @@ class EmbarquesController extends Controller
             'variedad_id',
             'vigencia_id',
             'pais_id',
+            'municipio_id',
             'puerto_id',
             'fecha_embarque',
             'numero_economico',
@@ -221,14 +225,14 @@ class EmbarquesController extends Controller
                 }
 
                 else{
-                    $btn = '<button data-id="'.$row->id.'" type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-kt-admin-table-filter="print">
+                    $btn = '<a href="/operation/imprimir_dictamen_embarque_rpv/'.$row->id.'" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                         <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14V4H6V20H18V8H20V21C20 21.6 19.6 22 19 22Z" fill="black"/>
                                     <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black"/>
                                 </svg>
                             </span>
-                    </button>
+                    </a>
                     <button data-id="'.$row->id.'" type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-kt-admin-table-filter="upload">
                         <span class="svg-icon svg-icon-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -332,6 +336,7 @@ class EmbarquesController extends Controller
     public function finish_embarque_rpv(Request $request)
     {
         $datos = $request->json()->all();
+        $vigencias = Vigencias::where('activo', 1)->get();
         $embarque = Embarques::find($request->embarque_id);
         // GET COUNTRY ID BY EMBPAQUE
         $country_id = Empaques::select('cat_estados.codigo', 'cat_estados.id')
@@ -355,6 +360,8 @@ class EmbarquesController extends Controller
         // -----------------------------
         $embarque->folio_embarque = 'UV-220724-16-VMRE-'.auth()->user()->employee_number.'-'.$country_id->codigo.'-'.$cadena_consecutivo.'-'.substr(date('Y'), 2, 2);
         $embarque->status = "Finalizado";
+        $embarque->clave_aprobacion = isset($vigencias[0]->clave_aprobacion) ? $vigencias[0]->clave_aprobacion : '';
+        $embarque->vigencia = isset($vigencias[0]->vigencia) ? $vigencias[0]->vigencia : '';
         $embarque->save();
         $registro = EmbarquesRPV::where('embarque_id', $request->embarque_id)->first();
         unset($datos['folio_embarque']);

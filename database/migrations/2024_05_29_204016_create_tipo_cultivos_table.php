@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('cat_tipo_cultivos', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_cultivo', 30);
-            $table->enum('tipo', ['Orgánico', 'Convencional']);
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
             $table->softDeletes();
