@@ -18,6 +18,7 @@ class Embarques extends Model
         'vigencia_id',
         'destinatario_id',
         'pais_id',
+        'municipio_id',
         'puerto_id',
         'folio_embarque',
         'consecutivo',
@@ -110,5 +111,14 @@ class Embarques extends Model
             AND status = 'Finalizado'
             AND tefs_id = ?
             AND estado_id = ?", [$user_id, $country_id]);
+    }
+
+    public static function get_procedencia($embarque_id){
+        return DB::select("SELECT CONCAT_WS(', ', cat_municipios.nombre, cat_estados.nombre, cat_paises.nombre) AS procedencia
+            FROM op_embarques
+            LEFT JOIN cat_municipios ON op_embarques.municipio_id = cat_municipios.id
+            LEFT JOIN cat_estados ON cat_municipios.estado_id = cat_estados.id
+            LEFT JOIN cat_paises ON cat_estados.pais_id = cat_paises.id
+            WHERE op_embarques.id = ?", [$embarque_id]);
     }
 }

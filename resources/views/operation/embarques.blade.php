@@ -149,7 +149,7 @@
                             </div>
                             <div class="row mb-12">
                                 @role(["Super Admin", "Admin"])
-                                    <div class="col-md-12 fv-row">
+                                    <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Usuario TEF´s</label>
                                         <select id="tefs_id" name="tefs_id" class="form-select" data-control="select2" data-placeholder="Selecciona un usuario" data-allow-clear="true">
                                             <option value=""></option>
@@ -159,6 +159,15 @@
                                         </select>
                                     </div>
                                 @endrole
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-bold mb-2">Procedencia</label>
+                                    <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                        <option value=""></option>
+                                        @foreach($municipios as $municipio)
+                                            <option value="{{$municipio->id}}">{{$municipio->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

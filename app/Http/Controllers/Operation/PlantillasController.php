@@ -8,6 +8,8 @@ use App\Models\Catalogs\Variedades;
 use App\Models\Catalogs\Vigencias;
 use App\Models\Operation\Embarques;
 use App\Models\Operation\EmbarquesMarcas;
+use App\Models\Operation\EmbarquesProductos;
+use App\Models\Operation\EmbarquesRPV;
 use App\Models\Operation\PlantillaRPV;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -82,6 +84,22 @@ class PlantillasController extends Controller
         return $pdf->stream('embarque.pdf');
     }
 
+    public function imprimir_dictamen_embarque_rpv($embarque_id)
+    {
+        $embarque = Embarques::get_embarque($embarque_id);
+        $plantilla = EmbarquesRPV::where('embarque_id', $embarque_id)->first();
+        $embarques_marcas = EmbarquesMarcas::get_marcas_embarque($embarque_id);
+        $count_productos = EmbarquesProductos::select('presentacion_id')->where('embarque_id', $embarque_id)->groupBy('presentacion_id')->get()->count();
+        $embarques_productos = EmbarquesProductos::get_embarque_products($embarque_id);
+        $presentations = EmbarquesProductos::get_presentations($embarque_id);
+        $cantidad = $this->convertirKilosAToneladas($embarque_id);
+        $procedencia = Embarques::get_procedencia($embarque_id);
+        // return response()->json(["sad"=>$procedencia]);
+        $pdf = PDF::loadView('operation/reports/dicatamen_embarque', compact("plantilla", "embarque", "embarques_marcas", "count_productos", "embarques_productos", "cantidad",
+            "presentations", 'procedencia'));
+        return $pdf->stream('embarque.pdf');
+    }
+
     public function validate_plantilla($pais, $variedad){
         $count_pais = PlantillaRPV::where("pais_id",$pais)->where('variedad_id', $variedad)->count();
         if($count_pais > 0 ){
@@ -89,6 +107,18 @@ class PlantillasController extends Controller
         }
         else{
             return response()->json(['mensaje' => 'El país ya tiene una plantilla registrada'], 422);
+        }
+    }
+
+    public function convertirKilosAToneladas($embarque_id)
+    {
+        $resultado = EmbarquesProductos::get_tons($embarque_id)[0];
+        $kilos = $resultado->total_kilos;
+        if ($kilos >= 1000) {
+            $toneladas = $kilos / 1000;
+            return number_format($toneladas, 2) . ' Toneladas';
+        } else {
+            return $kilos . ' KG';
         }
     }
 }

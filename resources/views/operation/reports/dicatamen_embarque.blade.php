@@ -129,6 +129,11 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
+        .table_datos_expedicion_1{
+            border: 1px solid black;
+            border-bottom: 0;
+            border-collapse: collapse;
+        }
         .tr_datos{
             border-right: 1px solid black;
             border-top: 0;
@@ -196,7 +201,7 @@
             </tr>
             <tr class="prueba">
                 <td style="text-align:left;"><b>A) ORDEN DE SERVICIO</b> (PARA SER LLENADO POR EL CLIENTE O USUARIO)</td>
-                <td style="text-align:center;"><b>FOLIO:</b> UV-220724-16-VMRE-006-293-0096-24</td>
+                <td style="text-align:center;"><b>FOLIO:</b> {{$embarque->folio_embarque}}</td>
             </tr>
         </table>
         <table class="table_1">
@@ -229,31 +234,65 @@
                 <td class="pregunta3 font-p">3. Datos para expedición de certificado fitosanitario:</td>
             </tr>
         </table>
-        <table class="table_datos_expedicion">
+        <table class="table_datos_expedicion_1" style="width: 100%">
             <tr>
-                <td colspan="3" class="td_datos font-g">Nombre y dirección del remitente</td>
-                <td colspan="2" class="td_datos font-g">Nombre y dirección del destinatario</td>
+                <td class="td_datos font-g">Nombre y dirección del remitente</td>
+                <td class="td_datos font-g">Nombre y dirección del destinatario</td>
             </tr>
             <tr>
-                <td colspan="3" class="td_datos font-g">{{$embarque->nombre_fiscal}}</td>
-                <td colspan="2" class="td_datos font-g">{{$embarque->destinatario}}</td>
+                <td class="td_datos font-g">{{$embarque->nombre_fiscal}}</td>
+                <td class="td_datos font-g">{{$embarque->destinatario}}</td>
             </tr>
             <tr>
-                <td colspan="3" class="td_datos font-g">{{$embarque->domicilio_empaque}}</td>
-                <td colspan="2" class="td_datos font-g">{{$embarque->destinatario_domicilio}}</td>
+                <td class="td_datos font-g">{{$embarque->domicilio_empaque}}</td>
+                <td class="td_datos font-g">{{$embarque->destinatario_domicilio}}</td>
             </tr>
+        </table>
+        <table class="table_datos_expedicion" style="width: 100%">
             <tr class="tr_datos">
                 <td class="td_datos_2 font-g">Producto</td>
                 <td class="td_datos_2 font-g">Uso</td>
                 <td class="td_datos_2 font-g">Cantidad</td>
-                <td class="td_datos_2 font-g">Presentación</td>
-                <td class="td_datos_2 font-g">Marcas Distintivas</td>
+                <td class="td_datos_2 font-g" style="width: 25%">Presentación</td>
+                <td class="td_datos_2 font-g" style="width: 25%">Marcas Distintivas</td>
             </tr>
             <tr>
-                <td class="td_datos_3 font-g">AGUACATE(Persea americana) Var. Hass</td>
+                <td class="td_datos_3 font-g">
+                    @if($count_productos <= 3)
+                        @foreach($embarques_productos as $producto)
+                            {{$producto->variedad}} <em>({{$producto->nombre_cientifico}})</em>
+                        @endforeach
+                    @else
+                        <p>
+                            {{$producto[0]->variedad}} <em>({{$producto[0]->nombre_cientifico}})</em>
+                        </p>
+                        <p>
+                            {{$producto[1]->variedad}} <em>({{$producto[1]->nombre_cientifico}})</em>
+                        </p>
+                        <p>
+                            {{$producto[2]->variedad}} <em>({{$producto[2]->nombre_cientifico}})</em>
+                        </p>
+                    @endif
+                </td>
                 <td class="td_datos_3 font-g">CONSUMO HUMANO</td>
-                <td class="td_datos_3 font-g">18.0800 Toneladas</td>
-                <td class="td_datos_3 font-g">: 1600 CAJAS DE CARTON DE 11.3 KGS. C/U </td>
+                <td class="td_datos_3 font-g">{{$cantidad}}</td>
+                <td class="td_datos_3 font-g">
+                    @if($count_productos <= 3)
+                        @foreach($presentations as $presentation)
+                            {{$presentation->total_cajas.' '.$presentation->presentacion}}
+                        @endforeach
+                    @else
+                        <p>
+                            {{$presentations[0]->total_cajas.' '.$presentations[0]->presentacion}}
+                        </p>
+                        <p>
+                            {{$presentations[1]->total_cajas.' '.$presentations[1]->presentacion}}
+                        </p>
+                        <p>
+                            {{$presentations[2]->total_cajas.' '.$presentations[2]->presentacion}}
+                        </p>
+                    @endif
+                </td>
                 <td class="td_datos_3 font-g">
                     @foreach($embarques_marcas as $marca)
                         {{$marca->marca}}
@@ -273,7 +312,7 @@
                     GRANDE, CUAUTLA, MAZAMITLA,
                     TAMAZULA DE GORDIANO, JALISCO;
                     MÉXICO</td>
-                <td class="td_datos_3 font-g">ZAPOTILTIC, JALISCO, MÉXICO</td>
+                <td class="td_datos_3 font-g">{{$procedencia[0]->procedencia}}</td>
             </tr>
         </table>
         <table>
@@ -593,19 +632,22 @@
             <tr>
             <td class="font-mm">
                 ORIGINAL: Archivo local o usuario  Copia: SADER
-                <br>
-                Nota ingresada, no pertenece al formato original: "La UI opera como tipo A y declara tener la capacidad y competencia técnica de acuerdo a su acreditación UVFITO-004 y
-                aprobación UV-240122-09-VCMREMN-001 para prestar los servicios de inspección y certificación, por lo que los trabajos realizados son de manera imparcial y en apego al
-                código de ética de la empresa, además se le comunica al cliente que la información se maneja de forma confidencial y que los costos generados del servicio serán sufragados
-                por este.
-                <br>
-                <b>UV-240122-09-VCMREMN-001 ES LA CLAVE DE APROBACIÓN PARA PRODUCTOS DE MOVILIZACIÓN NACIONAL.</b>
-                <br>
-                Nota ingresada, no pertenece al formato original: "La UI opera como tipo A y declara tener la capacidad y competencia técnica de acuerdo a su acreditación UVFITO-004 y
-                aprobación UV-240122-09-VMRE-001 para prestar los servicios de inspección y certificación, por lo que los trabajos realizados son de manera imparcial y en apego al código
-                de ética de la empresa, además se le comunica al cliente que la información se maneja de forma confidencial y que los costos generados del servicio serán sufragados por este.
-                <br>
-                <b>UV-240122-09-VMRE-001 ES LA CLAVE DE APROBACIÓN PARA PRODUCTOS QUE VAN A HACER EXPORTADOS.</b>
+                @if($embarque->pais_id == 1)
+                    <br>
+                    Nota ingresada, no pertenece al formato original: "La UI opera como tipo A y declara tener la capacidad y competencia técnica de acuerdo a su acreditación UVFITO-004 y
+                    aprobación UV-240122-09-VCMREMN-001 para prestar los servicios de inspección y certificación, por lo que los trabajos realizados son de manera imparcial y en apego al
+                    código de ética de la empresa, además se le comunica al cliente que la información se maneja de forma confidencial y que los costos generados del servicio serán sufragados
+                    por este.
+                    <br>
+                    <b>UV-240122-09-VCMREMN-001 ES LA CLAVE DE APROBACIÓN PARA PRODUCTOS DE MOVILIZACIÓN NACIONAL.</b>
+                @else
+                    <br>
+                    Nota ingresada, no pertenece al formato original: "La UI opera como tipo A y declara tener la capacidad y competencia técnica de acuerdo a su acreditación UVFITO-004 y
+                    aprobación UV-240122-09-VMRE-001 para prestar los servicios de inspección y certificación, por lo que los trabajos realizados son de manera imparcial y en apego al código
+                    de ética de la empresa, además se le comunica al cliente que la información se maneja de forma confidencial y que los costos generados del servicio serán sufragados por este.
+                    <br>
+                    <b>UV-240122-09-VMRE-001 ES LA CLAVE DE APROBACIÓN PARA PRODUCTOS QUE VAN A HACER EXPORTADOS.</b>
+                @endif
             </td>
             </tr>
         </table>
