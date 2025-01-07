@@ -515,10 +515,3 @@ var KTCreateAccount = (function () {
 KTUtil.onDOMContentLoaded(function () {
     KTCreateAccount.init()
 })
-
-export function init() {
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    init();
-});

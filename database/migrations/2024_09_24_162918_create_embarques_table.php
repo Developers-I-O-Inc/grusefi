@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('variedad_id')->unsigned()->index();
             $table->bigInteger('vigencia_id')->unsigned()->index();
             $table->bigInteger('municipio_id')->unsigned()->index();
+            $table->bigInteger('uso_id')->unsigned()->index();
             $table->bigInteger('consolidado_id')->nullable();
             $table->string('folio_embarque')->default('EMB-');
             $table->string('consecutivo')->default('0000');
@@ -40,6 +41,7 @@ return new class extends Migration
             $table->foreign('variedad_id')->references('id')->on('cat_variedades');
             $table->foreign('vigencia_id')->references('id')->on('cat_vigencias');
             $table->foreign('municipio_id')->references('id')->on('cat_municipios');
+            $table->foreign('uso_id')->references('id')->on('cat_usos');
             $table->timestamps();
         });
     }

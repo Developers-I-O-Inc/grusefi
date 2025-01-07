@@ -85,7 +85,7 @@
                 <form class="py-20 w-100 w-xl-900px px-9" novalidate="novalidate" id="form_embarques">
                     <div data-kt-stepper-element="content" class="current">
                         <div class="w-100">
-                            <div class="row mb-12">
+                            <div class="row mb-4">
                                 <div class="col-md-4 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Fecha Embarque</label>
                                     <input class="form-control" placeholder="Seleccione Fecha" id="fecha_embarque" name="fecha_embarque"/>
@@ -109,9 +109,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mb-12">
+                            <div class="row mb-4">
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-bold mb-2">Empaque</label>
+                                    <label class="required fs-6 fw-bold mb-2">Cliente</label>
                                     <input type="text" class="form-control d-none" placeholder="Ingresa el número económico" name="vigencia_id" id="vigencia_id" value="{{$vigencia->id}}" />
                                     <select id="empaque_id" name="empaque_id" class="form-select" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
                                         <option value=""></option>
@@ -127,7 +127,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mb-12">
+                            <div class="row mb-4">
                                 <div class="col-md-4 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Puerto de Entrada</label>
                                     <select id="puerto_id" name="puerto_id" class="form-select" data-control="select2" data-placeholder="Selecciona un puerto" data-allow-clear="true">
@@ -147,7 +147,27 @@
                                     <input type="text" class="form-control" placeholder="Ingresa el nombre del ispector" name="inspector" id="inspector" />
                                 </div> --}}
                             </div>
-                            <div class="row mb-12">
+                            <div class="row mb-4">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-bold mb-2">Procedencia</label>
+                                    <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                        <option value=""></option>
+                                        @foreach($municipios as $municipio)
+                                            <option value="{{$municipio->id}}">{{$municipio->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-bold mb-2">Uso</label>
+                                    <select id="uso_id" name="uso_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                        <option value=""></option>
+                                        @foreach($usos as $uso)
+                                            <option value="{{$uso->id}}">{{$uso->uso}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
                                 @role(["Super Admin", "Admin"])
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Usuario TEF´s</label>
@@ -159,15 +179,6 @@
                                         </select>
                                     </div>
                                 @endrole
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-bold mb-2">Procedencia</label>
-                                    <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
-                                        <option value=""></option>
-                                        @foreach($municipios as $municipio)
-                                            <option value="{{$municipio->id}}">{{$municipio->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </div>
                         </div>
                     </div>
