@@ -67,6 +67,8 @@ class EmbarquesRPV extends Model
         'cfe_no_debe_CFMN',
         'cfe_debe_CFI',
         'cfe_aplica_fleje_CFI',
-        'cfe_no_debe_CFI'
+        'cfe_no_debe_CFI',
+        'clave_aprobacion',
+        'vigencia'
     ];
 }
