@@ -12,6 +12,7 @@ use App\Models\Catalogs\Empaques;
 use App\Models\Catalogs\Municipios;
 use App\Models\Catalogs\Paises;
 use App\Models\Catalogs\Presentaciones;
+use App\Models\Catalogs\Usos;
 use App\Models\Catalogs\Variedades;
 use App\Models\Catalogs\Vigencias;
 use App\Models\Operation\EmbarquesMarcas;
@@ -31,6 +32,10 @@ class EmbarquesController extends Controller
      */
     public function index(Request $request)
     {
+        $vigencias = Vigencias::where('activo', 1)->get();
+        if($vigencias->count() == 0){
+            return redirect()->route('vigencias.index')->with('error_vigencia', 'No hay vigencias activas, por favor activa una vigencia para poder continuar.');
+        }
         if(auth()->user()->hasRole('tefs')){
             $empaques = Empaques::get_empaques_by_country();
         }
@@ -46,8 +51,9 @@ class EmbarquesController extends Controller
         $variedades = Variedades::where('activo', 1)->get();
         $municipios = Municipios::where('activo', 1)->get();
         $vigencia = Vigencias::select('id')->where('activo', 1)->first();
+        $usos = Usos::where('activo', 1)->get();
 
-        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'calibres', 'presentaciones', 'variedades', 'vigencia', 'municipios'));
+        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'calibres', 'presentaciones', 'variedades', 'vigencia', 'municipios', 'usos'));
 
     }
     /**
@@ -74,7 +80,8 @@ class EmbarquesController extends Controller
             'consolidado',
             'consolidado_id',
             'empresa_transporte',
-            'chofer'
+            'chofer',
+            'uso_id'
         ]);
 
         // TEFS OR ADMIN
@@ -358,10 +365,8 @@ class EmbarquesController extends Controller
                 $cadena_consecutivo = str_pad($num_consecutivo + 1, 4, '0', STR_PAD_LEFT);
         }
         // -----------------------------
-        $embarque->folio_embarque = 'UV-220724-16-VMRE-'.auth()->user()->employee_number.'-'.$country_id->codigo.'-'.$cadena_consecutivo.'-'.substr(date('Y'), 2, 2);
+        $embarque->folio_embarque = 'VMRE-'.auth()->user()->employee_number.'-'.$country_id->codigo.'-'.$cadena_consecutivo.'-'.substr(date('Y'), 2, 2);
         $embarque->status = "Finalizado";
-        $embarque->clave_aprobacion = isset($vigencias[0]->clave_aprobacion) ? $vigencias[0]->clave_aprobacion : '';
-        $embarque->vigencia = isset($vigencias[0]->vigencia) ? $vigencias[0]->vigencia : '';
         $embarque->save();
         $registro = EmbarquesRPV::where('embarque_id', $request->embarque_id)->first();
         unset($datos['folio_embarque']);

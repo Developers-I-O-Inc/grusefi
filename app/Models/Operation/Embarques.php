@@ -31,6 +31,7 @@ class Embarques extends Model
         'empresa_transporte',
         'chofer',
         'tefs_id',
+        'uso_id'
     ];
 
     public static function get_embarque($id){
@@ -56,7 +57,8 @@ class Embarques extends Model
             CONCAT_WS(', PLACAS:S', medio_transporte,
             placas) AS transporte,
             vigencia,
-            clave_aprobacion
+            clave_aprobacion,
+            uso
             FROM op_embarques
             LEFT JOIN cat_empaques AS empaques ON op_embarques.empaque_id = empaques.id
             LEFT JOIN cat_localidades ON empaques.localidad_id = cat_localidades.id
@@ -65,6 +67,7 @@ class Embarques extends Model
             LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
             LEFT JOIN cat_municipios AS mpuertos ON cat_puertos.municipio_id = mpuertos.id
             LEFT JOIN cat_vigencias ON op_embarques.vigencia_id = cat_vigencias.id
+            LEFT JOIN cat_usos ON op_embarques.uso_id = cat_usos.id
             WHERE op_embarques.id = ?
         ", [$id]);
 
