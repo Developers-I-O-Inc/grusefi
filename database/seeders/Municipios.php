@@ -2497,5 +2497,6 @@ class Municipios extends Seeder
         ];
 
         DB::table('cat_municipios')->insert($municipios);
+        DB::table('cat_municipios')->update(['created_at' => now(), 'updated_at' => now()]);
     }
 }
