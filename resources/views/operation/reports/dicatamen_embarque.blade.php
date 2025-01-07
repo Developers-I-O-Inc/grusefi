@@ -274,7 +274,7 @@
                         </p>
                     @endif
                 </td>
-                <td class="td_datos_3 font-g">CONSUMO HUMANO</td>
+                <td class="td_datos_3 font-g">{{$embarque->uso}}</td>
                 <td class="td_datos_3 font-g">{{$cantidad}}</td>
                 <td class="td_datos_3 font-g">
                     @if($count_productos <= 3)
