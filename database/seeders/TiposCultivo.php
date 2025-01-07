@@ -57,6 +57,18 @@ class TiposCultivo extends Seeder
                 'updated_at' => now()
             ],
             [
+                'tipo_cultivo' => 'Cultivos para Bebidas Medicinales y Aromáticas',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'tipo_cultivo' => 'Cultivos Tropicales Tradicionales',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
                 'tipo_cultivo' => 'Pastos',
                 'activo' => true,
                 'created_at' => now(),

@@ -580,6 +580,9 @@ export function init() {
                 <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
             </span>&emspProcessing Message here...",
         },
+        drawCallback: function() {
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        },
     }).on("draw", function () {
         delete_items(), edit(), uncheck()
     })
