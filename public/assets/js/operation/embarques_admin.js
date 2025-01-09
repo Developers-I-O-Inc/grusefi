@@ -9,26 +9,27 @@ var KTadminlist = (function () {
         edit_folio,
         btn_search,
         btn_products,
-        btn_marcas,
+        btn_standards,
         btn_add_product,
-        btn_add_marca,
-        btn_save_marcas,
+        btn_add_standard,
+        btn_save_standards,
         btn_save,
         btn_finish,
         btn_import,
         form_products,
         form_rpv,
         span_fecha_embarque,
-        select_marca,
+        span_hora_embarque,
+        select_standard,
         dates,
         filter,
         modal,
-        modal_marcas,
+        modal_standards,
         modal_upload,
         modal_import,
-        select_presentacion,
+        // select_presentacion,
         table_products,
-        table_marcas,
+        table_standards,
         n,
         save_embarque = (formulario, embarque_id) => {
             const clase = "p_input"
@@ -125,11 +126,13 @@ var KTadminlist = (function () {
                 },
                 body: JSON.stringify(datosFormulario)
             })
-            .then(
-                async response => {
-                    return response.json();
+            .then(async response => {
+                const data = await response.json();
+                if (!response.ok) {
+                    throw data;
                 }
-            )
+                return data;
+            })
             .then(data => {
                 Swal.fire({
                     text: "Datos guardados y embarque terminado exitosamente!",
@@ -141,18 +144,28 @@ var KTadminlist = (function () {
                     },
                 }).then(({ isConfirmed }) => {
                     if (isConfirmed) {
-                        location.reload()
+                        location.reload();
                     }
-                })
+                });
             })
-            .catch((error) => {
-                console.error('Error:', error)
-            })
+            .catch(error => {
+                Swal.fire({
+                    text: error.error || "Ocurrió un error inesperado.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Entendido!",
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                    },
+                });
+            });
+
+            // Mensaje de carga mientras se procesa la solicitud
             Swal.fire({
                 title: "<strong>Cargando</strong>",
                 html: `<div class="progress container-fluid"></div>`,
                 showConfirmButton: false,
-            })
+            });
         },
         edit = () => {
             n.querySelectorAll(
@@ -179,7 +192,8 @@ var KTadminlist = (function () {
                         delete plantilla.created_at
                         delete plantilla.deleted_at
                         delete plantilla.updated_at
-                        span_fecha_embarque.innerText  = embarque.fecha_embarque
+                        span_fecha_embarque.innerText  = (embarque.fecha_embarque).substring(0,10)
+                        span_hora_embarque.innerText  = (embarque.fecha_embarque).substring(11)
                         edit_folio.value  = embarque.folio_embarque
                         edit_folio.disabled = false
                         for (const [key, value] of Object.entries(plantilla)) {
@@ -206,10 +220,9 @@ var KTadminlist = (function () {
                                 }
                             }
                         }
-                        Operation.get_next_selects("marcas", embarque.empaque_id, select_marca)
-                        Operation.get_next_selects("presentaciones", embarque.variedad_id, select_presentacion, true)
+                        // Operation.get_next_selects("presentaciones", embarque.variedad_id, select_presentacion, true)
                         document.getElementById('btn_products').setAttribute('data-embarque', embarque.id);
-                        document.getElementById('btn_marcas').setAttribute('data-embarque', embarque.id);
+                        document.getElementById('btn_standards').setAttribute('data-embarque', embarque.id);
                         document.querySelector('#kt_accordion_1_header_2 button').classList.remove('collapsed');
                         document.querySelector('#kt_accordion_1_body_2').classList.add('show');
                         document.querySelectorAll('.accordion-collapse').forEach((accordion) => {
@@ -258,12 +271,13 @@ var KTadminlist = (function () {
                     overlayClass: "bg-success bg-opacity-15",
                     message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> Bloqueado seleccione un embarque...</div>'
                 })),
-                (modal = new bootstrap.Modal(document.querySelector("#kt_modal_edit_products"))),
-                (modal_marcas = new bootstrap.Modal(document.querySelector("#kt_modal_edit_marcas"))),
+                (modal = new bootstrap.Modal(document.querySelector("#kt_modal_add_product"))),
+                (modal_standards = new bootstrap.Modal(document.querySelector("#kt_modal_edit_standards"))),
                 (modal_upload = new bootstrap.Modal(document.querySelector("#kt_modal_upload"))),
                 (modal_import = new bootstrap.Modal(document.querySelector("#kt_modal_import"))),
                 (span_fecha_embarque = document.querySelector('#fecha_embarque')),
-                (select_presentacion = $('#presentacion_id').select2()),
+                (span_hora_embarque = document.querySelector('#hora_embarque')),
+                // (select_presentacion = $('#presentacion_id').select2()),
                 (form_products = document.querySelector("#kt_modal_add_product_form")),
                 (form_rpv = document.querySelector("#form_rpv")),
                 (dates = document.querySelector('#dates')),
@@ -271,14 +285,14 @@ var KTadminlist = (function () {
                 (edit_folio = document.querySelector('#FolioRPV')),
                 (btn_search = document.querySelector('#btn_search')),
                 (btn_products = document.getElementById('btn_products')),
-                (btn_marcas = document.getElementById('btn_marcas')),
+                (btn_standards = document.getElementById('btn_standards')),
                 (btn_add_product = document.querySelector("#btn_add_product")),
-                (btn_add_marca = document.querySelector("#btn_add_marca")),
-                (btn_save_marcas = document.querySelector("#btn_save_marcas")),
+                (btn_add_standard = document.querySelector("#btn_add_standard")),
+                (btn_save_standards = document.querySelector("#btn_save_standards")),
                 (btn_save = document.querySelector("#btn_save")),
                 (btn_finish = document.querySelector("#btn_finish")),
                 (btn_import = document.querySelector("#btn_import")),
-                (select_marca = $('#select_marca').select2()),
+                (select_standard = $('#select_standard').select2()),
                 (n = document.querySelector("#kt_admin_table")) &&
                 (n.querySelectorAll("tbody tr").forEach((t) => {
                     // formats
@@ -329,9 +343,8 @@ var KTadminlist = (function () {
                     order: [[1, "asc"]],
                     columnDefs: [
                         { orderable: !1, targets: 0 },
-                        { orderable: !1, targets: 8, visible : 0 },
-                        { orderable: !1, targets: 10, visible : 0 },
-                        { orderable: !1, targets: 12, visible : 0 },
+                        { orderable: !1, targets: 5, visible : 0 },
+                        { orderable: !1, targets: 7, visible : 0 },
                     ],
                     language: {
                         zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
@@ -345,8 +358,8 @@ var KTadminlist = (function () {
                         </span>&emsp;Processing Message here...",
                     },
                 })),
-                 // TABLE marcas
-                (table_marcas = $("#kt_marcas_table").DataTable({
+                 // TABLE standards
+                (table_standards = $("#kt_standards_table").DataTable({
                     order: [[1, "asc"]],
                     columnDefs: [
                         { orderable: !1, targets: 0, visible:0 },
@@ -391,9 +404,20 @@ var KTadminlist = (function () {
                                     <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
                                     <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
                                     </svg></span>
-                                </button>`, item.folio_pallet, item.lote, item.cajas, item.peso, item.total_kilos, item.sader, item.categoria, item.categoria_id,
-                                item.presentacion, item.presentacion_id,
-                                item.calibre, item.calibre_id, item.tipo_fruta, item.n_registros]).draw()
+                                </button>`,
+                                item.folio_pallet,
+                                item.lote,
+                                item.sader,
+                                item.cartilla,
+                                item.variedad_id,
+                                item.variedad,
+                                item.presentacion_id,
+                                item.presentacion,
+                                item.cantidad,
+                                item.peso,
+                                item.total_kilos,
+                                item.marca_id,
+                                item.marca]).draw()
                         });
                         modal.show()
                     })
@@ -401,8 +425,8 @@ var KTadminlist = (function () {
                         console.error(error)
                     })
                 })
-                btn_marcas.addEventListener('click', function () {
-                    fetch(`get_marcas_embarque/${$(this).data("embarque")}`, {
+                btn_standards.addEventListener('click', function () {
+                    fetch(`get_standards_embarque/${$(this).data("embarque")}`, {
                         method: "GET",
                         headers:{
                             'Content-Type': 'application/json'
@@ -415,9 +439,9 @@ var KTadminlist = (function () {
                         return response.json()
                     })
                     .then(data => {
-                        table_marcas.clear().draw();
+                        table_standards.clear().draw();
                         data.forEach(item => {
-                            table_marcas.row.add([item.marca_id, item.marca, `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 delete_marca"
+                            table_standards.row.add([item.id, item.name, `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 delete_standard"
                                 data-kt-customer-table-filter="delete_row">
                                 <span class="svg-icon svg-icon-muted svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
@@ -426,7 +450,7 @@ var KTadminlist = (function () {
                                     </svg></span>
                                 </button>`]).draw()
                         })
-                        modal_marcas.show()
+                        modal_standards.show()
                     })
                     .catch(error => {
                         console.error(error)
@@ -452,25 +476,25 @@ var KTadminlist = (function () {
                     t.preventDefault();
                     Operation.add_products(table_products, btn_add_product, form_products, embarque_id)
                 })
-                // ADD MARCA
-                btn_add_marca.addEventListener("click", function (t) {
+                // ADD standard
+                btn_add_standard.addEventListener("click", function (t) {
                     t.preventDefault();
-                    if(select_marca.val() != "" && select_marca.val() != null){
-                        var data = table_marcas.rows().data();
+                    if(select_standard.val() != "" && select_standard.val() != null){
+                        var data = table_standards.rows().data();
                         let repeat=false;
                         for (var i = 0; i < data.length; i++) {
-                            if (data[i][0] == select_marca.val()) {
+                            if (data[i][0] == select_standard.val()) {
                                 repeat=true;
                             }
                         }
                         if(repeat){
                             Swal.fire({
                                 title: "Advertencia!",
-                                text: "La marca " + select_marca.val() +" ya esta agregada!",
+                                text: select_standard.find('option:selected').text() +" ya esta agregada!",
                                 icon: "warning"
                               });
                         }else{
-                            table_marcas.row.add([select_marca.val(), select_marca.find('option:selected').text(),  `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 delete_marca">
+                            table_standards.row.add([select_standard.val(), select_standard.find('option:selected').text(),  `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 delete_standard">
                                 <span class="svg-icon svg-icon-muted svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
                                     <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
@@ -482,23 +506,23 @@ var KTadminlist = (function () {
                     else{
                         Swal.fire({
                             title: "Advertencia!",
-                            text: "Seleccione una marca!",
+                            text: "Seleccione una standard!",
                             icon: "warning"
                           });
                     }
                 })
-                 // SAVE MARCAS
-                 btn_save_marcas.addEventListener("click", function (t) {
+                 // SAVE standardS
+                 btn_save_standards.addEventListener("click", function (t) {
                     t.preventDefault();
-                    let marcas = [];
-                    table_marcas.rows().data().each(function (value) {
-                        marcas.push({
-                            marca_id: value[0],
-                            marca: value[1]
+                    let standards = [];
+                    table_standards.rows().data().each(function (value) {
+                        standards.push({
+                            standard_id: value[0],
+                            standard: value[1]
                         });
                     });
 
-                    fetch(`save_marcas_embarques`, {
+                    fetch(`save_standards_embarques`, {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',
@@ -506,7 +530,7 @@ var KTadminlist = (function () {
                         },
                         body: JSON.stringify({
                             embarque_id: embarque_id,
-                            marcas: marcas
+                            standards: standards
                         })
                     })
                     .then(response => {
@@ -518,16 +542,16 @@ var KTadminlist = (function () {
                     .then(data => {
                         Swal.fire({
                             title: "Éxito!",
-                            text: "Las marcas han sido guardadas correctamente!",
+                            text: "Las normas han sido guardadas correctamente!",
                             icon: "success"
                         });
-                        modal_marcas.hide();
+                        modal_standards.hide();
                     })
                     .catch(error => {
                         console.error(error);
                         Swal.fire({
                             title: "Error!",
-                            text: "Hubo un problema al guardar las marcas!",
+                            text: "Hubo un problema al guardar las normas!",
                             icon: "error"
                         });
                     });
@@ -544,9 +568,9 @@ var KTadminlist = (function () {
                     table_products.row(row).remove().draw()
                     toastr.success("Eliminado correctamente")
                 });
-                $('#kt_marcas_table tbody').on('click', '.delete_marca', function() {
+                $('#kt_standards_table tbody').on('click', '.delete_standard', function() {
                     var row = $(this).closest('tr')
-                    table_marcas.row(row).remove().draw()
+                    table_standards.row(row).remove().draw()
                     toastr.success("Eliminado correctamente")
                 });
 

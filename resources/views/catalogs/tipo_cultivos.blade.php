@@ -52,7 +52,6 @@
                             </th>
                             <th class="min-w-125px">id</th>
                             <th class="min-w-125px">Tipo de Cultivo</th>
-                            <th class="min-w-125px">Tipo</th>
                             <th class="min-w-125px">Status</th>
                             <th class="min-w-125px">Opciones</th>
                         </tr>
@@ -66,8 +65,7 @@
         <div class="modal fade" id="kt_modal_add_tipo_cultivo" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_tipo_cultivo_form"
-                        data-kt-redirect="../../demo6/dist/apps/tipo_cultivos/list.html">
+                    <form class="form" action="#" id="kt_modal_add_tipo_cultivo_form">
                         <div class="modal-header" id="kt_modal_add_tipo_cultivo_header">
                             <h2 class="fw-bolder">Agregar Tipo de cultivo</h2>
                             <div id="kt_modal_add_tipo_cultivo_close" class="btn btn-icon btn-sm btn-active-icon-primary">
@@ -91,14 +89,6 @@
                                     <label class="required fs-6 fw-bold mb-2">Tipo de Cultivo</label>
                                     <input type="text" class="form-control" placeholder="Ingresa el tipo de cultivo" name="tipo_cultivo" id="tipo_cultivo" autocomplete="off"/>
                                     <input type="text" class="form-control d-none" name="id_tipo_cultivo" id="id_tipo_cultivo" />
-                                </div>
-                                <div class="fv-row mb-7">
-                                    <label class="required fs-6 fw-bold mb-2">Tipo</label>
-                                    <select id="tipo" name="tipo" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_tipo_cultivo" data-placeholder="Selecciona un País" data-allow-clear="true">
-                                        <option></option>
-                                        <option value="Orgánico">Orgánico</option>
-                                        <option value="Convencional">Convencional</option>
-                                    </select>
                                 </div>
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>

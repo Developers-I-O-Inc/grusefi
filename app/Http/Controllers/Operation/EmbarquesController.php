@@ -6,12 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Imports\ProductsImport;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
-use App\Models\Catalogs\Calibres;
-use App\Models\Catalogs\Categorias;
 use App\Models\Catalogs\Empaques;
 use App\Models\Catalogs\Municipios;
 use App\Models\Catalogs\Paises;
 use App\Models\Catalogs\Presentaciones;
+use App\Models\Catalogs\Standards;
 use App\Models\Catalogs\Usos;
 use App\Models\Catalogs\Variedades;
 use App\Models\Catalogs\Vigencias;
@@ -21,6 +20,8 @@ use App\Models\Operation\Embarques;
 use App\Models\Operation\EmbarquesRPV;
 use App\Models\Operation\EmbarquesProductos;
 use App\Models\Operation\PlantillaRPV;
+use App\Models\Admin\UsersStandards;
+use App\Models\Operation\EmbarquesStandards;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
@@ -38,22 +39,22 @@ class EmbarquesController extends Controller
         }
         if(auth()->user()->hasRole('tefs')){
             $empaques = Empaques::get_empaques_by_country();
+            $lugares = Municipios::municipios_by_user(auth()->user()->id);
+            $standards = UsersStandards::user_standards_select(auth()->user()->id);
         }
         else{
             $empaques = Empaques::where('activo', 1)->get();
+            $lugares = Municipios::where('activo', 1)->get();
+            $standards = Standards::where('activo', 1)->get();
         }
-        $empaques = Empaques::where('activo', 1)->get();
         $paises = Paises::where('activo', 1)->get();
         $users = User::role('tefs')->get();
-        $categorias = Categorias::where('activo', 1)->get();
-        $calibres = Calibres::where('activo', 1)->get();
         $presentaciones = Presentaciones::where('activo', 1)->get();
         $variedades = Variedades::where('activo', 1)->get();
         $municipios = Municipios::where('activo', 1)->get();
         $vigencia = Vigencias::select('id')->where('activo', 1)->first();
         $usos = Usos::where('activo', 1)->get();
-
-        return view('operation/embarques', compact('empaques', 'paises', 'users', 'categorias', 'calibres', 'presentaciones', 'variedades', 'vigencia', 'municipios', 'usos'));
+        return view('operation/embarques', compact('empaques', 'paises', 'users', 'presentaciones', 'variedades', 'vigencia', 'municipios', 'usos', 'lugares', 'standards'));
 
     }
     /**
@@ -61,7 +62,7 @@ class EmbarquesController extends Controller
      */
     public function store(Request $request)
     {
-        $marcas = json_decode($request->get('marcas'), true);
+        $standards = json_decode($request->get('standards'), true);
         $maquiladores = json_decode($request->get('maquiladores'), true);
         $productos = json_decode($request->get('productos'), true);
 
@@ -72,8 +73,8 @@ class EmbarquesController extends Controller
             'vigencia_id',
             'pais_id',
             'municipio_id',
+            'lugar_id',
             'puerto_id',
-            'fecha_embarque',
             'numero_economico',
             'placas_trasporte',
             'inspector',
@@ -125,38 +126,38 @@ class EmbarquesController extends Controller
                     EmbarquesRPV::insert($embarqueRPVData);
                 }
             //--------------------------------
-            if (!empty($marcas)) {
-                foreach ($marcas as $marca_arr) {
-                    $marca = new EmbarquesMarcas();
-                    $marca->embarque_id = $embarque->id;
-                    $marca->marca_id = $marca_arr;
-                    $marca->save();
+            if (!empty($standards)) {
+                foreach ($standards as $standards_arr) {
+                    $standard = new EmbarquesStandards();
+                    $standard->embarque_id = $embarque->id;
+                    $standard->standard_id = $standards_arr;
+                    $standard->save();
                 }
             }
 
-            if (!empty($maquiladores)) {
-                foreach ($maquiladores as $maquilador_arr) {
-                    $maquilador = new EmbarquesMaquiladores();
-                    $maquilador->embarque_id = $embarque->id;
-                    $maquilador->maquilador_id = $maquilador_arr;
-                    $maquilador->save();
-                }
-            }
+            // if (!empty($maquiladores)) {
+            //     foreach ($maquiladores as $maquilador_arr) {
+            //         $maquilador = new EmbarquesMaquiladores();
+            //         $maquilador->embarque_id = $embarque->id;
+            //         $maquilador->maquilador_id = $maquilador_arr;
+            //         $maquilador->save();
+            //     }
+            // }
 
             $insertData = [];
             if (!empty($productos)) {
                 foreach ($productos as $product) {
                     $insertData[] = [
                         'embarque_id' => $embarque->id,
-                        'categoria_id' => $product[8],
-                        'presentacion_id' => $product[10],
-                        'calibre_id' => $product[12],
                         'folio_pallet' => $product[1],
                         'lote' => $product[2],
-                        'cajas' => $product[3],
-                        'sader' => $product[6],
-                        'tipo_fruta' => $product[13],
-                        'cartilla' => $product[14],
+                        'sader' => $product[3],
+                        'cartilla' => $product[4],
+                        'variedad_id' => $product[5],
+                        'presentacion_id' => $product[7],
+                        'cantidad' => $product[9],
+                        'peso' => $product[10],
+                        'marca_id' => $product[12],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
@@ -190,10 +191,6 @@ class EmbarquesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy_calibres(Request $request)
-    {
-
-    }
 
     public function embarques_admin(Request $request){
         if ($request->ajax()) {
@@ -203,13 +200,13 @@ class EmbarquesController extends Controller
             $apply_filter = $request->input('filter', false);
 
             if(!$apply_filter || $start_date == '' or $end_date ==''){
-                $calibres = Embarques::get_embarques_admin(auth()->user()->hasRole('tefs'));
+                $embarques = Embarques::get_embarques_admin(auth()->user()->hasRole('tefs'));
             }
             else {
-                $calibres = Embarques::get_embarques_admin_by_dates($start_date, $end_date, auth()->user()->hasRole('tefs'));
+                $embarques = Embarques::get_embarques_admin_by_dates($start_date, $end_date, auth()->user()->hasRole('tefs'));
             }
 
-            return Datatables::of($calibres) ->addIndexColumn()
+            return Datatables::of($embarques) ->addIndexColumn()
             ->addColumn('buttons', function($row){
                 $btn = "";
                 if($row->status != "Finalizado"){
@@ -256,18 +253,31 @@ class EmbarquesController extends Controller
             ->make(true);
 
         }
-        $categorias = Categorias::where('activo', 1)->get();
-        $calibres = Calibres::where('activo', 1)->get();
         $vigencias = Vigencias::where('activo', 1)->get();
-        return view("operation/embarques_admin", compact('categorias', 'calibres', 'vigencias'));
+        if(auth()->user()->hasRole('tefs')){
+            $standards = UsersStandards::user_standards_select(auth()->user()->id);
+        }
+        else{
+            $standards = Standards::where('activo', 1)->get();
+        }
+        $variedades = Variedades::where('activo', 1)->get();
+        $presentaciones = Presentaciones::where('activo', 1)->get();
+        return view("operation/embarques_admin", compact('vigencias', 'standards', 'variedades', 'presentaciones'));
     }
 
     public function get_embarque_edit($embarque_id)
     {
         $embarque = Embarques::get_embarque($embarque_id);
         $plantilla = EmbarquesRPV::where('embarque_id', $embarque_id)->first();
-        $embarques_marcas = EmbarquesMarcas::get_marcas_embarque($embarque_id);
-        return response()->json(["plantilla" =>$plantilla, "embarque"=>$embarque, "embarques_marcas"=>$embarques_marcas]);
+        // $embarques_standards = EmbarquesStandards::get_marcas_embarque($embarque_id);
+        return response()->json(["plantilla" =>$plantilla, "embarque"=>$embarque]);
+    }
+
+
+    public function get_standards_embarque($embarque_id)
+    {
+        $embarque_standards = EmbarquesStandards::get_standards_embarque($embarque_id);
+        return response()->json($embarque_standards);
     }
 
     public function get_products_embarque($embarque_id)
@@ -276,42 +286,36 @@ class EmbarquesController extends Controller
         return response()->json($embarque_productos);
     }
 
-    public function get_marcas_embarque($embarque_id)
-    {
-        $embarque_marcas = EmbarquesMarcas::get_marcas_embarque($embarque_id);
-        return response()->json($embarque_marcas);
-    }
-
     public function save_products_embarque(Request $request){
 
         $producto = new EmbarquesProductos();
         $producto->embarque_id = $request->get('embarque_id');
-        $producto->categoria_id = $request->get('categoria_id');
-        $producto->calibre_id = $request->get('calibre_id');
         $producto->folio_pallet = $request->get('folio_pallet');
         $producto->lote = $request->get('lote');
-        $producto->cajas = $request->get('cajas');
+        $producto->cantidad = $request->get('cantidad');
+        $producto->peso = $request->get('peso');
         $producto->sader = $request->get('sader');
-        $producto->tipo_fruta = $request->get('tipo_fruta');
         $producto->cartilla = $request->get('cartilla');
-        $producto->presentacion_id = explode('|', $request->input('presentacion_id'))[0];
+        $producto->presentacion_id = $request->input('presentacion_id');
+        $producto->variedad_id = $request->input('variedad_product_id');
+        $producto->marca_id = $request->input('select_marca');
         $producto->save();
 
         return response()->json(["OK"=>"Se guardo correctamente"]);
 
     }
 
-    public function save_marcas_embarques(Request $request)
+    public function save_standards_embarques(Request $request)
     {
         $embarque_id = $request->get('embarque_id');
-        $marcas = $request->get('marcas');
+        $standards = $request->get('standards');
 
-        EmbarquesMarcas::where('embarque_id', $embarque_id)->delete();
+        EmbarquesStandards::where('embarque_id', $embarque_id)->delete();
 
-        foreach ($marcas as $marca) {
-            EmbarquesMarcas::create([
+        foreach ($standards as $marca) {
+            EmbarquesStandards::create([
                 'embarque_id' => $embarque_id,
-                'marca_id' => $marca['marca_id'],
+                'standard_id' => $marca['standard_id'],
             ]);
         }
 
@@ -343,7 +347,13 @@ class EmbarquesController extends Controller
     public function finish_embarque_rpv(Request $request)
     {
         $datos = $request->json()->all();
-        $vigencias = Vigencias::where('activo', 1)->get();
+        // VALIDATE STANDARDS, PRODUCTOS AND
+        $normas = EmbarquesStandards::where('embarque_id', $request->embarque_id)->count();
+        $productos = EmbarquesProductos::where('embarque_id', $request->embarque_id)->count();
+        if($normas == 0 || $productos == 0){
+            return response()->json(['error' => 'No hay productos en este embarque'], 403);
+        }
+        // $vigencias = Vigencias::where('activo', 1)->get();
         $embarque = Embarques::find($request->embarque_id);
         // GET COUNTRY ID BY EMBPAQUE
         $country_id = Empaques::select('cat_estados.codigo', 'cat_estados.id')
@@ -367,6 +377,7 @@ class EmbarquesController extends Controller
         // -----------------------------
         $embarque->folio_embarque = 'VMRE-'.auth()->user()->employee_number.'-'.$country_id->codigo.'-'.$cadena_consecutivo.'-'.substr(date('Y'), 2, 2);
         $embarque->status = "Finalizado";
+        $embarque->fecha_termino = now();
         $embarque->save();
         $registro = EmbarquesRPV::where('embarque_id', $request->embarque_id)->first();
         unset($datos['folio_embarque']);

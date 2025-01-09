@@ -13,19 +13,20 @@ return new class extends Migration
     {
         Schema::create('op_embarques', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('empaque_id')->unsigned()->index();
-            $table->bigInteger('destinatario_id')->unsigned()->index();
-            $table->bigInteger('pais_id')->unsigned()->index();
-            $table->bigInteger('puerto_id')->unsigned()->index();
-            $table->bigInteger('tefs_id')->unsigned()->index();
-            $table->bigInteger('variedad_id')->unsigned()->index();
-            $table->bigInteger('vigencia_id')->unsigned()->index();
-            $table->bigInteger('municipio_id')->unsigned()->index();
-            $table->bigInteger('uso_id')->unsigned()->index();
-            $table->bigInteger('consolidado_id')->nullable();
+            $table->mediumInteger('empaque_id')->unsigned()->index();
+            $table->mediumInteger('destinatario_id')->unsigned()->index();
+            $table->mediumInteger('pais_id')->unsigned()->index();
+            $table->mediumInteger('puerto_id')->unsigned()->index();
+            $table->mediumInteger('tefs_id')->unsigned()->index();
+            $table->mediumInteger('variedad_id')->unsigned()->index();
+            $table->mediumInteger('vigencia_id')->unsigned()->index();
+            $table->mediumInteger('municipio_id')->unsigned()->index();//PROCEDENCIA
+            $table->mediumInteger('lugar_id')->unsigned()->index();
+            $table->mediumInteger('uso_id')->unsigned()->index();
+            $table->mediumInteger('consolidado_id')->nullable();
             $table->string('folio_embarque')->default('EMB-');
+            $table->dateTime('fecha_termino')->nullable();
             $table->string('consecutivo')->default('0000');
-            $table->date('fecha_embarque');
             $table->string('numero_economico', 50)->nullable();
             $table->string('placas_trasporte', 30)->nullable();
             $table->string('inspector')->nullable();
@@ -41,6 +42,7 @@ return new class extends Migration
             $table->foreign('variedad_id')->references('id')->on('cat_variedades');
             $table->foreign('vigencia_id')->references('id')->on('cat_vigencias');
             $table->foreign('municipio_id')->references('id')->on('cat_municipios');
+            $table->foreign('lugar_id')->references('id')->on('cat_municipios');
             $table->foreign('uso_id')->references('id')->on('cat_usos');
             $table->timestamps();
         });

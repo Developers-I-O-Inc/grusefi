@@ -21,7 +21,7 @@ class EmpaquesController extends Controller
     {
         if ($request->ajax()) {
 
-            $empaques = Empaques::all();
+            $empaques = Empaques::get_empaques();
             return Datatables::of($empaques)
                     ->addIndexColumn()
                     ->addColumn('check', function($row){
@@ -91,6 +91,7 @@ class EmpaquesController extends Controller
             'nombre_corto',
             'nombre_fiscal',
             'domicilio_fiscal',
+            'colonia',
             'num_ext',
             'num_int',
             'cp',

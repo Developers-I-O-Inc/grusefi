@@ -55,8 +55,6 @@
                             <th class="min-w-125px">Nombre Corto</th>
                             <th class="min-w-125px">Destinatario</th>
                             <th class="min-w-125px">Domicilio</th>
-                            <th class="min-w-125px">Teléfono(s)</th>
-                            <th class="min-w-125px">Correo(s)</th>
                             <th class="min-w-125px">Status</th>
                             <th class="min-w-125px">Opciones</th>
                         </tr>
@@ -68,7 +66,7 @@
             </div>
         </div>
         <div class="modal fade" id="kt_modal_add_destinatario" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-650px">
+            <div class="modal-dialog modal-dialog-centered mw-850px">
                 <div class="modal-content">
                     <form class="form" action="#" id="kt_modal_add_destinatario_form"
                         data-kt-redirect="../../demo6/dist/apps/destinatarios/list.html">
@@ -91,35 +89,66 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_destinatario_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_destinatario_scroll" data-kt-scroll-offset="300px">
-                                <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Empaque</label>
-                                    <select id="empaque_id" name="empaque_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_destinatario" data-placeholder="Selecciona un empaque" data-allow-clear="true">
-                                        <option value=""></option>
-                                         @foreach($empaques as $empaque)
-                                            <option value="{{$empaque->id}}">{{$empaque->nombre_fiscal}}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="row mb-4">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Empaque</label>
+                                        <select id="empaque_id" name="empaque_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_destinatario" data-placeholder="Selecciona un empaque" data-allow-clear="true">
+                                            <option value=""></option>
+                                             @foreach($empaques as $empaque)
+                                                <option value="{{$empaque->id}}">{{$empaque->nombre_fiscal}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Nombre corto</label>
+                                        <input type="text" class="form-control" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" autocomplete="off"/>
+                                    </div>
                                 </div>
-                                <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Nombre del destinatario</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa el nombre del destinatario" name="nombre" id="nombre" autocomplete="off" />
-                                    <input type="text" class="form-control d-none" name="id_destinatario" id="id_destinatario" />
+                                <div class="row mb-4">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Nombre del destinatario</label>
+                                        <input type="text" class="form-control" placeholder="Ingresa el nombre del destinatario" name="nombre" id="nombre" autocomplete="off" />
+                                        <input type="text" class="form-control d-none" name="id_destinatario" id="id_destinatario" />
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Domicilio Fiscal</label>
+                                        <input type="text" class="form-control" placeholder="Ingresa el domicilio fiscal" name="domicilio" id="domicilio" autocomplete="off" />
+                                    </div>
                                 </div>
-                                <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Nombre corto</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" autocomplete="off"/>
+                                <div class="row mb-4">
+                                    <div class="col-md-4 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Colonia</label>
+                                        <input type="text" class="form-control" placeholder="Ingresa la colonia" name="colonia" id="colonia" autocomplete="off" />
+                                    </div>
+                                    <div class="col-md-4 fv-row">
+                                        <label class="required fs-6 fw-bold form-label mb-2">Número</label>
+                                        <div class="row fv-row fv-plugins-icon-container">
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" placeholder="Exterior" name="num_ext" id="num_ext" autocomplete="off"/>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" placeholder="Interior" name="num_int" id="num_int" autocomplete="off"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 fv-row fv-plugins-icon-container">
+                                        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                            <span class="required">Código Postal</span>
+                                        </label>
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" minlength="3" maxlength="6" placeholder="Código Postal" id="cp" name="cp" autocomplete="off">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Domicilio</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa el domicilio del destinatario" name="domicilio" id="domicilio" autocomplete="off" />
-                                </div>
-                                <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Teléfono(s)</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese teléfonos" name="telefonos" id="telefonos" autocomplete="off"/>
-                                </div>
-                                <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Correos</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese correos" name="correos" id="correos" autocomplete="off"/>
+                                <div class="row mb-4">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Teléfono(s)</label>
+                                        <input type="text" class="form-control" placeholder="Ingrese teléfonos" name="telefonos" id="telefonos" autocomplete="off"/>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Correos</label>
+                                        <input type="text" class="form-control" placeholder="Ingrese correos" name="correos" id="correos" autocomplete="off"/>
+                                    </div>
                                 </div>
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>

@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('cat_presentaciones', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('variedad_id')->unsigned()->index();
-            $table->string("presentacion", 500);
-            $table->decimal('peso', total: 5, places: 3);
+            $table->string("presentacion", 50);
+            $table->string("plural", 50);
             $table->tinyInteger('activo')->default(1);
-            $table->foreign('variedad_id')->references('id')->on('cat_variedades');
             $table->timestamps();
             $table->softDeletes();
         });

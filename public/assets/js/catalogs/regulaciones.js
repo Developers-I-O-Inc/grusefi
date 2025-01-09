@@ -17,7 +17,7 @@ var KTregulacionesList = (function () {
         validations,
         form,
         edit_id,
-        edit_dictamen_4,
+        edit_regulacion,
         edit_dictamen_5,
         edit_dictamen_11,
         edit_pais_dictamen,
@@ -44,16 +44,7 @@ var KTregulacionesList = (function () {
                     e.preventDefault()
                     $.get("regulaciones/"+ $(this).data("id") + "/edit", function(data){
                         edit_id.value=data.regulacion[0].id
-                        edit_dictamen_4.value=data.regulacion[0].dictamen_apartado_4
-                        edit_dictamen_5.value=data.regulacion[0].dictamen_apartado_5
-                        edit_dictamen_11.value=data.regulacion[0].dictamen_apartado_11
-                        edit_pais_dictamen.value=data.regulacion[0].nombre_pais_dictamen
-                        edit_pais_certificado.value=data.regulacion[0].nombre_pais_certificado
-                        Catalogs.checked_edit(data.regulacion[0].activo_embarques, edit_embarques, check_embarques)
-                        Catalogs.checked_edit(data.regulacion[0].rq_inspector, edit_inspector, check_inspector)
-                        Catalogs.checked_edit(data.regulacion[0].rq_huertas, edit_huertas, check_huertas)
-                        Catalogs.checked_edit(data.regulacion[0].rq_estudios_analisis, edit_analisis, check_analisis)
-                        Catalogs.checked_edit(data.regulacion[0].rq_impresion, edit_impresion, check_impresion)
+                        edit_regulacion.value=data.regulacion[0].regulacion
                         Catalogs.checked_edit(data.regulacion[0].rq_activo, edit_active, check_active)
                         $("#pais_id").val(data.regulacion[0].pais_id).trigger("change.select2")
                         select_pais.trigger('change');
@@ -76,64 +67,15 @@ var KTregulacionesList = (function () {
                 (btn_submit = form.querySelector("#kt_modal_add_regulacion_submit")),
                 (btn_cancel = form.querySelector("#kt_modal_add_regulacion_cancel")),
                 (edit_id = form.querySelector("#id_regulacion")),
-                (edit_dictamen_4 = form.querySelector("#dictamen_apartado_4")),
-                (edit_dictamen_5 = form.querySelector("#dictamen_apartado_5")),
-                (edit_dictamen_11 = form.querySelector("#dictamen_apartado_11")),
-                (edit_pais_dictamen = form.querySelector("#nombre_pais_dictamen")),
-                (edit_pais_certificado = form.querySelector("#nombre_pais_certificado")),
+                (edit_regulacion = form.querySelector("#regulacion")),
                 (check_active = form.querySelector("#active_check")),
-                (check_embarques = form.querySelector("#check_embarques")),
-                (check_inspector = form.querySelector("#check_inspector")),
-                (check_huertas = form.querySelector("#check_huertas")),
-                (check_analisis = form.querySelector("#check_analisis")),
-                (check_impresion = form.querySelector("#check_impresion")),
                 (edit_active = form.querySelector("#activo")),
-                (edit_embarques = form.querySelector("#activo_embarques")),
-                (edit_inspector = form.querySelector("#rq_inspector")),
-                (edit_huertas = form.querySelector("#rq_huertas")),
-                (edit_analisis = form.querySelector("#rq_estudios_analisis")),
-                (edit_impresion = form.querySelector("#rq_impresion")),
                 (validations = FormValidation.formValidation(form, {
                     fields: {
-                        pais: {
+                        regulacion: {
                             validators: {
                                 notEmpty: {
-                                    message: "País requerido",
-                                },
-                            },
-                        },
-                        dictamen_apartado_4: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Dictamen Apartado 4 requerido",
-                                },
-                            },
-                        },
-                        dictamen_apartado_5: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Dictamen Apartado 5 requerido",
-                                },
-                            },
-                        },
-                        dictamen_apartado_11: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Dictamen Apartado 11 requerido",
-                                },
-                            },
-                        },
-                        nombre_pais_certificado: {
-                            validators: {
-                                notEmpty: {
-                                    message: "País certificado requerido",
-                                },
-                            },
-                        },
-                        nombre_pais_dictamen: {
-                            validators: {
-                                notEmpty: {
-                                    message: "País dictamen requerido",
+                                    message: "Descripción requerida",
                                 },
                             },
                         },
@@ -142,12 +84,7 @@ var KTregulacionesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                        }),
-                        icon: new FormValidation.plugins.Icon({
-                            valid: 'fa fa-check',
-                            invalid: 'fa fa-times',
-                            validating: 'fa fa-refresh',
-                        }),
+                        })
                     },
                 })),
                 (n = document.querySelector("#kt_regulaciones_table")) &&
@@ -160,21 +97,10 @@ var KTregulacionesList = (function () {
                             processing: true,
                             columns: [
                                 { data: "check", name: "check" },
-                                { data: "buttons", name: "buttons" },
                                 { data: "id", name: "id" },
-                                { data: "pais", name: "pais" },
-                                { data: "abreviacion", name: "abreviacion" },
-                                { data: "dictamen_apartado_4", name: "dictamen_apartado_4" },
-                                { data: "dictamen_apartado_5", name: "dictamen_apartado_5" },
-                                { data: "dictamen_apartado_11", name: "dictamen_apartado_11" },
-                                { data: "nombre_pais_dictamen", name: "nombre_pais_dictamen" },
-                                { data: "nombre_pais_certificado", name: "nombre_pais_certificado" },
-                                { data: "embarques", name: "embarques" },
-                                { data: "inspector", name: "inspector" },
-                                { data: "huertas", name: "huertas" },
-                                { data: "analisis", name: "analisis" },
-                                { data: "impresion", name: "impresion" },
+                                { data: "regulacion", name: "regulacion" },
                                 { data: "activos", name: "activos" },
+                                { data: "buttons", name: "buttons" },
                             ],
                             order: [[2, "asc"]],
                             columnDefs: [
@@ -205,26 +131,6 @@ var KTregulacionesList = (function () {
                 // CHECK ACTIVE
                 check_active.addEventListener("click", function (t) {
                     Catalogs.checked(edit_active, check_active)
-                })
-                // CHECK EMBARQUES
-                check_embarques.addEventListener("click", function (t) {
-                    Catalogs.checked(edit_embarques, check_embarques)
-                })
-                // CHECK INSPECTOR
-                check_inspector.addEventListener("click", function (t) {
-                    Catalogs.checked(edit_inspector, check_inspector)
-                })
-                // CHECK HUERTAS
-                check_huertas.addEventListener("click", function (t) {
-                    Catalogs.checked(edit_huertas, check_huertas)
-                })
-                // CHECK ANALISIS
-                check_analisis.addEventListener("click", function (t) {
-                    Catalogs.checked(edit_analisis, check_analisis)
-                })
-                // CHECK IMPRESION
-                check_impresion.addEventListener("click", function (t) {
-                    Catalogs.checked(edit_impresion, check_impresion)
                 })
                 // BUTTON ADD
                 btn_add.addEventListener("click", function (t) {

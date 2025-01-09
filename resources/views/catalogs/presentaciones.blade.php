@@ -51,9 +51,8 @@
                                 </div>
                             </th>
                             <th class="min-w-125px">id</th>
-                            <th class="min-w-125px">Variedad</th>
                             <th class="min-w-125px">Presentacion</th>
-                            <th class="min-w-125px">Peso</th>
+                            <th class="min-w-125px">Plural</th>
                             <th class="min-w-125px">Status</th>
                             <th class="min-w-125px">Opciones</th>
                         </tr>
@@ -89,22 +88,13 @@
                                 data-kt-scroll-dependencies="#kt_modal_add_presentacion_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_presentacion_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Variedad</label>
-                                    <select id="variedad_id" name="variedad_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_presentacion" data-placeholder="Selecciona una variedad" data-allow-clear="true">
-                                        <option></option>
-                                        @foreach($variedades as $variedad)
-                                            <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Presentación</label>
                                     <input type="text" class="form-control" placeholder="Ingresa un nombre" name="presentacion" id="presentacion" autocomplete="off"/>
                                     <input type="text" class="form-control d-none" name="id_presentacion" id="id_presentacion" />
                                 </div>
                                 <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Peso</label>
-                                    <input type="number" class="form-control" step="0.001" placeholder="Ingresa el peso de la presentación" name="peso" id="peso" />
+                                    <label class="required fs-6 fw-bold mb-2">Presentación</label>
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="plural" id="plural" autocomplete="off"/>
                                 </div>
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>

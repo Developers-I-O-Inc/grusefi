@@ -94,7 +94,7 @@
                                 <table class="table table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-7 gs-7" id="kt_admin_table">
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                            <th class="min-w-125px">ID</th>
+                                            <th class="min-w-50px">ID</th>
                                             <th class="min-w-125px">Folio</th>
                                             <th class="min-w-125px">Empaque</th>
                                             <th class="min-w-125px">Destinatario</th>
@@ -128,7 +128,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="kt_modal_edit_products" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="kt_modal_add_product" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-850px">
                 <div class="modal-content">
                     <form class="form" action="#" id="kt_modal_add_product_form">
@@ -174,90 +174,11 @@
                                                         <button href="#" class="btn btn-link btn-color-danger btn-active-color-primary me-5 mb-2">Eliminar</button>
                                                     </div>
                                                 </div>
-                                                <table class="table table-row-dashed fs-6 gy-5 table-row-gray-300" id="kt_products_table">
-                                                    <thead>
-                                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                            <th class="">Eliminar</th>
-                                                            <th class="">Pallet</th>
-                                                            <th class="">Lote</th>
-                                                            <th class="">N° Cajas</th>
-                                                            <th class="">Peso</th>
-                                                            <th class="">Total Kilos</th>
-                                                            <th class="">SADER</th>
-                                                            <th class="">Categoría</th>
-                                                            <th class="">idCategoria</th>
-                                                            <th class="">Presentación</th>
-                                                            <th class="">idPresentacion</th>
-                                                            <th class="">Calibre</th>
-                                                            <th class="">idcalibre</th>
-                                                            <th class="">Tipo Fruta</th>
-                                                            <th class="">Registros</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="fw-bold text-gray-600">
-
-                                                    </tbody>
-                                                </table>
+                                                <x-table-products />
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="kt_tab_pane_8" role="tabpanel">
-                                            <div class="row mb-5">
-                                                <div class="col-md-3 fv-row">
-                                                    <label class="required fs-6 fw-bold mb-2">Folio Pallet</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el folio del pallet" name="folio_pallet" id="folio_pallet" />
-                                                </div>
-                                                <div class="col-md-3 fv-row">
-                                                    <label class="required fs-6 fw-bold mb-2">Lote</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el n° de lote" name="lote" id="lote" />
-                                                </div>
-
-                                                <div class="col-md-6 fv-row">
-                                                    <label class="required fs-6 fw-bold mb-2">Categoría</label>
-                                                    <select id="categoria_id" name="categoria_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_edit_products" data-placeholder="Selecciona una categoría" data-allow-clear="true">
-                                                        <option></option>
-                                                        @foreach($categorias as $categoria)
-                                                            <option value="{{$categoria->id}}">{{$categoria->categoria}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-5">
-                                                <div class="col-md-6 fv-row">
-                                                    <label class="required fs-6 fw-bold mb-2">SADER</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el codigo SADER" name="sader" id="sader" />
-                                                </div>
-                                                <div class="col-md-6 fv-row">
-                                                    <label class="required fs-6 fw-bold mb-2">Presentación</label>
-                                                    <select id="presentacion_id" name="presentacion_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_edit_products" data-placeholder="Seleccione una presentación" data-allow-clear="true">
-                                                        <option></option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-5">
-                                                <div class="col-md-6 fv-row">
-                                                    <label class="required fs-6 fw-bold mb-2">Calibre</label>
-                                                    <select id="calibre_id" name="calibre_id" class="form-select form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_edit_products" data-placeholder="Selecciona una categoría" data-allow-clear="true">
-                                                        <option></option>
-                                                        @foreach($calibres as $calibre)
-                                                            <option value="{{$calibre->id}}">{{$calibre->calibre}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6 fv-row">
-                                                    <label class="required fs-6 fw-bold mb-2">Tipo de Fruta</label>
-                                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa el tipo de fruta" name="tipo_fruta" id="tipo_fruta" />
-                                                </div>
-                                            </div>
-                                            <div class="row mb-5">
-                                                <div class="col-md-6 fv-row">
-                                                    <label class="required fs-6 fw-bold mb-2">N° Cajas</label>
-                                                    <input type="number" class="form-control form-control-solid" placeholder="Ingresa el n° de cajas" name="cajas" id="cajas" />
-                                                </div>
-                                                <div class="col-md-6 fv-row">
-                                                    <label class="required fs-6 fw-bold mb-2">N° Registros</label>
-                                                    <input type="number" class="form-control form-control-solid" placeholder="Ingresa el n° de registros" name="n_registros" id="n_registros" value="1" min="1" />
-                                                </div>
-                                            </div>
+                                            <x-fields_products :variedades="$variedades" :presentaciones="$presentaciones"/>
                                         </div>
                                     </div>
                                 </div>
@@ -275,11 +196,11 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="kt_modal_edit_marcas" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="kt_modal_edit_standards" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-850px">
                 <div class="modal-content">
                         <div class="modal-header" id="kt_modal_add_product_header">
-                            <h2 class="fw-bolder">Marcas del Embarque</h2>
+                            <h2 class="fw-bolder">standards del Embarque</h2>
                             <div id="kt_modal_add_product_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -300,15 +221,18 @@
                                 <div class="card-body">
                                     <div class="row mb-12">
                                         <div class="col-9">
-                                            <select id="select_marca" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona una marca" data-allow-clear="true">
+                                            <select id="select_standard" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona una norma" data-allow-clear="true">
                                                 <option></option>
+                                                @foreach ($standards as $standard)
+                                                    <option value="{{ $standard->id }}">{{ $standard->name }}</option>
+                                                @endforeach
                                             </select>
                                             <div class="col-md-6 fv-row d-none">
-                                                <input class="form-control form-control-solid" placeholder="Seleccione Fecha" id="edit_marcas" name="edit_marcas"/>
+                                                <input class="form-control form-control-solid" placeholder="Seleccione Fecha" id="edit_standards" name="edit_standards"/>
                                             </div>
                                         </div>
                                         <div class="col-3">
-                                            <button class="btn btn-flex btn-light-primary" id="btn_add_marca">
+                                            <button class="btn btn-flex btn-light-primary" id="btn_add_standard">
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
@@ -320,11 +244,11 @@
                                         </div>
                                     </div>
                                     <div class="row mb-12">
-                                        <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-7 gs-7" id="kt_marcas_table">
+                                        <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-7 gs-7" id="kt_standards_table">
                                             <thead>
                                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th class="">id</th>
-                                                    <th class="">Marca</th>
+                                                    <th class="">standard</th>
                                                     <th class="">Eliminar</th>
                                                 </tr>
                                             </thead>
@@ -338,7 +262,7 @@
                         </div>
                         <div class="modal-footer flex-center">
                             <button type="button" data-bs-dismiss="modal" class="btn btn-light me-3">Cancelar</button>
-                            <button type="button" id="btn_save_marcas" class="btn btn-primary">
+                            <button type="button" id="btn_save_standards" class="btn btn-primary">
                                 <span class="indicator-label">Guardar</span>
                                 <span class="indicator-progress">Espere un momento...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
