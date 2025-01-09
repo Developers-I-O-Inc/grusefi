@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cat_marcas', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->mediumInteger('empaque_id')->unsigned()->index();
+            $table->smallInteger('empaque_id')->unsigned()->index();
             $table->string("nombre", 50);
             $table->tinyInteger('activo')->default(1);
             $table->foreign('empaque_id')->references('id')->on('cat_empaques');
