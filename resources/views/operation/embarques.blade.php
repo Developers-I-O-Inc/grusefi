@@ -31,8 +31,8 @@
                                 <span class="stepper-number">2</span>
                             </div>
                             <div class="stepper-label">
-                                <h3 class="stepper-title">Marcas</h3>
-                                <div class="stepper-desc fw-bold">Agregar marcas o maquiladores del embarque</div>
+                                <h3 class="stepper-title">Normas</h3>
+                                <div class="stepper-desc fw-bold">Agregar normas o maquiladores del embarque</div>
                             </div>
                         </div>
                         <div class="stepper-item" data-kt-stepper-element="nav">
@@ -54,7 +54,7 @@
                             </div>
                             <div class="stepper-label">
                                 <h3 class="stepper-title">Consolidado</h3>
-                                <div class="stepper-desc fw-bold">Marcar embarque consolidado o mixto</div>
+                                <div class="stepper-desc fw-bold">standardr embarque consolidado o mixto</div>
                             </div>
                         </div>
                         <div class="stepper-item" data-kt-stepper-element="nav">
@@ -86,28 +86,54 @@
                     <div data-kt-stepper-element="content" class="current">
                         <div class="w-100">
                             <div class="row mb-4">
-                                <div class="col-md-4 fv-row">
-                                    <label class="required fs-6 fw-bold mb-2">Fecha Embarque</label>
-                                    <input class="form-control" placeholder="Seleccione Fecha" id="fecha_embarque" name="fecha_embarque"/>
-                                </div>
-                                <div class="col-md-4 fv-row">
-                                    <label class="required fs-6 fw-bold mb-2">País</label>
-                                    <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-placeholder="Selecciona un país" data-allow-clear="true">
-                                        <option value=""></option>
-                                        @foreach($paises as $pais)
-                                            <option value="{{$pais->id}}">{{$pais->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-4 fv-row">
-                                    <label class="required fs-6 fw-bold mb-2">Variedad</label>
-                                    <select id="variedad_id" name="variedad_id" class="form-select" data-control="select2" data-placeholder="Selecciona una variedad" data-allow-clear="true">
-                                        <option value=""></option>
-                                        @foreach($variedades as $variedad)
-                                            <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                @role(["Super Admin", "Admin"])
+                                    <div class="col-md-4 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Usuario TEF´s</label>
+                                        <select id="tefs_id" name="tefs_id" class="form-select" data-control="select2" data-placeholder="Selecciona un usuario" data-allow-clear="true">
+                                            <option value=""></option>
+                                            @foreach($users as $users)
+                                                <option value="{{$users->id}}">{{$users->name.' '.$users->last_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">País</label>
+                                        <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-placeholder="Selecciona un país" data-allow-clear="true">
+                                            <option value=""></option>
+                                            @foreach($paises as $pais)
+                                                <option value="{{$pais->id}}">{{$pais->nombre}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Variedad</label>
+                                        <select id="variedad_id" name="variedad_id" class="form-select" data-control="select2" data-placeholder="Selecciona una variedad" data-allow-clear="true">
+                                            <option value=""></option>
+                                            @foreach($variedades as $variedad)
+                                                <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @else
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">País</label>
+                                        <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-placeholder="Selecciona un país" data-allow-clear="true">
+                                            <option value=""></option>
+                                            @foreach($paises as $pais)
+                                                <option value="{{$pais->id}}">{{$pais->nombre}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Variedad</label>
+                                        <select id="variedad_id" name="variedad_id" class="form-select" data-control="select2" data-placeholder="Selecciona una variedad" data-allow-clear="true">
+                                            <option value=""></option>
+                                            @foreach($variedades as $variedad)
+                                                <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endrole
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-6 fv-row">
@@ -142,12 +168,17 @@
                                     <label class="fs-6 fw-bold mb-2">Placas</label>
                                     <input type="text" class="form-control" placeholder="Ingresa las placas" name="placas_trasporte" id="placas_trasporte" />
                                 </div>
-                                {{-- <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-bold mb-2">Inspector</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa el nombre del ispector" name="inspector" id="inspector" />
-                                </div> --}}
                             </div>
                             <div class="row mb-4">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-bold mb-2">Lugar</label>
+                                    <select id="lugar_id" name="lugar_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                        <option value=""></option>
+                                        @foreach($lugares as $lugar)
+                                            <option value="{{$lugar->id}}">{{$lugar->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Procedencia</label>
                                     <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
@@ -157,9 +188,11 @@
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
+                            <div class="row mb-4">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Uso</label>
-                                    <select id="uso_id" name="uso_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                    <select id="uso_id" name="uso_id" class="form-select" data-control="select2" data-placeholder="Selecciona un uso" data-allow-clear="true">
                                         <option value=""></option>
                                         @foreach($usos as $uso)
                                             <option value="{{$uso->id}}">{{$uso->uso}}</option>
@@ -167,34 +200,24 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mb-4">
-                                @role(["Super Admin", "Admin"])
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Usuario TEF´s</label>
-                                        <select id="tefs_id" name="tefs_id" class="form-select" data-control="select2" data-placeholder="Selecciona un usuario" data-allow-clear="true">
-                                            <option value=""></option>
-                                            @foreach($users as $users)
-                                                <option value="{{$users->id}}">{{$users->name.' '.$users->last_name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endrole
-                            </div>
                         </div>
                     </div>
                     <div data-kt-stepper-element="content">
                         <div class="w-100">
                             <div class="row mb-12">
                                 <div class="col-9">
-                                    <select id="select_marca" class="form-select" data-control="select2" data-placeholder="Selecciona una marca" data-allow-clear="true">
+                                    <select id="select_standard" class="form-select" data-control="select2" data-placeholder="Selecciona una norma" data-allow-clear="true">
                                         <option></option>
+                                        @foreach($standards as $standard)
+                                            <option value="{{$standard->id}}">{{$standard->name}}</option>
+                                        @endforeach
                                     </select>
                                     <div class="col-md-6 fv-row d-none">
-                                        <input class="form-control" placeholder="Seleccione Fecha" id="edit_marcas" name="edit_marcas"/>
+                                        <input class="form-control" placeholder="Seleccione Fecha" id="edit_standards" name="edit_standards"/>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <button class="btn btn-flex btn-light-primary" id="btn_add_marca">
+                                    <button class="btn btn-flex btn-light-primary" id="btn_add_standard">
                                         <span class="svg-icon svg-icon-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
@@ -206,11 +229,11 @@
                                 </div>
                             </div>
                             <div class="row mb-12">
-                                <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-7 gs-7" id="kt_marcas_table">
+                                <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-7 gs-7" id="kt_standards_table">
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <th class="">id</th>
-                                            <th class="">Marca</th>
+                                            <th class="">Normas</th>
                                             <th class="">Eliminar</th>
                                         </tr>
                                     </thead>
@@ -278,30 +301,7 @@
                                 <div class="row mb-12">
                                     <div class="col-12">
                                         <div class="table-responsive">
-                                            <table class="table table-row-dashed fs-6 gy-5 table-row-gray-300" id="kt_products_table">
-                                                <thead>
-                                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                        <th class="">Eliminar</th>
-                                                        <th class="">Pallet</th>
-                                                        <th class="">Lote</th>
-                                                        <th class="">N° Cajas</th>
-                                                        <th class="">Peso</th>
-                                                        <th class="">Total Kilos</th>
-                                                        <th class="">SADER</th>
-                                                        <th class="">Categoría</th>
-                                                        <th class="">idCategoria</th>
-                                                        <th class="">Presentación</th>
-                                                        <th class="">idPresentacion</th>
-                                                        <th class="">Calibre</th>
-                                                        <th class="">idcalibre</th>
-                                                        <th class="">Tipo Fruta</th>
-                                                        <th class="">Cartilla</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="fw-bold text-gray-600">
-
-                                                </tbody>
-                                            </table>
+                                            <x-table-products />
                                         </div>
                                     </div>
                                 </div>
@@ -341,11 +341,11 @@
                             <div class="row mb-12">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Empresa Transportista</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa el nombre de la categoría" name="empresa_transporte" id="empresa_transporte" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el nombre de la empresa trasnportista" name="empresa_transporte" id="empresa_transporte" />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Nombre del chofer</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa el nombre de la categoría" name="chofer" id="chofer" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el nombre del chofer" name="chofer" id="chofer" />
                                 </div>
                             </div>
                         </div>
@@ -416,7 +416,7 @@
             </div>
         </div>
         <div class="modal fade" id="kt_modal_add_product" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-850px">
+            <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
                     <form class="form" action="#" id="kt_modal_add_product_form">
                         <div class="modal-header" id="kt_modal_add_product_header">
@@ -438,24 +438,22 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_product_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_product_scroll" data-kt-scroll-offset="300px">
+                                {{-- <div class="row mb-5">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Variedad</label>
+                                        <select id="select_marca" name="select_marca" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="row mb-5">
-                                    <div class="col-md-3 fv-row">
+                                    <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Folio Pallet</label>
                                         <input type="text" class="form-control" placeholder="Ingresa el folio del pallet" name="folio_pallet" id="folio_pallet" />
                                     </div>
-                                    <div class="col-md-3 fv-row">
+                                    <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Lote</label>
                                         <input type="text" class="form-control" placeholder="Ingresa el n° de lote" name="lote" id="lote" />
-                                    </div>
-
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Categoría</label>
-                                        <select id="categoria_id" name="categoria_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
-                                            <option></option>
-                                            @foreach($categorias as $categoria)
-                                                <option value="{{$categoria->id}}">{{$categoria->categoria}}</option>
-                                            @endforeach
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="row mb-5">
@@ -470,31 +468,35 @@
                                 </div>
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Presentación</label>
-                                        <select id="presentacion_id" name="presentacion_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
+                                        <label class="required fs-6 fw-bold mb-2">Variedad</label>
+                                        <select id="variedad_product_id" name="variedad_product_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
                                             <option></option>
+                                            @foreach($variedades as $variedad)
+                                                <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Calibre</label>
-                                        <select id="calibre_id" name="calibre_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Selecciona una categoría" data-allow-clear="true">
+                                        <label class="required fs-6 fw-bold mb-2">Presentación</label>
+                                        <select id="presentacion_id" name="presentacion_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
                                             <option></option>
-                                            @foreach($calibres as $calibre)
-                                                <option value="{{$calibre->id}}">{{$calibre->calibre}}</option>
+                                            @foreach($presentaciones as $presentacion)
+                                                <option value="{{$presentacion->id}}">{{$presentacion->presentacion}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">N° Cajas</label>
-                                        <input type="number" class="form-control" placeholder="Ingresa el n° de cajas" name="cajas" id="cajas" />
+                                        <label class="required fs-6 fw-bold mb-2">Peso</label>
+                                        <input type="number" class="form-control" placeholder="Ingresa el peso" name="peso" id="peso" />
                                     </div>
                                     <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Tipo de Fruta</label>
-                                        <input type="text" class="form-control" placeholder="Ingresa el tipo de fruta" name="tipo_fruta" id="tipo_fruta" />
+                                        <label class="required fs-6 fw-bold mb-2">Cantidad</label>
+                                        <input type="number" class="form-control" placeholder="Ingresa la cantidad" name="cantidad" id="cantidad" />
                                     </div>
-                                </div>
+                                </div> --}}
+                                <x-fields_products :variedades="$variedades" :presentaciones="$presentaciones"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

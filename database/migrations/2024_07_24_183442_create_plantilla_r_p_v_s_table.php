@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('plantilla_rpv', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('pais_id')->unsigned()->index();
-            $table->bigInteger('variedad_id')->unsigned()->index();
+            $table->mediumInteger('pais_id')->unsigned()->index();
+            $table->mediumInteger('variedad_id')->unsigned()->index();
             // SERVICIO SOLICITADO
             $table->boolean('ss_dictamen_verificacion');
             $table->boolean('ss_certificado_movilizacion');

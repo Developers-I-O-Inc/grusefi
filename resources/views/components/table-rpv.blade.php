@@ -264,7 +264,7 @@
                             <div class="section template-subheader">
                                 <div class="text-right m-b-xs">
                                     <span class="text-bold">Folio: </span>
-                                    <input id="FolioRPV" type="text" name="FolioRPV" value="XXXXXXXXXXXXXXXX" maxlength="250" style="width: 250px;" disabled>
+                                    <input id="FolioRPV" type="text" name="FolioRPV" value="XXXXXXXXXXXXXXXX" maxlength="250" style="width: 250px;" readonly>
                                 </div>
                                 <h4 class="text-upper text-center"><span class="text-bold">A) Orden de servicio</span> (Para ser llenado por el cliente o usuario)</h4>
                             </div>
@@ -273,7 +273,7 @@
                                     <div class="text-bold" style="width: 100px;">1 Inicio:</div>
                                     <div class="group-control" style="flex-grow: 1;">Lugar: <span class="disabled-input m-l-sm">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span></div>
                                     <div class="group-control m-l-md" style="width: 250px;">Fecha: <span class="disabled-input m-l-sm" id="fecha_embarque">XX/XX/XXXX</span></div>
-                                    <div class="group-control m-l-md" style="width: 175px;">Hora: <span class="disabled-input m-l-sm">XX:XX x.x.</span></div>
+                                    <div class="group-control m-l-md" style="width: 175px;">Hora: <span class="disabled-input m-l-sm" id="hora_embarque">XX:XX x.x.</span></div>
                                 </div>
                             </div>
                             <div class="section">
@@ -364,14 +364,7 @@
                                             </div>
                                             <div style="width: 30%;">
                                                 <div>Marcas distintivas</div>
-                                                @if($embarque)
-                                                    <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" id="btn_marcas" data-embarque="0">
-                                                        <span class="svg-icon svg-icon-1"><i class="bi bi-box-arrow-up-right fs-2"></i></span>
-                                                        <span class="pulse-ring w-45px h-45px"></span>
-                                                    </button>
-                                                @else
-                                                    <input id="marcas" type="text" name="marcas" value="AGUACATE(Persea americana) Var. Hass" maxlength="100" style="width: 100%;">
-                                                @endif
+                                                <input id="marcas" type="text" name="marcas" value="AGUACATE(Persea americana) Var. Hass" maxlength="100" style="width: 100%;">
                                             </div>
                                         </div>
                                     </div>
@@ -419,7 +412,7 @@
                                     </div>
                                 </div>
                                 <div class="m-t-md">
-                                    <input id="LeyendaB" class="text-center" type="text" name="LeyendaB" value="B) LISTA DE VERIFICACIÓN(PARA SER LLENADO POR EL OFA O TEF)" maxlength="200" style="width: 100%;">
+                                    <input id="LeyendaB" class="text-center" type="text" name="LeyendaB" disabled value="B) LISTA DE VERIFICACIÓN(PARA SER LLENADO POR EL OFA O TEF)" maxlength="200" style="width: 100%;">
                                     <div class="m-t-xs" style="font-size: 11px;">
                                         De conformidad con los artículos 68, 71, 84, 85, 91, 92, 94, 100, 101 de la Ley Federal sobre Metrología y Normalización;  97, 99, 100, 101 y 102 del Reglamento de la Ley Federal sobre Metrología y Normalización; 7 fracción XVIII, 13, 15, 22 fracción II, 27, 28, 35, 50 fracciones I, VII, 51, 53, 54, 55, 57 del Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley Federal de Sanidad Vegetal;  7, fracciones XIII y XIX, 22 fracciones I y III, 52, 56 de la Ley Federal de Sanidad Vegetal; Normas Oficiales Mexicanas, requisitos fitosanitarios del país importador y demás disposiciones legales aplicables, se realiza la verificación fitosanitaria del producto, lote o embarque.
                                     </div>
@@ -427,7 +420,14 @@
                             </div>
                             <div class="section" style="display: flex; align-items: center;">
                                 <span class="text-bold m-r-sm">4 Indique la regulación o requisito que se evaluará:</span>
-                                <input class="p_input" id="regulacion_tvaluar" type="text" name="regulacion_tvaluar" value="" maxlength="500" style="flex-grow: 1;">
+                                @if($embarque)
+                                    <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" id="btn_standards" data-embarque="0">
+                                        <span class="svg-icon svg-icon-1"><i class="bi bi-box-arrow-up-right fs-2"></i></span>
+                                        <span class="pulse-ring w-45px h-45px"></span>
+                                    </button>
+                                @else
+                                    <input class="p_input" id="regulacion_tvaluar" type="text" name="regulacion_tvaluar" value="" maxlength="500" style="flex-grow: 1;">
+                                @endif
                             </div>
                             <div class="section">
                                 <div class="text-bold">5 De acuerdo al servicio solicitado y a la regulación o requisito que aplica, marque con una “X” los documentos que son requeridos para iniciar el proceso de verificación:</div>
@@ -495,10 +495,10 @@
                             <div class="section">
                                 <div class="text-bold">7 De acuerdo con la regulación o requisito que aplica. ¿El tipo de verificación que se requiere es?</div>
                                 <div style="display: flex; align-items: center;">
-                                    <div class="group-control" style="flex-grow: 1;">(<input id="tv_constatacion_ocular" type="checkbox" name="tv_constatacion_ocular" value="" class="p_input">) Constatación ocular</div>
-                                    <div class="group-control m-l-md" style="flex-grow: 1;">(<input id="tv_diagnostico_fitosanitario" type="checkbox" name="tv_diagnostico_fitosanitario" value="" class="p_input">) Diagnostico fitosanitario</div>
-                                    <div class="group-control m-l-md" style="flex-grow: 1;">(<input id="tv_muestreo_sitio" type="checkbox" name="tv_muestreo_sitio" value="" class="p_input">) Muestreo en sitio</div>
-                                    <div class="group-control m-l-md" style="flex-grow: 1;">
+                                    <div class="" style="flex-grow: 1;">(<input id="tv_constatacion_ocular" type="checkbox" name="tv_constatacion_ocular" value="" class="p_input">) Constatación ocular</div>
+                                    <div class="m-l-md" style="flex-grow: 1;">(<input id="tv_diagnostico_fitosanitario" type="checkbox" name="tv_diagnostico_fitosanitario" value="" class="p_input">) Diagnostico fitosanitario</div>
+                                    <div class="m-l-md" style="flex-grow: 1;">(<input id="tv_muestreo_sitio" type="checkbox" name="tv_muestreo_sitio" value="" class="p_input">) Muestreo en sitio</div>
+                                    <div class="m-l-md" style="flex-grow: 1;">
                                         (<input id="tv_otro" type="checkbox" name="tv_otro" value="" class="p_input">) Otro(especifique):
                                         <input id="tv_otro_t" type="text" name="tv_otro_t" value="" maxlength="150" style="width: 350px; margin-left: 8px;" class="p_input">
                                     </div>
@@ -784,17 +784,20 @@
                                 </div>
                             </div>
                             <div class="section" style="font-size: 11px;">
-                                Cualquier declaración con falsedad que se manifieste en este dictamen de verificación, será sancionado conforme lo marca el título cuarto del Decreto por el que se reforma, adiciona y derogan diversas disposiciones de la Ley Federal de Sanidad Vegetal; el capítulo III del título cuarto de la Ley Federal de Sanidad Vegetal, sin perjuicio de las penas que correspondan cuando sean constitutivas de delito. Este dictamen de verificación es obligatorio para la expedición del Certificado Fitosanitario y formará parte del expediente del trámite correspondiente.  Ningún Oficial Fitosanitario Autorizado, Unidad de Verificación, Tercero Especialista Fitosanitario, Persona Moral o Física y Organismo de Certificación deberán emitir certificados fitosanitarios sin el dictamen de verificación respectivo.
+                                Cualquier declaración con falsedad que se manifieste en este dictamen de verificación, será sancionado conforme lo standard el título cuarto del Decreto por el que se reforma, adiciona y derogan diversas disposiciones de la Ley Federal de Sanidad Vegetal; el capítulo III del título cuarto de la Ley Federal de Sanidad Vegetal, sin perjuicio de las penas que correspondan cuando sean constitutivas de delito. Este dictamen de verificación es obligatorio para la expedición del Certificado Fitosanitario y formará parte del expediente del trámite correspondiente.  Ningún Oficial Fitosanitario Autorizado, Unidad de Verificación, Tercero Especialista Fitosanitario, Persona Moral o Física y Organismo de Certificación deberán emitir certificados fitosanitarios sin el dictamen de verificación respectivo.
                                 <br>
                                 <br>
                                 <b>NOTA</b> si se realizo verificación a productos que no requieren certificado fitosanitario para su movilización, el usuario y el verificador indican <i>“BAJO PROTESTA DE DECIR VERDAD QUE EN ESTE EMBARQUE NO SE OCULTAN PRODUCTOS REGULADOS O CUARENTENADOS Y POR NINGUN MOTIVO SE TRANSPORTAN PRODUCTOS ILICITOS”</i>
                             </div>
                             <div class="section" style="font-size: 11px;">
                                 ORIGINAL: Archivo local o usuario  Copia: SADER
-                                Nota ingresada, no pertenece al formato original: "La UI opera como tipo A y declara tener la capacidad y competencia técnica de acuerdo a su acreditación UVFITO-004 y aprobación UV-240122-09-VCMREMN-001 para prestar los servicios de inspección y certificación, por lo que los trabajos realizados son de manera imparcial y en apego al código de ética de la empresa, además se le comunica al cliente que la información se maneja de forma confidencial y que los costos generados del servicio serán sufragados por este.
-                                UV-240122-09-VCMREMN-001 ES LA CLAVE DE APROBACIÓN PARA PRODUCTOS DE MOVILIZACIÓN NACIONAL.
-                                Nota ingresada, no pertenece al formato original: "La UI opera como tipo A y declara tener la capacidad y competencia técnica de acuerdo a su acreditación UVFITO-004 y aprobación UV-240122-09-VMRE-001 para prestar los servicios de inspección y certificación, por lo que los trabajos realizados son de manera imparcial y en apego al código de ética de la empresa, además se le comunica al cliente que la información se maneja de forma confidencial y que los costos generados del servicio serán sufragados por este.
-                                UV-240122-09-VMRE-001 ES LA CLAVE DE APROBACIÓN PARA PRODUCTOS QUE VAN A HACER EXPORTADOS.
+                                {{-- @if($embarque->pais_id == 1)
+                                    Nota ingresada, no pertenece al formato original: "La UI opera como tipo A y declara tener la capacidad y competencia técnica de acuerdo a su acreditación UVFITO-004 y aprobación UV-240122-09-VCMREMN-001 para prestar los servicios de inspección y certificación, por lo que los trabajos realizados son de manera imparcial y en apego al código de ética de la empresa, además se le comunica al cliente que la información se maneja de forma confidencial y que los costos generados del servicio serán sufragados por este.
+                                    UV-240122-09-VCMREMN-001 ES LA CLAVE DE APROBACIÓN PARA PRODUCTOS DE MOVILIZACIÓN NACIONAL.
+                                @else
+                                    Nota ingresada, no pertenece al formato original: "La UI opera como tipo A y declara tener la capacidad y competencia técnica de acuerdo a su acreditación UVFITO-004 y aprobación UV-240122-09-VMRE-001 para prestar los servicios de inspección y certificación, por lo que los trabajos realizados son de manera imparcial y en apego al código de ética de la empresa, además se le comunica al cliente que la información se maneja de forma confidencial y que los costos generados del servicio serán sufragados por este.
+                                    UV-240122-09-VMRE-001 ES LA CLAVE DE APROBACIÓN PARA PRODUCTOS QUE VAN A HACER EXPORTADOS.
+                                @endif --}}
                             </div>
                         </div>
 

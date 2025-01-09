@@ -18,15 +18,15 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation
     {
         return new EmbarquesProductos([
             'embarque_id' => $row['embarque_id'],
-            'categoria_id' => $row['categoria_id'],
+            'variedad_id' => $row['variedad_id'],
             'presentacion_id' => $row['presentacion_id'],
-            'calibre_id' => $row['calibre_id'],
             'folio_pallet' => $row['folio_pallet'],
-            'sader' => $row['sader'],
-            'cajas' => $row['cajas'],
             'lote' => $row['lote'],
-            'tipo_fruta' => $row['tipo_fruta'],
-            'cartilla' => $row['cartilla']
+            'sader' => $row['sader'],
+            'cartilla' => $row['cartilla'],
+            'cantidad' => $row['cantidad'],
+            'peso' => $row['peso'],
+            'marca_id'=> $row['marca_id'],
         ]);
     }
 
@@ -34,19 +34,20 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation
     {
         return [
             'embarque_id.exists' => 'El id de embarque no es válido.',
-            'categoria_id.exists' => 'El id de categoría no es válido.',
+            'variedad_id.exists' => 'El id de variedad no es válido.',
             'presentacion_id.exists' => 'El id de presentación no es válido.',
-            'calibre_id.exists' => 'El id de calibre no es válido.',
             'folio_pallet.required' => 'El folio de pallet es requerido.',
             'folio_pallet.string' => 'El folio de pallet debe ser una cadena de texto.',
-            'sader.required' => 'El sader es requerido.',
-            'sader.string' => 'El sader debe ser una cadena de texto.',
-            'cajas.required' => 'Las cajas son requeridas.',
-            'cajas.integer' => 'Las cajas deben ser un número entero.',
             'lote.required' => 'El lote es requerido.',
             'lote.string' => 'El lote debe ser una cadena de texto.',
-            'tipo_fruta.required' => 'El tipo de fruta es requerido.',
-            'tipo_fruta.string' => 'El tipo de fruta debe ser una cadena de texto.',
+            'sader.required' => 'El sader es requerido.',
+            'sader.string' => 'El sader debe ser una cadena de texto.',
+            'cartilla.required' => 'El sader es requerido.',
+            'cartilla.string' => 'El sader debe ser una cadena de texto.',
+            'cantidad.required' => 'Las cantidades son requeridas.',
+            'cantidad.integer' => 'Las cantidades deben ser un número entero.',
+            'peso.required' => 'El peso es requerido.',
+            'peso.decimal' => 'El peso debe ser un número decimal.',
         ];
     }
 
@@ -54,15 +55,14 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation
     {
         return [
             'embarque_id' => 'exists:op_embarques,id',
-            'categoria_id' => 'exists:cat_categorias,id',
+            'variedad_id' => 'exists:cat_variedades,id',
             'presentacion_id' => 'exists:cat_presentaciones,id',
-            'calibre_id' => 'exists:cat_calibres,id',
             'folio_pallet' => 'required|string',
-            'sader' => 'required|string',
-            'cajas' => 'required|integer',
             'lote' => 'required|string',
-            'tipo_fruta' => 'required|string',
+            'sader' => 'required|string',
             'cartilla' => 'required|string',
+            'cantidad' => 'required|integer',
+            'peso' => 'required|numeric',
         ];
     }
 }

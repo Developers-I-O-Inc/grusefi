@@ -20,44 +20,59 @@ class EmbarquesProductos extends Model
     protected $fillable = [
         'id',
         'embarque_id',
-        'categoria_id',
+        'variedad_id',
         'presentacion_id',
-        'calibre_id',
         'folio_pallet',
         'sader',
-        'cajas',
+        'cantidad',
+        'peso',
         'lote',
-        'tipo_fruta',
-        'cartilla'
+        'cartilla',
+        'marca_id'
     ];
 
     public static function get_embarque_products($id){
-        return DB::select("SELECT op_embarques_productos.id, embarque_id, categoria_id, categoria, tipo_cultivo_id,  tipo_cultivo, presentacion_id,
-				variedad_id, variedad, nombre_cientifico,
-                presentacion, calibre_id, calibre, folio_pallet, sader, cajas, lote, tipo_fruta, cartilla, peso,
-                (cajas * peso) as total_kilos
+        return DB::select("SELECT op_embarques_productos.id, embarque_id, presentacion_id, variedad_id, variedad, nombre_cientifico,
+                presentacion, folio_pallet, sader, cantidad, lote, cartilla, peso, marca_id, cat_marcas.nombre AS marca,
+                (cantidad * peso) as total_kilos
             FROM op_embarques_productos
-            LEFT JOIN cat_categorias ON op_embarques_productos.categoria_id = cat_categorias.id
             LEFT JOIN cat_presentaciones ON op_embarques_productos.presentacion_id = cat_presentaciones.id
-            LEFT JOIN cat_variedades ON cat_presentaciones.variedad_id = cat_variedades.id
-            LEFT JOIN cat_tipo_cultivos ON cat_variedades.tipo_cultivo_id = cat_tipo_cultivos.id
-            LEFT JOIN cat_calibres ON op_embarques_productos.calibre_id = cat_calibres.id
+            LEFT JOIN cat_variedades ON op_embarques_productos.variedad_id = cat_variedades.id
+            LEFT JOIN cat_marcas ON op_embarques_productos.marca_id = cat_marcas.id
             WHERE embarque_id = $id");
     }
 
-    public static function get_tons($embarque_id){
-        return DB::select("SELECT SUM(cajas * peso) as total_kilos
+    public static function get_only_embarque_products($id){
+        return DB::select("SELECT DISTINCT variedad, nombre_cientifico
             FROM op_embarques_productos
-            LEFT JOIN cat_presentaciones ON op_embarques_productos.presentacion_id = cat_presentaciones.id
-            WHERE embarque_id = $embarque_id");
+            LEFT JOIN cat_variedades ON op_embarques_productos.variedad_id = cat_variedades.id
+            WHERE embarque_id = $id
+            ORDER BY variedad");
+    }
+
+    public static function get_only_embarque_quantities($id){
+        return DB::select("SELECT variedad, sum(cantidad) as cantidad, sum(peso) as peso, sum(cantidad * peso) as total_kilos
+            FROM op_embarques_productos
+            LEFT JOIN cat_variedades ON op_embarques_productos.variedad_id = cat_variedades.id
+            WHERE embarque_id = $id
+            GROUP BY variedad");
+    }
+
+    public static function get_only_embarque_marcas($id){
+        return DB::select("SELECT DISTINCT variedad, nombre
+            FROM op_embarques_productos
+            LEFT JOIN cat_variedades ON op_embarques_productos.variedad_id = cat_variedades.id
+            LEFT JOIN cat_marcas ON op_embarques_productos.marca_id = cat_marcas.id
+            WHERE embarque_id = $id");
     }
 
     public static function get_presentations($embarque_id){
-        return DB::select("SELECT COUNT(cajas) as total_cajas, presentacion_id, presentacion
+        return DB::select("SELECT variedad, sum(cantidad) as cantidad_total, peso, presentacion_id, presentacion, plural
             FROM op_embarques_productos
+            LEFT JOIN cat_variedades ON op_embarques_productos.variedad_id = cat_variedades.id
             LEFT JOIN cat_presentaciones ON op_embarques_productos.presentacion_id = cat_presentaciones.id
             WHERE embarque_id = $embarque_id
-            GROUP BY presentacion_id");
+            GROUP BY variedad, peso, presentacion_id");
     }
 
     public function calibre(){

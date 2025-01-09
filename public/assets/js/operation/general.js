@@ -49,12 +49,12 @@ class Operation {
         let edit_pallet = document.getElementById('folio_pallet'),
         edit_lote = document.getElementById('lote'),
         edit_sader = document.getElementById('sader'),
-        edit_cajas = document.getElementById('cajas'),
+        edit_cantidad = document.getElementById('cantidad'),
+        edit_peso = document.getElementById('peso'),
         edit_cartilla = document.getElementById('cartilla'),
-        edit_tipo_fruta = document.getElementById('tipo_fruta'),
-        select_categoria = $('#categoria_id').select2(),
-        select_calibre = $('#calibre_id').select2(),
         select_presentacion = $('#presentacion_id').select2(),
+        select_variedad = $('#variedad_product_id').select2(),
+        select_marca = $('#select_marca').select2(),
         count_products = 0
 
         const validations_products = FormValidation.formValidation(form_products, {
@@ -73,20 +73,6 @@ class Operation {
                         },
                     },
                 },
-                id_categoria: {
-                    validators: {
-                        notEmpty: {
-                            message: "Categoría requerida",
-                        },
-                    },
-                },
-                tipo_cultivo_id: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Tipo de cultivo requerido'
-                        }
-                    }
-                },
                 sader: {
                     validators: {
                         notEmpty: {
@@ -94,10 +80,10 @@ class Operation {
                         }
                     }
                 },
-                cajas: {
+                cantidad: {
                     validators: {
                         notEmpty: {
-                            message: 'N° de cajas requerido'
+                            message: 'N° de cantidad requerido'
                         },
                         between: {
                             min: 1,
@@ -117,27 +103,6 @@ class Operation {
                     validators: {
                         notEmpty: {
                             message: 'Presentación requerida'
-                        }
-                    }
-                },
-                calibre_id: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Calibre requerido'
-                        }
-                    }
-                },
-                tipo_fruta: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Tipo de fruta requerido'
-                        }
-                    }
-                },
-                categoria_id: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Categoría requerida'
                         }
                     }
                 },
@@ -175,18 +140,17 @@ class Operation {
                         </button>`,
                         edit_pallet.value,
                         edit_lote.value,
-                        edit_cajas.value,
-                        select_presentacion.val().split('|')[1],
-                        edit_cajas.value * select_presentacion.val().split('|')[1],
                         edit_sader.value,
-                        select_categoria.find('option:selected').text(),
-                        select_categoria.val(),
-                        select_presentacion.find('option:selected').text(),
-                        select_presentacion.val().split('|')[0],
-                        select_calibre.find('option:selected').text(),
-                        select_calibre.val(),
-                        edit_tipo_fruta.value,
                         edit_cartilla.value,
+                        select_variedad.val(),
+                        select_variedad.find('option:selected').text(),
+                        select_presentacion.val(),
+                        select_presentacion.find('option:selected').text(),
+                        edit_cantidad.value,
+                        edit_peso.value,
+                        edit_cantidad.value * edit_peso.value,
+                        select_marca.val(),
+                        select_marca.find('option:selected').text(),
                     ]).draw()
 
                     btn_add_product.setAttribute("data-kt-indicator", "off")

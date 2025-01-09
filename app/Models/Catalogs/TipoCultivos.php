@@ -16,7 +16,6 @@ class TipoCultivos extends Model
     protected $fillable = [
         'id',
         'tipo_cultivo',
-        'tipo',
         'activo',
     ];
 }

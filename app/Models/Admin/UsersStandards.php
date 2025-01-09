@@ -24,6 +24,12 @@ class UsersStandards extends Model
         WHERE user_id ='.$id);
     }
 
+    public static function user_standards_select($id){
+        return DB::select('SELECT cat_users_standards.standard_id AS id, cat_standards.name
+        FROM cat_users_standards INNER JOIN cat_standards ON cat_users_standards.standard_id = cat_standards.id
+        WHERE user_id ='.$id);
+    }
+
     public static function user_standards_date($id)
 {
     return DB::select('

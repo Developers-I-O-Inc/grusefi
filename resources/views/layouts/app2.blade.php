@@ -114,22 +114,6 @@
                                                 <span class="menu-section fs-5 fw-bolder ps-1 py-1">Configuración General</span>
                                             </div>
                                         </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link" href="/catalogs/calibres">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Calibres</span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link" href="/catalogs/categorias">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Categorías</span>
-                                            </a>
-                                        </div>
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                             <span class="menu-link">
                                                 <span class="menu-bullet">
@@ -168,14 +152,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <div class="menu-item">
-                                            <a class="menu-link" href="/catalogs/floraciones">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Floraciones</span>
-                                            </a>
-                                        </div> --}}
                                         <div class="menu-item">
                                             <a class="menu-link" href="/catalogs/presentaciones">
                                                 <span class="menu-bullet">
@@ -190,14 +166,6 @@
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
                                                 <span class="menu-title">Puntos de Entrada</span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link" href="/catalogs/regulaciones">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Regulaciones del País</span>
                                             </a>
                                         </div>
                                         <div class="menu-item">

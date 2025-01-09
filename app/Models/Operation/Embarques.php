@@ -19,10 +19,11 @@ class Embarques extends Model
         'destinatario_id',
         'pais_id',
         'municipio_id',
+        'lugar_id',
+        'fecha_termino',
         'puerto_id',
         'folio_embarque',
         'consecutivo',
-        'fecha_embarque',
         'numero_economico',
         'placas_trasporte',
         'inspector',
@@ -41,7 +42,7 @@ class Embarques extends Model
             op_embarques.variedad_id,
             op_embarques.empaque_id,
             folio_embarque,
-            fecha_embarque,
+            op_embarques.created_at as fecha_embarque,
             empaques.nombre_fiscal,
             CONCAT_WS(', ',
                 empaques.domicilio_fiscal,
@@ -58,11 +59,17 @@ class Embarques extends Model
             placas) AS transporte,
             vigencia,
             clave_aprobacion,
-            uso
+            uso,
+            CONCAT_WS(', ',
+                mo.nombre,
+                eo.nombre
+            ) AS lugar, fecha_termino
             FROM op_embarques
             LEFT JOIN cat_empaques AS empaques ON op_embarques.empaque_id = empaques.id
             LEFT JOIN cat_localidades ON empaques.localidad_id = cat_localidades.id
             LEFT JOIN cat_municipios ON cat_localidades.municipio_id = cat_municipios.id
+            LEFT JOIN cat_municipios AS mo ON op_embarques.lugar_id = mo.id
+            LEFT JOIN cat_estados AS eo ON mo.estado_id = eo.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
             LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
             LEFT JOIN cat_municipios AS mpuertos ON cat_puertos.municipio_id = mpuertos.id
@@ -79,14 +86,14 @@ class Embarques extends Model
         if($admin){
             $where = "AND tefs_id = ".auth()->user()->id;
         }
-        return DB::select("SELECT op_embarques.id, folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
+        return DB::select("SELECT op_embarques.id, folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, op_embarques.created_at AS fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
             FROM op_embarques
             LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
             LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
             WHERE
-                YEAR(fecha_embarque) = YEAR(CURDATE())
-                AND WEEK(fecha_embarque, 1) = WEEK(CURDATE(), 1)"
+                YEAR(op_embarques.created_at) = YEAR(CURDATE())
+                AND WEEK(op_embarques.created_at, 1) = WEEK(CURDATE(), 1)"
             .$where);
     }
 
@@ -95,13 +102,13 @@ class Embarques extends Model
         if($admin){
             $where = " AND tefs_id = ".auth()->user()->id;
         }
-        return DB::select("SELECT op_embarques.id, folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
+        return DB::select("SELECT op_embarques.id, folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, op_embarques.created_at AS fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
             FROM op_embarques
             LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
             LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
             WHERE
-                fecha_embarque BETWEEN ? AND ?".$where, [$start_date, $end_date]);
+                op_embarques.created_at BETWEEN ? AND ?".$where, [$start_date, $end_date]);
     }
 
     public static function count_consecutivo_year($user_id, $country_id){
@@ -110,7 +117,7 @@ class Embarques extends Model
             INNER JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
             INNER JOIN cat_localidades ON cat_empaques.localidad_id = cat_localidades.id
             INNER JOIN cat_municipios ON cat_localidades.municipio_id = cat_municipios.id
-            WHERE YEAR(fecha_embarque) = YEAR(CURDATE())
+            WHERE YEAR(op_embarques.created_at) = YEAR(CURDATE())
             AND status = 'Finalizado'
             AND tefs_id = ?
             AND estado_id = ?", [$user_id, $country_id]);

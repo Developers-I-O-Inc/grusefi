@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('cat_empaques', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('localidad_id')->unsigned()->index();
-            $table->bigInteger('localidad_doc_id')->unsigned()->index();
+            $table->mediumInteger('localidad_id')->unsigned()->index();
+            $table->mediumInteger('localidad_doc_id')->unsigned()->index();
             $table->string('nombre_corto', 50);
             $table->string('nombre_fiscal', 200);
-            $table->string('domicilio_fiscal', 1000);
-            $table->string('num_ext', 10);
+            $table->string('domicilio_fiscal', 500);
+            $table->string('colonia', 100)->nullable();
+            $table->string('num_ext', 10)->nullable();
             $table->string('num_int', 10)->nullable();
             $table->string('cp', 5);
             $table->string('rfc', 13);

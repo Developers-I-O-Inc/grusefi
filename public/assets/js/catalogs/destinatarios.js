@@ -20,6 +20,10 @@ var KTdestinatarioesList = (function () {
         edit_nombre,
         edit_nombre_corto,
         edit_domicilio,
+        edit_colonia,
+        edit_num_ext,
+        edit_num_int,
+        edit_cp,
         edit_telefonos,
         edit_correos,
         select_empaque,
@@ -40,6 +44,11 @@ var KTdestinatarioesList = (function () {
                         edit_nombre_corto.value=data.destinatario.nombre_corto
                         edit_domicilio.value=data.destinatario.domicilio
                         edit_telefonos.value=data.destinatario.telefonos
+                        edit_colonia.value = data.destinatario.colonia
+                        edit_telefonos.value = data.destinatario.telefonos
+                        edit_num_ext.value = data.destinatario.num_ext
+                        edit_num_int.value = data.destinatario.num_int
+                        edit_cp.value = data.destinatario.cp
                         edit_correos.value=data.destinatario.correos
                         Catalogs.checked_edit(data.destinatario.activo, edit_active, check_active)
                         modal.show()
@@ -65,6 +74,11 @@ var KTdestinatarioesList = (function () {
                 (edit_nombre_corto = form.querySelector("#nombre_corto")),
                 (edit_domicilio = form.querySelector("#domicilio")),
                 (edit_telefonos = form.querySelector("#telefonos")),
+                (edit_colonia = form.querySelector("#colonia")),
+                (edit_telefonos = form.querySelector("#telefonos")),
+                (edit_num_int = form.querySelector("#num_int")),
+                (edit_num_ext = form.querySelector("#num_ext")),
+                (edit_cp = form.querySelector("#cp")),
                 (edit_correos = form.querySelector("#correos")),
                 (check_active = form.querySelector("#check_activo")),
                 (edit_active = form.querySelector("#activo")),
@@ -101,18 +115,17 @@ var KTdestinatarioesList = (function () {
                                 },
                             },
                         },
-                        telefonos: {
+                        cp: {
                             validators: {
                                 notEmpty: {
-                                    message: "Ingrese los telefonos del destinatario",
+                                    message: "Ingrese el código postal del destinatario",
                                 },
-                            },
-                        },
-                        correos: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Ingrese los correos del destinatario",
-                                },
+                                stringLength: {
+                                    min: 5,
+                                    max: 5,
+                                    message:
+                                        "El código postal del destinatario debe tener 5 caracteres",
+                                }
                             },
                         },
                         empaque_id: {
@@ -151,8 +164,6 @@ var KTdestinatarioesList = (function () {
                                 { data: "nombre_corto", name: "nombre_corto" },
                                 { data: "domicilio", name: "domicilio" },
                                 { data: "telefonos", name: "telefonos" },
-                                { data: "correos", name: "correos" },
-                                { data: "activos", name: "activos" },
                                 { data: "buttons", name: "buttons" },
                             ],
                             order: [[2, "asc"]],

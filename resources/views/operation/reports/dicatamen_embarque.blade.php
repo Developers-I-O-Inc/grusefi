@@ -208,11 +208,11 @@
             <tr>
                 <td class="pregunta1 font-p">1. INICIO:</td>
                 <td class="r_lugar font-g">Lugar:</td>
-                <td class="rr_lugar font-g">ZAPOTILTIC, JALISCO, MÉXICO </td>
+                <td class="rr_lugar font-g">{{$embarque->lugar}}, MÉXICO </td>
                 <td class="r_lugar font-g">Fecha:</td>
-                <td class="rr_lugar font-g">{{$embarque->fecha_embarque}}</td>
+                <td class="rr_lugar font-g">{{substr($embarque->fecha_embarque, 0, 10)}}</td>
                 <td class="r_lugar font-g">Hora:</td>
-                <td class="rr_lugar font-g">08:00:00 Hrs</td>
+                <td class="rr_lugar font-g">{{substr($embarque->fecha_embarque, 11)}} Hrs</td>
             </tr>
         </table>
         <table class="table_2">
@@ -260,42 +260,62 @@
                 <td class="td_datos_3 font-g">
                     @if($count_productos <= 3)
                         @foreach($embarques_productos as $producto)
-                            {{$producto->variedad}} <em>({{$producto->nombre_cientifico}})</em>
+                            {{$producto->variedad}} <em>({{$producto->nombre_cientifico}})</em><br>
                         @endforeach
                     @else
                         <p>
-                            {{$producto[0]->variedad}} <em>({{$producto[0]->nombre_cientifico}})</em>
+                            {{$producto[0]->variedad}} <em>({{$producto[0]->nombre_cientifico}})</em><br>
                         </p>
                         <p>
-                            {{$producto[1]->variedad}} <em>({{$producto[1]->nombre_cientifico}})</em>
+                            {{$producto[1]->variedad}} <em>({{$producto[1]->nombre_cientifico}})</em><br>
                         </p>
                         <p>
-                            {{$producto[2]->variedad}} <em>({{$producto[2]->nombre_cientifico}})</em>
+                            {{$producto[2]->variedad}} <em>({{$producto[2]->nombre_cientifico}})</em><br>
                         </p>
                     @endif
                 </td>
                 <td class="td_datos_3 font-g">{{$embarque->uso}}</td>
-                <td class="td_datos_3 font-g">{{$cantidad}}</td>
                 <td class="td_datos_3 font-g">
                     @if($count_productos <= 3)
-                        @foreach($presentations as $presentation)
-                            {{$presentation->total_cajas.' '.$presentation->presentacion}}
+                        @foreach($quantities as $cant)
+                            @if ($cant->total_kilos >= 1000)+
+                                {{number_format($cant->total_kilos/1000, 2) . ' Toneladas'}}<br>
+                            @else
+                                {{$cant->total_kilos . ' KG'}}<br>
+                            @endif
                         @endforeach
                     @else
                         <p>
-                            {{$presentations[0]->total_cajas.' '.$presentations[0]->presentacion}}
+                            {{$quantities[0]->total_kilos >= 1000 ? number_format($quantities[0]->total_kilos/1000, 2) . ' Toneladas' : $quantities[0]->total_kilos . ' KG'}}<br>
                         </p>
                         <p>
-                            {{$presentations[1]->total_cajas.' '.$presentations[1]->presentacion}}
+                            {{$quantities[1]->total_kilos >= 1000 ? number_format($quantities[1]->total_kilos/1000, 2) . ' Toneladas' : $quantities[1]->total_kilos . ' KG'}}<br>
                         </p>
                         <p>
-                            {{$presentations[2]->total_cajas.' '.$presentations[2]->presentacion}}
+                            {{$quantities[2]->total_kilos >= 1000 ? number_format($quantities[2]->total_kilos/1000, 2) . ' Toneladas' : $quantities[2]->total_kilos . ' KG'}}<br>
                         </p>
                     @endif
                 </td>
                 <td class="td_datos_3 font-g">
-                    @foreach($embarques_marcas as $marca)
-                        {{$marca->marca}}
+                    @if($count_productos <= 3)
+                        @foreach($presentations as $presentation)
+                            {{($presentation->cantidad_total).' '.($presentation->cantidad_total == 1 ? ($presentation->presentacion.' '.$presentation->peso.' KG') : $presentation->plural.' '.$presentation->peso.' KG')}}<br>
+                        @endforeach
+                    @else
+                        <p>
+                            {{($presentations[0]->cantidad_total).' '.($presentations[0]->cantidad_total == 1 ? $presentations[0]->presentacion : $presentations[0]->plural).' '.$presentations[0]->peso.' KG'}}<br>
+                        </p>
+                        <p>
+                            {{($presentations[1]->cantidad_total).' '.($presentations[1]->cantidad_total == 1 ? $presentations[1]->presentacion : $presentations[1]->plural).' '.$presentations[1]->peso.' KG'}}<br>
+                        </p>
+                        <p>
+                            {{($presentations[2]->cantidad_total).' '.($presentations[2]->cantidad_total == 1 ? $presentations[2]->presentacion : $presentations[2]->plural).' '.$presentations[2]->peso.' KG'}}<br>
+                        </p>
+                    @endif
+                </td>
+                <td class="td_datos_3 font-g">
+                    @foreach($marcas as $marca)
+                        {{$marca->nombre}}
                     @endforeach
                 </td>
             </tr>
@@ -330,10 +350,11 @@
                 </td>
             </tr>
         </table>
-        <table>
+        <table style="width: 100%;">
             <tr>
-                <td class="font-p">4. Indique la regulación o requisito que evaluará:</td>
-                <td class="font-g">INCISO B) DEL AVISO 108 DEL 19 DE OCTUBRE DEL 2018 Y CIRCULAR 080 DEL 27 DE SEPTIEMBRE DEL 2017</td>
+                <td style="width: 30%;" class="font-p">4. Indique la regulación o requisito que evaluará:</td>
+                <td style="width: 70%;" class="font-g">{{implode(',', $standards->pluck('name')->toArray())}}</td>
+
             </tr>
         </table>
         <table>
@@ -583,11 +604,11 @@
             <tr>
                 <td class="font-p" style="width: 8%">12. FIN</td>
                 <td class="font-g"style="width: 8%">Lugar:</td>
-                <td class="font-g">ZAPOTILTIC, JALISCO, MÉXICO</td>
+                <td class="font-g">{{$embarque->lugar}}</td>
                 <td class="font-g">Fecha</td>
-                <td class="font-g">15/08/2024</td>
+                <td class="font-g">{{substr($embarque->fecha_termino, 0, 10)}}</td>
                 <td class="font-g">Hora</td>
-                <td class="font-g">10:39 Hrs.</td>
+                <td class="font-g">{{substr($embarque->fecha_termino, 11)}} Hrs</td>
             </tr>
         </table>
         <table>
@@ -609,9 +630,9 @@
             <tr>
                 <td style="width: 40%"></td>
                 <td class="font-rr">CLAVE DE APROBACION: </td>
-                <td class="font-rr">{{$plantilla->clave_aprobacion}}</td>
+                <td class="font-rr">{{$vigencias->clave_aprobacion}}</td>
                 <td class="font-rr">VIGENCIA</td>
-                <td class="font-rr">{{$plantilla->vigencia}}</td>
+                <td class="font-rr">{{$vigencias->vigencia}}</td>
             </tr>
         </table>
         <table class="table_datos_expedicion">

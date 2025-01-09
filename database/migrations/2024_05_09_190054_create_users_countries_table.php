@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('cat_users_countries', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned()->index();
-            $table->bigInteger('estado_id')->unsigned()->index();
+            $table->mediumInteger('user_id')->unsigned()->index();
+            $table->mediumInteger('estado_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('estado_id')->references('id')->on('cat_estados');
             $table->timestamps();
