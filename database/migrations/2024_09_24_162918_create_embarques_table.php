@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('op_embarques', function (Blueprint $table) {
             $table->id();
-            $table->mediumInteger('empaque_id')->unsigned()->index();
-            $table->mediumInteger('destinatario_id')->unsigned()->index();
-            $table->mediumInteger('pais_id')->unsigned()->index();
-            $table->mediumInteger('puerto_id')->unsigned()->index();
-            $table->mediumInteger('tefs_id')->unsigned()->index();
-            $table->mediumInteger('variedad_id')->unsigned()->index();
-            $table->mediumInteger('vigencia_id')->unsigned()->index();
-            $table->mediumInteger('municipio_id')->unsigned()->index();//PROCEDENCIA
-            $table->mediumInteger('lugar_id')->unsigned()->index();
-            $table->mediumInteger('uso_id')->unsigned()->index();
-            $table->mediumInteger('consolidado_id')->nullable();
+            $table->smallInteger('empaque_id')->unsigned()->index();
+            $table->smallInteger('destinatario_id')->unsigned()->index();
+            $table->smallInteger('pais_id')->unsigned()->index();
+            $table->smallInteger('puerto_id')->unsigned()->index();
+            $table->smallInteger('tefs_id')->unsigned()->index();
+            $table->smallInteger('variedad_id')->unsigned()->index();
+            $table->smallInteger('vigencia_id')->unsigned()->index();
+            $table->smallInteger('municipio_id')->unsigned()->index();//PROCEDENCIA
+            $table->smallInteger('lugar_id')->unsigned()->index();
+            $table->smallInteger('uso_id')->unsigned()->index();
+            $table->smallInteger('consolidado_id')->nullable();
             $table->string('folio_embarque')->default('EMB-');
             $table->dateTime('fecha_termino')->nullable();
             $table->string('consecutivo')->default('0000');

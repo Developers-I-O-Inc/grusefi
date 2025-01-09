@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_users_countries', function (Blueprint $table) {
-            $table->id();
-            $table->mediumInteger('user_id')->unsigned()->index();
-            $table->mediumInteger('estado_id')->unsigned()->index();
+            $table->smallIncrements('id');
+            $table->smallInteger('user_id')->unsigned()->index();
+            $table->smallInteger('estado_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('estado_id')->references('id')->on('cat_estados');
             $table->timestamps();

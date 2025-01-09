@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_presentaciones', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id');
             $table->string("presentacion", 50);
             $table->string("plural", 50);
             $table->tinyInteger('activo')->default(1);

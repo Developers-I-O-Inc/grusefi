@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_paises', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id');
             $table->string('nombre', 50);
             $table->string('nombre_corto', 10);
             $table->string('codigo', 10);

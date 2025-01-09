@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_localidades', function (Blueprint $table) {
-            $table->id();
-            $table->mediumInteger('municipio_id')->unsigned()->index();
+            $table->smallIncrements('id');
+            $table->smallInteger('municipio_id')->unsigned()->index();
             $table->string('nombre', 100);
             $table->string('nombre_corto', 50);
             $table->string('codigo', 10);

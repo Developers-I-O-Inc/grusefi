@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_usos', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id');
             $table->string('uso',  30);
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();

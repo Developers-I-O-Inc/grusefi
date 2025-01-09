@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_vigencias', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id');
             $table->string('clave_aprobacion', 50)->unique();
             $table->date('vigencia');
             $table->boolean('activo')->default(1);
