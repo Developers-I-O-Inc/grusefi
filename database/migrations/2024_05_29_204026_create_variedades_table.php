@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cat_variedades', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('tipo_cultivo_id')->unsigned()->index();
+            $table->mediumInteger('tipo_cultivo_id')->unsigned()->index();
             $table->string('nombre_cientifico', 50);
             $table->string('variedad', 50);
             $table->enum('tipo', ['Orgánico', 'Convencional']);

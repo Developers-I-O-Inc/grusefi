@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cat_municipios', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('estado_id')->unsigned()->index();
+            $table->mediumInteger('estado_id')->unsigned()->index();
             $table->string('nombre', 100);
             $table->string('nombre_corto', 50)->nullable();
             $table->string('codigo', 10);

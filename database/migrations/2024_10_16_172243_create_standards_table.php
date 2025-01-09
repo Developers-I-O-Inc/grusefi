@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('op_embarques_marcas', function (Blueprint $table) {
+        Schema::create('cat_standards', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('embarque_id')->unsigned()->index();
-            $table->bigInteger('marca_id')->unsigned()->index();
-            $table->foreign('embarque_id')->references('id')->on('op_embarques');
-            $table->foreign('marca_id')->references('id')->on('cat_marcas');
+            $table->string('name', 30);
+            $table->string('description', 1050);
+            $table->boolean('activo')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('embarques_marcas');
+        Schema::dropIfExists('cat_standards');
     }
 };

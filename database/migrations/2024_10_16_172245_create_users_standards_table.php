@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('cat_users_standards', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned()->index();
-            $table->bigInteger('standard_id')->unsigned()->index();
+            $table->mediumInteger('user_id')->unsigned()->index();
+            $table->mediumInteger('standard_id')->unsigned()->index();
             $table->date('validity');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('standard_id')->references('id')->on('cat_standards');

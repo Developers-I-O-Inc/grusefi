@@ -23,6 +23,7 @@ var KTempaqueesList = (function () {
         edit_nombre_corto,
         edit_nombre_fiscal,
         edit_domicilio_fiscal,
+        edit_colonia,
         edit_rfc,
         edit_telefonos,
         edit_num_ext,
@@ -56,6 +57,7 @@ var KTempaqueesList = (function () {
                         edit_nombre_corto.value = data.empaque[0].nombre_corto
                         edit_nombre_fiscal.value = data.empaque[0].nombre_fiscal
                         edit_domicilio_fiscal.value = data.empaque[0].domicilio_fiscal
+                        edit_colonia.value = data.empaque[0].colonia
                         edit_rfc.value = data.empaque[0].rfc
                         edit_telefonos.value = data.empaque[0].telefonos
                         edit_num_ext.value = data.empaque[0].num_ext
@@ -111,6 +113,7 @@ var KTempaqueesList = (function () {
                 (edit_nombre_corto = form.querySelector("#nombre_corto")),
                 (edit_nombre_fiscal = form.querySelector("#nombre_fiscal")),
                 (edit_domicilio_fiscal = form.querySelector("#domicilio_fiscal")),
+                (edit_colonia = form.querySelector("#colonia")),
                 (edit_rfc = form.querySelector("#rfc")),
                 (edit_telefonos = form.querySelector("#telefonos")),
                 (edit_num_int = form.querySelector("#num_int")),
@@ -306,15 +309,7 @@ var KTempaqueesList = (function () {
                                 { data: "nombre_corto" , name : "nombre_corto" },
                                 { data: "nombre_fiscal" , name : "nombre_fiscal" },
                                 { data: "domicilio_fiscal" , name : "domicilio_fiscal" },
-                                { data: "num_ext" , name : "num_ext" },
-                                { data: "num_int" , name : "num_int" },
-                                { data: "cp", name : "cp" },
                                 { data: "rfc" , name : "rfc" },
-                                { data: "telefonos" , name : "telefonos" },
-                                { data: "imagen", name : "imagen" },
-                                { data: "nombre_embarque" , name : "nombre_embarque" },
-                                { data: "domicilio_documentacion" , name : "domicilio_documentacion" },
-                                { data: "codigo", name: "codigo" },
                                 { data: "exportacion" , name : "exportacion" },
                                 { data: "asociados" , name : "asociados"},
                                 { data: "activos", name: "activos" },

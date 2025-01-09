@@ -18,7 +18,7 @@ class PresentacionesController extends Controller
     {
         if ($request->ajax()) {
 
-            $presentaciones = Presentaciones::get_presentaciones();
+            $presentaciones = Presentaciones::all();
             return Datatables::of($presentaciones)
                     ->addIndexColumn()
                     ->addColumn('check', function($row){
@@ -64,10 +64,10 @@ class PresentacionesController extends Controller
         Presentaciones::updateOrCreate(
             ['id'=>$request->get('id_presentacion')],
             [
-                'variedad_id' => $request->input('variedad_id'),
                 'presentacion' => $request->input('presentacion'),
-                'peso' => $request->input('peso'),
-            'activo' => $request->input('activo')],
+                'plural' => $request->input('plural'),
+                'activo' => $request->input('activo')
+            ],
         );
         return response()->json(["OK"=>"Se guardo correctamente"]);
     }
@@ -91,9 +91,9 @@ class PresentacionesController extends Controller
         return response()->json(["OK"=>"Eliminados"]);
     }
 
-    public function get_presentaciones(Request $request)
+    public function get_presentaciones()
     {
-        $presentacion = Presentaciones::get_presentaciones_by_variedad($request->query('id'));
+        $presentacion = Presentaciones::where('activo', 1)->get();
         return response()->json(["ok" => "OK", "catalogo" => $presentacion]);
     }
 

@@ -9,14 +9,14 @@ var KTCreateAccount = (function () {
     var e,
         btn_modal,
         btn_modal_c,
-        btn_add_marca,
+        btn_add_standard,
         btn_add_maquilador,
         btn_add_products,
         btn_add_product,
-        count_marcas = 0,
-        edit_text_marca,
+        count_standards = 0,
+        edit_text_standard,
         edit_text_products,
-        table_marcas,
+        table_standards,
         table_maquilador,
         table_products,
         stepper_embarques,
@@ -30,12 +30,13 @@ var KTCreateAccount = (function () {
         select_consolidado,
         select_destinatario,
         select_marca,
+        select_standard,
         select_maquiladores,
         select_pais,
         select_puerto,
         select_tefs,
         select_variedad,
-        select_presentacion,
+        // select_presentacion,
         select_puerto2,
         arr_validations = [],
         add_fields = (table, select) => {
@@ -50,7 +51,7 @@ var KTCreateAccount = (function () {
                 if(repeat){
                     Swal.fire({
                         title: "Advertencia!",
-                        text: "El permiso " + select.val() +" ya esta asignado al usuario!",
+                        text: select.select2('data')[0].text +" ya esta agragado!",
                         icon: "warning"
                       });
                 }else{
@@ -64,27 +65,27 @@ var KTCreateAccount = (function () {
                             </svg></span>
                         </button>`]).draw()
 
-                    count_marcas = count_marcas + 1
-                    edit_text_marca.value=count_marcas
+                    count_standards = count_standards + 1
+                    edit_text_standard.value=count_standards
 
                 }
             }
             else{
                 Swal.fire({
                     title: "Advertencia!",
-                    text: "Seleccione un permiso!",
+                    text: "Seleccione un registro!",
                     icon: "warning"
                   });
             }
         },
-        delete_permission = (table, marca) => {
+        delete_permission = (table, standard) => {
             document.querySelectorAll('[data-kt-customer-table-filter="delete_row"]').forEach((e) => {
                 e.addEventListener("click", function (e) {
                     e.preventDefault();
                     const o = e.target.closest("tr")
                     table.row($(o)).remove().draw()
-                    if(marca){
-                        edit_text_marca.value = table.column(0).data().length > 0 ? 1 : ''
+                    if(standard){
+                        edit_text_standard.value = table.column(0).data().length > 0 ? 1 : ''
                     }
                 });
             });
@@ -140,20 +141,20 @@ var KTCreateAccount = (function () {
                 (select_pais = $('#pais_id').select2()),
                 (select_empaque = $('#empaque_id').select2()),
                 (select_tefs = $('#tefs_id').select2()),
-                (select_presentacion = $('#presentacion_id').select2()),
+                (select_marca = $('#select_marca').select2()),
                 (select_consolidado = $('#consolidado_id').select2()),
                 (select_destinatario = $('#destinatario_id').select2()),
                 (select_variedad = $('#variedad_id').select2()),
-                (select_marca = $('#select_marca').select2()),
+                (select_standard = $('#select_standard').select2()),
                 (select_maquiladores = $('#select_maquiladores').select2()),
                 (select_puerto = $('#puerto_id').select2()),
                 (select_puerto2 = document.querySelector("#puerto_id")),
-                (edit_text_marca = document.querySelector("#edit_marcas")),
+                (edit_text_standard = document.querySelector("#edit_standards")),
                 (edit_text_products = document.querySelector("#edit_products")),
                 (check_active = document.querySelector("#check_activo")),
                 (check_import = document.querySelector("#check_import")),
                 (edit_active = document.querySelector("#consolidado")),
-                (btn_add_marca = document.querySelector("#btn_add_marca")),
+                (btn_add_standard = document.querySelector("#btn_add_standard")),
                 (btn_add_maquilador = document.querySelector("#btn_add_maquilador")),
                 (btn_add_products = document.querySelector("#btn_add_products")),
                 (btn_add_product = document.querySelector("#btn_add_product")),
@@ -184,7 +185,7 @@ var KTCreateAccount = (function () {
                         } else {
                             let errorMessage = "Error, verifique los datos por favor";
                             if (e.getCurrentStepIndex() === 2) {
-                                errorMessage = "Error, ingrese al menos una marca";
+                                errorMessage = "Error, ingrese al menos una standard";
                             } else if (e.getCurrentStepIndex() === 3) {
                                 errorMessage = "Error, ingrese al menos un producto";
                             }
@@ -233,7 +234,7 @@ var KTCreateAccount = (function () {
                     }
                 }),
                  // TABLE PERMISSIONS
-                (table_marcas = $("#kt_marcas_table").DataTable({
+                (table_standards = $("#kt_standards_table").DataTable({
                     order: [[1, "asc"]],
                     columnDefs: [
                         { orderable: !1, targets: 0, visible:0 },
@@ -250,7 +251,7 @@ var KTCreateAccount = (function () {
                         </span>&emsp;Processing Message here...",
                     },
                 }).on("draw", function(){
-                    delete_permission(table_marcas, 1);
+                    delete_permission(table_standards, 1);
                 })),
                  // TABLE MAQUILADORES
                 (table_maquilador = $("#kt_maquiladores_table").DataTable({
@@ -277,9 +278,8 @@ var KTCreateAccount = (function () {
                     order: [[1, "asc"]],
                     columnDefs: [
                         { orderable: !1, targets: 0 },
-                        { orderable: !1, targets: 8, visible : 0 },
-                        { orderable: !1, targets: 10, visible : 0 },
-                        { orderable: !1, targets: 12, visible : 0 },
+                        { orderable: !1, targets: 5, visible : 0 },
+                        { orderable: !1, targets: 7, visible : 0 },
                     ],
                     language: {
                         zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
@@ -293,20 +293,11 @@ var KTCreateAccount = (function () {
                         </span>&emsp;Processing Message here...",
                     },
                 }).on("draw", function(){
-                    delete_permission(table_maquilador, 0);
+                    delete_permission(table_products, 0);
                 })),
                 arr_validations.push(
                     FormValidation.formValidation(form_embarques, {
                         fields: {
-                            fecha_embarque: {
-                                validators: {
-                                    notEmpty: { message: "Ingrese una fecha" },
-                                    format: {
-                                        pattern: "YYYY-MM-DD",
-                                        message: "La fecha no es válida",
-                                    }
-                                },
-                            },
                             pais_id: {
                                 validators: {
                                     notEmpty: { message: "Seleccione un país" },
@@ -319,7 +310,7 @@ var KTCreateAccount = (function () {
                             },
                             empaque_id: {
                                 validators: {
-                                    notEmpty: { message: "Seleccione un empaque" },
+                                    notEmpty: { message: "Seleccione un cliente" },
                                 },
                             },
                             destinatario_id: {
@@ -329,12 +320,22 @@ var KTCreateAccount = (function () {
                             },
                             tefs_id: {
                                 validators: {
-                                    notEmpty: { message: "Seleccione un usuario" },
+                                    notEmpty: { message: "Seleccione un usuario tef" },
                                 },
                             },
                             puerto_id: {
                                 validators: {
                                     notEmpty: { message: "Seleccione un usuario" },
+                                },
+                            },
+                            municipio_id: {
+                                validators: {
+                                    notEmpty: { message: "Seleccione una procedencia" },
+                                },
+                            },
+                            uso_id: {
+                                validators: {
+                                    notEmpty: { message: "Seleccione un uso" },
                                 },
                             },
                         },
@@ -343,20 +344,15 @@ var KTCreateAccount = (function () {
                             bootstrap: new FormValidation.plugins.Bootstrap5({
                                 rowSelector: ".fv-row",
                             }),
-                            icon: new FormValidation.plugins.Icon({
-                                valid: 'fa fa-check',
-                                invalid: 'fa fa-times',
-                                validating: 'fa fa-refresh',
-                            }),
                         },
                     })
                 ),
                 arr_validations.push(
                     FormValidation.formValidation(form_embarques, {
                         fields: {
-                            edit_marcas: {
+                            edit_standards: {
                                 validators: {
-                                    notEmpty: { message: "La marca es obligatorìa" },
+                                    notEmpty: { message: "La norma es obligatorìa" },
                                 },
                             },
                         },
@@ -375,7 +371,7 @@ var KTCreateAccount = (function () {
                         fields: {
                             edit_products: {
                                 validators: {
-                                    notEmpty: { message: "La marca es obligatorìa" },
+                                    notEmpty: { message: "La standard es obligatorìa" },
                                 },
                             },
                         },
@@ -393,16 +389,12 @@ var KTCreateAccount = (function () {
                     e.preventDefault
                     arr_validations[0].validate().then(function (t) {
                         const formData = new FormData(document.querySelector(`#form_embarques`));
-                        const marcasArray = table_marcas.column(0).data().toArray()
-                        const maquiladoresArray = table_marcas.column(0).data().toArray()
+                        const standardsArray = table_standards.column(0).data().toArray()
+                        const maquiladoresArray = table_standards.column(0).data().toArray()
                         const productosArray = table_products.data().toArray();
-                        formData.append('marcas', JSON.stringify(marcasArray))
+                        formData.append('standards', JSON.stringify(standardsArray))
                         formData.append('maquiladores', JSON.stringify(maquiladoresArray))
                         formData.append('productos', JSON.stringify(productosArray))
-                        // const dropzoneFiles = myDropzone.getAcceptedFiles();
-                        // if (dropzoneFiles.length > 0) {
-                        //     formData.append('file_import', dropzoneFiles[0], dropzoneFiles[0].name)
-                        // }
                         arr_validations[0].enableValidator('puerto_id')
                         arr_validations[0].enableValidator('destinatario_id')
                         "Valid" == t
@@ -443,8 +435,8 @@ var KTCreateAccount = (function () {
                     arr_validations[0].revalidateField('empaque_id')
                     arr_validations[0].disableValidator('destinatario_id')
                     // const select_estado2 = $('#estado_id').select2()
-                    Operation.get_next_selects("destinatarios", select_empaque.val(), select_destinatario)
                     Operation.get_next_selects("marcas", select_empaque.val(), select_marca)
+                    Operation.get_next_selects("destinatarios", select_empaque.val(), select_destinatario)
                     Operation.get_next_selects("maquiladores", select_empaque.val(), select_maquiladores)
                     Operation.get_next_selects("maquiladores", select_empaque.val(), select_consolidado)
                 })
@@ -461,7 +453,7 @@ var KTCreateAccount = (function () {
                     else{
                         Operation.validate_plantilla(`validate_plantilla/${select_pais.val()}/${select_variedad.val()}`, 'GET',
                             select_pais.find('option:selected').text(), select_variedad.find('option:selected').text())
-                        Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion, true)
+                        // Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion, true)
                     }
                 })
                 // CLOSE MODAL
@@ -473,9 +465,9 @@ var KTCreateAccount = (function () {
                     t.preventDefault(), modal.hide()
                 })
                  // ADD PERMISSION TO DATATABLE
-                btn_add_marca.addEventListener("click", function (t) {
+                btn_add_standard.addEventListener("click", function (t) {
                     t.preventDefault();
-                    add_fields(table_marcas, select_marca)
+                    add_fields(table_standards, select_standard)
                 })
                  // ADD PERMISSION TO DATATABLE
                 btn_add_maquilador.addEventListener("click", function (t) {
