@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('plantilla_rpv', function (Blueprint $table) {
-            $table->id();
-            $table->mediumInteger('pais_id')->unsigned()->index();
-            $table->mediumInteger('variedad_id')->unsigned()->index();
+            $table->smallIncrements('id');
+            $table->smallInteger('pais_id')->unsigned()->index();
+            $table->smallInteger('variedad_id')->unsigned()->index();
             // SERVICIO SOLICITADO
             $table->boolean('ss_dictamen_verificacion');
             $table->boolean('ss_certificado_movilizacion');

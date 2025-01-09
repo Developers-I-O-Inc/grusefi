@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_destinatarios', function (Blueprint $table) {
-            $table->id();
-            $table->mediumInteger('empaque_id')->unsigned()->index();
-            $table->mediumInteger('municipio_id')->unsigned()->index();
-            $table->mediumInteger('localidad_id')->nullable()->unsigned()->index();
+            $table->smallIncrements('id');
+            $table->smallInteger('empaque_id')->unsigned()->index();
+            $table->smallInteger('municipio_id')->unsigned()->index();
+            $table->smallInteger('localidad_id')->nullable()->unsigned()->index();
             $table->string("nombre", 500);
             $table->string("nombre_corto", 50);
             $table->string("domicilio", 1000);

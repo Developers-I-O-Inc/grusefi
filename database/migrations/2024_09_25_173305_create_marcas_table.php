@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_marcas', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id');
             $table->mediumInteger('empaque_id')->unsigned()->index();
             $table->string("nombre", 50);
             $table->tinyInteger('activo')->default(1);

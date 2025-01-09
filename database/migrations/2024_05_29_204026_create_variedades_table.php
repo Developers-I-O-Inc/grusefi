@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_variedades', function (Blueprint $table) {
-            $table->id();
-            $table->mediumInteger('tipo_cultivo_id')->unsigned()->index();
+            $table->smallIncrements('id');
+            $table->smallInteger('tipo_cultivo_id')->unsigned()->index();
             $table->string('nombre_cientifico', 50);
             $table->string('variedad', 50);
             $table->enum('tipo', ['Orgánico', 'Convencional']);

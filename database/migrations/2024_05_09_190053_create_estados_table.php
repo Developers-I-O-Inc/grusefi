@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_estados', function (Blueprint $table) {
-            $table->id();
-            $table->mediumInteger('pais_id')->unsigned()->index();
+            $table->smallIncrements('id');
+            $table->smallInteger('pais_id')->unsigned()->index();
             $table->string('nombre', 50);
             $table->string('nombre_corto', 10);
             $table->string('codigo', 10);

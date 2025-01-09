@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('op_embarques_maquiladores', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('embarque_id')->unsigned()->index();
-            $table->bigInteger('maquilador_id')->unsigned()->index();
+            $table->smallInteger('maquilador_id')->unsigned()->index();
             $table->foreign('embarque_id')->references('id')->on('op_embarques');
             $table->foreign('maquilador_id')->references('id')->on('cat_empaques');
             $table->timestamps();
