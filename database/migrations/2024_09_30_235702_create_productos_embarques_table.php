@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('op_embarques_productos', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('embarque_id')->unsigned()->index();
-            $table->mediumInteger('variedad_id')->unsigned()->index();
-            $table->mediumInteger('presentacion_id')->unsigned()->index();
+            $table->smallInteger('variedad_id')->unsigned()->index();
+            $table->smallInteger('presentacion_id')->unsigned()->index();
             $table->integer('marca_id')->unsigned()->index()->nullable();
             $table->string('folio_pallet', 20);
             $table->string('lote', 20);
