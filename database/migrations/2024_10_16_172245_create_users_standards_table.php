@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_users_standards', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id');
             $table->mediumInteger('user_id')->unsigned()->index();
             $table->mediumInteger('standard_id')->unsigned()->index();
             $table->date('validity');

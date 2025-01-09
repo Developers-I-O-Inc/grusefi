@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_empaques', function (Blueprint $table) {
-            $table->id();
-            $table->mediumInteger('localidad_id')->unsigned()->index();
-            $table->mediumInteger('localidad_doc_id')->unsigned()->index();
+            $table->smallIncrements('id');
+            $table->smallInteger('localidad_id')->unsigned()->index();
+            $table->smallInteger('localidad_doc_id')->unsigned()->index();
             $table->string('nombre_corto', 50);
             $table->string('nombre_fiscal', 200);
             $table->string('domicilio_fiscal', 500);

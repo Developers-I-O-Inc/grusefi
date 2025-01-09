@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cat_standards', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id');
             $table->string('name', 30);
             $table->string('description', 1050);
             $table->boolean('activo')->default(true);
