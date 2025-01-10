@@ -182,7 +182,10 @@ class Catalogs {
         })
     }
 
-    get_next_selects(catalog, id,  catalog_item, select_change){
+    get_next_selects(catalog, id, select_change, id_change = null){
+        console.log("el catalogo a consular es", catalog)
+        console.log("el id a consular es", id)
+        console.log("el id del select a cambiar es", id_change)
         fetch(`/catalogs/get_${catalog}?id=${id}`, {
             method: "GET",
             headers:{
@@ -202,7 +205,7 @@ class Catalogs {
                     const option = new Option(item.nombre, item.id);
                     select_change.append(option)
                 })
-            select_change.val(select_change.attr('data-id')).trigger('change.select2');
+            select_change.val(id_change).trigger('change.select2');
 
         })
         .catch(error => {

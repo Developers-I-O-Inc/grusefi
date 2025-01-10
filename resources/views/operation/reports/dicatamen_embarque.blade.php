@@ -245,7 +245,7 @@
             </tr>
             <tr>
                 <td class="td_datos font-g">{{$embarque->domicilio_empaque}}</td>
-                <td class="td_datos font-g">{{$embarque->destinatario_domicilio}}</td>
+                <td class="td_datos font-g">{{$domicilio_destinatario[0]->domicilio}}</td>
             </tr>
         </table>
         <table class="table_datos_expedicion" style="width: 100%">

@@ -51,7 +51,7 @@
                                 </div>
                             </th>
                             <th class="min-w-125px">id</th>
-                            <th class="min-w-125px">Empaque</th>
+                            <th class="min-w-125px">Cliente</th>
                             <th class="min-w-125px">Nombre Corto</th>
                             <th class="min-w-125px">Destinatario</th>
                             <th class="min-w-125px">Domicilio</th>
@@ -117,10 +117,6 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-md-4 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Colonia</label>
-                                        <input type="text" class="form-control" placeholder="Ingresa la colonia" name="colonia" id="colonia" autocomplete="off" />
-                                    </div>
-                                    <div class="col-md-4 fv-row">
                                         <label class="required fs-6 fw-bold form-label mb-2">Número</label>
                                         <div class="row fv-row fv-plugins-icon-container">
                                             <div class="col-6">
@@ -131,6 +127,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-4 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Colonia</label>
+                                        <input type="text" class="form-control" placeholder="Ingresa la colonia" name="colonia" id="colonia" autocomplete="off" />
+                                    </div>
                                     <div class="col-md-4 fv-row fv-plugins-icon-container">
                                         <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                             <span class="required">Código Postal</span>
@@ -138,6 +138,38 @@
                                         <div class="position-relative">
                                             <input type="text" class="form-control" minlength="3" maxlength="6" placeholder="Código Postal" id="cp" name="cp" autocomplete="off">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">País</label>
+                                        <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_destinatario" data-placeholder="Selecciona un pais" data-allow-clear="true">
+                                            <option value=""></option>
+                                            @foreach($paises as $pais)
+                                                <option value="{{$pais->id}}">{{$pais->nombre}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Estado</label>
+                                        <select id="estado_id" name="estado_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_destinatario" data-placeholder="Selecciona un pais" data-allow-clear="true">
+                                            <option value=""></option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-bold mb-2">Municipio</label>
+                                        <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_destinatario" data-placeholder="Selecciona un pais" data-allow-clear="true">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <label class="fs-6 fw-bold mb-2">Localidad</label>
+                                        <select id="localidad_id" name="localidad_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_destinatario" data-placeholder="Selecciona un pais" data-allow-clear="true">
+                                            <option value=""></option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
