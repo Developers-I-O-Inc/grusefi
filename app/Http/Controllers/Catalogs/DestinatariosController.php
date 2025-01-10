@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catalogs\Destinatarios;
 use App\Models\Catalogs\Empaques;
+use App\Models\Catalogs\Paises;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
@@ -74,8 +75,8 @@ class DestinatariosController extends Controller
         }
 
         $empaques = Empaques::all();
-
-        return view('catalogs/destinatarios', compact('empaques'));
+        $paises = Paises::where('activo', 1)->get();
+        return view('catalogs/destinatarios', compact('empaques', 'paises'));
 
     }
     /**
@@ -88,6 +89,12 @@ class DestinatariosController extends Controller
             'nombre',
             'nombre_corto',
             'domicilio',
+            'colonia',
+            'num_ext',
+            'num_int',
+            'cp',
+            'localidad_id',
+            'municipio_id',
             'telefonos',
             'correos',
             'activo'
@@ -105,7 +112,7 @@ class DestinatariosController extends Controller
      */
     public function edit(string $id)
     {
-        $destinatario=Destinatarios::find($id);
+        $destinatario=Destinatarios::get_destinatario($id);
 
         return response()->json(['destinatario'=>$destinatario]);
     }

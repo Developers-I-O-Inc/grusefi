@@ -117,11 +117,6 @@ var KTestadoesList = (function () {
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
                         }),
-                        icon: new FormValidation.plugins.Icon({
-                            valid: 'fa fa-check',
-                            invalid: 'fa fa-times',
-                            validating: 'fa fa-refresh',
-                        }),
                     },
                 })),
                 (n = document.querySelector("#kt_estados_table")) &&

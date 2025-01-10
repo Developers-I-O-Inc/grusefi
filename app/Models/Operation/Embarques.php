@@ -45,11 +45,17 @@ class Embarques extends Model
             op_embarques.created_at as fecha_embarque,
             empaques.nombre_fiscal,
             CONCAT_WS(', ',
-                empaques.domicilio_fiscal,
-                empaques.num_ext,
-                empaques.num_int,
+                CONCAT_WS(' ',
+                    empaques.domicilio_fiscal,
+                    CONCAT('#', empaques.num_ext),
+                    IF(empaques.num_int IS NOT NULL AND empaques.num_int != '', CONCAT('INT.', empaques.num_int), NULL)
+                ),
+                empaques.colonia,
+                CONCAT('CP.', empaques.cp),
+                cat_localidades.nombre,
                 cat_municipios.nombre,
-                cat_localidades.nombre
+                cat_estados.nombre,
+                'MÉXICO'
             ) AS domicilio_empaque,
             cat_destinatarios.nombre AS destinatario,
             cat_destinatarios.domicilio AS destinatario_domicilio,
@@ -68,6 +74,7 @@ class Embarques extends Model
             LEFT JOIN cat_empaques AS empaques ON op_embarques.empaque_id = empaques.id
             LEFT JOIN cat_localidades ON empaques.localidad_id = cat_localidades.id
             LEFT JOIN cat_municipios ON cat_localidades.municipio_id = cat_municipios.id
+            LEFT JOIN cat_estados ON cat_municipios.estado_id = cat_estados.id
             LEFT JOIN cat_municipios AS mo ON op_embarques.lugar_id = mo.id
             LEFT JOIN cat_estados AS eo ON mo.estado_id = eo.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id

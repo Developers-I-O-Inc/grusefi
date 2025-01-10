@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
+use App\Models\Catalogs\Destinatarios;
 use App\Models\Catalogs\Paises;
 use App\Models\Catalogs\Variedades;
 use App\Models\Catalogs\Vigencias;
@@ -92,6 +93,7 @@ class PlantillasController extends Controller
     public function imprimir_dictamen_embarque_rpv($embarque_id)
     {
         $embarque = Embarques::get_embarque($embarque_id);
+        $domicilio_destinatario = Destinatarios::get_destinatario_address($embarque_id);
         $plantilla = EmbarquesRPV::where('embarque_id', $embarque_id)->first();
         $embarques_standards = EmbarquesStandards::get_standards_embarque($embarque_id);
         $count_productos = EmbarquesProductos::select('presentacion_id')->where('embarque_id', $embarque_id)->groupBy('presentacion_id')->get()->count();
@@ -103,7 +105,7 @@ class PlantillasController extends Controller
         $marcas = EmbarquesProductos::get_only_embarque_marcas($embarque_id);
         $vigencias = Vigencias::where('activo', 1)->first();
         $pdf = PDF::loadView('operation/reports/dicatamen_embarque', compact("plantilla", "embarque", "embarques_standards", "count_productos", "embarques_productos",
-            "presentations", 'procedencia', 'standards', 'quantities', 'marcas', 'vigencias'));
+            "presentations", 'procedencia', 'standards', 'quantities', 'marcas', 'vigencias', 'domicilio_destinatario'));
         return $pdf->stream('embarque.pdf');
     }
 
