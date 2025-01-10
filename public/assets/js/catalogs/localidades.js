@@ -28,7 +28,8 @@ var KTlocalidadesList = (function () {
         select_estado,
         select_municipio,
         select_estado_2,
-        var_estado,
+        var_estado = 0,
+        var_municipio = 0,
         n,
         edit = () => {
             n.querySelectorAll(
@@ -49,14 +50,17 @@ var KTlocalidadesList = (function () {
                             check_active.checked = false
                             edit_active.value = 0
                         }
+                        // CHANGE ESTADO
                         $("#pais_id").val(data.localidad[0].pais_id).trigger("change.select2")
+                        var_estado = data.localidad[0].estado_id
                         select_pais.trigger('change');
-                        select_estado_2.setAttribute('data-id', data.localidad[0].estado_id)
+                        // CHANGE MUNICIPIO
                         $("#estado_id").val(data.localidad[0].estado_id).trigger("change.select2")
-                        var_estado= data.localidad[0].estado_id
+                        console.log("el valor es", select_estado.val())
+                        var_municipio = data.localidad[0].municipio_id
                         select_estado.trigger('change');
-                        select_municipio.setAttribute('data-id', data.localidad[0].municipio_id)
-
+                        var_estado = 0
+                        var_municipio = 0
                         modal.show()
                     })
                 })
@@ -71,10 +75,8 @@ var KTlocalidadesList = (function () {
                 // inicialize elements html
                 (select_pais = $('#pais_id').select2()),
                 (select_estado = $('#estado_id').select2()),
-                (select_estado_2 = document.querySelector("#estado_id")),
-                (select_municipio = document.querySelector("#municipio_id")),
+                (select_municipio = $('#municipio_id').select2()),
                 (btn_add = document.querySelector("#btn_add")),
-                // (select_estado = document.querySelector("#estado_id")),
                 (form = document.querySelector("#kt_modal_add_localidad_form")),
                 (btn_modal = form.querySelector("#kt_modal_add_localidad_close")),
                 (btn_submit = form.querySelector("#kt_modal_add_localidad_submit")),
@@ -146,11 +148,6 @@ var KTlocalidadesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                        }),
-                        icon: new FormValidation.plugins.Icon({
-                            valid: 'fa fa-check',
-                            invalid: 'fa fa-times',
-                            validating: 'fa fa-refresh',
                         }),
                     },
                 })),
@@ -225,19 +222,18 @@ var KTlocalidadesList = (function () {
                     validations.revalidateField('pais_id')
                     validations.disableValidator('estado_id')
                     validations.disableValidator('municipio_id')
-                    const select_estado2 = $('#estado_id').select2()
-                    Catalogs.get_next_selects(catalog_fat, select_pais.val(), catalog_item, select_estado2)
+                    Catalogs.get_next_selects(catalog_fat, select_pais.val(), select_estado, var_estado)
                 })
                 select_estado.on('change', function() {
-                    const select_estado2 = $('#municipio_id').select2()
                     let estado_id_changue
-                    if (typeof var_estado === "undefined") {
+                    if (var_estado == 0) {
                         estado_id_changue = select_estado.val()
-                      }
+                    }
                     else{
+                        console.log("el valor es", var_estado)
                         estado_id_changue = var_estado
                     }
-                    Catalogs.get_next_selects(catalog_fat2, estado_id_changue, catalog_item, select_estado2)
+                    Catalogs.get_next_selects("municipios", estado_id_changue, select_municipio, var_municipio)
                 })
                 // SUBMIT
                 btn_submit.addEventListener("click", function (e) {
