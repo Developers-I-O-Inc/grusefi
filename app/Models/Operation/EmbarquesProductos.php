@@ -72,7 +72,7 @@ class EmbarquesProductos extends Model
             LEFT JOIN cat_variedades ON op_embarques_productos.variedad_id = cat_variedades.id
             LEFT JOIN cat_presentaciones ON op_embarques_productos.presentacion_id = cat_presentaciones.id
             WHERE embarque_id = $embarque_id
-            GROUP BY variedad, peso, presentacion_id");
+            GROUP BY variedad, peso, presentacion_id, presentacion, plural");
     }
 
     public function calibre(){
