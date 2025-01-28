@@ -5,6 +5,50 @@ var KTadminlist = (function () {
     const token = $('meta[name="csrf-token"]').attr('content')
     let blockUI, target
     let embarque_id = 0
+    const exportButtons = () => {
+        const documentTitle = 'Embarques';
+        var buttons = new $.fn.dataTable.Buttons(table_items, {
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    title: documentTitle
+                },
+                {
+                    extend: 'excelHtml5',
+                    title: documentTitle
+                },
+                {
+                    extend: 'csvHtml5',
+                    title: documentTitle
+                },
+                {
+                    extend: 'pdfHtml5',
+                    title: documentTitle
+                }
+            ]
+        }).container().appendTo($('#kt_datatable_example_buttons'));
+
+        // Hook dropdown menu click event to datatable export buttons
+        const exportButtons = document.querySelectorAll('#kt_datatable_example_export_menu [data-kt-export]');
+        exportButtons.forEach(exportButton => {
+            exportButton.addEventListener('click', e => {
+                e.preventDefault();
+
+                // Get clicked export value
+                const exportValue = e.target.getAttribute('data-kt-export');
+                const target = document.querySelector('.dt-buttons .buttons-' + exportValue);
+
+                // Trigger click event on hidden datatable export buttons
+                target.click();
+            });
+        });
+    }
+    const handleSearchDatatable = () => {
+        const filterSearch = document.querySelector('[data-kt-filter="search"]');
+        filterSearch.addEventListener('keyup', function (e) {
+            table_items.search(e.target.value).draw();
+        });
+    }
     var table_items,
         edit_folio,
         btn_search,
@@ -89,7 +133,7 @@ var KTadminlist = (function () {
             })
             Swal.fire({
                 title: "<strong>Cargando</strong>",
-                html: `<div class="progress container-fluid"></div>`,
+                html: `<span class='loader'></span>`,
                 showConfirmButton: false,
             })
         },
@@ -163,7 +207,7 @@ var KTadminlist = (function () {
             // Mensaje de carga mientras se procesa la solicitud
             Swal.fire({
                 title: "<strong>Cargando</strong>",
-                html: `<div class="progress container-fluid"></div>`,
+                html: `<span class='loader'></span>`,
                 showConfirmButton: false,
             });
         },
@@ -264,6 +308,7 @@ var KTadminlist = (function () {
                 })
             })
         }
+
         return {
             init: function () {
                 (target = document.querySelector("#kt_block_ui_1_target")),
@@ -307,13 +352,6 @@ var KTadminlist = (function () {
                         },
                         serverSide: true,
                         processing: true,
-                        dom: 'Bfrtip',
-                        buttons: [
-                            {
-                                extend: 'excelHtml5',
-                                title: 'Cost Balers Data',
-                            }
-                        ],
                         columns: [
                             { data: "id", name: "id" },
                             { data: "folio_embarque", name: "folio_embarque" },
@@ -325,16 +363,18 @@ var KTadminlist = (function () {
 
                         ],
                         language: {
-                            search:"Buscar",
-                            zeroRecords: "No hay datos que mostrar",
+                            zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
+                            "<span>No hay datos que mostrar</span></div></div>",
                             info: "Mostrando página _PAGE_ de _PAGES_",
                             infoEmpty: "No hay información",
                             infoFiltered: "(Filtrando _MAX_ registros)",
-                            processing:
-                                `<span class="loader"></span>`
+                            processing: "<span class='loader'></span>",
+                        },
+                        drawCallback: function() {
+                            $('[data-bs-toggle="tooltip"]').tooltip()
                         },
                     }).on("draw", function () {
-                        edit(), upload(), print()
+                        edit(), upload(), print(), exportButtons(),handleSearchDatatable()
                     })
                 )
                 ),
@@ -350,12 +390,9 @@ var KTadminlist = (function () {
                         zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
                         "<span>No hay datos que mostrar</span></div></div>",
                         info: "Mostrando página _PAGE_ de _PAGES_",
-                        infoEmpty: "<div class='container-fluid'>No hay Información</div>",
+                        infoEmpty: "No hay información",
                         infoFiltered: "(Filtrando _MAX_ registros)",
-                        processing:
-                            "<span class='fa-stack fa-lg'>\n\
-                            <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
-                        </span>&emsp;Processing Message here...",
+                        processing: "<span class='loader'></span>",
                     },
                 })),
                  // TABLE standards
@@ -397,13 +434,8 @@ var KTadminlist = (function () {
                     .then(data => {
                         table_products.clear().draw();
                         data.forEach(item => {
-                            table_products.row.add([`<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 delete_product"
-                                data-kt-customer-table-filter="delete_row">
-                                <span class="svg-icon svg-icon-muted svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
-                                    <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
-                                    <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
-                                    </svg></span>
+                            table_products.row.add([`<button data-id="${item.id}" type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_product" data-kt-customer-table-filter="delete_row">
+                                <i class="ki-outline ki-trash text-danger fs-2"></i>
                                 </button>`,
                                 item.folio_pallet,
                                 item.lote,
@@ -441,14 +473,9 @@ var KTadminlist = (function () {
                     .then(data => {
                         table_standards.clear().draw();
                         data.forEach(item => {
-                            table_standards.row.add([item.id, item.name, `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 delete_standard"
-                                data-kt-customer-table-filter="delete_row">
-                                <span class="svg-icon svg-icon-muted svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
-                                    <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
-                                    <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
-                                    </svg></span>
-                                </button>`]).draw()
+                            table_standards.row.add([item.id, item.name, `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_standard" data-kt-customer-table-filter="delete_row">
+                    <i class="ki-outline ki-trash text-danger fs-2"></i>
+                    </button>`]).draw()
                         })
                         modal_standards.show()
                     })
@@ -494,13 +521,9 @@ var KTadminlist = (function () {
                                 icon: "warning"
                               });
                         }else{
-                            table_standards.row.add([select_standard.val(), select_standard.find('option:selected').text(),  `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 delete_standard">
-                                <span class="svg-icon svg-icon-muted svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
-                                    <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
-                                    <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
-                                    </svg></span>
-                                </button>`]).draw();
+                            table_standards.row.add([select_standard.val(), select_standard.find('option:selected').text(),  `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_standard" data-kt-customer-table-filter="delete_row">
+                    <i class="ki-outline ki-trash text-danger fs-2"></i>
+                    </button>`]).draw();
                         }
                     }
                     else{
@@ -511,8 +534,8 @@ var KTadminlist = (function () {
                           });
                     }
                 })
-                 // SAVE standardS
-                 btn_save_standards.addEventListener("click", function (t) {
+                // SAVE standardS
+                btn_save_standards.addEventListener("click", function (t) {
                     t.preventDefault();
                     let standards = [];
                     table_standards.rows().data().each(function (value) {
@@ -521,7 +544,7 @@ var KTadminlist = (function () {
                             standard: value[1]
                         });
                     });
-
+                    console.log(standards)
                     fetch(`save_standards_embarques`, {
                         method: "POST",
                         headers: {
@@ -564,16 +587,21 @@ var KTadminlist = (function () {
                     },
                 })
                 $('#kt_products_table tbody').on('click', '.delete_product', function() {
-                    var row = $(this).closest('tr')
-                    table_products.row(row).remove().draw()
-                    toastr.success("Eliminado correctamente")
+                    const id = $(this).data("id")
+                    if(Operation.delete_product(id, "product")){
+                        var row = $(this).closest('tr')
+                        table_products.row(row).remove().draw()
+                        toastr.success("Eliminado correctamente")
+                    }
+                    else{
+                        toastr.error("El producto no se puede eliminar")
+                    }
                 });
                 $('#kt_standards_table tbody').on('click', '.delete_standard', function() {
                     var row = $(this).closest('tr')
                     table_standards.row(row).remove().draw()
                     toastr.success("Eliminado correctamente")
                 });
-
                 blockUI.block()
             },
 

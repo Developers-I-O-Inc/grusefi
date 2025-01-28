@@ -1,7 +1,5 @@
-@extends('layouts/app2')
+@extends('metronic.index')
 @section('styles')
-    <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
     <style>
         table {
             table-layout: fixed !important;
@@ -297,13 +295,13 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-1 offset-3 fv-row px-14">
-                            <a type="button" class=" btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-4 me-1 d-none" id="btn_imprimir" href="/operation/imprimir_dictamen/1" target="_blank">Imprimir</a>
+                        <div class="col-md-1 offset-3 fv-row px-6">
+                            <a type="button" class=" btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-8 me-1 d-none" id="btn_imprimir" href="/operation/imprimir_dictamen/1" target="_blank">Imprimir</a>
                         </div>
                         <div class="col-md-1 fv-row px-10">
                             @can('admin_plantillas')
-                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_add">Guardar</button>
-                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_edit">Editar</button>
+                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 ms-1 d-none" id="btn_add">Guardar</button>
+                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-10 d-none" id="btn_edit">Editar</button>
                             @else
                                 <button type="button" disabled class="btn btn-secondary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_add">Guardar</button>
                                 <button type="button" disabled class="btn btn-secondary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_edit">Editar</button>
@@ -322,7 +320,7 @@
         </form>
     </div>
 @endsection
-@section('scripts')
-    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+@push('scripts')
+    <script src="{{asset('assets/js/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/operation/plantilla_rpv.js')}}" type="module"></script>
-@endsection
+@endpush

@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,16 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'Manuel',
-            // 'user_name' => 'Manuel',
             'last_name' => 'Morales',
             'address' => 'Roble 4',
             'phone' => '3411671215',
@@ -53,6 +47,15 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'admin_embarques']);
         Permission::create(['name' => 'admin_users']);
 
-
+        $this->call([
+            Paises::class,
+            Estados::class,
+            Municipios::class,
+            Presentaciones::class,
+            Standards::class,
+            TiposCultivo::class,
+            Usos::class,
+            Variedades::class,
+        ]);
     }
 }

@@ -99,7 +99,7 @@ var KTrolesList = (function () {
                         beforeSend(){
                             Swal.fire({
                                 title: "<strong>Cargando</strong>",
-                                html: `<div class="progress container-fluid"></div>`,
+                                html: `<div class="loader"></div>`,
                                 showConfirmButton: false,
                             });
                         },
@@ -176,8 +176,8 @@ var KTrolesList = (function () {
                         trigger: new FormValidation.plugins.Trigger(),
                         bootstrap: new FormValidation.plugins.Bootstrap5({
                             rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
+                            eleInvalidClass: "is-invalid",
+                            eleValidClass: "is-valid",
                         }),
                     },
                 })),
@@ -205,16 +205,15 @@ var KTrolesList = (function () {
                                 },
                             ],
                             language: {
-                                zeroRecords: "No hay datos que mostrar",
+                                zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
+                                "<span>No hay datos que mostrar</span></div></div>",
                                 info: "Mostrando página _PAGE_ de _PAGES_",
                                 infoEmpty: "No hay información",
                                 infoFiltered: "(Filtrando _MAX_ registros)",
-                                processing:
-                                    `<div id="loader">
-                                    <span class='fa-stack fa-lg'>
-                                        <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>
-                                    </span>&emsp;Loading...
-                                </div>`
+                                processing: "<span class='loader'></span>",
+                            },
+                            drawCallback: function() {
+                                $('[data-bs-toggle="tooltip"]').tooltip();
                             },
                         })).on("draw", function () {
                             delete_items(), edit(), uncheck();
@@ -279,13 +278,13 @@ var KTrolesList = (function () {
                                                 e.isConfirmed &&
                                                     (modal.hide(),
                                                     (btn_submit.disabled =
-                                                        !1), table_items.ajax.reload(), form.reset());
+                                                        !1), table_items.ajax.reload(), form.reset(), btn_add.focus());
                                             });
                                         },
                                         beforeSend(){
                                             Swal.fire({
                                                 title: "<strong>Cargando</strong>",
-                                                html: `<div class="progress container-fluid"></div>`,
+                                                html: `<div class="loader"></div>`,
                                                 showConfirmButton: false,
                                                 });
                                         },
@@ -312,7 +311,6 @@ var KTrolesList = (function () {
                     });
                 })
                 let prueba = JSON.parse(input_arr.value)
-               // Comprueba y destruye si Tagify ya existe
                 if (input_permission.tagify) {
                     input_permission.tagify.destroy();
                 }

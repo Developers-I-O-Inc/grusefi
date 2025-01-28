@@ -1,4 +1,4 @@
-@extends('layouts/app2')
+@extends('metronic.index')
 @section('title', 'Permisos')
 @section('title_top', 'Permisos')
 @section('subtitle_top', 'Control de Permisos')
@@ -82,8 +82,8 @@
                                 data-kt-scroll-wrappers="#kt_modal_add_permission_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-7">
                                     <label class="required fs-6 fw-bold mb-2">Nombre</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Ingresa un nombre" name="name" id="name" />
-                                    <input type="text" class="form-control form-control-solid d-none" name="id_rol" id="id_rol" />
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="name" id="name" />
+                                    <input type="text" class="form-control d-none" name="id_rol" id="id_rol" />
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+@push('scripts')
+    <script src="{{asset('assets/js/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/admin/permissions.js')}}" type="module"></script>
-@endsection
+@endpush

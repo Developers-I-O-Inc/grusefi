@@ -23,6 +23,7 @@ class EmbarquesStandards extends Model
             ->join('cat_standards', 'op_embarques_standards.standard_id', '=', 'cat_standards.id')
             ->select('cat_standards.id', 'cat_standards.name', 'cat_standards.description')
             ->where('op_embarques_standards.embarque_id', '=', $embarque_id)
+            ->where('op_embarques_standards.deleted_at', '=', null)
             ->get();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['can:ver_zonas']], function () {
     // PAISES
@@ -47,10 +47,10 @@ Route::group(['middleware' => ['can:ver_configuracion']], function () {
     // VARIEDADES
     Route::resource('variedades', 'VariedadesController');
     Route::post('destroy_variedades', 'VariedadesController@destroy_variedades');
-    // VIGENCIAS
+    //VIGENCIAS
     Route::resource('vigencias', 'VigenciasController');
     Route::post('destroy_vigencias', 'VigenciasController@destroy_vigencias');
-    // VARIEDADES
+    //STANDARDS
     Route::resource('standards', 'StandardsController');
     Route::post('destroy_standards', 'StandardsController@destroy_standards');
 });

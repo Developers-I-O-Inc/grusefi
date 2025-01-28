@@ -88,6 +88,7 @@ class Catalogs {
     }
 
     submit_form(catalog, datos, token, modal, tableItems, btnSubmit, form) {
+        modal.hide()
         fetch(catalog, {
             method: "POST",
             headers: {
@@ -112,14 +113,15 @@ class Catalogs {
                 },
             }).then(({ isConfirmed }) => {
                 if (isConfirmed) {
-                    modal.hide()
                     btnSubmit.disabled = false
                     tableItems.ajax.reload()
+                    // tableItems.columns.adjust().draw();
                     form.reset()
                 }
             })
         })
         .catch((error) => {
+            modal.show()
             Swal.fire({
                 icon: "error",
                 title: "Error",
@@ -131,7 +133,7 @@ class Catalogs {
 
         Swal.fire({
             title: "<strong>Cargando</strong>",
-            html: `<div class="progress container-fluid"></div>`,
+            html: `<div class="loader"></div>`,
             showConfirmButton: false,
         })
     }
@@ -177,7 +179,7 @@ class Catalogs {
         })
         Swal.fire({
             title: "<strong>Cargando</strong>",
-            html: `<div class="progress container-fluid"></div>`,
+            html: `<div class="loader"></div>`,
             showConfirmButton: false,
         })
     }

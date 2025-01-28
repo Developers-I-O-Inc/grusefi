@@ -2,7 +2,7 @@
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Models\Admin\UsersStandards;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\HomeAuth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth/login');
-})->middleware('home.auth');
+    return view('auth.login');
+})->middleware(HomeAuth::class)->name('public');
 
 Route::middleware([
     'auth:sanctum',
@@ -24,7 +24,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        $users_standards = UsersStandards::user_standards_date(auth()->user()->id);
+        $users_standards = UsersStandards::user_standards_date(Auth::user()->id);
         return view('dashboard', compact('users_standards'));
     })->name('dashboard');
 });
