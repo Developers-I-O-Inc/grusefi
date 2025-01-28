@@ -12,7 +12,6 @@ const edit = () => {
         e.addEventListener("click", function (e) {
             e.preventDefault()
             $.get("presentaciones/"+ $(this).data("id") + "/edit", function(data){
-                console.log(data)
                 edit_id.value=data.presentacion.id
                 edit_presentacion.value=data.presentacion.presentacion
                 edit_plural.value=data.presentacion.plural
@@ -56,7 +55,14 @@ export function init(){
             presentacion: {
                 validators: {
                     notEmpty: {
-                        message: "Ingrese una presentación",
+                        message: "Ingrese el nombre de la presentación",
+                    },
+                },
+            },
+            plural: {
+                validators: {
+                    notEmpty: {
+                        message: "Ingrese el nombre en plural de la presentación",
                     },
                 },
             },
@@ -65,6 +71,8 @@ export function init(){
             trigger: new FormValidation.plugins.Trigger(),
             bootstrap: new FormValidation.plugins.Bootstrap5({
                 rowSelector: ".fv-row",
+                eleInvalidClass: "is-invalid",
+                eleValidClass: "is-valid",
             }),
         },
     })
@@ -92,12 +100,15 @@ export function init(){
             },
         ],
         language: {
-            zeroRecords: "No hay datos que mostrar",
+            zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
+            "<span>No hay datos que mostrar</span></div></div>",
             info: "Mostrando página _PAGE_ de _PAGES_",
             infoEmpty: "No hay información",
             infoFiltered: "(Filtrando _MAX_ registros)",
-            processing:
-                `<span class="loader"></span>`
+            processing: "<span class='loader'></span>",
+        },
+        drawCallback: function() {
+            $('[data-bs-toggle="tooltip"]').tooltip();
         },
     }).on("draw", function () {
         Catalogs.delete_items(n, table_items, catalog, catalog_item, token), edit(), Catalogs.uncheck(n, catalog_item)
@@ -139,7 +150,7 @@ export function init(){
                         btn_submit.removeAttribute(
                             "data-kt-indicator"
                         )
-                        const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
+                        const formData = new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`))
                         Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
                         validations.resetForm(true);
 

@@ -247,7 +247,7 @@
         padding: 4px 8px;
     }
 </style>
-<div class="rounded border p-10" id="kt_block_ui_1_target">
+<div class="rounded" id="kt_block_ui_1_target">
     <table class="dxflGroup_Moderno dxflGroupSys dxflAGSys" style="border-collapse:separate;">
         <tbody>
             <tr>
@@ -335,11 +335,11 @@
                                                 <div>Productos</div>
                                                 @if($embarque)
                                                     <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" data-embarque="0" id="btn_products" >
-                                                        <span class="svg-icon svg-icon-1"><i class="bi bi-box-arrow-up-right fs-2"></i></span>
+                                                        <span class="svg-icon svg-icon-1"><i class="ki-outline ki-exit-right-corner fs-2"></i></span>
                                                         <span class="pulse-ring w-45px h-45px"></span>
                                                     </button>
                                                     <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" data-embarque="0" id="btn_import" >
-                                                        <span class="svg-icon svg-icon-1"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></span>
+                                                        <span class="svg-icon svg-icon-1"><i class="ki-outline ki-file-up fs-2"></i></span>
                                                         <span class="pulse-ring w-45px h-45px"></span>
                                                     </button>
                                                 @else
@@ -422,7 +422,7 @@
                                 <span class="text-bold m-r-sm">4 Indique la regulación o requisito que se evaluará:</span>
                                 @if($embarque)
                                     <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" id="btn_standards" data-embarque="0">
-                                        <span class="svg-icon svg-icon-1"><i class="bi bi-box-arrow-up-right fs-2"></i></span>
+                                        <span class="svg-icon svg-icon-1"><i class="ki-outline ki-exit-right-corner fs-2"></i></span>
                                         <span class="pulse-ring w-45px h-45px"></span>
                                     </button>
                                 @else

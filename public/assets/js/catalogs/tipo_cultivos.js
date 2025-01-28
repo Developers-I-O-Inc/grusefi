@@ -67,6 +67,8 @@ export function init() {
             trigger: new FormValidation.plugins.Trigger(),
             bootstrap: new FormValidation.plugins.Bootstrap5({
                 rowSelector: ".fv-row",
+                eleInvalidClass: "is-invalid",
+                eleValidClass: "is-valid",
             })
         },
     })
@@ -92,12 +94,15 @@ export function init() {
             },
         ],
         language: {
-            zeroRecords: "No hay datos que mostrar",
+            zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
+            "<span>No hay datos que mostrar</span></div></div>",
             info: "Mostrando página _PAGE_ de _PAGES_",
             infoEmpty: "No hay información",
             infoFiltered: "(Filtrando _MAX_ registros)",
-            processing:
-                `<span class="loader"></span>`
+            processing: "<span class='loader'></span>",
+        },
+        drawCallback: function() {
+            $('[data-bs-toggle="tooltip"]').tooltip();
         },
     }).on("draw", function () {
         Catalogs.delete_items(n, table_items, catalog, catalog_item, token), edit(), Catalogs.uncheck(n, catalog_item)

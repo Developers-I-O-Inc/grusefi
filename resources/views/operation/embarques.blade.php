@@ -1,8 +1,4 @@
-@extends('layouts/app2')
-@section('styles')
-    <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
-@endsection
+@extends('metronic.index')
 @section('title', 'Embarques')
 @section('title_top', 'Embarques')
 @section('embarques', 'active')
@@ -10,13 +6,13 @@
 @section('content')
     <div id="kt_content_container bg-light-primary" class="container-xxl">
         <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid" id="stepper_embarques">
-            <div class="d-flex justify-content-center bg-body rounded justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px me-9">
+            <div class="d-flex justify-content-center bg-body rounded justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px me-9 shadow-sm">
                 <div class="px-6 px-lg-10 px-xxl-15 py-10">
                     <div class="stepper-nav">
                         <div class="stepper-item current" data-kt-stepper-element="nav">
                             <div class="stepper-line w-40px"></div>
                             <div class="stepper-icon w-40px h-40px">
-                                <i class="stepper-check fas fa-check"></i>
+                                <i class="stepper-check ki-outline ki-double-check fs-2x"></i>
                                 <span class="stepper-number">1</span>
                             </div>
                             <div class="stepper-label">
@@ -27,7 +23,7 @@
                         <div class="stepper-item" data-kt-stepper-element="nav">
                             <div class="stepper-line w-40px"></div>
                             <div class="stepper-icon w-40px h-40px">
-                                <i class="stepper-check fas fa-check"></i>
+                                <i class="stepper-check ki-outline ki-double-check fs-2x"></i>
                                 <span class="stepper-number">2</span>
                             </div>
                             <div class="stepper-label">
@@ -38,7 +34,7 @@
                         <div class="stepper-item" data-kt-stepper-element="nav">
                             <div class="stepper-line w-40px"></div>
                             <div class="stepper-icon w-40px h-40px">
-                                <i class="stepper-check fas fa-check"></i>
+                                <i class="stepper-check ki-outline ki-double-check fs-2x"></i>
                                 <span class="stepper-number">3</span>
                             </div>
                             <div class="stepper-label">
@@ -49,7 +45,7 @@
                         <div class="stepper-item" data-kt-stepper-element="nav">
                             <div class="stepper-line w-40px"></div>
                             <div class="stepper-icon w-40px h-40px">
-                                <i class="stepper-check fas fa-check"></i>
+                                <i class="stepper-check ki-outline ki-double-check fs-2x"></i>
                                 <span class="stepper-number">4</span>
                             </div>
                             <div class="stepper-label">
@@ -60,7 +56,7 @@
                         <div class="stepper-item" data-kt-stepper-element="nav">
                             <div class="stepper-line w-40px"></div>
                             <div class="stepper-icon w-40px h-40px">
-                                <i class="stepper-check fas fa-check"></i>
+                                <i class="stepper-check ki-outline ki-double-check fs-2x"></i>
                                 <span class="stepper-number">5</span>
                             </div>
                             <div class="stepper-label">
@@ -71,7 +67,7 @@
                         <div class="stepper-item" data-kt-stepper-element="nav">
                             <div class="stepper-line w-40px"></div>
                             <div class="stepper-icon w-40px h-40px">
-                                <i class="stepper-check fas fa-check"></i>
+                                <i class="stepper-check ki-outline ki-double-check fs-2x"></i>
                                 <span class="stepper-number">6</span>
                             </div>
                             <div class="stepper-tittle">
@@ -81,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-row-fluid flex-center bg-body rounded">
+            <div class="d-flex flex-row-fluid flex-center bg-body rounded shadow-sm">
                 <form class="py-20 w-100 w-xl-900px px-9" novalidate="novalidate" id="form_embarques">
                     <div data-kt-stepper-element="content" class="current">
                         <div class="w-100">
@@ -217,19 +213,14 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <button class="btn btn-flex btn-light-primary" id="btn_add_standard">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                        </svg>
+                                    <button class="btn btn-flex btn-light-success" id="btn_add_standard">
+                                        <i class="ki-outline ki-plus fs-2"></i>
                                         </span>Agregar
                                     </button>
                                 </div>
                             </div>
                             <div class="row mb-12">
-                                <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-7 gs-7" id="kt_standards_table">
+                                <table class="table table-row-bordered gy-5" id="kt_standards_table">
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <th class="">id</th>
@@ -250,19 +241,14 @@
                                     </select>
                                 </div>
                                 <div class="col-3">
-                                    <button class="btn btn-flex btn-light-primary" id="btn_add_maquilador">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                        </svg>
+                                    <button class="btn btn-flex btn-light-success" id="btn_add_maquilador">
+                                       <i class="ki-outline ki-plus fs-2"></i>
                                         </span>Agregar
                                     </button>
                                 </div>
                             </div>
                             <div class="row mb-12">
-                                <table class="table table-row-dashed fs-6 gy-5 table-row-gray-300" id="kt_maquiladores_table">
+                                <table class="table table-row-bordered gy-5" id="kt_maquiladores_table">
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <th class="">id</th>
@@ -283,13 +269,8 @@
                                 <div class="col-md-6 fv-row d-none">
                                     <input class="form-control" placeholder="Seleccione Fecha" id="edit_products" name="edit_products"/>
                                 </div>
-                                <button class="btn btn-flex btn-light-primary" id="btn_add_products">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                    </svg>
+                                <button class="btn btn-flex btn-light-success" id="btn_add_products">
+                                    <i class="ki-outline ki-plus fs-2"></i>
                                     </span>Agregar Productos
                                 </button>
                                 <div class="form-check form-switch form-check-custom form-check-solid mt-5">
@@ -341,7 +322,7 @@
                             <div class="row mb-12">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Empresa Transportista</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa el nombre de la empresa trasnportista" name="empresa_transporte" id="empresa_transporte" />
+                                    <input type="text" class="form-control" placeholder="Ingresa el nombre de la empresa transportista" name="empresa_transporte" id="empresa_transporte" />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Nombre del chofer</label>
@@ -358,23 +339,19 @@
                             </div>
                             <div class="mb-0">
                                 <div class="fs-6 text-gray-600 mb-5">Alguna Información del embarque se genera directamente en la plantilla por país, si desea cambiar algún dato.
-                                    <a href="../../demo6/dist/authentication/sign-in/basic.html" class="link-primary fw-bolder">ingresa aquí</a>
+                                    <a href="{{route('plantillas_rpv')}}" class="link-success fw-bolder">ingresa aquí</a>
                                 </div>
                                 <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
                                     <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
-                                            <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black" />
-                                            <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black" />
-                                        </svg>
+                                        <i class="ki-outline ki-information-5 fs-2qx text-warning"></i>
                                     </span>
                                     <div class="d-flex flex-stack flex-grow-1">
                                         <div class="fw-bold">
                                             <h4 class="text-gray-900 fw-bolder">Notificaciones!</h4>
                                             <div class="fs-6 text-gray-700">Si desea imprimir el formato para vizualizarlo
-                                            <a href="#" class="fw-bolder" id="link_dictamen" target="_blank">presione aquí</a></div>
+                                            <a href="#" class="fw-bolder link-success" id="link_dictamen" target="_blank">presione aquí</a></div>
                                             <div class="fs-6 text-gray-700">O si desea generar o editar el RPV
-                                            <a href="#" class="fw-bolder" id="link_consulta">presione aquí</a></div>
+                                            <a href="#" class="fw-bolder link-success" id="link_consulta">presione aquí</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -385,31 +362,18 @@
                         <div class="mr-2">
                             <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
                             <span class="svg-icon svg-icon-4 me-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="black" />
-                                    <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="black" />
-                                </svg>
+                                <i class="ki-outline ki-double-left fs-1"></i>
                             </span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
                                 <span class="indicator-label">Guardar
-                                <span class="svg-icon svg-icon-3 ms-2 me-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
-                                        <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="black" />
-                                    </svg>
-                                </span>
+                                <i class="ki-outline ki-double-right fs-1"></i>
                                 <span class="indicator-progress">Espera...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                             </button>
                             <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continuar
-                            <span class="svg-icon svg-icon-4 ms-1 me-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
-                                    <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="black" />
-                                </svg>
-                            </span>
+                            <i class="ki-outline ki-double-right fs-1"></i>
                         </div>
                     </div>
                 </form>
@@ -438,64 +402,6 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_product_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_product_scroll" data-kt-scroll-offset="300px">
-                                {{-- <div class="row mb-5">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Variedad</label>
-                                        <select id="select_marca" name="select_marca" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-5">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Folio Pallet</label>
-                                        <input type="text" class="form-control" placeholder="Ingresa el folio del pallet" name="folio_pallet" id="folio_pallet" />
-                                    </div>
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Lote</label>
-                                        <input type="text" class="form-control" placeholder="Ingresa el n° de lote" name="lote" id="lote" />
-                                    </div>
-                                </div>
-                                <div class="row mb-5">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">SADER</label>
-                                        <input type="text" class="form-control" placeholder="Ingresa el codigo SADER" name="sader" id="sader" />
-                                    </div>
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Cartilla</label>
-                                        <input type="text" class="form-control" placeholder="Ingresa el n° de registros" name="cartilla" id="cartilla" />
-                                    </div>
-                                </div>
-                                <div class="row mb-5">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Variedad</label>
-                                        <select id="variedad_product_id" name="variedad_product_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
-                                            <option></option>
-                                            @foreach($variedades as $variedad)
-                                                <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Presentación</label>
-                                        <select id="presentacion_id" name="presentacion_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una presentación" data-allow-clear="true">
-                                            <option></option>
-                                            @foreach($presentaciones as $presentacion)
-                                                <option value="{{$presentacion->id}}">{{$presentacion->presentacion}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-5">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Peso</label>
-                                        <input type="number" class="form-control" placeholder="Ingresa el peso" name="peso" id="peso" />
-                                    </div>
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Cantidad</label>
-                                        <input type="number" class="form-control" placeholder="Ingresa la cantidad" name="cantidad" id="cantidad" />
-                                    </div>
-                                </div> --}}
                                 <x-fields_products :variedades="$variedades" :presentaciones="$presentaciones"/>
                             </div>
                         </div>
@@ -514,7 +420,7 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+@push('scripts')
+    <script src="{{asset('assets/js/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/operation/embarques.js')}}" type="module"></script>
-@endsection
+@endpush

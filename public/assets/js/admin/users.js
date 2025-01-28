@@ -183,12 +183,8 @@ const edit = () => {
                 },
                 success: function (result) {
                     $.each(result.user, function(index){
-                        table_permissions.row.add([result.user[index], `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" data-kt-customer-table-filter="delete_row">
-                        <span class="svg-icon svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
-                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
-                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
-                        </svg></span>
+                        table_permissions.row.add([result.user[index], `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0" data-kt-customer-table-filter="delete_row">
+                        <i class="ki-outline ki-trash text-danger fs-2"></i>
                     </button>`]).draw()
                     })
                     delete_permission()
@@ -198,7 +194,7 @@ const edit = () => {
                 beforeSend(){
                     Swal.fire({
                         title: "<strong>Cargando</strong>",
-                        html: `<div class="progress container-fluid"></div>`,
+                        html: `<span class='loader'></span>`,
                         showConfirmButton: false,
                         })
                 },
@@ -234,12 +230,8 @@ const edit = () => {
                 },
                 success: function (result) {
                     $.each(result.user, function(index){
-                        table_countries.row.add([result.user[index].estado_id, result.user[index].nombre, `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" data-kt-customer-table-filter="delete_country">
-                        <span class="svg-icon svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
-                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
-                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
-                        </svg></span>
+                        table_countries.row.add([result.user[index].estado_id, result.user[index].nombre, `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0" data-kt-customer-table-filter="delete_country">
+                        <i class="ki-outline ki-trash text-danger fs-2"></i>
                     </button>`]).draw()
                     })
                     Swal.close()
@@ -248,7 +240,7 @@ const edit = () => {
                 beforeSend(){
                     Swal.fire({
                         title: "<strong>Cargando</strong>",
-                        html: `<div class="progress container-fluid"></div>`,
+                        html: `<span class='loader'></span>`,
                         showConfirmButton: false,
                         })
                 },
@@ -284,12 +276,8 @@ const edit = () => {
                 },
                 success: function (result) {
                     $.each(result.user, function(index){
-                        table_standards.row.add([result.user[index].standard_id, result.user[index].name, result.user[index].validity, `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" data-kt-standard-table-filter="delete_standard">
-                        <span class="svg-icon svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
-                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
-                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
-                        </svg></span>
+                        table_standards.row.add([result.user[index].standard_id, result.user[index].name, result.user[index].validity, `<button type="button" class="btn btn-active-light-success btn-sm me-0 ms-0" data-kt-standard-table-filter="delete_standard">
+                        <i class="ki-outline ki-trash text-danger fs-2"></i>
                     </button>`]).draw()
                     })
                     Swal.close()
@@ -298,7 +286,7 @@ const edit = () => {
                 beforeSend(){
                     Swal.fire({
                         title: "<strong>Cargando</strong>",
-                        html: `<div class="progress container-fluid"></div>`,
+                        html: `<span class='loader'></span>`,
                         showConfirmButton: false,
                         })
                 },
@@ -374,7 +362,7 @@ const delete_items = () => {
                 beforeSend(){
                     Swal.fire({
                         title: "<strong>Cargando</strong>",
-                        html: `<div class="progress container-fluid"></div>`,
+                        html: `<span class='loader'></span>`,
                         showConfirmButton: false,
                     })
                 },
@@ -429,6 +417,7 @@ let table_items,
         table_countries,
         table_standards,
         btn_modal,
+        btn_add_user,
         btn_cancel,
         btn_submit,
         btn_add_permission,
@@ -477,6 +466,7 @@ export function init() {
     modal_standards = new bootstrap.Modal(document.querySelector("#kt_modal_standards"))
     // inicialize elements html
     btn_add_permission = document.querySelector("#btn_add_permission")
+    btn_add_user = document.querySelector("#btn_add_user")
     btn_add_standard = document.querySelector("#btn_add_standard")
     btn_add_country = document.querySelector("#btn_add_country")
     btn_save_permissions = document.querySelector("#btn_save_permissions")
@@ -537,11 +527,8 @@ export function init() {
             trigger: new FormValidation.plugins.Trigger(),
             bootstrap: new FormValidation.plugins.Bootstrap5({
                 rowSelector: ".fv-row",
-            }),
-            icon: new FormValidation.plugins.Icon({
-                valid: 'fa fa-check',
-                invalid: 'fa fa-times',
-                validating: 'fa fa-refresh',
+                eleInvalidClass: "is-invalid",
+                eleValidClass: "is-valid",
             }),
         },
     })
@@ -575,10 +562,7 @@ export function init() {
             info: "Mostrando página _PAGE_ de _PAGES_",
             infoEmpty: "No hay información",
             infoFiltered: "(Filtrando _MAX_ registros)",
-            processing:
-                "<span class='fa-stack fa-lg'>\n\
-                <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
-            </span>&emspProcessing Message here...",
+            processing: "<span class='loader'></span>",
         },
         drawCallback: function() {
             $('[data-bs-toggle="tooltip"]').tooltip();
@@ -650,6 +634,12 @@ export function init() {
         delete_standard()
     })
     // CLOSE MODAL
+    btn_add_user.addEventListener("click", function (t) {
+        t.preventDefault()
+        form.reset()
+        modal.show()
+    })
+    // CLOSE MODAL
     btn_modal.addEventListener("click", function (t) {
         t.preventDefault(), modal.hide()
     })
@@ -675,12 +665,8 @@ export function init() {
                     icon: "warning"
                     })
             }else{
-                table_permissions.row.add([select_permission.value, `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" data-kt-customer-table-filter="delete_row">
-                    <span class="svg-icon svg-icon-muted svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
-                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
-                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
-                        </svg></span>
+                table_permissions.row.add([select_permission.value, `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0" data-kt-customer-table-filter="delete_row">
+                    <i class="ki-outline ki-trash text-danger fs-2"></i>
                     </button>`]).draw()
             }
         }
@@ -689,7 +675,7 @@ export function init() {
                 title: "Advertencia!",
                 text: "Seleccione un permiso!",
                 icon: "warning"
-                })
+            })
         }
 
     })
@@ -711,12 +697,8 @@ export function init() {
                     icon: "info"
                     })
             }else{
-                table_standards.row.add([select_standard.value , $("#select_standard option:selected").text(), edit_validity.value ,`<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" data-kt-standard-table-filter="delete_standard">
-                    <span class="svg-icon svg-icon-muted svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
-                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
-                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
-                        </svg></span>
+                table_standards.row.add([select_standard.value , $("#select_standard option:selected").text(), edit_validity.value ,`<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0" data-kt-standard-table-filter="delete_standard">
+                       <i class="ki-outline ki-trash text-danger fs-2"></i>
                     </button>`]).draw()
             }
         }
@@ -747,12 +729,8 @@ export function init() {
                     icon: "warning"
                     })
             }else{
-                table_countries.row.add([select_country.value, $("#select_country option:selected").text(), `<button type="button" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" data-kt-customer-table-filter="delete_country">
-                    <span class="svg-icon svg-icon-muted svg-icon-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
-                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
-                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
-                        </svg></span>
+                table_countries.row.add([select_country.value, $("#select_country option:selected").text(), `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0" data-kt-customer-table-filter="delete_country">
+                    <i class="ki-outline ki-trash text-danger fs-2"></i>
                     </button>`]).draw()
             }
         }
@@ -925,7 +903,7 @@ export function init() {
                             beforeSend(){
                                 Swal.fire({
                                     title: "<strong>Cargando</strong>",
-                                    html: `<div class="progress container-fluid"></div>`,
+                                    html: `<span class='loader'></span>`,
                                     showConfirmButton: false,
                                     })
                             },

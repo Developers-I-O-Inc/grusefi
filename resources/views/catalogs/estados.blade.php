@@ -1,15 +1,11 @@
-@extends('layouts/app2')
-@section('styles')
-    <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
-@endsection
+@extends('metronic.index')
 @section('title', 'Estados')
 @section('title_top', 'Estados')
 @section('zones', 'active')
 @section('subtitle_top', 'Control de Estados')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
-        <div class="card">
+        <div class="card shadow-sm">
             <div class="card-header border-0 pt-6">
                 <div class="card-title">
                     <div class="d-flex align-items-center position-relative my-1">
@@ -142,7 +138,7 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+@push('scripts')
+    <script src="{{asset('assets/js/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/catalogs/estados.js')}}" type="module"></script>
-@endsection
+@endpush
