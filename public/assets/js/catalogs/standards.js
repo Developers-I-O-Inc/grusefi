@@ -70,19 +70,15 @@ export function init() {
             trigger: new FormValidation.plugins.Trigger(),
             bootstrap: new FormValidation.plugins.Bootstrap5({
                 rowSelector: ".fv-row",
-            }),
-            icon: new FormValidation.plugins.Icon({
-                valid: 'fa fa-check',
-                invalid: 'fa fa-times',
-                validating: 'fa fa-refresh',
-            }),
+                eleInvalidClass: "is-invalid",
+                eleValidClass: "is-valid",
+            })
         },
     })
 
     n = document.querySelector("#kt_standards_table")
     table_items = $(n).DataTable({
         ajax: "standards",
-        serverSide: true,
         processing: true,
         columns: [
             { data: "check", name: "check" },
@@ -102,15 +98,17 @@ export function init() {
             },
         ],
         language: {
-            zeroRecords: "No hay datos que mostrar",
+            zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
+            "<span>No hay datos que mostrar</span></div></div>",
             info: "Mostrando página _PAGE_ de _PAGES_",
             infoEmpty: "No hay información",
             infoFiltered: "(Filtrando _MAX_ registros)",
-            processing:
-                `<span class="loader"></span>`
+            processing: "<span class='loader'></span>",
+        },
+        drawCallback: function() {
+            $('[data-bs-toggle="tooltip"]').tooltip();
         },
     }).on("draw", function () {
-        console.log("d")
         Catalogs.delete_items(n, table_items, catalog, catalog_item, token), edit(), Catalogs.uncheck(n, catalog_item)
     })
 
@@ -125,7 +123,6 @@ export function init() {
     btn_add.addEventListener("click", function (t) {
         Catalogs.checked(edit_active, check_active)
         form.reset()
-        $("#pais_id").val(null).trigger("change.select2")
         modal.show()
     })
     // CLOSE MODAL
@@ -151,7 +148,7 @@ export function init() {
                         btn_submit.removeAttribute(
                             "data-kt-indicator"
                         )
-                        const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
+                        const formData = new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`))
                         Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
                         validations.resetForm(true);
 

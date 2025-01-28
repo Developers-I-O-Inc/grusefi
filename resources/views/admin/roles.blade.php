@@ -1,4 +1,4 @@
-@extends('layouts/app2')
+@extends('metronic.index')
 @section('title', 'Roles')
 @section('title_top', 'Roles')
 @section('subtitle_top', 'Control de Roles')
@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-role-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btn_add">Agregar Rol</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Rol</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-role-table-toolbar="selected">
@@ -36,28 +36,30 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_roles_table">
-                    <thead>
-                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="w-10px pe-2">
-                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                        data-kt-check-target="#kt_roles_table .form-check-input" value="1" />
-                                </div>
-                            </th>
-                            <th class="min-w-125px">id</th>
-                            <th class="min-w-125px">Rol</th>
-                            <th class="min-w-125px">Permisos</th>
-                            <th class="min-w-125px">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody class="fw-bold text-gray-600">
+                <div class="table-responsive">
+                    <table class="table table-row-bordered gy-5" id="kt_roles_table">
+                        <thead>
+                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                <th class="w-10px pe-2">
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
+                                            data-kt-check-target="#kt_roles_table .form-check-input" value="1" />
+                                    </div>
+                                </th>
+                                <th class="min-w-125px">id</th>
+                                <th class="min-w-125px">Rol</th>
+                                <th class="min-w-125px">Permisos</th>
+                                <th class="min-w-125px">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-bold text-gray-600">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="modal fade" id="kt_modal_add_role" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="kt_modal_add_role" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered mw-750px">
                 <div class="modal-content">
                     <form class="form" action="#" id="kt_modal_add_role_form">
@@ -107,7 +109,7 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+@push('scripts')
+    <script src="{{asset('assets/js/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/admin/roles.js')}}"></script>
-@endsection
+@endpush

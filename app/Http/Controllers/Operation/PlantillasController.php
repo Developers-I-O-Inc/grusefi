@@ -81,15 +81,6 @@ class PlantillasController extends Controller
         return $pdf->stream('reporte_productos.pdf');
     }
 
-    public function imprimir_dictamen_embarque($pais_id, $embarque_id)
-    {
-        $embarque = Embarques::get_embarque($embarque_id);
-        $plantilla = PlantillaRPV::where('pais_id', $pais_id)->first();
-        $embarques_marcas = EmbarquesMarcas::get_marcas_embarque($embarque_id);
-        $pdf = PDF::loadView('operation/reports/dicatamen_embarque', compact("plantilla", "embarque", "embarques_marcas"));
-        return $pdf->stream('embarque.pdf');
-    }
-
     public function imprimir_dictamen_embarque_rpv($embarque_id)
     {
         $embarque = Embarques::get_embarque($embarque_id);
@@ -104,7 +95,7 @@ class PlantillasController extends Controller
         $standards = EmbarquesStandards::get_standards_embarque($embarque_id);
         $marcas = EmbarquesProductos::get_only_embarque_marcas($embarque_id);
         $vigencias = Vigencias::where('activo', 1)->first();
-        $pdf = PDF::loadView('operation/reports/dicatamen_embarque', compact("plantilla", "embarque", "embarques_standards", "count_productos", "embarques_productos",
+        $pdf = PDF::loadView('operation/reports/dictamen_embarque', compact("plantilla", "embarque", "embarques_standards", "count_productos", "embarques_productos",
             "presentations", 'procedencia', 'standards', 'quantities', 'marcas', 'vigencias', 'domicilio_destinatario'));
         return $pdf->stream('embarque.pdf');
     }

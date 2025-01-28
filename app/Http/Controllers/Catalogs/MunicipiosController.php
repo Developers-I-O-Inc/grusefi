@@ -26,10 +26,10 @@ class MunicipiosController extends Controller
                 return Datatables::of($municipios)
                     ->addIndexColumn()
                     ->addColumn('check', function($row){
-                        return view('components.checks_table', [
-                            'id' => $row->id,
-                            'disabled' => !auth()->user()->can("admin_municipios"),
-                        ])->render();
+                            $btn = '<div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="1" data-id="'.$row->id.'" />
+                            </div>';
+                            return $btn;
                     })
                     ->addColumn('activos', function($row){
                         return $row->activo
@@ -37,11 +37,11 @@ class MunicipiosController extends Controller
                             : '<span class="badge badge-light-danger">Desactivado</span>';
                     })
                     ->addColumn('buttons', function($row){
-                        return view('components.buttons_table', [
-                            'id' => $row->id,
-                            'disabled' => !auth()->user()->can("admin_municipios"),
-                            'catalog' => "municipio"
-                        ])->render();
+                        $btn = '<button data-id="'.$row->id.'" type="button" class="btn btn-active-light-success btn-sm" data-kt-municipio-table-filter="edit" data-bs-toggle="tooltip" title="Editar">
+                            <i class="ki-outline ki-pencil text-success fs-2">
+                            </i>
+                        </button>';
+                        return $btn;
                     })
                     ->rawColumns(['check', 'buttons', 'activos'])
                     ->make(true);

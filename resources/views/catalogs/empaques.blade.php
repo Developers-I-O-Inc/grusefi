@@ -1,17 +1,11 @@
-@extends('layouts/app2')
-@section('styles')
-    <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.1.0/css/fixedColumns.dataTables.min.css">
-
-@endsection
+@extends('metronic.index')
 @section('title', 'Clientes')
 @section('title_top', 'Clientes')
 @section('config', 'active')
 @section('subtitle_top', 'Control de Clientes')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
-        <div class="card">
+        <div class="card shadow-sm">
             <div class="card-header border-0 pt-6">
                 <div class="card-title">
                     <div class="d-flex align-items-center position-relative my-1">
@@ -255,23 +249,23 @@
                                                data-bs-toggle="tooltip"
                                                data-bs-dismiss="click"
                                                title="Change avatar">
-                                                <i class="bi bi-pencil-fill fs-7"></i>
+                                                <i class="ki-outline ki-pencil text-light fx-1"></i>
                                                 <input type="file" name="imagen" accept=".png, .jpg, .jpeg" />
                                                 <input type="hidden" name="imagen_remove" />
                                             </label>
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px shadow"
                                                data-kt-image-input-action="cancel"
                                                data-bs-toggle="tooltip"
                                                data-bs-dismiss="click"
                                                title="Cancel avatar">
-                                                <i class="bi bi-x fs-2"></i>
+                                                <i class="ki-outline kicross-square fs-2 text-primary"></i>
                                             </span>
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px shadow"
                                                data-kt-image-input-action="remove"
                                                data-bs-toggle="tooltip"
                                                data-bs-dismiss="click"
-                                               title="Remove avatar">
-                                                <i class="bi bi-x fs-2"></i>
+                                               title="Eliminar Imagen">
+                                                <i class="ki-outline kicross-square fs-2 text-primary"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -293,7 +287,7 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+@push('scripts')
+    <script src="{{asset('assets/js/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/catalogs/empaques.js')}}" type="module"></script>
-@endsection
+@endpush

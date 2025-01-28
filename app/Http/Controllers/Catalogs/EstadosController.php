@@ -23,22 +23,21 @@ class EstadosController extends Controller
             return Datatables::of($estados)
                     ->addIndexColumn()
                     ->addColumn('check', function($row){
-                        return view('components.checks_table', [
-                            'id' => $row->id,
-                            'disabled' => !auth()->user()->can("admin_estados"),
-                        ])->render();
-                    })
+                        $btn = '<div class="form-check form-check-sm form-check-custom form-check-solid">
+                            <input class="form-check-input" type="checkbox" value="1" data-id="'.$row->id.'" />
+                        </div>';
+                         return $btn;
+                     })
                     ->addColumn('activos', function($row){
                         return $row->activo
                             ? '<span class="badge badge-light-success">Activo</span>'
                             : '<span class="badge badge-light-danger">Desactivado</span>';
                     })
                     ->addColumn('buttons', function($row){
-                        return view('components.buttons_table', [
-                            'id' => $row->id,
-                            'disabled' => !auth()->user()->can("admin_estados"),
-                            'catalog' => "estado"
-                        ])->render();
+                        $btn = '<button data-id="'.$row->id.'" type="button" class="btn btn-active-light-success btn-sm me-0 ms-0" data-kt-estado-table-filter="edit" data-bs-toggle="tooltip" title="Editar">
+                              <i class="ki-outline ki-pencil text-success fs-2"></i>
+                        </button>';
+                        return $btn;
                     })
                     ->rawColumns(['check', 'buttons', 'activos'])
                     ->make(true);

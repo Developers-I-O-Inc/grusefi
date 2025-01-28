@@ -1,15 +1,11 @@
-@extends('layouts/app2')
-@section('styles')
-    <link href="{{asset('assets/css/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
-@endsection
+@extends('metronic.index')
 @section('title', 'Presentaciones')
 @section('title_top', 'Presentaciones')
 @section('config', 'active')
 @section('subtitle_top', 'Control de Presentaciones')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
-        <div class="card">
+        <div class="card shadow-sm">
             <div class="card-header border-0 pt-6">
                 <div class="card-title">
                     <div class="d-flex align-items-center position-relative my-1">
@@ -89,12 +85,12 @@
                                 data-kt-scroll-wrappers="#kt_modal_add_presentacion_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-4">
                                     <label class="required fs-6 fw-bold mb-2">Presentación</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="presentacion" id="presentacion" autocomplete="off"/>
+                                    <input type="text" class="form-control" placeholder="Ingresa el nombre de la presentación" name="presentacion" id="presentacion" autocomplete="off"/>
                                     <input type="text" class="form-control d-none" name="id_presentacion" id="id_presentacion" />
                                 </div>
                                 <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Presentación</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa un nombre" name="plural" id="plural" autocomplete="off"/>
+                                    <label class="required fs-6 fw-bold mb-2">Plural</label>
+                                    <input type="text" class="form-control" placeholder="Ingresa un nombre en plural" name="plural" id="plural" autocomplete="off"/>
                                 </div>
                                 <div class="fv-row mb-7">
                                     <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
@@ -120,7 +116,7 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+@push('scripts')
+    <script src="{{asset('assets/js/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/catalogs/presentaciones.js')}}" type="module"></script>
-@endsection
+@endpush

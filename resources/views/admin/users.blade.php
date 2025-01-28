@@ -1,4 +1,4 @@
-@extends('layouts/app2')
+@extends('metronic.index')
 @section('title', 'Usuarios')
 @section('title_top', 'Usuarios')
 @section('subtitle_top', 'Control de Usuarios')
@@ -24,7 +24,7 @@
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                         @can('admin_users')
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">Agregar Usuario</button>
+                            <button type="button" class="btn btn-primary" id="btn_add_user">Agregar Usuario</button>
                         @else
                             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" disabled data-bs-target="#kt_modal_add_user">No puedes realizar modificaciones</button>
                         @endcan
@@ -40,31 +40,33 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_users_table">
-                    <thead>
-                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="w-10px pe-2">
-                                @can('admin_users')
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                            data-kt-check-target="#kt_users_table .form-check-input" value="1" />
-                                    </div>
-                                @endcan
-                            </th>
-                            <th class="min-w-125px">id</th>
-                            <th class="min-w-125px">N° Empleado</th>
-                            <th class="min-w-125px">Email</th>
-                            <th class="min-w-125px">Nombre</th>
-                            <th class="min-w-125px">Apellidos</th>
-                            <th class="min-w-125px">Teléfono</th>
-                            <th class="min-w-125px">Dirección</th>
-                            <th class="min-w-125px">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody class="fw-bold text-gray-600">
+                <div class="table-responsive">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_users_table">
+                        <thead>
+                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                <th class="w-10px pe-2">
+                                    @can('admin_users')
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                            <input class="form-check-input" type="checkbox" data-kt-check="true"
+                                                data-kt-check-target="#kt_users_table .form-check-input" value="1" />
+                                        </div>
+                                    @endcan
+                                </th>
+                                <th class="min-w-50px">id</th>
+                                <th class="min-w-125px">N° Empleado</th>
+                                <th class="min-w-125px">Email</th>
+                                <th class="min-w-125px">Nombre</th>
+                                <th class="min-w-125px">Apellidos</th>
+                                <th class="min-w-125px">Teléfono</th>
+                                <th class="min-w-125px">Dirección</th>
+                                <th class="min-w-125px">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-bold text-gray-600">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
@@ -166,13 +168,8 @@
                             </div>
                             <div class="col-3">
                                 <button class="btn btn-sm btn-flex btn-light-primary" id="btn_add_permission">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                        </svg>
-                                    </span>Agregar</button>
+                                    <i class="ki-outline ki-plus-square"></i>Agregar
+                                </button>
                             </div>
                         </div>
                         <div class="separator my-2"></div>
@@ -189,8 +186,8 @@
                             <table class="table table-row-dashed fs-6 gy-5 table-row-gray-300" id="kt_users_permissions_table">
                                 <thead>
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                        <th class="">Permiso</th>
-                                        <th class="">Eliminar</th>
+                                        <th class="min-w-125px">Permiso</th>
+                                        <th class="min-w-125px">Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody class="fw-bold text-gray-600">
@@ -241,13 +238,8 @@
                             </div>
                             <div class="col-3">
                                 <button class="btn btn-sm btn-flex btn-light-primary" id="btn_add_country">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                        </svg>
-                                    </span>Agregar</button>
+                                    <i class="ki-outline ki-plus-square"></i>Agregar
+                                </button>
                             </div>
                         </div>
                         <div class="separator my-2"></div>
@@ -317,13 +309,8 @@
                             </div>
                             <div class="col-3">
                                 <button class="btn btn-sm btn-flex btn-light-primary" id="btn_add_standard">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                        </svg>
-                                    </span>Agregar</button>
+                                    <i class="ki-outline ki-plus-square"></i>Agregar
+                                </button>
                             </div>
                             <div class="fv-row mb-4">
                                 <label class="required fs-6 fw-bold mb-2">Vigencia</label>
@@ -369,7 +356,7 @@
         <!--end::Modal-->
     </div>
 @endsection
-@section('scripts')
-    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+@push('scripts')
+    <script src="{{asset('assets/js/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/admin/users.js')}}" type="module"></script>
-@endsection
+@endpush
