@@ -1,4 +1,4 @@
-<table class="table table-row-dashed fs-6 gy-5 table-row-gray-300" id="kt_products_table">
+<table class="table table-row-dashed fs-6 gy-5 table-row-gray-300 table-responsive" id="kt_products_table">
     <thead>
         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
             <th class="">Eliminar</th>
