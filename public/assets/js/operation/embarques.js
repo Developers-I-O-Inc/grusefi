@@ -141,7 +141,6 @@ var KTCreateAccount = (function () {
                 (select_standard = $('#select_standard').select2()),
                 (select_maquiladores = $('#select_maquiladores').select2()),
                 (select_puerto = $('#puerto_id').select2()),
-                (select_puerto2 = document.querySelector("#puerto_id")),
                 (edit_text_standard = document.querySelector("#edit_standards")),
                 (edit_text_products = document.querySelector("#edit_products")),
                 (check_active = document.querySelector("#check_activo")),
