@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
 use App\Models\Catalogs\Destinatarios;
+use App\Models\Catalogs\Municipios;
 use App\Models\Catalogs\Paises;
 use App\Models\Catalogs\Variedades;
 use App\Models\Catalogs\Vigencias;
@@ -15,6 +16,7 @@ use App\Models\Operation\EmbarquesStandards;
 use App\Models\Operation\PlantillaRPV;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class PlantillasController extends Controller
 {
@@ -30,14 +32,18 @@ class PlantillasController extends Controller
             session()->flash('variedad_id', $request->query('variedad_id'));
         }
         $paises = Paises::where('activo', 1)->get();
-        $variedades = Variedades::where('activo', 1)->get();
-        $vigencias = Vigencias::where('activo', 1)->get();
-        return view("operation/rpv", compact('paises', 'variedades', 'vigencias'));
+        if (Auth::user()->hasRole(['tefs'])) {
+            $municipios = Municipios::municipios_by_user(Auth::user()->id);
+        }
+        else{
+            $municipios = Municipios::where('activo', 1)->get();
+        }
+        return view("operation/rpv", compact('paises', 'vigencias', 'municipios'));
     }
 
     public function save_plantilla(Request $request) {
         $datos = $request->json()->all();
-        $count_pais = PlantillaRPV::where("pais_id",$request->pais_id)->count();
+        $count_pais = PlantillaRPV::where("pais_id",$request->pais_id)->where("municipio_id", $request->municipio_id)->count();
         if($count_pais > 0 ){
             return response()->json(['mensaje' => 'El país ya tiene una plantilla registrada'], 422);
         }
@@ -69,7 +75,7 @@ class PlantillasController extends Controller
     }
 
     public function get_plantilla($pais, $variedad){
-        $plantilla = PlantillaRPV::where("pais_id", $pais)->where("variedad_id", $variedad)->get();
+        $plantilla = PlantillaRPV::where("pais_id", $pais)->where("municipio_id", $variedad)->get();
 
         return response()->json(["plantilla"=>$plantilla]);
     }
@@ -101,7 +107,7 @@ class PlantillasController extends Controller
     }
 
     public function validate_plantilla($pais, $variedad){
-        $count_pais = PlantillaRPV::where("pais_id",$pais)->where('variedad_id', $variedad)->count();
+        $count_pais = PlantillaRPV::where("pais_id",$pais)->where('municipio_id', $variedad)->count();
         if($count_pais > 0 ){
             return response()->json(['mensaje' => 'si esta'], 200);
         }

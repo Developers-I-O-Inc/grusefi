@@ -185,9 +185,6 @@ class Catalogs {
     }
 
     get_next_selects(catalog, id, select_change, id_change = null){
-        console.log("el catalogo a consular es", catalog)
-        console.log("el id a consular es", id)
-        console.log("el id del select a cambiar es", id_change)
         fetch(`/catalogs/get_${catalog}?id=${id}`, {
             method: "GET",
             headers:{

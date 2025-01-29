@@ -144,7 +144,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="kt_accordion_1_header_2">
                             <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_2" aria-expanded="false" aria-controls="kt_accordion_1_body_2">
-                            Documento RPV
+                            Documento Dictamen de Verificación (DV)
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_2" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">

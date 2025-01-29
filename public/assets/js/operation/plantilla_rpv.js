@@ -1,5 +1,7 @@
 "use strict"
 
+import Catalogs from "./general.js"
+
 const token = $('meta[name="csrf-token"]').attr('content')
 
 let btn_add,
@@ -8,12 +10,12 @@ btn_edit,
 edit_id,
 btn_imprimir,
 select_pais,
-select_variedad,
+select_municipio,
 form,
 target,
 blockUI
 
-const obtener_datos = (formulario, pais, variedad, saveoredit) => {
+const obtener_datos = (formulario, pais, municipio, saveoredit) => {
     const clase = "p_input"
     const url = saveoredit ? "save_plantilla" : "edit_plantilla"
 
@@ -22,14 +24,14 @@ const obtener_datos = (formulario, pais, variedad, saveoredit) => {
     if(!saveoredit){
         datosFormulario = {
             pais_id: pais,
-            variedad_id: variedad,
+            municipio_id: municipio,
             id: edit_id.value
         }
     }
     else{
         datosFormulario = {
             pais_id: pais,
-            variedad_id: variedad
+            municipio_id: municipio
         }
     }
 
@@ -107,12 +109,12 @@ export function init(){
     btn_imprimir = document.querySelector("#btn_imprimir")
     btn_search = document.querySelector("#btn_search")
     select_pais = $('#pais_id').select2()
-    select_variedad = $("#variedad_id").select2()
+    select_municipio = $("#municipio_id").select2()
     form = document.querySelector("#form_plantilla")
 
     btn_add.addEventListener("click", function (t) {
         if(select_pais.val() != '' && select_pais.val() !== null){
-            obtener_datos(form, select_pais.val(), select_variedad.val(), true)
+            obtener_datos(form, select_pais.val(), select_municipio.val(), true)
         }
         else{
             Swal.fire({
@@ -124,7 +126,7 @@ export function init(){
     })
     btn_edit.addEventListener("click", function (t) {
         if(select_pais.val() != '' && select_pais.val() !== null){
-            obtener_datos(form, select_pais.val(), select_variedad.val(), false)
+            obtener_datos(form, select_pais.val(), select_municipio.val(), false)
         }
         else{
             Swal.fire({
@@ -135,8 +137,8 @@ export function init(){
         }
     })
     btn_search.addEventListener("click", function (t) {
-        if(select_pais.val() != '' && select_pais.val() !== null && select_variedad.val() != '' && select_variedad.val() !== null){
-            fetch(`get_plantilla/${select_pais.val()}/${select_variedad.val()}`, {
+        if(select_pais.val() != '' && select_pais.val() !== null && select_municipio.val() != '' && select_municipio.val() !== null){
+            fetch(`get_plantilla/${select_pais.val()}/${select_municipio.val()}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -217,7 +219,7 @@ export function init(){
     })
     // CHANGE PAIS
     select_pais.on('change', function() {
-        select_variedad.prop('disabled', false)
+        select_municipio.prop('disabled', false)
         blockUI.release()
     })
     blockUI.block()

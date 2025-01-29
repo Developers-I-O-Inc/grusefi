@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="modal fade" id="kt_modal_add_empaque" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-950px">
+            <div class="modal-dialog modal-dialog-centered mw-1200px">
                 <div class="modal-content">
                     <form class="form" action="#" id="kt_modal_add_empaque_form" enctype="multipart/form-data">
                         <div class="modal-header" id="kt_modal_add_empaque_header">

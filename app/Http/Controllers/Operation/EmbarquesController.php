@@ -14,16 +14,14 @@ use App\Models\Catalogs\Standards;
 use App\Models\Catalogs\Usos;
 use App\Models\Catalogs\Variedades;
 use App\Models\Catalogs\Vigencias;
-use App\Models\Operation\EmbarquesMarcas;
-use App\Models\Operation\EmbarquesMaquiladores;
 use App\Models\Operation\Embarques;
 use App\Models\Operation\EmbarquesRPV;
 use App\Models\Operation\EmbarquesProductos;
 use App\Models\Operation\PlantillaRPV;
 use App\Models\Admin\UsersStandards;
 use App\Models\Operation\EmbarquesStandards;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EmbarquesController extends Controller
@@ -37,10 +35,14 @@ class EmbarquesController extends Controller
         if($vigencias->count() == 0){
             return redirect()->route('vigencias.index')->with('error_vigencia', 'No hay vigencias activas, por favor activa una vigencia para poder continuar.');
         }
-        if(auth()->user()->hasRole('tefs')){
+        if(Auth::user()->hasRole('tefs')){
             $empaques = Empaques::get_empaques_by_country();
-            $lugares = Municipios::municipios_by_user(auth()->user()->id);
-            $standards = UsersStandards::user_standards_select(auth()->user()->id);
+            $lugares = Municipios::municipios_by_user(Auth::user()->id);
+            $standards = UsersStandards::user_standards_select(Auth::user()->id);
+            $count_standards = UsersStandards::where('user_id', Auth::user()->id);
+            if($count_standards->count() == 0){
+                return redirect()->route('dashboard')->with('error_standards', 'No tienes normas asignadas, por favor asigna normas para poder continuar.');
+            }
         }
         else{
             $empaques = Empaques::where('activo', 1)->get();
@@ -69,7 +71,6 @@ class EmbarquesController extends Controller
         $data = $request->only([
             'empaque_id',
             'destinatario_id',
-            'variedad_id',
             'vigencia_id',
             'pais_id',
             'municipio_id',
@@ -101,7 +102,7 @@ class EmbarquesController extends Controller
             $embarque_new = $embarque->id;
             // add embarque_rpv
             $plantilla = PlantillaRPV::where('pais_id', $embarque->pais_id)
-            ->where('variedad_id', $embarque->variedad_id)
+            ->where('municipio_id', $embarque->municipio_id)
             ->first();
 
                 if ($plantilla) {
@@ -111,7 +112,7 @@ class EmbarquesController extends Controller
                     unset(
                         $embarqueRPVData['id'],
                         $embarqueRPVData['pais_id'],
-                        $embarqueRPVData['variedad_id'],
+                        $embarqueRPVData['municipio_id'],
                         $embarqueRPVData['created_at'],
                         $embarqueRPVData['updated_at'],
                         $embarqueRPVData['deleted_at'],
@@ -236,6 +237,10 @@ class EmbarquesController extends Controller
         $vigencias = Vigencias::where('activo', 1)->get();
         if(auth()->user()->hasRole('tefs')){
             $standards = UsersStandards::user_standards_select(auth()->user()->id);
+            $count_standards = UsersStandards::where('user_id', Auth::user()->id);
+            if($count_standards->count() == 0){
+                return redirect()->route('dashboard')->with('error_standards', 'No tienes normas asignadas, por favor asigna normas para poder continuar.');
+            }
         }
         else{
             $standards = Standards::where('activo', 1)->get();

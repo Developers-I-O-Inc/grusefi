@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('op_embarques', function (Blueprint $table) {
             $table->id();
             $table->smallInteger('empaque_id')->unsigned()->index();
+            $table->smallInteger('municipio_id')->unsigned()->index();//PROCEDENCIA
             $table->smallInteger('destinatario_id')->unsigned()->index();
             $table->smallInteger('pais_id')->unsigned()->index();
             $table->smallInteger('puerto_id')->unsigned()->index();
             $table->smallInteger('tefs_id')->unsigned()->index();
-            $table->smallInteger('variedad_id')->unsigned()->index();
             $table->smallInteger('vigencia_id')->unsigned()->index();
-            $table->smallInteger('municipio_id')->unsigned()->index();//PROCEDENCIA
             $table->smallInteger('lugar_id')->unsigned()->index();
             $table->smallInteger('uso_id')->unsigned()->index();
             $table->smallInteger('consolidado_id')->nullable();
@@ -39,7 +38,6 @@ return new class extends Migration
             $table->foreign('tefs_id')->references('id')->on('users');
             $table->foreign('pais_id')->references('id')->on('cat_paises');
             $table->foreign('puerto_id')->references('id')->on('cat_puertos');
-            $table->foreign('variedad_id')->references('id')->on('cat_variedades');
             $table->foreign('vigencia_id')->references('id')->on('cat_vigencias');
             $table->foreign('municipio_id')->references('id')->on('cat_municipios');
             $table->foreign('lugar_id')->references('id')->on('cat_municipios');
