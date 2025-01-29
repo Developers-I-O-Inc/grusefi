@@ -10,7 +10,7 @@
 	data-kt-drawer-toggle="#kt_aside_mobile_toggle"
 	>
     <div class="aside-logo  py-8" id="kt_aside_logo">
-        <a href="?page=index" class="d-flex align-items-center">
+        <a href="{{route('dashboard')}}" class="d-flex align-items-center">
             <img alt="Logo" src="{{asset('img/logo.png')}}" class="h-85px logo"/>
         </a>
     </div>

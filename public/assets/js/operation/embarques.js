@@ -35,9 +35,7 @@ var KTCreateAccount = (function () {
         select_pais,
         select_puerto,
         select_tefs,
-        select_variedad,
-        // select_presentacion,
-        select_puerto2,
+        select_municipio,
         arr_validations = [],
         add_fields = (table, select) => {
             if(select.val() != ""){
@@ -139,7 +137,7 @@ var KTCreateAccount = (function () {
                 (select_marca = $('#select_marca').select2()),
                 (select_consolidado = $('#consolidado_id').select2()),
                 (select_destinatario = $('#destinatario_id').select2()),
-                (select_variedad = $('#variedad_id').select2()),
+                (select_municipio = $('#municipio_id').select2()),
                 (select_standard = $('#select_standard').select2()),
                 (select_maquiladores = $('#select_maquiladores').select2()),
                 (select_puerto = $('#puerto_id').select2()),
@@ -180,7 +178,7 @@ var KTCreateAccount = (function () {
                         } else {
                             let errorMessage = "Error, verifique los datos por favor";
                             if (e.getCurrentStepIndex() === 2) {
-                                errorMessage = "Error, ingrese al menos una standard";
+                                errorMessage = "Error, ingrese al menos una norma";
                             } else if (e.getCurrentStepIndex() === 3) {
                                 errorMessage = "Error, ingrese al menos un producto";
                             }
@@ -205,7 +203,7 @@ var KTCreateAccount = (function () {
                     Operation.checked(edit_active, check_active)
                 }),
                 // CHECK IMPORT
-                 check_import.addEventListener("click", function (t) {
+                check_import.addEventListener("click", function (t) {
                     if (check_import.checked) {
                         Swal.fire({
                             title: "Advertencia!",
@@ -276,6 +274,7 @@ var KTCreateAccount = (function () {
                         { orderable: !1, targets: 5, visible : 0 },
                         { orderable: !1, targets: 7, visible : 0 },
                     ],
+                    responsive: true,
                     language: {
                         zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
                         "<span>No hay datos que mostrar</span></div></div>",
@@ -296,11 +295,6 @@ var KTCreateAccount = (function () {
                             pais_id: {
                                 validators: {
                                     notEmpty: { message: "Seleccione un país" },
-                                },
-                            },
-                            variedad_id: {
-                                validators: {
-                                    notEmpty: { message: "Seleccione una variedad" },
                                 },
                             },
                             empaque_id: {
@@ -436,8 +430,8 @@ var KTCreateAccount = (function () {
                     Operation.get_next_selects("maquiladores", select_empaque.val(), select_consolidado)
                 })
                 // SELECT VARIEDADES
-                select_variedad.on('change', function() {
-                    arr_validations[0].revalidateField('variedad_id')
+                select_municipio.on('change', function() {
+                    arr_validations[0].revalidateField('municipio_id')
                     if(select_pais.val() == "" || select_pais.val() == null){
                         Swal.fire({
                             title: "Advertencia!",
@@ -446,9 +440,9 @@ var KTCreateAccount = (function () {
                           });
                     }
                     else{
-                        Operation.validate_plantilla(`validate_plantilla/${select_pais.val()}/${select_variedad.val()}`, 'GET',
-                            select_pais.find('option:selected').text(), select_variedad.find('option:selected').text())
-                        // Operation.get_next_selects("presentaciones", select_variedad.val(), select_presentacion, true)
+                        Operation.validate_plantilla(`validate_plantilla/${select_pais.val()}/${select_municipio.val()}`, 'GET',
+                            select_pais.find('option:selected').text(), select_municipio.find('option:selected').text())
+                        // Operation.get_next_selects("presentaciones", select_municipio.val(), select_presentacion, true)
                     }
                 })
                 // CLOSE MODAL

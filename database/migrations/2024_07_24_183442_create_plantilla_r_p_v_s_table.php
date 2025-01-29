@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('plantilla_rpv', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->smallInteger('pais_id')->unsigned()->index();
-            $table->smallInteger('variedad_id')->unsigned()->index();
+            $table->smallInteger('municipio_id')->unsigned()->index();
             // SERVICIO SOLICITADO
             $table->boolean('ss_dictamen_verificacion');
             $table->boolean('ss_certificado_movilizacion');
@@ -121,7 +121,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softdeletes();
             $table->foreign('pais_id')->references('id')->on('cat_paises');
-            $table->foreign('variedad_id')->references('id')->on('cat_variedades');
+            $table->foreign('municipio_id')->references('id')->on('cat_municipios');
         });
     }
 

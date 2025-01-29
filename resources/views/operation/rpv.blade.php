@@ -253,10 +253,10 @@
         }
     </style>
 @endsection
-@section('title', 'Plantillas RPV')
-@section('title_top', 'Plantillas RPV')
+@section('title', 'Plantillas DV')
+@section('title_top', 'Plantillas DV')
 @section('config', 'active')
-@section('subtitle_top', 'Control de Plantillas RPV')
+@section('subtitle_top', 'Creación de Plantillas DV')
 @section('content')
     <div id="kt_content_container bg-light-primary" class="container-xxl">
         @if (Session::has('message_type') && Session::has('message'))
@@ -280,7 +280,7 @@
                     <div class="row">
                         <div class="col-md-3 fv-row">
                             <input type="text" id="plantilla_id" name="plantilla_id" class="d-none">
-                            <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
+                            <select id="pais_id" name="pais_id" class="form-select" data-control="select2" data-placeholder="Selecciona un país" data-allow-clear="true">
                                 <option value=""></option>
                                 @foreach($paises as $pais)
                                     <option value="{{$pais->id}}">{{$pais->nombre}}</option>
@@ -288,20 +288,20 @@
                             </select>
                         </div>
                         <div class="col-md-3 fv-row">
-                            <select id="variedad_id" name="variedad_id" disabled class="form-select" data-control="select2" data-placeholder="Selecciona una variedad" data-allow-clear="true">
+                            <select id="municipio_id" name="municipio_id" disabled class="form-select" data-control="select2" data-placeholder="Selecciona una municipio/lugar" data-allow-clear="true">
                                 <option value=""></option>
-                                @foreach($variedades as $variedad)
-                                    <option value="{{$variedad->id}}">{{$variedad->variedad}}</option>
+                                @foreach($municipios as $municipio)
+                                    <option value="{{$municipio->id}}">{{$municipio->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-1 offset-3 fv-row px-6">
+                        <div class="col-md-1 offset-3 fv-row">
                             <a type="button" class=" btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-8 me-1 d-none" id="btn_imprimir" href="/operation/imprimir_dictamen/1" target="_blank">Imprimir</a>
                         </div>
-                        <div class="col-md-1 fv-row px-10">
+                        <div class="col-md-1 fv-row">
                             @can('admin_plantillas')
                                 <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 ms-1 d-none" id="btn_add">Guardar</button>
-                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 me-10 d-none" id="btn_edit">Editar</button>
+                                <button type="button" class="btn btn-primary btn-sm nav-link fw-bolder px-4 mx-5 d-none" id="btn_edit">Editar</button>
                             @else
                                 <button type="button" disabled class="btn btn-secondary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_add">Guardar</button>
                                 <button type="button" disabled class="btn btn-secondary btn-sm nav-link fw-bolder px-4 me-1 d-none" id="btn_edit">Editar</button>

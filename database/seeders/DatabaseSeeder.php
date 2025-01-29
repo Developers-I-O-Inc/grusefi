@@ -31,22 +31,40 @@ class DatabaseSeeder extends Seeder
         ]);
         // Create role administrator
         Role::create(['name' => 'Super Admin']);
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'tefs']);
-        Permission::create(['name' => 'ver_zonas']);
-        Permission::create(['name' => 'ver_configuracion']);
-        Permission::create(['name' => 'ver_plantillas']);
-        Permission::create(['name' => 'ver_embarques']);
-        Permission::create(['name' => 'ver_admin']);
-        Permission::create(['name' => 'ver_reportes']);
-        Permission::create(['name' => 'admin_paises']);
-        Permission::create(['name' => 'admin_estados']);
-        Permission::create(['name' => 'admin_municipios']);
-        Permission::create(['name' => 'admin_localidades']);
-        Permission::create(['name' => 'admin_plantillas']);
-        Permission::create(['name' => 'admin_embarques']);
-        Permission::create(['name' => 'admin_users']);
-
+        $role_admin = Role::create(['name' => 'admin']);
+        $role_tefs = Role::create(['name' => 'tefs']);
+        $ver_zonas = Permission::create(['name' => 'ver_zonas']);
+        $ver_configuracion = Permission::create(['name' => 'ver_configuracion']);
+        $ver_plantillas = Permission::create(['name' => 'ver_plantillas']);
+        $ver_embarques = Permission::create(['name' => 'ver_embarques']);
+        $ver_admin = Permission::create(['name' => 'ver_admin']);
+        $ver_reportes = Permission::create(['name' => 'ver_reportes']);
+        $admin_paises = Permission::create(['name' => 'admin_paises']);
+        $admin_estados = Permission::create(['name' => 'admin_estados']);
+        $admin_municipios = Permission::create(['name' => 'admin_municipios']);
+        $admin_localidades = Permission::create(['name' => 'admin_localidades']);
+        $admin_plantillas = Permission::create(['name' => 'admin_plantillas']);
+        $admin_embarques = Permission::create(['name' => 'admin_embarques']);
+        $admin_users = Permission::create(['name' => 'admin_users']);
+        //ASING PERMISSIONS TO ROLES
+        $role_admin->givePermissionTo($ver_zonas);
+        $role_admin->givePermissionTo($ver_configuracion);
+        $role_admin->givePermissionTo($ver_plantillas);
+        $role_admin->givePermissionTo($ver_embarques);
+        $role_admin->givePermissionTo($ver_admin);
+        $role_admin->givePermissionTo($ver_reportes);
+        $role_admin->givePermissionTo($admin_paises);
+        $role_admin->givePermissionTo($admin_estados);
+        $role_admin->givePermissionTo($admin_municipios);
+        $role_admin->givePermissionTo($admin_localidades);
+        $role_admin->givePermissionTo($admin_plantillas);
+        $role_admin->givePermissionTo($admin_embarques);
+        $role_admin->givePermissionTo($admin_users);
+        $role_tefs->givePermissionTo($ver_plantillas);
+        $role_tefs->givePermissionTo($admin_plantillas);
+        $role_tefs->givePermissionTo($ver_embarques);
+        $role_tefs->givePermissionTo($admin_embarques);
+        $role_tefs->givePermissionTo($ver_reportes);
         $this->call([
             Paises::class,
             Estados::class,

@@ -14,7 +14,7 @@ class PlantillaRPV extends Model
 
     protected $fillable = [
         'pais_id',
-        'variedad_id',
+        'municipio_id',
         'ss_dictamen_verificacion',
         'ss_certificado_movilizacion',
         'ss_certificado_internacional',

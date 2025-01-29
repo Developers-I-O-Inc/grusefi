@@ -11,7 +11,7 @@ class Operation {
         }
     }
 
-    get_next_selects(catalog, id, select_change, peso = null) {
+    get_next_selects(catalog, id, select_change, id_change = null) {
         fetch(`/catalogs/get_${catalog}?id=${id}`, {
             method: "GET",
             headers:{
@@ -25,19 +25,13 @@ class Operation {
             return response.json()
         })
         .then(data => {
-            let option
             const arr_data = data.catalogo
             select_change.empty()
                 arr_data.forEach(item => {
-                    if(peso != null){
-                        option = new Option(item.nombre, `${item.id}|${item.peso}`);
-                    }
-                    else{
-                        option = new Option(item.nombre, item.id);
-                    }
+                    const option = new Option(item.nombre, item.id);
                     select_change.append(option)
                 })
-            select_change.val(select_change.attr('data-id')).trigger('change.select2');
+            select_change.val(id_change).trigger('change.select2');
 
         })
         .catch(error => {
@@ -59,13 +53,6 @@ class Operation {
 
         const validations_products = FormValidation.formValidation(form_products, {
             fields: {
-                pallet: {
-                    validators: {
-                        notEmpty: {
-                            message: "Pallet requerido",
-                        },
-                    },
-                },
                 lote: {
                     validators: {
                         notEmpty: {
