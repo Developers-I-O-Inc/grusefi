@@ -1,7 +1,5 @@
 "use strict"
 
-import Catalogs from "./general.js"
-
 const token = $('meta[name="csrf-token"]').attr('content')
 
 let btn_add,
@@ -176,11 +174,12 @@ export function init(){
                 }
                 else{
                     Swal.fire({
-                        icon: "info",
+                        icon: "question",
                         title: "Este país no tiene una plantilla",
                         text: "No se encontró una plantilla para este país con esa variedad, desea crear una nueva plantilla?",
                         showDenyButton: true,
                         showCancelButton: false,
+                        confirmButtonColor: "#1F4529",
                         confirmButtonText: "Si, crear una nueva plantilla",
                         denyButtonText: `No, cancelar`,
                     }).then((result) => {

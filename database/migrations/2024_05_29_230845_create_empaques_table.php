@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('cat_empaques', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->smallInteger('localidad_id')->unsigned()->index();
-            $table->smallInteger('localidad_doc_id')->unsigned()->index();
+            $table->smallInteger('municipio_id')->unsigned()->index();
+            $table->smallInteger('localidad_id')->unsigned()->index()->nullable();
+            $table->smallInteger('localidad_doc_id')->unsigned()->index()->nullable();
             $table->string('nombre_corto', 50);
             $table->string('nombre_fiscal', 200);
             $table->string('domicilio_fiscal', 500);
@@ -35,8 +36,7 @@ return new class extends Migration
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('localidad_id')->references('id')->on('cat_localidades');
-            $table->foreign('localidad_doc_id')->references('id')->on('cat_localidades');
+            $table->foreign('municipio_id')->references('id')->on('cat_municipios');
         });
     }
 

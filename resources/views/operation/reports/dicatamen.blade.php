@@ -190,7 +190,7 @@
         <table>
             <tr class="encabezado_principal">
                 <td rowspan="2" style="width: 8%;"><img class="logo-SNSICA" src="{{public_path('img/SNSICA.png')}}" alt="Logo"></td>
-                <td colspan="2" style="text-align:center; border:1px;">Dictamen de verificacion (DV)</td>
+                <td colspan="2" style="text-align:center; border:1px;">Dictamen de verificación (DV)</td>
 
                 <td rowspan="2" style="width: 8%; text-align:right"><img src="{{public_path('img/logo.png')}}" class="logo-unidad-verificacion" alt="Logo Unidad de Verificación"></td>
             </tr>

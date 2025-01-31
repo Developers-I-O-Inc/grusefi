@@ -113,7 +113,6 @@ class Operation {
                 } else {
                     ban = await this.save_products(embarque_id, btn_add_product)
                 }
-                console.log(ban, "sda")
                 if(ban > 0){
                     table_products.row.add([
                         `<button type="button" data-id="${ban}" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_product" data-kt-customer-table-filter="delete_row">

@@ -25,7 +25,7 @@ class Embarques extends Model
         'folio_embarque',
         'consecutivo',
         'numero_economico',
-        'placas_trasporte',
+        'placas_transporte',
         'inspector',
         'consolidado',
         'consolidado_id',
@@ -44,6 +44,10 @@ class Embarques extends Model
             op_embarques.created_at as fecha_embarque,
             empaques.nombre_fiscal,
             CONCAT_WS(', ',
+                cat_localidades.nombre,
+                cat_municipios.nombre,
+                cat_estados.nombre) AS lugar_inicial,
+            CONCAT_WS(', ',
                 CONCAT_WS(' ',
                     empaques.domicilio_fiscal,
                     CONCAT('#', empaques.num_ext),
@@ -60,8 +64,8 @@ class Embarques extends Model
             cat_destinatarios.domicilio AS destinatario_domicilio,
             CONCAT_WS(', ', puerto,
             mpuertos.nombre) AS puerto,
-            CONCAT_WS(', PLACAS:S', medio_transporte,
-            placas) AS transporte,
+            CONCAT_WS(', PLACAS: ', numero_economico,
+            placas_transporte) AS transporte,
             vigencia,
             clave_aprobacion,
             uso,
@@ -71,8 +75,8 @@ class Embarques extends Model
             ) AS lugar, fecha_termino
             FROM op_embarques
             LEFT JOIN cat_empaques AS empaques ON op_embarques.empaque_id = empaques.id
+            LEFT JOIN cat_municipios ON empaques.municipio_id = cat_municipios.id
             LEFT JOIN cat_localidades ON empaques.localidad_id = cat_localidades.id
-            LEFT JOIN cat_municipios ON cat_localidades.municipio_id = cat_municipios.id
             LEFT JOIN cat_estados ON cat_municipios.estado_id = cat_estados.id
             LEFT JOIN cat_municipios AS mo ON op_embarques.lugar_id = mo.id
             LEFT JOIN cat_estados AS eo ON mo.estado_id = eo.id
@@ -89,7 +93,7 @@ class Embarques extends Model
 
     public static function get_embarques_admin($admin){
         $where = "";
-        if($admin){
+        if(!$admin){
             $where = "AND tefs_id = ".auth()->user()->id;
         }
         return DB::select("SELECT op_embarques.id, folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, op_embarques.created_at AS fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
@@ -105,7 +109,7 @@ class Embarques extends Model
 
     public static function get_embarques_admin_by_dates($start_date, $end_date, $admin){
         $where = "";
-        if($admin){
+        if(!$admin){
             $where = " AND tefs_id = ".auth()->user()->id;
         }
         return DB::select("SELECT op_embarques.id, folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, op_embarques.created_at AS fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status

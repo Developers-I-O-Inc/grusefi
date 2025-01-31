@@ -28,17 +28,12 @@ var KTadminlist = (function () {
             ]
         }).container().appendTo($('#kt_datatable_example_buttons'));
 
-        // Hook dropdown menu click event to datatable export buttons
         const exportButtons = document.querySelectorAll('#kt_datatable_example_export_menu [data-kt-export]');
         exportButtons.forEach(exportButton => {
             exportButton.addEventListener('click', e => {
                 e.preventDefault();
-
-                // Get clicked export value
                 const exportValue = e.target.getAttribute('data-kt-export');
                 const target = document.querySelector('.dt-buttons .buttons-' + exportValue);
-
-                // Trigger click event on hidden datatable export buttons
                 target.click();
             });
         });
@@ -65,6 +60,7 @@ var KTadminlist = (function () {
         span_fecha_embarque,
         span_hora_embarque,
         select_standard,
+        select_marca,
         dates,
         filter,
         modal,
@@ -230,8 +226,7 @@ var KTadminlist = (function () {
                         return response.json()
                     })
                     .then(data => {
-                        console.log(data)
-                        const {plantilla, embarque } = data
+                        const {plantilla, embarque, marcas } = data
                         delete plantilla.id
                         delete plantilla.created_at
                         delete plantilla.deleted_at
@@ -264,6 +259,12 @@ var KTadminlist = (function () {
                                 }
                             }
                         }
+                        // MARCAS
+                        select_marca.empty()
+                        marcas.forEach(item => {
+                            const option = new Option(item.nombre, item.id);
+                            select_marca.append(option)
+                        })
                         // Operation.get_next_selects("presentaciones", embarque.variedad_id, select_presentacion, true)
                         document.getElementById('btn_products').setAttribute('data-embarque', embarque.id);
                         document.getElementById('btn_standards').setAttribute('data-embarque', embarque.id);
@@ -338,6 +339,7 @@ var KTadminlist = (function () {
                 (btn_finish = document.querySelector("#btn_finish")),
                 (btn_import = document.querySelector("#btn_import")),
                 (select_standard = $('#select_standard').select2()),
+                (select_marca = $('#select_marca').select2()),
                 (n = document.querySelector("#kt_admin_table")) &&
                 (n.querySelectorAll("tbody tr").forEach((t) => {
                     // formats

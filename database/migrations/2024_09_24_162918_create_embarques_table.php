@@ -17,7 +17,7 @@ return new class extends Migration
             $table->smallInteger('municipio_id')->unsigned()->index();//PROCEDENCIA
             $table->smallInteger('destinatario_id')->unsigned()->index();
             $table->smallInteger('pais_id')->unsigned()->index();
-            $table->smallInteger('puerto_id')->unsigned()->index();
+            $table->smallInteger('puerto_id')->unsigned()->index()->nullable();
             $table->smallInteger('tefs_id')->unsigned()->index();
             $table->smallInteger('vigencia_id')->unsigned()->index();
             $table->smallInteger('lugar_id')->unsigned()->index();
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->dateTime('fecha_termino')->nullable();
             $table->string('consecutivo')->default('0000');
             $table->string('numero_economico', 50)->nullable();
-            $table->string('placas_trasporte', 30)->nullable();
+            $table->string('placas_transporte', 30)->nullable();
             $table->string('inspector')->nullable();
             $table->boolean('consolidado')->default(0);
             $table->string('empresa_transporte')->nullable();
@@ -37,7 +37,6 @@ return new class extends Migration
             $table->foreign('destinatario_id')->references('id')->on('cat_destinatarios');
             $table->foreign('tefs_id')->references('id')->on('users');
             $table->foreign('pais_id')->references('id')->on('cat_paises');
-            $table->foreign('puerto_id')->references('id')->on('cat_puertos');
             $table->foreign('vigencia_id')->references('id')->on('cat_vigencias');
             $table->foreign('municipio_id')->references('id')->on('cat_municipios');
             $table->foreign('lugar_id')->references('id')->on('cat_municipios');

@@ -112,10 +112,12 @@ return new class extends Migration
             $table->boolean('cfe_si_cumple');
             $table->boolean('cfe_debe_CFMN');
             $table->boolean('cfe_aplica_flete_CFMN');
+            $table->string('cfe_folios_CFMN')->nullable();
             $table->boolean('cfe_no_debe_CFMN');
             $table->boolean('cfe_debe_CFI');
             $table->boolean('cfe_aplica_flete_CFI');
             $table->boolean('cfe_no_debe_CFI');
+            $table->string('cfe_folios_CFI')->nullable();
             $table->string('clave_aprobacion', 100);
             $table->string('vigencia', 50);
             $table->timestamps();

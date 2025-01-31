@@ -121,7 +121,13 @@
                                         </select>
                                     </div>
                                     <div class="col-md-6 fv-row">
-
+                                        <label class="required fs-6 fw-bold mb-2">Procedencia</label>
+                                        <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                            <option value=""></option>
+                                            @foreach($lugares as $lugar)
+                                                <option value="{{$lugar->id}}">{{$lugar->nombre}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 @endrole
                             </div>
@@ -145,7 +151,7 @@
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-4 fv-row">
-                                    <label class="required fs-6 fw-bold mb-2">Puerto de Entrada</label>
+                                    <label class="fs-6 fw-bold mb-2">Puerto de Entrada</label>
                                     <select id="puerto_id" name="puerto_id" class="form-select" data-control="select2" data-placeholder="Selecciona un puerto" data-allow-clear="true">
                                         <option value=""></option>
                                     </select>
