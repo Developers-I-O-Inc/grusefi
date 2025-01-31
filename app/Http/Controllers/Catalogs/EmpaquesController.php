@@ -78,8 +78,7 @@ class EmpaquesController extends Controller
     public function store(Request $request)
     {
         $data = $request->only([
-            'localidad_id',
-            'localidad_doc_id',
+            'municipio_id',
             'nombre_corto',
             'nombre_fiscal',
             'domicilio_fiscal',
@@ -98,7 +97,8 @@ class EmpaquesController extends Controller
             'activo',
             'tipo'
         ]);
-
+        $data['localidad_id'] = $request->input('localidad_id') ? $request->input("localidad_id") : null;
+        $data['localidad_doc_id'] = $request->input('localidad_doc_id') ? $request->input("localidad_doc_id") : null;
         // Manejo de la imagen
         if ($request->hasFile('imagen')) {
             $image = ImageManager::imagick()->read($request->file('imagen'));

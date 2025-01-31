@@ -19,6 +19,7 @@ use App\Models\Operation\EmbarquesRPV;
 use App\Models\Operation\EmbarquesProductos;
 use App\Models\Operation\PlantillaRPV;
 use App\Models\Admin\UsersStandards;
+use App\Models\Catalogs\Marcas;
 use App\Models\Operation\EmbarquesStandards;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,12 @@ class EmbarquesController extends Controller
         if($vigencias->count() == 0){
             return redirect()->route('vigencias.index')->with('error_vigencia', 'No hay vigencias activas, por favor activa una vigencia para poder continuar.');
         }
-        if(Auth::user()->hasRole('tefs')){
+        if(Auth::user()->hasRole('Super Admin')){
+            $empaques = Empaques::where('activo', 1)->get();
+            $lugares = Municipios::where('activo', 1)->get();
+            $standards = Standards::where('activo', 1)->get();
+        }
+        else{
             $empaques = Empaques::get_empaques_by_country();
             $lugares = Municipios::municipios_by_user(Auth::user()->id);
             $standards = UsersStandards::user_standards_select(Auth::user()->id);
@@ -43,11 +49,6 @@ class EmbarquesController extends Controller
             if($count_standards->count() == 0){
                 return redirect()->route('dashboard')->with('error_standards', 'No tienes normas asignadas, por favor asigna normas para poder continuar.');
             }
-        }
-        else{
-            $empaques = Empaques::where('activo', 1)->get();
-            $lugares = Municipios::where('activo', 1)->get();
-            $standards = Standards::where('activo', 1)->get();
         }
         $paises = Paises::where('activo', 1)->get();
         $users = User::role('tefs')->get();
@@ -77,7 +78,7 @@ class EmbarquesController extends Controller
             'lugar_id',
             'puerto_id',
             'numero_economico',
-            'placas_trasporte',
+            'placas_transporte',
             'inspector',
             'consolidado',
             'consolidado_id',
@@ -87,10 +88,10 @@ class EmbarquesController extends Controller
         ]);
 
         // TEFS OR ADMIN
-        if (auth()->user()->hasRole('tefs')) {
-            $data['tefs_id'] = auth()->user()->id;
-        } else {
+        if (auth()->user()->hasRole('Super Admin')) {
             $data['tefs_id'] = $request->get('tefs_id');
+        } else {
+            $data['tefs_id'] = auth()->user()->id;
         }
         // DB::beginTransaction();
 
@@ -201,10 +202,10 @@ class EmbarquesController extends Controller
             $apply_filter = $request->input('filter', false);
 
             if(!$apply_filter || $start_date == '' or $end_date ==''){
-                $embarques = Embarques::get_embarques_admin(auth()->user()->hasRole('tefs'));
+                $embarques = Embarques::get_embarques_admin(auth()->user()->hasRole('Super Admin'));
             }
             else {
-                $embarques = Embarques::get_embarques_admin_by_dates($start_date, $end_date, auth()->user()->hasRole('tefs'));
+                $embarques = Embarques::get_embarques_admin_by_dates($start_date, $end_date, auth()->user()->hasRole('Super Admin'));
             }
 
             return Datatables::of($embarques) ->addIndexColumn()
@@ -235,15 +236,15 @@ class EmbarquesController extends Controller
 
         }
         $vigencias = Vigencias::where('activo', 1)->get();
-        if(auth()->user()->hasRole('tefs')){
+        if(auth()->user()->hasRole('Super Admin')){
+            $standards = Standards::where('activo', 1)->get();
+        }
+        else{
             $standards = UsersStandards::user_standards_select(auth()->user()->id);
             $count_standards = UsersStandards::where('user_id', Auth::user()->id);
             if($count_standards->count() == 0){
                 return redirect()->route('dashboard')->with('error_standards', 'No tienes normas asignadas, por favor asigna normas para poder continuar.');
             }
-        }
-        else{
-            $standards = Standards::where('activo', 1)->get();
         }
         $variedades = Variedades::where('activo', 1)->get();
         $presentaciones = Presentaciones::where('activo', 1)->get();
@@ -254,8 +255,8 @@ class EmbarquesController extends Controller
     {
         $embarque = Embarques::get_embarque($embarque_id);
         $plantilla = EmbarquesRPV::where('embarque_id', $embarque_id)->first();
-        // $embarques_standards = EmbarquesStandards::get_marcas_embarque($embarque_id);
-        return response()->json(["plantilla" =>$plantilla, "embarque"=>$embarque]);
+        $marcas = Marcas::where('activo', 1)->where('empaque_id', $embarque->empaque_id)->get();
+        return response()->json(["plantilla" =>$plantilla, "embarque"=>$embarque, "marcas"=>$marcas]);
     }
 
 
@@ -342,8 +343,7 @@ class EmbarquesController extends Controller
         $embarque = Embarques::find($request->embarque_id);
         // GET COUNTRY ID BY EMBPAQUE
         $country_id = Empaques::select('cat_estados.codigo', 'cat_estados.id')
-            ->join('cat_localidades', 'cat_empaques.localidad_id', 'cat_localidades.id')
-            ->join('cat_municipios', 'cat_localidades.municipio_id', 'cat_municipios.id')
+            ->join('cat_municipios', 'cat_empaques.municipio_id', 'cat_municipios.id')
             ->join('cat_estados', 'cat_municipios.estado_id', 'cat_estados.id')->where('cat_empaques.id', $embarque->empaque_id)->first();
         // -----------------------------
         // CONSECUTIVE

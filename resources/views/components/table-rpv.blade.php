@@ -256,7 +256,7 @@
                         <div id="template-container" class="watermark ">
                             <div class="section template-header">
                                 <img class="logo-SNSICA" src="{{asset('img/SNSICA.png')}}" alt="Logo">
-                                <h2 class="title">Dictamen de verificacion (DV) <br> para la movilizacion de productos vegetales</h2>
+                                <h2 class="title">Dictamen de verificación (DV) <br> para la movilización de productos vegetales</h2>
                                 <div class="logo-unidad-verificacion">
                                     <img src="{{asset('img/logo.png')}}" alt="Logo Unidad de Verificación">
                                 </div>
@@ -343,7 +343,7 @@
                                                         <span class="pulse-ring w-45px h-45px"></span>
                                                     </button>
                                                 @else
-                                                    <input id="Producto" type="text" name="Producto" value="AGUACATE(Persea americana) Var. Hass" maxlength="100" style="width: 100%;">
+                                                    <input id="Producto" type="text" name="Producto" value="XXXXXXXXXXXX" maxlength="100" style="width: 100%;">
                                                 @endif
                                             </div>
                                             <div style="width: 40%; padding-right: 6px;">
@@ -364,7 +364,7 @@
                                             </div>
                                             <div style="width: 30%;">
                                                 <div>Marcas distintivas</div>
-                                                <input id="marcas" type="text" name="marcas" value="AGUACATE(Persea americana) Var. Hass" maxlength="100" style="width: 100%;">
+                                                <input id="marcas" type="text" name="marcas" value="XXXXXXXXXXXXXXXXX" maxlength="100" style="width: 100%;">
                                             </div>
                                         </div>
                                     </div>
@@ -698,9 +698,7 @@
                                         </div>
                                     </div>
                                     <div class="pd-sm" style="width: 40%; display: flex; flex-wrap: wrap;">
-                                        {{-- <div>Fecha de inspección: <span class="disabled-input m-b-xs" style="width: 150px;">XX/XX/XXXX</span></div> --}}
-                                        {{-- <input id="cd_c_fecha_inspeccion" type="text" name="cd_c_fecha_inspeccion" value="" maxlength="500" style="width: 100%;" class="p_input"> --}}
-                                        <input id="cf_c_otra" type="text" name="cf_c_otra" value="" maxlength="500" style="width: 100%;" class="p_input">
+                                        <input id="cf_c_otra_o" type="text" name="cf_c_otra_o" value="" maxlength="500" style="width: 100%;" class="p_input">
                                     </div>
                                 </div>
                             </div>
@@ -741,14 +739,18 @@
                                     <div style="flex-grow: 1;">
                                         <div style="display: flex;">
                                             <div style="width: 25%;">(<input id="cfe_debe_CFMN" type="checkbox" name="cfe_debe_CFMN" value="" class="p_input">) Debe expedirse el CFMN</div>
-                                            <div style="width: 15%;">(<input id="cfe_aplica_flete_CFMN" type="checkbox" name="cfe_aplica_flete_CFMN" value="" class="p_input">) Aplica Flete</div>
-                                            <div style="width: 35%; display: flex; padding-right: 16px;">Anote folios: <span class="disabled-input" style="flex-grow: 1; margin-left: 8px;">XXXXXXXXXXXXXXXXXXXXXX</span></div>
+                                            <div style="width: 15%;">(<input id="cfe_aplica_flete_CFMN" type="checkbox" name="cfe_aplica_flete_CFMN" value="" class="p_input">) Aplica Fleje</div>
+                                            <div style="width: 35%; display: flex; padding-right: 16px;">Anote folios:
+                                                <input id="cfe_folios_CFMN" type="text" name="cfe_folios_CFMN" maxlength="50" class="p_input">
+                                            </div>
                                             <div style="width: 25%;">(<input id="cfe_no_debe_CFMN" type="checkbox" name="cfe_no_debe_CFMN" value="" class="p_input">) No debe expedirse el CFMN</div>
                                         </div>
                                         <div class="m-t-xs" style="display: flex;">
                                             <div style="width: 25%;">(<input id="cfe_debe_CFI" type="checkbox" name="cfe_debe_CFI" value="" class="p_input">) Debe expedirse el CFI</div>
-                                            <div style="width: 15%;">(<input id="cfe_aplica_flete_CFI" type="checkbox" name="cfe_aplica_flete_CFI" value="" class="p_input">) Aplica Flete</div>
-                                            <div style="width: 35%; display: flex; padding-right: 16px;">Anote folios: <span class="disabled-input" style="flex-grow: 1; margin-left: 8px;">XXXXXXXXXXXXXXXXXXXXXX</span></div>
+                                            <div style="width: 15%;">(<input id="cfe_aplica_flete_CFI" type="checkbox" name="cfe_aplica_flete_CFI" value="" class="p_input">) Aplica Fleje</div>
+                                            <div style="width: 35%; display: flex; padding-right: 16px;">Anote folios:
+                                                <input id="cfe_folios_CFI" type="text" name="cfe_folios_CFI" maxlength="50" class="p_input">
+                                            </div>
                                             <div style="width: 25%;">(<input id="cfe_no_debe_CFI" type="checkbox" name="cfe_no_debe_CFI" value="" class="p_input">) No debe expedirse el CFI</div>
                                         </div>
                                     </div>
@@ -757,7 +759,15 @@
                             <div class="section">
                                 <div style="display: flex; align-items: center;">
                                     <div class="text-bold" style="width: 100px;">12 Fin:</div>
-                                    <div class="group-control" style="flex-grow: 1;">Lugar: <span class="disabled-input m-l-sm">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span></div>
+                                    <div class="group-control" style="flex-grow: 1;">Lugar:
+                                        @if($embarque)
+                                        <div class="m-t-xs" style="display: flex;">
+                                            <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="lugar"></span>
+                                        </div>
+                                        @else
+                                        <span class="disabled-input m-l-sm" id=>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+                                        @endif
+                                    </div>
                                     <div class="group-control m-l-md" style="width: 250px;">Fecha: <span class="disabled-input m-l-sm">XX/XX/XXXX</span></div>
                                     <div class="group-control m-l-md" style="width: 175px;">Hora: <span class="disabled-input m-l-sm">XX:XX x.x.</span></div>
                                 </div>

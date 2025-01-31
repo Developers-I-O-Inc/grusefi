@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PDF Report</title>
+    <title>Dictamen de Verificación</title>
     <style>
         .logo-unidad-verificacion {
             width: 64px;
@@ -208,7 +208,7 @@
             <tr>
                 <td class="pregunta1 font-p">1. INICIO:</td>
                 <td class="r_lugar font-g">Lugar:</td>
-                <td class="rr_lugar font-g">{{$embarque->lugar}}, MÉXICO </td>
+                <td class="rr_lugar font-g">{{$embarque->lugar_inicial}}, MÉXICO </td>
                 <td class="r_lugar font-g">Fecha:</td>
                 <td class="rr_lugar font-g">{{substr($embarque->fecha_embarque, 0, 10)}}</td>
                 <td class="r_lugar font-g">Hora:</td>
@@ -260,17 +260,17 @@
                 <td class="td_datos_3 font-g">
                     @if($count_productos <= 3)
                         @foreach($embarques_productos as $producto)
-                            {{$producto->variedad}} <em>({{$producto->nombre_cientifico}})</em><br>
+                            <p style="margin: 0 0;">{{$producto->variedad}} <em>({{$producto->nombre_cientifico}})</em></p>
                         @endforeach
                     @else
-                        <p>
-                            {{$producto[0]->variedad}} <em>({{$producto[0]->nombre_cientifico}})</em><br>
+                        <p style="margin: 0 0;">
+                            {{$embarques_productos[0]->variedad}} <em>({{$embarques_productos[0]->nombre_cientifico}})</em>
                         </p>
-                        <p>
-                            {{$producto[1]->variedad}} <em>({{$producto[1]->nombre_cientifico}})</em><br>
+                        <p style="margin: 0 0;">
+                            {{$embarques_productos[1]->variedad}} <em>({{$embarques_productos[1]->nombre_cientifico}})</em>
                         </p>
-                        <p>
-                            {{$producto[2]->variedad}} <em>({{$producto[2]->nombre_cientifico}})</em><br>
+                        <p style="margin: 0 0;">
+                            {{$embarques_productos[2]->variedad}} <em>({{$embarques_productos[2]->nombre_cientifico}})</em>
                         </p>
                     @endif
                 </td>
@@ -279,19 +279,19 @@
                     @if($count_productos <= 3)
                         @foreach($quantities as $cant)
                             @if ($cant->total_kilos >= 1000)+
-                                {{number_format($cant->total_kilos/1000, 2) . ' Toneladas'}}<br>
+                                <p style="margin: 0 0;">{{number_format($cant->total_kilos/1000, 2) . ' Toneladas'}}</p>
                             @else
-                                {{$cant->total_kilos . ' KG'}}<br>
+                                <p style="margin: 0 0;">{{$cant->total_kilos . ' KG'}}</p>
                             @endif
                         @endforeach
                     @else
-                        <p>
+                        <p style="margin: 0 0;">
                             {{$quantities[0]->total_kilos >= 1000 ? number_format($quantities[0]->total_kilos/1000, 2) . ' Toneladas' : $quantities[0]->total_kilos . ' KG'}}<br>
                         </p>
-                        <p>
+                        <p style="margin: 0 0;">
                             {{$quantities[1]->total_kilos >= 1000 ? number_format($quantities[1]->total_kilos/1000, 2) . ' Toneladas' : $quantities[1]->total_kilos . ' KG'}}<br>
                         </p>
-                        <p>
+                        <p style="margin: 0 0;">
                             {{$quantities[2]->total_kilos >= 1000 ? number_format($quantities[2]->total_kilos/1000, 2) . ' Toneladas' : $quantities[2]->total_kilos . ' KG'}}<br>
                         </p>
                     @endif
@@ -299,16 +299,16 @@
                 <td class="td_datos_3 font-g">
                     @if($count_productos <= 3)
                         @foreach($presentations as $presentation)
-                            {{($presentation->cantidad_total).' '.($presentation->cantidad_total == 1 ? ($presentation->presentacion.' '.$presentation->peso.' KG') : $presentation->plural.' '.$presentation->peso.' KG')}}<br>
+                        <p style="margin: 0 0;">{{($presentation->cantidad_total).' '.($presentation->cantidad_total == 1 ? ($presentation->presentacion.' '.$presentation->peso.' KG') : $presentation->plural.' '.$presentation->peso.' KG')}}</p>
                         @endforeach
                     @else
-                        <p>
+                        <p style="margin: 0 0;">
                             {{($presentations[0]->cantidad_total).' '.($presentations[0]->cantidad_total == 1 ? $presentations[0]->presentacion : $presentations[0]->plural).' '.$presentations[0]->peso.' KG'}}<br>
                         </p>
-                        <p>
+                        <p style="margin: 0 0;">
                             {{($presentations[1]->cantidad_total).' '.($presentations[1]->cantidad_total == 1 ? $presentations[1]->presentacion : $presentations[1]->plural).' '.$presentations[1]->peso.' KG'}}<br>
                         </p>
-                        <p>
+                        <p style="margin: 0 0;">
                             {{($presentations[2]->cantidad_total).' '.($presentations[2]->cantidad_total == 1 ? $presentations[2]->presentacion : $presentations[2]->plural).' '.$presentations[2]->peso.' KG'}}<br>
                         </p>
                     @endif

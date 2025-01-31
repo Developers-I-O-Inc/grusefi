@@ -311,11 +311,6 @@ var KTCreateAccount = (function () {
                                     notEmpty: { message: "Seleccione un usuario tef" },
                                 },
                             },
-                            puerto_id: {
-                                validators: {
-                                    notEmpty: { message: "Seleccione un usuario" },
-                                },
-                            },
                             municipio_id: {
                                 validators: {
                                     notEmpty: { message: "Seleccione una procedencia" },

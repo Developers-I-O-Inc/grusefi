@@ -39,11 +39,12 @@ let table_items,
     check_asociado,
     select_municipio,
     select_municipio2,
-    select_localidad_2,
+    select_localidad,
     select_localidad_22,
     image_empaque,
-    var_municipio = 0,
+    var_localidad2 = 0,
     var_municipio2 = 0,
+    var_localidad = 0,
     n
 //
 const edit = () => {
@@ -52,6 +53,10 @@ const edit = () => {
     ).forEach((e) => {
         e.addEventListener("click", function (e) {
             e.preventDefault()
+            $("#municipio_id").val(null).trigger("change.select2")
+            $("#municipio_id2").val(null).trigger("change.select2")
+            $("#localidad_id").val(null).trigger("change.select2")
+            $("#localidad_doc_id").val(null).trigger("change.select2")
             $.get("empaques/"+ $(this).data("id") + "/edit", function(data){
                 edit_id.value=data.empaque[0].id
                 edit_nombre_corto.value = data.empaque[0].nombre_corto
@@ -64,15 +69,15 @@ const edit = () => {
                 edit_num_int.value = data.empaque[0].num_int
                 edit_cp.value = data.empaque[0].cp
                 // CHANGE LOCALIDAD
-                $("#municipio_id").val(data.empaque[0].municipio_id)
-                var_municipio = data.empaque[0].localidad_id
+                $("#municipio_id").val(data.empaque[0].municipio_id).trigger("change.select2")
+                var_localidad = data.empaque[0].localidad_id
                 select_municipio.trigger('change');
                 edit_embarque.value = data.empaque[0].nombre_embarque
                 edit_domicilio_documentacion.value = data.empaque[0].domicilio_documentacion
                 edit_sader.value = data.empaque[0].sader
                 edit_codigo.value = data.empaque[0].codigo
-                $("#municipio_id2").val(data.empaque[0].municipio2)
-                var_municipio2 = data.empaque[0].localidad_doc_id
+                $("#municipio_id2").val(data.empaque[0].municipio2).trigger("change.select2")
+                var_localidad2 = data.empaque[0].localidad_doc_id
                 select_municipio2.trigger('change');
                 Catalogs.checked_edit(data.empaque[0].exportacion, edit_exportacion, check_exportacion)
                 Catalogs.checked_edit(data.empaque[0].asociado, edit_asociado, check_asociado)
@@ -87,6 +92,7 @@ const edit = () => {
                 }
                 image_empaque.style.backgroundImage = `url('${data.empaque[0].imagen}')`;
                 modal.show()
+                var_localidad = 0
             })
         })
     })
@@ -97,7 +103,7 @@ export function init() {
     // inicialize elements html
     select_municipio = $('#municipio_id').select2()
     select_municipio2 = $('#municipio_id2').select2()
-    select_localidad_2 = document.querySelector("#localidad_id")
+    select_localidad = $("#localidad_id").select2()
     select_localidad_22 = document.querySelector("#localidad_doc_id")
     btn_add = document.querySelector("#btn_add")
     form = document.querySelector("#kt_modal_add_empaque_form")
@@ -214,13 +220,6 @@ export function init() {
                     },
                 }
             },
-            localidad_id:{
-                validators: {
-                    notEmpty: {
-                        message: "Seleccione una localidad",
-                    },
-                }
-            },
             nombre_embarque:{
                 validators: {
                     notEmpty: {
@@ -271,14 +270,7 @@ export function init() {
                         message: "Seleccione un municipio",
                     },
                 }
-            },
-            localidad_doc_id:{
-                validators: {
-                    notEmpty: {
-                        message: "Seleccione una localidad",
-                    },
-                }
-            },
+            }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -374,16 +366,14 @@ export function init() {
     select_municipio.on('change', function() {
         validations.disableValidator('municipio_id')
         validations.disableValidator('localidad_id')
-        const select_estado2 = $('#localidad_id').select2()
-        console.log("el valor es a", var_municipio)
-        Catalogs.get_next_selects(cat_localidades, select_municipio.val(), select_estado2, var_municipio)
+        Catalogs.get_next_selects(cat_localidades, select_municipio.val(), select_localidad, var_localidad)
     })
         // CHANGE MUNICIPIO2
     select_municipio2.on('change', function() {
         validations.disableValidator('municipio_id2')
         validations.disableValidator('localidad_doc_id')
         const select_estado2 = $('#localidad_doc_id').select2()
-        Catalogs.get_next_selects(cat_localidades, select_municipio2.val(), select_estado2, var_municipio2)
+        Catalogs.get_next_selects(cat_localidades, select_municipio2.val(), select_estado2, var_localidad2)
     })
     // SUBMIT
     btn_submit.addEventListener("click", function (e) {

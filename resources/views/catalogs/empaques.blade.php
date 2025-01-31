@@ -154,7 +154,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Localidad</label>
+                                                        <label class="fs-6 fw-bold mb-2">Localidad</label>
                                                         <select id="localidad_id" name="localidad_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona una localidad" data-allow-clear="true">
                                                             <option value=""></option>
                                                         </select>

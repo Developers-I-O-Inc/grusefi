@@ -1,6 +1,7 @@
 @extends('metronic.index')
 @section('title', 'Usuarios')
 @section('title_top', 'Usuarios')
+@section('admin', 'active')
 @section('subtitle_top', 'Control de Usuarios')
 @section('content')
     <div id="kt_content_container" class="container-xxl">

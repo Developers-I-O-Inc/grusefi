@@ -65,9 +65,11 @@ class EmbarquesRPV extends Model
         'cfe_debe_CFMN',
         'cfe_aplica_fleje_CFMN',
         'cfe_no_debe_CFMN',
+        'cfe_folios_CFMN',
         'cfe_debe_CFI',
         'cfe_aplica_fleje_CFI',
         'cfe_no_debe_CFI',
+        'cfe_folios_CFI',
         'clave_aprobacion',
         'vigencia'
     ];

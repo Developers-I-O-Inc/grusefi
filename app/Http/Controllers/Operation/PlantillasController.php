@@ -32,11 +32,11 @@ class PlantillasController extends Controller
             session()->flash('variedad_id', $request->query('variedad_id'));
         }
         $paises = Paises::where('activo', 1)->get();
-        if (Auth::user()->hasRole(['tefs'])) {
-            $municipios = Municipios::municipios_by_user(Auth::user()->id);
+        if (Auth::user()->hasRole(['Super Admin'])) {
+            $municipios = Municipios::where('activo', 1)->get();
         }
         else{
-            $municipios = Municipios::where('activo', 1)->get();
+            $municipios = Municipios::municipios_by_user(Auth::user()->id);
         }
         return view("operation/rpv", compact('paises', 'vigencias', 'municipios'));
     }
@@ -93,7 +93,7 @@ class PlantillasController extends Controller
         $domicilio_destinatario = Destinatarios::get_destinatario_address($embarque_id);
         $plantilla = EmbarquesRPV::where('embarque_id', $embarque_id)->first();
         $embarques_standards = EmbarquesStandards::get_standards_embarque($embarque_id);
-        $count_productos = EmbarquesProductos::select('presentacion_id')->where('embarque_id', $embarque_id)->groupBy('presentacion_id')->get()->count();
+        $count_productos = EmbarquesProductos::select('variedad_id')->where('embarque_id', $embarque_id)->groupBy('variedad_id')->get()->count();
         $embarques_productos = EmbarquesProductos::get_only_embarque_products($embarque_id);
         $quantities = EmbarquesProductos::get_only_embarque_quantities($embarque_id);
         $presentations = EmbarquesProductos::get_presentations($embarque_id);
@@ -103,7 +103,7 @@ class PlantillasController extends Controller
         $vigencias = Vigencias::where('activo', 1)->first();
         $pdf = PDF::loadView('operation/reports/dictamen_embarque', compact("plantilla", "embarque", "embarques_standards", "count_productos", "embarques_productos",
             "presentations", 'procedencia', 'standards', 'quantities', 'marcas', 'vigencias', 'domicilio_destinatario'));
-        return $pdf->stream('embarque.pdf');
+        return $pdf->stream($embarque->folio_embarque.'.pdf');
     }
 
     public function validate_plantilla($pais, $variedad){

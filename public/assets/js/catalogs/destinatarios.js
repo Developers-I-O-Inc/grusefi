@@ -30,7 +30,6 @@ const edit = () => {
                 select_pais.trigger('change');
                 // CHANGE MUNICIPIO
                 $("#estado_id").val(data.destinatario[0].estado_id).trigger("change.select2")
-                console.log("el valor es", select_estado.val())
                 var_municipio = data.destinatario[0].municipio_id
                 select_estado.trigger('change');
                 // CHANGE LOCALIDAD
