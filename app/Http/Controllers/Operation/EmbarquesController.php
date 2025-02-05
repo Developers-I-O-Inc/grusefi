@@ -77,6 +77,7 @@ class EmbarquesController extends Controller
             'municipio_id',
             'lugar_id',
             'puerto_id',
+            'origen',
             'numero_economico',
             'placas_transporte',
             'inspector',

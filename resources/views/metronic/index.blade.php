@@ -30,11 +30,11 @@
                         @yield('content')
                     </div>
 				</div>
-                @include("metronic/partials/_scrolltop")
+                @include("metronic/layout/_footer")
 			</div>
 		</div>
 	</div>
-    @include("metronic/layout/_footer")
+    @include("metronic/partials/_scrolltop")
     <script src="{{asset('assets/js/plugins.bundle.js')}}"></script>
     <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
     @stack('scripts')

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('consecutivo')->default('0000');
             $table->string('numero_economico', 50)->nullable();
             $table->string('placas_transporte', 30)->nullable();
+            $table->string('origen', 300)->nullable();
             $table->string('inspector')->nullable();
             $table->boolean('consolidado')->default(0);
             $table->string('empresa_transporte')->nullable();

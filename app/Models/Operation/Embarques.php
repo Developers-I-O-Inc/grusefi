@@ -22,6 +22,7 @@ class Embarques extends Model
         'lugar_id',
         'fecha_termino',
         'puerto_id',
+        'origen',
         'folio_embarque',
         'consecutivo',
         'numero_economico',
@@ -72,7 +73,7 @@ class Embarques extends Model
             CONCAT_WS(', ',
                 mo.nombre,
                 eo.nombre
-            ) AS lugar, fecha_termino
+            ) AS lugar, fecha_termino, CONCAT_WS(' ', users.name, users.last_name) AS tefs
             FROM op_embarques
             LEFT JOIN cat_empaques AS empaques ON op_embarques.empaque_id = empaques.id
             LEFT JOIN cat_municipios ON empaques.municipio_id = cat_municipios.id
@@ -85,6 +86,7 @@ class Embarques extends Model
             LEFT JOIN cat_municipios AS mpuertos ON cat_puertos.municipio_id = mpuertos.id
             LEFT JOIN cat_vigencias ON op_embarques.vigencia_id = cat_vigencias.id
             LEFT JOIN cat_usos ON op_embarques.uso_id = cat_usos.id
+            LEFT JOIN users ON op_embarques.tefs_id = users.id
             WHERE op_embarques.id = ?
         ", [$id]);
 
@@ -96,11 +98,13 @@ class Embarques extends Model
         if(!$admin){
             $where = "AND tefs_id = ".auth()->user()->id;
         }
-        return DB::select("SELECT op_embarques.id, folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, op_embarques.created_at AS fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
+        return DB::select("SELECT op_embarques.id, folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, op_embarques.created_at AS fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status,
+                CONCAT_WS(' ', users.name, users.last_name) AS tefs
             FROM op_embarques
             LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
             LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
+            LEFT JOIN users ON op_embarques.tefs_id = users.id
             WHERE
                 YEAR(op_embarques.created_at) = YEAR(CURDATE())
                 AND WEEK(op_embarques.created_at, 1) = WEEK(CURDATE(), 1)"
@@ -112,11 +116,13 @@ class Embarques extends Model
         if(!$admin){
             $where = " AND tefs_id = ".auth()->user()->id;
         }
-        return DB::select("SELECT op_embarques.id, folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, op_embarques.created_at AS fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status
+        return DB::select("SELECT op_embarques.id, folio_embarque, op_embarques.id, op_embarques.empaque_id, nombre_fiscal, op_embarques.created_at AS fecha_embarque, puerto, destinatario_id, cat_destinatarios.nombre, status,
+                CONCAT_WS(' ', users.name, users.last_name) AS tefs
             FROM op_embarques
             LEFT JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
             LEFT JOIN cat_destinatarios ON op_embarques.destinatario_id = cat_destinatarios.id
             LEFT JOIN cat_puertos ON op_embarques.puerto_id = cat_puertos.id
+            LEFT JOIN users ON op_embarques.tefs_id = users.id
             WHERE
                 op_embarques.created_at BETWEEN ? AND ?".$where, [$start_date, $end_date]);
     }
