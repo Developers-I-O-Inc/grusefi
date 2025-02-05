@@ -62,12 +62,17 @@
             margin-bottom: 0;
         }
         .font-p{
-            font-size: 8.2px;
+            font-size: 7.2px;
             font-weight: bold;
             text-align: left;
         }
+        .font-g-title{
+            font-size: 7px;
+            text-align: left;
+            font-weight: bold;
+        }
         .font-g{
-            font-size: 8px;
+            font-size: 7px;
             text-align: left
         }
         .font-mm{
@@ -79,11 +84,11 @@
             text-align: right;
         }
         .font-cc{
-            font-size: 8px;
+            font-size: 7px;
             text-align: center;
         }
         .font-rr{
-            font-size: 8px;
+            font-size: 7px;
             text-align: right;
         }
         /* table, th, td {
@@ -91,7 +96,7 @@
             border-collapse: collapse;
         } */
         .prueba td{
-            font-size: 8px;
+            font-size: 7px;
             font-style: italic;
         }
         .encabezado_principal td{
@@ -101,7 +106,7 @@
             width: 7%;
         }
         .r_lugar{
-            font-size: 8px;
+            font-size: 7px;
             width: 8%;
             text-align: right;
         }
@@ -112,7 +117,7 @@
             width: 14%;
         }
         .r_servicio{
-            font-size: 8px;
+            font-size: 7px;
             width: auto;
             text-align: center;
         }
@@ -123,7 +128,7 @@
             width: 88%;
         }
         .pregunta3{
-            font-size: 8px;
+            font-size: 7px;
         }
         .table_datos_expedicion{
             border: 1px solid black;
@@ -144,16 +149,16 @@
             border-right: 1px solid black;
             border-top: 1px solid black;
             border-left: 0;
-            font-size: 8px;
+            font-size: 7px;
         }
         .td_datos_3{
             border-right: 1px solid black;
             border-left: 0;
-            font-size: 8px;
+            font-size: 7px;
         }
         .td_datos{
             width: 50%;
-            font-size: 8px;
+            font-size: 7px;
             text-align: left;
             border-right: 1px solid black;
             border-top: 0;
@@ -195,7 +200,7 @@
         <table>
             <tr class="encabezado_principal">
                 <td rowspan="2" style="width: 8%;"><img class="logo-SNSICA" src="{{public_path('img/SNSICA.png')}}" alt="Logo"></td>
-                <td colspan="2" style="text-align:center; border:1px;">Dictamen de verificacion (DV)</td>
+                <td colspan="2" style="text-align:center; border:1px;">Dictamen de verificación (DV)</td>
 
                 <td rowspan="2" style="width: 8%; text-align:right"><img src="{{public_path('img/logo.png')}}" class="logo-unidad-verificacion" alt="Logo Unidad de Verificación"></td>
             </tr>
@@ -236,8 +241,8 @@
         </table>
         <table class="table_datos_expedicion_1" style="width: 100%">
             <tr>
-                <td class="td_datos font-g">Nombre y dirección del remitente</td>
-                <td class="td_datos font-g">Nombre y dirección del destinatario</td>
+                <td class="td_datos font-g-title">Nombre y dirección del remitente</td>
+                <td class="td_datos font-g-title">Nombre y dirección del destinatario</td>
             </tr>
             <tr>
                 <td class="td_datos font-g">{{$embarque->nombre_fiscal}}</td>
@@ -250,15 +255,15 @@
         </table>
         <table class="table_datos_expedicion" style="width: 100%">
             <tr class="tr_datos">
-                <td class="td_datos_2 font-g">Producto</td>
-                <td class="td_datos_2 font-g">Uso</td>
-                <td class="td_datos_2 font-g">Cantidad</td>
-                <td class="td_datos_2 font-g" style="width: 25%">Presentación</td>
-                <td class="td_datos_2 font-g" style="width: 25%">Marcas Distintivas</td>
+                <td class="td_datos_2 font-g-title">Producto</td>
+                <td class="td_datos_2 font-g-title">Uso</td>
+                <td class="td_datos_2 font-g-title">Cantidad</td>
+                <td class="td_datos_2 font-g-title" style="width: 25%">Presentación</td>
+                <td class="td_datos_2 font-g-title" style="width: 25%">Marcas Distintivas</td>
             </tr>
             <tr>
                 <td class="td_datos_3 font-g">
-                    @if($count_productos <= 3)
+                    @if($count_productos <= 6)
                         @foreach($embarques_productos as $producto)
                             <p style="margin: 0 0;">{{$producto->variedad}} <em>({{$producto->nombre_cientifico}})</em></p>
                         @endforeach
@@ -276,7 +281,7 @@
                 </td>
                 <td class="td_datos_3 font-g">{{$embarque->uso}}</td>
                 <td class="td_datos_3 font-g">
-                    @if($count_productos <= 3)
+                    @if($count_productos <= 6)
                         @foreach($quantities as $cant)
                             @if ($cant->total_kilos >= 1000)+
                                 <p style="margin: 0 0;">{{number_format($cant->total_kilos/1000, 2) . ' Toneladas'}}</p>
@@ -297,7 +302,7 @@
                     @endif
                 </td>
                 <td class="td_datos_3 font-g">
-                    @if($count_productos <= 3)
+                    @if($count_productos <= 6)
                         @foreach($presentations as $presentation)
                         <p style="margin: 0 0;">{{($presentation->cantidad_total).' '.($presentation->cantidad_total == 1 ? ($presentation->presentacion.' '.$presentation->peso.' KG') : $presentation->plural.' '.$presentation->peso.' KG')}}</p>
                         @endforeach
@@ -320,10 +325,10 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="font-g td_datos_2">Punto de entrada </td>
-                <td class="font-g td_datos_2">Medio de transporte y placas</td>
-                <td class="font-g td_datos_2">Origen</td>
-                <td class="font-g td_datos_2">Procedencia</td>
+                <td colspan="2" class="font-g-title td_datos_2">Punto de entrada </td>
+                <td class="font-g-title td_datos_2">Medio de transporte y placas</td>
+                <td class="font-g-title td_datos_2">Origen</td>
+                <td class="font-g-title td_datos_2">Procedencia</td>
             </tr>
             <tr>
                 <td colspan="2" class="td_datos_3 font-g">{{$embarque->puerto}}</td>
@@ -337,7 +342,7 @@
         </table>
         <table>
             <tr>
-                <td class="font-p pregunta2">B) lista de verificación</td>
+                <td class="font-p pregunta2">B) Lista de verificación</td>
                 <td class="font-g">B) LISTA DE VERIFICACIÓN(PARA SER LLENADO POR EL OFA O TEF)</td>
             </tr>
         </table>
@@ -372,7 +377,7 @@
             <tr>
                 <td class="font-mm td_incisos_left"> ({{$plantilla->dr_copiacfmn ? 'X' : ' '}}) Copia del CFMN expedido en el origen</td>
                 <td class="font-mm_right td_incisos">{{$plantilla->dr_copiacfmn_t}}</td>
-                <td class="font-mm td_incisos_right"> ({{$plantilla->dr_certificado_cumplimiento ? 'X' : ' '}})Certificado de cumplimiento de Norma</td>
+                <td class="font-mm td_incisos_right"> ({{$plantilla->dr_certificado_cumplimiento ? 'X' : ' '}}) Certificado de cumplimiento de Norma</td>
                 <td class="font-mm_right td_incisos">{{$plantilla->dr_certificado_cumplimiento_t}}</td>
             </tr>
             <tr>
@@ -388,7 +393,7 @@
                 <td class="font-mm_right td_incisos">{{$plantilla->dr_copia_certificado_t}}</td>
             </tr>
             <tr>
-                <td class="font-mm td_incisos_left"> ({{$plantilla->dr_ninguno ? 'X' : ' '}}) Ningún documento</td>
+                <td class="font-mm td_incisos_left"> ({{$plantilla->dr_ninguno ? 'X' : ' '}}) Ningún Documento</td>
                 <td class="font-mm_right td_incisos"></td>
                 <td class="font-mm td_incisos_right"> ({{$plantilla->dr_tratamiento_cuarentenario ? 'X' : ' '}}) Certificado Fitosanitario de Tratamiento Cuarentenario</td>
                 <td class="font-mm_right td_incisos">{{$plantilla->dr_tratamiento_cuarentenario_t}}</td>
@@ -402,7 +407,7 @@
         </table>
         <table>
             <tr>
-                <td class="font-p">6. El producto o lote se encuentra identificado, acondicionado y preparado para realizar la verificación?: {{$plantilla->pv ? 'SI(X) NO( )' : 'SI( ) NO(X)'}}. Si su respuesta es No, cancele la verificación hasta que
+                <td class="font-p">6. ¿El producto o lote se encuentra identificado, acondicionado y preparado para realizar la verificación?: {{$plantilla->pv ? 'SI(X) NO( )' : 'SI( ) NO(X)'}}. Si su respuesta es No, cancele la verificación hasta que
                     sea requerido nuevamente, de lo contrario continúe con el siguiente apartado.</td>
             </tr>
         </table>
@@ -562,8 +567,8 @@
         </table>
         <table>
             <tr>
-                <td class="font-p">C) DICTAMEN DE VERIFICACION</td>
-                <td class="font-g">D) DICTAMEN DE VERIFICACIÓN (PARA SER LLENADO POR EL TEF)</td>
+                {{-- <td class="font-p">C) DICTAMEN DE VERIFICACION</td> --}}
+                <td colspan="2"  class="font-g" style="text-align: center;">C) DICTAMEN DE VERIFICACIÓN (PARA SER LLENADO POR EL TEF)</td>
             </tr>
             <tr>
                 <td colspan="2" class="font-g">De conformidad con la comprobación documental, la constatación ocular o comprobación mediante muestreo o análisis de laboratorio de prueba, se dictamina que el Lote de
@@ -574,7 +579,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="font-p">11. {{$plantilla->cfe_si_cumple ? 'Si cumple (X) No Cumple ()' : 'Si Cumple () No Cumple (X)'}} con la normatividad, requisitos aplicables y/o requisito fitosanitario evaluado.
+                <td colspan="2" class="font-p">11. {{$plantilla->cfe_si_cumple ? 'Si cumple (X) No Cumple ( )' : 'Si Cumple ( ) No Cumple (X)'}} con la normatividad, requisitos aplicables y/o requisito fitosanitario evaluado.
                 </td>
             </tr>
             <tr>
@@ -600,25 +605,29 @@
                 <td class="font-g">({{$plantilla->cfe_no_debe_CFI ? 'X' : ' '}}) No debe expedirse el CFI</td>
             </tr>
         </table>
-        <table>
+        <table style="width: 100%;">
             <tr>
-                <td class="font-p" style="width: 8%">12. FIN</td>
+                <td class="font-p" style="width: 5%">12. FIN</td>
                 <td class="font-g"style="width: 8%">Lugar:</td>
-                <td class="font-g">{{$embarque->lugar}}</td>
+                <td class="font-g" style="width: 45%">{{$embarque->lugar}}</td>
                 <td class="font-g">Fecha</td>
                 <td class="font-g">{{substr($embarque->fecha_termino, 0, 10)}}</td>
                 <td class="font-g">Hora</td>
                 <td class="font-g">{{substr($embarque->fecha_termino, 11)}} Hrs</td>
             </tr>
         </table>
-        <table>
+        <table style="margin-top: 3px;">
             <tr>
                 <td class="font-cc">SOLICITANTE</td>
                 <td class="font-cc">OFA/UV/TEF</td>
             </tr>
             <tr>
-                <td class="font-cc" style="height: 40px; text-aling=">________________________________</td>
-                <td class="font-cc" style="height: 40px; text-aling=">________________________________</td>
+                <td class="font-cc" style="height: 20px; text-align: center; padding: 0; margin: 0;">________________________________</td>
+                <td class="font-cc" style="height: 20px; text-align: center; padding: 0; margin: 0;">________________________________</td>
+            </tr>
+            <tr>
+                <td class="font-cc" style="text-align: center; padding: 0; margin: 0;"></td>
+                <td class="font-cc" style="text-align: center; padding: 0; margin: 0;">{{$embarque->tefs}}</td>
             </tr>
             <tr>
                 <td class="font-cc">NOMBRE Y FIRMA</td>
@@ -629,7 +638,7 @@
         <table>
             <tr>
                 <td style="width: 40%"></td>
-                <td class="font-rr">CLAVE DE APROBACION: </td>
+                <td class="font-rr">CLAVE DE APROBACIÓN: </td>
                 <td class="font-rr">{{$vigencias->clave_aprobacion}}</td>
                 <td class="font-rr">VIGENCIA</td>
                 <td class="font-rr">{{$vigencias->vigencia}}</td>

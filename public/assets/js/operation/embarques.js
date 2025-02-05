@@ -321,6 +321,11 @@ var KTCreateAccount = (function () {
                                     notEmpty: { message: "Seleccione un uso" },
                                 },
                             },
+                            origen: {
+                                validators: {
+                                    notEmpty: { message: "Ingrese un origen" },
+                                },
+                            },
                         },
                         plugins: {
                             trigger: new FormValidation.plugins.Trigger(),
@@ -483,6 +488,55 @@ var KTCreateAccount = (function () {
                 $('#kt_products_table tbody').on('click', '.delete_product', function() {
                     var row = $(this).closest('tr')
                     table_products.row(row).remove().draw()
+                });
+                const popover_procedencia = document.getElementById("pp_procedencia")
+                const popover_no_economico = document.getElementById("pp_no_economico")
+                const popover_lugar = document.getElementById("pp_lugar")
+                const popover_origen = document.getElementById("pp_origen")
+
+                const popover1 = new bootstrap.Popover(popover_procedencia, {
+                    html: true,
+                    trigger: "focus",
+                    sanitize: false,
+                    placement: "auto", // Ajusta la posición del popover automáticamente
+                    title: "Procedencia", // Título del popover
+                    content: `<div style="max-width: 300px;">
+                                 <img src="/img/poppovers/procedencia.png" alt="Imagen de procedencia" style="width:100%; display:block;">
+                                 <p style="margin-top: 10px;">Es el punto número 3 del DV.</p>
+                              </div>`
+                });
+                const popover2 = new bootstrap.Popover(popover_no_economico, {
+                    html: true,
+                    trigger: "focus",
+                    sanitize: false,
+                    placement: "auto", // Ajusta la posición del popover automáticamente
+                    title: "Procedencia", // Título del popover
+                    content: `<div style="max-width: 300px;">
+                                 <img src="/img/poppovers/no_economico.png" alt="Imagen de procedencia" style="width:100%; display:block;">
+                                 <p style="margin-top: 10px;">Es el punto número 3 del DV. Es el medio de transporte y placas</p>
+                              </div>`
+                });
+                const popover3 = new bootstrap.Popover(popover_lugar, {
+                    html: true,
+                    trigger: "focus",
+                    sanitize: false,
+                    placement: "auto", // Ajusta la posición del popover automáticamente
+                    title: "Procedencia", // Título del popover
+                    content: `<div style="max-width: 300px;">
+                                 <img src="/img/poppovers/lugar.png" alt="Imagen de procedencia" style="width:100%; display:block;">
+                                 <p style="margin-top: 10px;">Es el punto número 1 INICIO.</p>
+                              </div>`
+                });
+                const popover4 = new bootstrap.Popover(popover_origen, {
+                    html: true,
+                    trigger: "focus",
+                    sanitize: false,
+                    placement: "auto", // Ajusta la posición del popover automáticamente
+                    title: "Procedencia", // Título del popover
+                    content: `<div style="max-width: 300px;">
+                                 <img src="/img/poppovers/origen.png" alt="Imagen de procedencia" style="width:100%; display:block;">
+                                 <p style="margin-top: 10px;">Es el punto número 3 del DV. El origen</p>
+                              </div>`
                 });
         },
     }

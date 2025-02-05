@@ -360,6 +360,7 @@ var KTadminlist = (function () {
                             { data: "nombre_fiscal", name: "nombre_fiscal" },
                             { data: "nombre", name: "nombre" },
                             { data: "puerto", name: "puerto" },
+                            { data: "tefs", name: "tefs" },
                             { data: "fecha_embarque", name: "fecha_embarque" },
                             { data: "buttons", name: "buttons" },
 
