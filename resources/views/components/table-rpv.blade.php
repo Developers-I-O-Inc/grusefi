@@ -343,12 +343,12 @@
                                                         <span class="pulse-ring w-45px h-45px"></span>
                                                     </button>
                                                 @else
-                                                    <input id="Producto" type="text" name="Producto" value="XXXXXXXXXXXX" maxlength="100" style="width: 100%;">
+                                                    <div class="disabled-input" style="margin-top:18px">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
                                                 @endif
                                             </div>
                                             <div style="width: 40%; padding-right: 6px;">
                                                 <div>Uso</div>
-                                                <input id="Uso" type="text" name="Uso" value="Consumo Humano" maxlength="100" style="width: 100%; margin-top:10px">
+                                                <div class="disabled-input" style="margin-top:18px">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
                                             </div>
                                             <div style="width: 30%;">
                                                 Cantidad
@@ -364,7 +364,7 @@
                                             </div>
                                             <div style="width: 30%;">
                                                 <div>Marcas distintivas</div>
-                                                <input id="marcas" type="text" name="marcas" value="XXXXXXXXXXXXXXXXX" maxlength="100" style="width: 100%;">
+                                                <div class="disabled-input" style="margin-top:18px">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
                                             </div>
                                         </div>
                                     </div>
@@ -426,7 +426,7 @@
                                         <span class="pulse-ring w-45px h-45px"></span>
                                     </button>
                                 @else
-                                    <input class="p_input" id="regulacion_tvaluar" type="text" name="regulacion_tvaluar" value="" maxlength="500" style="flex-grow: 1;">
+                                    <div class="disabled-input" style="margin-top:18px">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
                                 @endif
                             </div>
                             <div class="section">

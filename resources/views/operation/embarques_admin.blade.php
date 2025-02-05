@@ -127,6 +127,7 @@
                                                     <th class="min-w-125px">Empaque</th>
                                                     <th class="min-w-125px">Destinatario</th>
                                                     <th class="min-w-125px">Puerto</th>
+                                                    <th class="min-w-125px">Tefs</th>
                                                     <th class="min-w-125px">Fecha Embarque</th>
                                                     <th class="min-w-125px">Acciones</th>
                                                 </tr>

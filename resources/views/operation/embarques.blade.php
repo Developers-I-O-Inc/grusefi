@@ -103,6 +103,7 @@
                                     </div>
                                     <div class="col-md-4 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Procedencia</label>
+                                        <i class="ki-outline ki-message-question ms-1 fs-5" id="pp_procedencia" tabindex="0"></i>
                                         <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
                                             <option value=""></option>
                                             @foreach($lugares as $lugar)
@@ -122,6 +123,7 @@
                                     </div>
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-6 fw-bold mb-2">Procedencia</label>
+                                        <i class="ki-outline ki-message-question ms-1 fs-5" id="pp_procedencia" tabindex="0"></i>
                                         <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
                                             <option value=""></option>
                                             @foreach($lugares as $lugar)
@@ -158,16 +160,18 @@
                                 </div>
                                 <div class="col-md-4 fv-row">
                                     <label class="fs-6 fw-bold mb-2">N° Económico</label>
+                                    <i class="ki-outline ki-message-question ms-1 fs-5" id="pp_no_economico" tabindex="0"></i>
                                     <input type="text" class="form-control" placeholder="Ingresa el número económico" name="numero_economico" id="numero_economico" autocomplete="off" />
                                 </div>
                                 <div class="col-md-4 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Placas</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa las placas" name="placas_trasporte" id="placas_trasporte" />
+                                    <input type="text" class="form-control" placeholder="Ingresa las placas" name="placas_transporte" id="placas_transporte" />
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Lugar</label>
+                                    <i class="ki-outline ki-message-question ms-1 fs-5" id="pp_lugar" tabindex="0"></i>
                                     <select id="lugar_id" name="lugar_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
                                         <option value=""></option>
                                         @foreach($lugares as $lugar)
@@ -175,6 +179,13 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-bold mb-2">Origen</label>
+                                    <i class="ki-outline ki-message-question ms-1 fs-5" id="pp_origen" tabindex="0"></i>
+                                    <input type="text" class="form-control" placeholder="Ingresa el origen del embarque" name="origen" id="origen" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="row mb-4">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Uso</label>
                                     <select id="uso_id" name="uso_id" class="form-select" data-control="select2" data-placeholder="Selecciona un uso" data-allow-clear="true">
