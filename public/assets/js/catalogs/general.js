@@ -87,7 +87,7 @@ class Catalogs {
 
     }
 
-    submit_form(catalog, datos, token, modal, tableItems, btnSubmit, form) {
+    submit_form(catalog, datos, token, modal, tableItems, btnSubmit, form, validations) {
         modal.hide()
         fetch(catalog, {
             method: "POST",
@@ -115,8 +115,8 @@ class Catalogs {
                 if (isConfirmed) {
                     btnSubmit.disabled = false
                     tableItems.ajax.reload()
-                    // tableItems.columns.adjust().draw();
                     form.reset()
+                    validations.resetForm(true)
                 }
             })
         })

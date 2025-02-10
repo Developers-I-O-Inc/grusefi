@@ -1,8 +1,7 @@
 
 @extends('metronic.index')
 @section('title', 'Dashboard')
-@section('title_top', 'Dashboard')
-@section('subtitle_top', 'Menú Principal')
+@section('subtitle', 'Menú Principal')
 @section('content')
 <div id="kt_content_container" class="container-xxl">
     <div class="row gy-5 g-xl-8">

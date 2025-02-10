@@ -254,9 +254,8 @@
     </style>
 @endsection
 @section('title', 'Plantillas DV')
-@section('title_top', 'Plantillas DV')
 @section('config', 'active')
-@section('subtitle_top', 'Creación de Plantillas DV')
+@section('subtitle', 'Creación de Plantillas DV')
 @section('content')
     <div id="kt_content_container bg-light-primary" class="container-xxl">
         @if (Session::has('message_type') && Session::has('message'))
@@ -296,7 +295,7 @@
                             </select>
                         </div>
                         <div class="col-md-1 offset-3 fv-row">
-                            <a type="button" class=" btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-8 me-1 d-none" id="btn_imprimir" href="/operation/imprimir_dictamen/1" target="_blank">Imprimir</a>
+                            <a type="button" class=" btn btn-sm btn-color-muted btn-active btn-active-dark active fw-bolder px-8 me-1 d-none" id="btn_imprimir" href="#" target="_blank">Imprimir</a>
                         </div>
                         <div class="col-md-1 fv-row">
                             @can('admin_plantillas')

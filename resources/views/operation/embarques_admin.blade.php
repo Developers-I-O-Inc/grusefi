@@ -1,8 +1,7 @@
 @extends('metronic.index')
-@section('title', 'Embarques')
-@section('title_top', 'Embarques')
+@section('title', 'DV')
 @section('embarques', 'active')
-@section('subtitle_top', 'Control de embarques registrados')
+@section('subtitle', 'Control de DV´S registrados')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         @if (session('success'))
@@ -119,23 +118,26 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-row-bordered gy-5" id="kt_admin_table">
-                                            <thead>
-                                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                    <th class="min-w-50px">ID</th>
-                                                    <th class="min-w-125px">Folio</th>
-                                                    <th class="min-w-125px">Empaque</th>
-                                                    <th class="min-w-125px">Destinatario</th>
-                                                    <th class="min-w-125px">Puerto</th>
-                                                    <th class="min-w-125px">Tefs</th>
-                                                    <th class="min-w-125px">Fecha Embarque</th>
-                                                    <th class="min-w-125px">Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="fw-bold text-gray-600">
+                                        <div class="table-responsive">
+                                            <table class="table table-row-bordered gy-5" id="kt_admin_table">
+                                                <thead>
+                                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                        <th class="">ID</th>
+                                                        <th class="">Estatus</th>
+                                                        <th class="">Folio</th>
+                                                        <th class="">Empaque</th>
+                                                        <th class="">Destinatario</th>
+                                                        <th class="">Puerto</th>
+                                                        <th class="">Tefs</th>
+                                                        <th class="">Fecha Embarque</th>
+                                                        <th class="">Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="fw-bold text-gray-600">
 
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -375,9 +377,52 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="kt_modal_cancel" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered mw-650px">
+                <div class="modal-content">
+                    <form class="form" action="#" id="form_cancel" method="POST">
+                        @csrf
+                        <div class="modal-header" id="kt_modal_add_product_header">
+                            <h2 class="fw-bolder">Cancelar Embarque</h2>
+                            <div id="kt_modal_add_product_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                            transform="rotate(45 7.41422 6)" fill="black" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="modal-body py-10 px-lg-17">
+                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_product_scroll" data-kt-scroll="true"
+                                data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+                                data-kt-scroll-dependencies="#kt_modal_add_product_header"
+                                data-kt-scroll-wrappers="#kt_modal_add_product_scroll" data-kt-scroll-offset="300px">
+                                <label class="fs-6 fw-bold mb-2">Observaciones</label>
+                                <textarea class="form-control" data-kt-autosize="true" id="observations" name="observations"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer flex-center">
+                            <button type="button" id="cancel_modal"
+                                class="btn btn-light me-3">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                <span class="indicator-label">Agregar</span>
+                                <span class="indicator-progress">Espere un momento...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @push('scripts')
     <script src="{{asset('assets/js/datatables.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/datatables/datatables_fixedcolumns.js')}}"></script>
+    <script src="{{asset('assets/js/datatables/fixedColumns.dataTables.js')}}"></script>
     <script src="{{asset('assets/js/operation/embarques_admin.js')}}" type="module"></script>
 @endpush

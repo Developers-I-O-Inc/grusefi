@@ -15,8 +15,8 @@ return new class extends Migration
             $table->smallIncrements('id');
             $table->smallInteger('municipio_id')->unsigned()->index();
             $table->string('nombre', 100);
-            $table->string('nombre_corto', 50);
-            $table->string('codigo', 10);
+            $table->string('nombre_corto', 50)->nullable();
+            $table->string('codigo', 10)->nullable();
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
             $table->softdeletes();

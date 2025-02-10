@@ -117,17 +117,6 @@ export function init(){
                     }
                 },
             },
-            nombre_corto: {
-                validators: {
-                    notEmpty: {
-                        message: "Ingrese el nombre corto del puerto",
-                    },
-                    stringLength: {
-                        max: 10,
-                        message: "El nombre corto debe tener menos de 10 caracteres",
-                    }
-                },
-            },
             medio_transporte: {
                 validators: {
                     notEmpty: {
@@ -164,14 +153,6 @@ export function init(){
             { data: "activos", name: "activos" },
         ],
         order: [[2, "asc"]],
-        columnDefs: [
-            { orderable: !1, targets: 0 },
-            {
-                targets: [2],
-                visible: false,
-                searchable: false,
-            },
-        ],
         language: {
             zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
             "<span>No hay datos que mostrar</span></div></div>",
@@ -262,8 +243,7 @@ export function init(){
                             "data-kt-indicator"
                         )
                         const formData = new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`))
-                        Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-                        validations.resetForm(true);
+                        Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form, validations)
 
                     }, 1000))
                 : Swal.fire({

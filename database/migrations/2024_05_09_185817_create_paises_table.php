@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('cat_paises', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('nombre', 50);
-            $table->string('nombre_corto', 10);
-            $table->string('codigo', 10);
+            $table->string('nombre_corto', 10)->nullable();
+            $table->string('codigo', 10)->nullable();
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
             $table->softdeletes();
