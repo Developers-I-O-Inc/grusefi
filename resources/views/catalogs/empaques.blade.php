@@ -150,7 +150,7 @@
                                                         <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona un municipio" data-allow-clear="true">
                                                             <option value=""></option>
                                                             @foreach($municipios as $municipio)
-                                                                <option value="{{$municipio->id}}">{{$municipio->nombre}}</option>
+                                                                <option value="{{$municipio->id}}">{{$municipio->nombre.'-'.$municipio->estado}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -198,7 +198,7 @@
                                                         <select id="municipio_id2" name="municipio_id2" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona un municipio" data-allow-clear="true">
                                                             <option value=""></option>
                                                             @foreach($municipios as $municipio)
-                                                                <option value="{{$municipio->id}}">{{$municipio->nombre}}</option>
+                                                                <option value="{{$municipio->id}}">{{$municipio->nombre.'-'.$municipio->estado}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

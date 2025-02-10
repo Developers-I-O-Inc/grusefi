@@ -32,4 +32,8 @@ class Municipios extends Model
             return DB::select("SELECT id, nombre FROM cat_municipios WHERE estado_id IN (".implode(",", $estados).")");
         }
     }
+
+    public static function get_municipios(){
+        return DB::select("SELECT m.id, m.nombre, m.nombre_corto, m.activo, m.codigo, e.nombre as estado FROM cat_municipios m INNER JOIN cat_estados e ON m.estado_id = e.id");
+    }
 }
