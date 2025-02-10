@@ -68,7 +68,7 @@ class EmpaquesController extends Controller
                     ->make(true);
         }
 
-        $municipios = Municipios::all();
+        $municipios = Municipios::get_municipios();
         return view('catalogs/empaques', array("municipios" => $municipios));
 
     }
