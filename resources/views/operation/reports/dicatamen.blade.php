@@ -250,11 +250,11 @@
                 <td class="td_datos_2 font-g">Marcas Distintivas</td>
             </tr>
             <tr>
-                <td class="td_datos_3 font-g">AGUACATE(Persea americana) Var. Hass</td>
-                <td class="td_datos_3 font-g">CONSUMO HUMANO</td>
-                <td class="td_datos_3 font-g">18.0800 Toneladas</td>
-                <td class="td_datos_3 font-g">: 1600 CAJAS DE CARTON DE 11.3 KGS. C/U </td>
-                <td class="td_datos_3 font-g">LUCKY7'S</td>
+                <td class="td_datos_3 font-g">XXXXXXXXXXXXXXXXXX</td>
+                <td class="td_datos_3 font-g">XXXXXXXXXXXXXXXXXX</td>
+                <td class="td_datos_3 font-g">XXXXXXXXXXXXXXXXXX</td>
+                <td class="td_datos_3 font-g">XXXXXXXXXXXXXXXXX </td>
+                <td class="td_datos_3 font-g">XXXXXXXXXXXXXXXXX</td>
             </tr>
             <tr>
                 <td colspan="2" class="font-g td_datos_2">Punto de entrada </td>
@@ -263,14 +263,10 @@
                 <td class="font-g td_datos_2">Procedencia</td>
             </tr>
             <tr>
-                <td colspan="2" class="td_datos_3 font-g">TORONTO, CANADA</td>
-                <td class="td_datos_3 font-g">TRAILER PLACAS: 82-UL-6R
-                    345</td>
-                <td class="td_datos_3 font-g">ATENGUILLO, ZAPOTLÁN EL
-                    GRANDE, CUAUTLA, MAZAMITLA,
-                    TAMAZULA DE GORDIANO, JALISCO;
-                    MÉXICO</td>
-                <td class="td_datos_3 font-g">ZAPOTILTIC, JALISCO, MÉXICO</td>
+                <td colspan="2" class="td_datos_3 font-g">XXXXXXXXXXXXXXXXXX</td>
+                <td class="td_datos_3 font-g">XXXXXXXXXXXXXXXXX</td>
+                <td class="td_datos_3 font-g">XXXXXXXXXXXXXXXXX</td>
+                <td class="td_datos_3 font-g">XXXXXXXXXXXXXXXXX</td>
             </tr>
         </table>
         <table>

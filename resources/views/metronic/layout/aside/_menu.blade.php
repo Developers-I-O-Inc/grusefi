@@ -185,12 +185,12 @@
                     <span class="menu-icon me-0">
                         <i class="ki-outline ki-parcel fs-1"></i>
                     </span>
-                    <span class="menu-title">Embarques</span>
+                    <span class="menu-title">DV</span>
                 </span>
                 <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
                     <div class="menu-item">
                         <div class="menu-content">
-                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">Embarques</span>
+                            <span class="menu-section fs-5 fw-bolder ps-1 py-1">DV</span>
                         </div>
                     </div>
                     @can(['admin_embarques'])
@@ -199,7 +199,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Nuevo</span>
+                                <span class="menu-title">Generar nuevo DV</span>
                             </a>
                         </div>
                     @endcan
@@ -208,7 +208,7 @@
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">Generar DV</span>
+                            <span class="menu-title">Consultar DV's</span>
                         </a>
                     </div>
                 </div>

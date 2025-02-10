@@ -1,8 +1,7 @@
 @extends('metronic.index')
 @section('title', 'Tipo de Cultivos')
-@section('title_top', 'Tipo de Cultivos')
 @section('config', 'active')
-@section('subtitle_top', 'Control de Tipo de Cultivos')
+@section('subtitle', 'Control de Tipo de Cultivos')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card shadow-sm">
@@ -46,7 +45,7 @@
                                         data-kt-check-target="#kt_tipo_cultivos_table .form-check-input" value="1" />
                                 </div>
                             </th>
-                            <th class="min-w-125px">id</th>
+                            <th class="min-w-20px">id</th>
                             <th class="min-w-125px">Tipo de Cultivo</th>
                             <th class="min-w-125px">Status</th>
                             <th class="min-w-125px">Opciones</th>

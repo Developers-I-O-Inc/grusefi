@@ -79,28 +79,6 @@ export default function init(){
                     }
                 }
             },
-            nombre_corto: {
-                validators: {
-                    notEmpty: {
-                        message: "Nombre corto requerido",
-                    },
-                    stringLength: {
-                        max: 10,
-                        message: "El nombre corto no debe tener más de 10 caracteres",
-                    }
-                },
-            },
-            codigo: {
-                validators: {
-                    notEmpty: {
-                        message: "Código",
-                    },
-                    stringLength: {
-                        max: 10,
-                        message: "El código no debe tener más de 10 caracteres",
-                    }
-                },
-            },
             pais_id: {
                 validators: {
                     notEmpty: {
@@ -134,14 +112,6 @@ export default function init(){
             { data: "buttons", name: "buttons" },
         ],
         order: [[2, "asc"]],
-        columnDefs: [
-            { orderable: !1, targets: 0 },
-            {
-                targets: [1],
-                visible: false,
-                searchable: false,
-            },
-        ],
         language: {
             zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
             "<span>No hay datos que mostrar</span></div></div>",
@@ -200,8 +170,7 @@ export default function init(){
                             "data-kt-indicator"
                         )
                         const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
-                        Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-                        validations.resetForm(true);
+                        Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form, validations)
 
                     }, 1000))
                 : Swal.fire({

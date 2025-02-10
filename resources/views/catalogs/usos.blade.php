@@ -1,8 +1,7 @@
 @extends('metronic.index')
 @section('title', 'Usos')
-@section('title_top', 'Usos')
 @section('config', 'active')
-@section('subtitle_top', 'Control de usos')
+@section('subtitle', 'Control de usos')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card shadow-sm">
@@ -46,7 +45,7 @@
                                         data-kt-check-target="#kt_usos_table .form-check-input" value="1" />
                                 </div>
                             </th>
-                            <th class="min-w-125px">id</th>
+                            <th class="min-w-20px">id</th>
                             <th class="min-w-125px">uso</th>
                             <th class="min-w-125px">Status</th>
                             <th class="min-w-125px">Opciones</th>

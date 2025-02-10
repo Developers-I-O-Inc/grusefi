@@ -210,18 +210,41 @@ class EmbarquesController extends Controller
             }
 
             return Datatables::of($embarques) ->addIndexColumn()
+            ->addColumn('status', function($row){
+                $btn = "";
+                if($row->status == "Finalizado"){
+                    $btn = '<span class="badge badge-light-success">Finalizado</span>';
+                }
+
+                else if($row->status == "Modificado"){
+                    $btn = '<span class="badge badge-light-warning">Modificado</span>';
+                }
+
+                else if($row->status == "Cancelado"){
+                    $btn = '<span class="badge badge-light-danger">Cancelado</span>';
+                }
+
+                else{
+                    $btn = '<span class="badge badge-light-primary">Pendiente</span>';
+                }
+
+                return $btn;
+            })
             ->addColumn('buttons', function($row){
                 $btn = "";
-                if($row->status != "Finalizado"){
+                if($row->status != "Finalizado" && $row->status != "Cancelado"){
                     $btn = '<button data-id="'.$row->id.'" type="button" class="btn btn-active-light-success btn-sm" data-kt-admin-table-filter="edit" data-bs-toggle="tooltip" title="Editar">
                         <i class="ki-outline ki-pencil text-success fs-2"></i>
                     </button>
                     <a href="/operation/imprimir_dictamen_embarque_rpv/'.$row->id.'" target="_blank" class="btn btn-active-light-success btn-sm" data-bs-toggle="tooltip" title="Imprimir">
                         <i class="ki-outline ki-printer text-success fs-2"></i>
-                    </a>';
+                    </a>
+                    <button data-id="'.$row->id.'" type="_button" class="btn btn-active-light-success btn-sm" data-bs-toggle="tooltip" title="Cancelar" data-kt-admin-table-filter="delete">
+                        <i class="ki-outline ki-tablet-delete text-danger fs-2"></i>
+                    </button>';
                 }
 
-                else{
+                else if($row->status == "Finalizado"){
                     $btn = '<a href="/operation/imprimir_dictamen_embarque_rpv/'.$row->id.'" target="_blank" class="btn btn-active-light-success btn-sm" data-bs-toggle="tooltip" title="Imprimir">
                         <i class="ki-outline ki-printer text-success fs-2"></i>
                     </a>
@@ -230,9 +253,12 @@ class EmbarquesController extends Controller
                     </button>
                     ';
                 }
+                else{
+
+                }
                 return $btn;
             })
-            ->rawColumns(['buttons'])
+            ->rawColumns(['buttons', 'status'])
             ->make(true);
 
         }
@@ -402,6 +428,37 @@ class EmbarquesController extends Controller
     {
         EmbarquesProductos::find($product_id)->delete();
         return response()->json(['success' => 'Producto eliminado correctamente']);
+    }
+
+    public function cancel_embarque(Request $request, $embarque_id)
+    {
+        $embarque = Embarques::find($embarque_id);
+        // GET COUNTRY ID BY EMBPAQUE
+        $country_id = Empaques::select('cat_estados.codigo', 'cat_estados.id')
+            ->join('cat_municipios', 'cat_empaques.municipio_id', 'cat_municipios.id')
+            ->join('cat_estados', 'cat_municipios.estado_id', 'cat_estados.id')->where('cat_empaques.id', $embarque->empaque_id)->first();
+        // -----------------------------
+        // CONSECUTIVE
+        $consecutivo = Embarques::count_consecutivo_year($embarque->tefs_id, $country_id->id);
+        $num_consecutivo = $consecutivo[0]->total;
+        if (strlen((string)$num_consecutivo) > 4) {
+            $cadena_consecutivo = (string)$num_consecutivo;
+        }
+        else{
+            if($num_consecutivo == 0){
+                $cadena_consecutivo = '0001';
+            }
+            else
+                $cadena_consecutivo = str_pad($num_consecutivo + 1, 4, '0', STR_PAD_LEFT);
+        }
+        // -----------------------------
+        $embarque->folio_embarque = 'VMRE-'.auth()->user()->employee_number.'-'.$country_id->codigo.'-'.$cadena_consecutivo.'-'.substr(date('Y'), 2, 2);
+        $embarque->status = "Cancelado";
+        $embarque->fecha_termino = now();
+        $embarque->observaciones = $request->observations;
+        $embarque->save();
+
+        return redirect()->back();
     }
 
 }

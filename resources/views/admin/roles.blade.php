@@ -1,7 +1,6 @@
 @extends('metronic.index')
 @section('title', 'Roles')
-@section('title_top', 'Roles')
-@section('subtitle_top', 'Control de Roles')
+@section('subtitle', 'Control de Roles')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card">

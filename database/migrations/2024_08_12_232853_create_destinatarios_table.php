@@ -17,7 +17,7 @@ return new class extends Migration
             $table->smallInteger('municipio_id')->unsigned()->index();
             $table->smallInteger('localidad_id')->nullable()->unsigned()->index();
             $table->string("nombre", 500);
-            $table->string("nombre_corto", 50);
+            $table->string("nombre_corto", 50)->nullable();
             $table->string("domicilio", 1000);
             $table->string('colonia', 100);
             $table->string('num_ext', 10)->nullable();

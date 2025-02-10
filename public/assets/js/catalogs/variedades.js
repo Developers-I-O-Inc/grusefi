@@ -28,7 +28,6 @@ const edit = () => {
     ).forEach((e) => {
         e.addEventListener("click", function (e) {
             e.preventDefault()
-            // Catalogs.checked(check_active)
             $.get("variedades/"+ $(this).data("id") + "/edit", function(data){
                 edit_id.value=data.variedad.id
                 edit_variedad.value=data.variedad.variedad
@@ -120,14 +119,6 @@ export function init(){
             { data: "buttons", name: "buttons" },
         ],
         order: [[2, "asc"]],
-        columnDefs: [
-            { orderable: !1, targets: 0 },
-            {
-                targets: [1],
-                visible: false,
-                searchable: false,
-            },
-        ],
         language: {
             zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
             "<span>No hay datos que mostrar</span></div></div>",
@@ -183,8 +174,7 @@ export function init(){
                             "data-kt-indicator"
                         )
                         const formData = new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`))
-                        Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-                        validations.resetForm(true);
+                        Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form, validations)
 
                     }, 1000))
                 : Swal.fire({

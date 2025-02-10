@@ -441,7 +441,6 @@ var KTCreateAccount = (function () {
                     else{
                         Operation.validate_plantilla(`validate_plantilla/${select_pais.val()}/${select_municipio.val()}`, 'GET',
                             select_pais.find('option:selected').text(), select_municipio.find('option:selected').text())
-                        // Operation.get_next_selects("presentaciones", select_municipio.val(), select_presentacion, true)
                     }
                 })
                 // CLOSE MODAL

@@ -1,8 +1,7 @@
 @extends('metronic.index')
 @section('title', 'Clientes')
-@section('title_top', 'Clientes')
 @section('config', 'active')
-@section('subtitle_top', 'Control de Clientes')
+@section('subtitle', 'Control de Clientes')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card shadow-sm">
@@ -37,30 +36,32 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_empaques_table">
-                    <thead>
-                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="w-10px pe-2">
-                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                        data-kt-check-target="#kt_empaques_table .form-check-input" value="1" />
-                                </div>
-                            </th>
-                            <th class="">id</th>
-                            <th class="">Opciones</th>
-                            <th class="">Nom. Corto</th>
-                            <th class="">Nombre Fiscal</th>
-                            <th class="">Domicilio</th>
-                            <th class="">RFC</th>
-                            <th class="">Exportacion</th>
-                            <th class="">Asociado</th>
-                            <th class="">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="fw-bold text-gray-600">
+                <div class="table-responsive">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_empaques_table">
+                        <thead>
+                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                <th class="w-10px pe-2">
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
+                                            data-kt-check-target="#kt_empaques_table .form-check-input" value="1" />
+                                    </div>
+                                </th>
+                                <th class="">Opciones</th>
+                                <th class="">id</th>
+                                <th class="">Nom. Corto</th>
+                                <th class="">Nombre Fiscal</th>
+                                <th class="">Domicilio</th>
+                                <th class="">RFC</th>
+                                <th class="">Exportacion</th>
+                                <th class="">Asociado</th>
+                                <th class="">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-bold text-gray-600">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="modal fade" id="kt_modal_add_empaque" tabindex="-1" aria-hidden="true">

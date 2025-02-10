@@ -116,18 +116,6 @@ export function init(){
                     }
                 },
             },
-            nombre_corto: {
-                validators: {
-                    notEmpty: {
-                        message: "Ingrese el nombre corto del destinatario",
-                    },
-                    stringLength: {
-                        max: 50,
-                        message:
-                            "El nombre corto del destinatario debe tener menos de 50 caracteres",
-                    }
-                },
-            },
             domicilio: {
                 validators: {
                     notEmpty: {
@@ -200,14 +188,6 @@ export function init(){
             { data: "buttons", name: "buttons" },
         ],
         order: [[2, "asc"]],
-        columnDefs: [
-            { orderable: !1, targets: 0 },
-            {
-                targets: [1],
-                visible: false,
-                searchable: false,
-            },
-        ],
         language: {
             zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
             "<span>No hay datos que mostrar</span></div></div>",
@@ -294,9 +274,8 @@ export function init(){
                         btn_submit.removeAttribute(
                             "data-kt-indicator"
                         )
-                        const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
-                        Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-                        validations.resetForm(true);
+                        const formData = new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`))
+                        Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form, validations)
 
                     }, 1000))
                 : Swal.fire({

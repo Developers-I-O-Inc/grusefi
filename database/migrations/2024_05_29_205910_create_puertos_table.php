@@ -15,7 +15,7 @@ return new class extends Migration
             $table->smallIncrements('id');
             $table->smallInteger('municipio_id')->unsigned()->index();
             $table->string('puerto', 50);
-            $table->string('nombre_corto', 10);
+            $table->string('nombre_corto', 10)->nullable();
             $table->string('medio_transporte', 50);
             $table->tinyInteger('placas')->default(1);
             $table->tinyInteger('activo')->default(1);
