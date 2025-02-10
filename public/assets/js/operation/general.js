@@ -240,8 +240,12 @@ class Operation {
                   }).then((result) => {
                     if (result.isConfirmed) {
                         let messageType = 'Alerta'
-                        let message = 'Actualmente no existe ninguna plantilla con el país ni variedad seleccionada!'
+                        let message = 'Actualmente no existe ninguna plantilla con el país ni origen seleccionado!'
                         window.location.href = `plantillas_rpv?message_type=${messageType}&message=${message}&variedad_id=${variedad_id}&pais_id=${pais_id}`;
+
+                    }
+                    else{
+                        $("#municipio_id").val(null).trigger("change.select2")
                     }
                   })
                 throw new Error('Error en la base de datos')

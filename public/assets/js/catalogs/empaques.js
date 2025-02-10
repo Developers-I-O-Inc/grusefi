@@ -135,17 +135,6 @@ export function init() {
     edit_active = form.querySelector("#activo")
     validations = FormValidation.formValidation(form, {
         fields: {
-            nombre_corto: {
-                validators: {
-                    notEmpty: {
-                        message: "Ingrese el nombre corto",
-                    },
-                    stringLength: {
-                        max: 50,
-                        message: "El nombre corto debe tener menos de 50 caracteres",
-                    }
-                },
-            },
             nombre_fiscal: {
                 validators: {
                     notEmpty: {
@@ -253,17 +242,6 @@ export function init() {
                     }
                 }
             },
-            codigo:{
-                validators: {
-                    notEmpty: {
-                        message: "Ingrese el código",
-                    },
-                    stringLength: {
-                        max: 10,
-                        message: "El código debe tener menos de 10 caracteres",
-                    }
-                }
-            },
             municipio_id2:{
                 validators: {
                     notEmpty: {
@@ -288,8 +266,8 @@ export function init() {
         processing: true,
         columns: [
             { data: "check", name: "check" },
-            { data: "id", name: "id" },
             { data: "buttons", name: "buttons" },
+            { data: "id", name: "id" },
             { data: "nombre_corto" , name : "nombre_corto" },
             { data: "nombre_fiscal" , name : "nombre_fiscal" },
             { data: "domicilio_fiscal" , name : "domicilio_fiscal" },
@@ -301,11 +279,8 @@ export function init() {
         order: [[2, "asc"]],
         columnDefs: [
             { orderable: !1, targets: 0 },
-            {
-                targets: [1],
-                visible: false,
-                searchable: false,
-            },
+            { orderable: !1, targets: 1 },
+            { orderable: !1, targets: 2 },
         ],
         language: {
             zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
@@ -390,10 +365,8 @@ export function init() {
                         btn_submit.removeAttribute(
                             "data-kt-indicator"
                         )
-                        // const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
                         const formData = new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`))
-                        Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form)
-                        validations.resetForm(true);
+                        Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form, validations)
 
                     }, 1000))
                 : Swal.fire({

@@ -1,8 +1,7 @@
 @extends('metronic.index')
-@section('title', 'Embarques')
-@section('title_top', 'Embarques')
+@section('title', 'Dictamen de Verificación')
 @section('embarques', 'active')
-@section('subtitle_top', 'Control de Embarques')
+@section('subtitle', 'Crear Nuevo Documento')
 @section('content')
     <div id="kt_content_container bg-light-primary" class="container-xxl">
         <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid" id="stepper_embarques">

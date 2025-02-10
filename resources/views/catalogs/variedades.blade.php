@@ -1,8 +1,7 @@
 @extends('metronic.index')
 @section('title', 'Variedades')
-@section('title_top', 'Variedades')
 @section('zones', 'active')
-@section('subtitle_top', 'Control de Variedades')
+@section('subtitle', 'Control de Variedades')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card shadow-sm">
@@ -46,7 +45,7 @@
                                         data-kt-check-target="#kt_variedades_table .form-check-input" value="1" />
                                 </div>
                             </th>
-                            <th class="min-w-125px">id</th>
+                            <th class="min-w-25px">id</th>
                             <th class="min-w-125px">Variedad</th>
                             <th class="min-w-125px">Nombre Científico</th>
                             <th class="min-w-125px">Tipo de Cultivo</th>

@@ -67,7 +67,7 @@ var KTadminlist = (function () {
         modal_standards,
         modal_upload,
         modal_import,
-        // select_presentacion,
+        modal_cancel,
         table_products,
         table_standards,
         n,
@@ -297,7 +297,7 @@ var KTadminlist = (function () {
 
                 })
             })
-        }
+        },
         print = () => {
             n.querySelectorAll(
                 '[data-kt-admin-table-filter="print"]'
@@ -305,6 +305,33 @@ var KTadminlist = (function () {
                 e.addEventListener("click", function (e) {
                     e.preventDefault()
                     Swal.fire("Esta en mantenimiento")
+
+                })
+            })
+        },
+        delete_embarque = () => {
+            n.querySelectorAll(
+                '[data-kt-admin-table-filter="delete"]'
+            ).forEach((e) => {
+                e.addEventListener("click", function (e) {
+                    e.preventDefault()
+                    Swal.fire({
+                        title: "¿Estás seguro?",
+                        text: "No podrás realizar ningúna acción con este DV!",
+                        icon: "warning",
+                        showCancelButton: !0,
+                        buttonsStyling: !1,
+                        confirmButtonText: "Sí, eliminar!",
+                        cancelButtonText: "No, cancelar",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-danger",
+                            cancelButton: "btn fw-bold btn-active-light-primary",
+                        },
+                    }).then((e) => {
+                        e.value &&
+                           modal_cancel.show()
+                           $('#form_cancel').attr('action', `/operation/cancel_embarque/${$(this).data("id")}`)
+                    });
 
                 })
             })
@@ -321,6 +348,7 @@ var KTadminlist = (function () {
                 (modal_standards = new bootstrap.Modal(document.querySelector("#kt_modal_edit_standards"))),
                 (modal_upload = new bootstrap.Modal(document.querySelector("#kt_modal_upload"))),
                 (modal_import = new bootstrap.Modal(document.querySelector("#kt_modal_import"))),
+                (modal_cancel = new bootstrap.Modal(document.querySelector("#kt_modal_cancel"))),
                 (span_fecha_embarque = document.querySelector('#fecha_embarque')),
                 (span_hora_embarque = document.querySelector('#hora_embarque')),
                 // (select_presentacion = $('#presentacion_id').select2()),
@@ -354,8 +382,16 @@ var KTadminlist = (function () {
                         },
                         serverSide: true,
                         processing: true,
+                        fixedColumns: {
+                            start: 1,
+                            end: 1
+                        },
+                        scrollCollapse: true,
+                        scrollX: true,
+                        scrollY: 300,
                         columns: [
                             { data: "id", name: "id" },
+                            { data: "status", name: "status" },
                             { data: "folio_embarque", name: "folio_embarque" },
                             { data: "nombre_fiscal", name: "nombre_fiscal" },
                             { data: "nombre", name: "nombre" },
@@ -377,7 +413,7 @@ var KTadminlist = (function () {
                             $('[data-bs-toggle="tooltip"]').tooltip()
                         },
                     }).on("draw", function () {
-                        edit(), upload(), print(), exportButtons(),handleSearchDatatable()
+                        edit(), upload(), print(), exportButtons(),handleSearchDatatable(), delete_embarque()
                     })
                 )
                 ),

@@ -33,7 +33,8 @@ class Embarques extends Model
         'empresa_transporte',
         'chofer',
         'tefs_id',
-        'uso_id'
+        'uso_id',
+        'status'
     ];
 
     public static function get_embarque($id){
@@ -131,8 +132,7 @@ class Embarques extends Model
         return DB::select("SELECT COUNT(tefs_id) AS total
             FROM op_embarques
             INNER JOIN cat_empaques ON op_embarques.empaque_id = cat_empaques.id
-            INNER JOIN cat_localidades ON cat_empaques.localidad_id = cat_localidades.id
-            INNER JOIN cat_municipios ON cat_localidades.municipio_id = cat_municipios.id
+            INNER JOIN cat_municipios ON cat_empaques.municipio_id = cat_municipios.id
             WHERE YEAR(op_embarques.created_at) = YEAR(CURDATE())
             AND status = 'Finalizado'
             AND tefs_id = ?

@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('empresa_transporte')->nullable();
             $table->string('chofer')->nullable();
             $table->enum('status', ['Pendiente', 'Modificado', 'Finalizado'])->default('Pendiente');
+            $table->string('observaciones', 1300)->nullable();
             $table->foreign('empaque_id')->references('id')->on('cat_empaques');
             $table->foreign('destinatario_id')->references('id')->on('cat_destinatarios');
             $table->foreign('tefs_id')->references('id')->on('users');

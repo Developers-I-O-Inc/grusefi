@@ -170,6 +170,7 @@ export function init(){
                     btn_imprimir.classList.remove("d-none")
                     btn_edit.classList.remove("d-none")
                     btn_add.classList.add("d-none")
+                    $('#btn_imprimir').attr('href', `/operation/imprimir_dictamen/${edit_id.value}`)
                     Swal.close()
                 }
                 else{

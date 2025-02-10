@@ -1,8 +1,7 @@
 @extends('metronic.index')
 @section('title', 'Puntos de Entrada')
-@section('title_top', 'Puntos de Entrada')
 @section('config', 'active')
-@section('subtitle_top', 'Control de Puntos de Entrada')
+@section('subtitle', 'Control de Puntos de Entrada')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card shadow-sm">
@@ -47,7 +46,7 @@
                                 </div>
                             </th>
                             <th class="min-w-65px">Opciones</th>
-                            <th class="min-w-125px">id</th>
+                            <th class="min-w-25px">id</th>
                             <th class="min-w-125px">Punto de Entrada</th>
                             <th class="min-w-125px">Pais</th>
                             <th class="min-w-125px">Estado</th>
@@ -115,7 +114,7 @@
                                     <input type="text" class="form-control d-none" name="id_puerto" id="id_puerto" />
                                 </div>
                                 <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
+                                    <label class="fs-6 fw-bold mb-2">Nombre Corto</label>
                                     <input type="text" class="form-control" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" />
                                 </div>
                                 <div class="fv-row mb-7">

@@ -1,8 +1,7 @@
 @extends('metronic.index')
 @section('title', 'destinatarios')
-@section('title_top', 'destinatarios')
 @section('config', 'active')
-@section('subtitle_top', 'Control de destinatarios')
+@section('subtitle', 'Control de destinatarios')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card shadow-sm">
@@ -46,7 +45,7 @@
                                         data-kt-check-target="#kt_destinatarios_table .form-check-input" value="1" />
                                 </div>
                             </th>
-                            <th class="min-w-125px">id</th>
+                            <th class="min-w-25px">id</th>
                             <th class="min-w-125px">Cliente</th>
                             <th class="min-w-125px">Nombre Corto</th>
                             <th class="min-w-125px">Destinatario</th>
@@ -64,8 +63,7 @@
         <div class="modal fade" id="kt_modal_add_destinatario" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-850px">
                 <div class="modal-content">
-                    <form class="form" action="#" id="kt_modal_add_destinatario_form"
-                        data-kt-redirect="../../demo6/dist/apps/destinatarios/list.html">
+                    <form class="form" action="#" id="kt_modal_add_destinatario_form">
                         <div class="modal-header" id="kt_modal_add_destinatario_header">
                             <h2 class="fw-bolder">Agregar Destinatario</h2>
                             <div id="kt_modal_add_destinatario_close" class="btn btn-icon btn-sm btn-active-icon-primary">
@@ -96,7 +94,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-bold mb-2">Nombre corto</label>
+                                        <label class="fs-6 fw-bold mb-2">Nombre corto</label>
                                         <input type="text" class="form-control" placeholder="Ingresa un nombre corto" name="nombre_corto" id="nombre_corto" autocomplete="off"/>
                                     </div>
                                 </div>

@@ -1,8 +1,7 @@
 @extends('metronic.index')
 @section('title', 'Normas')
-@section('title_top', 'Normas')
 @section('admin', 'active')
-@section('subtitle_top', 'Control de Normas')
+@section('subtitle', 'Control de Normas')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card shadow-sm">

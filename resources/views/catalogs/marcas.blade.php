@@ -1,8 +1,7 @@
 @extends('metronic.index')
 @section('title', 'Marcas')
-@section('title_top', 'Marcas')
 @section('config', 'active')
-@section('subtitle_top', 'Control de Marcas')
+@section('subtitle', 'Control de Marcas')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card shadow-sm">
@@ -46,7 +45,7 @@
                                         data-kt-check-target="#kt_marcas_table .form-check-input" value="1" />
                                 </div>
                             </th>
-                            <th class="min-w-125px">id</th>
+                            <th class="min-w-25px">id</th>
                             <th class="min-w-125px">Empaque</th>
                             <th class="min-w-125px">Marca</th>
                             <th class="min-w-125px">Status</th>

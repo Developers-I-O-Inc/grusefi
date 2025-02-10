@@ -1,8 +1,7 @@
 @extends('metronic.index')
 @section('title', 'Vigencias')
-@section('title_top', 'Vigencias')
 @section('admin', 'active')
-@section('subtitle_top', 'Control de Vigencias')
+@section('subtitle', 'Control de Vigencias')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         @if(session('error_vigencia'))

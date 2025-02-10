@@ -1,8 +1,7 @@
 @extends('metronic.index')
 @section('title', 'Paises')
-@section('title_top', 'Paises')
 @section('zones', 'active')
-@section('subtitle_top', 'Control de Paises')
+@section('subtitle', 'Control de Paises')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card shadow-sm">
@@ -54,7 +53,7 @@
                                     </div>
                                 @endcan
                             </th>
-                            <th class="min-w-125px">id</th>
+                            <th class="min-w-20px">id</th>
                             <th class="min-w-125px">Nombre</th>
                             <th class="min-w-125px">Nombre Corto</th>
                             <th class="min-w-125px">Código</th>
@@ -97,11 +96,11 @@
                                     <input type="text" class="form-control d-none" name="id_pais" id="id_pais" />
                                 </div>
                                 <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
+                                    <label class="fs-6 fw-bold mb-2">Nombre Corto</label>
                                     <input type="text" class="form-control" placeholder="Ingresa nombre corto" name="nombre_corto" id="nombre_corto" autocomplete="off" />
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <label class="required fs-6 fw-bold mb-2">Código</label>
+                                    <label class="fs-6 fw-bold mb-2">Código</label>
                                     <input type="text" class="form-control" placeholder="Ingresa un código" name="codigo" id="codigo" autocomplete="off"/>
                                 </div>
                                 <div class="fv-row mb-4">
