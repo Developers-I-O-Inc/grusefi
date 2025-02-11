@@ -2,22 +2,18 @@
 import Operation from "./general.js"
 
 var KTCreateAccount = (function () {
-    let check_active,
-        edit_active,
-        check_import
+    let check_import
     const token = $('meta[name="csrf-token"]').attr('content')
     var e,
         btn_modal,
         btn_modal_c,
         btn_add_standard,
-        btn_add_maquilador,
         btn_add_products,
         btn_add_product,
         count_standards = 0,
         edit_text_standard,
         edit_text_products,
         table_standards,
-        table_maquilador,
         table_products,
         stepper_embarques,
         form_embarques,
@@ -27,11 +23,9 @@ var KTCreateAccount = (function () {
         s,
         r,
         select_empaque,
-        select_consolidado,
         select_destinatario,
         select_marca,
         select_standard,
-        select_maquiladores,
         select_pais,
         select_puerto,
         select_tefs,
@@ -135,19 +129,14 @@ var KTCreateAccount = (function () {
                 (select_empaque = $('#empaque_id').select2()),
                 (select_tefs = $('#tefs_id').select2()),
                 (select_marca = $('#select_marca').select2()),
-                (select_consolidado = $('#consolidado_id').select2()),
                 (select_destinatario = $('#destinatario_id').select2()),
                 (select_municipio = $('#municipio_id').select2()),
                 (select_standard = $('#select_standard').select2()),
-                (select_maquiladores = $('#select_maquiladores').select2()),
                 (select_puerto = $('#puerto_id').select2()),
                 (edit_text_standard = document.querySelector("#edit_standards")),
                 (edit_text_products = document.querySelector("#edit_products")),
-                (check_active = document.querySelector("#check_activo")),
                 (check_import = document.querySelector("#check_import")),
-                (edit_active = document.querySelector("#consolidado")),
                 (btn_add_standard = document.querySelector("#btn_add_standard")),
-                (btn_add_maquilador = document.querySelector("#btn_add_maquilador")),
                 (btn_add_products = document.querySelector("#btn_add_products")),
                 (btn_add_product = document.querySelector("#btn_add_product")),
                 (stepper_embarques = document.querySelector("#stepper_embarques")),
@@ -158,11 +147,11 @@ var KTCreateAccount = (function () {
                 (btn_submit = stepper_embarques.querySelector('[data-kt-stepper-action="submit"]')),
                 (s = stepper_embarques.querySelector('[data-kt-stepper-action="next"]')),
                 (r = new KTStepper(stepper_embarques)).on("kt.stepper.changed", function (e) {
-                    5 === r.getCurrentStepIndex()
+                    3 === r.getCurrentStepIndex()
                         ? (btn_submit.classList.remove("d-none"),
                             btn_submit.classList.add("d-inline-block"),
                             s.classList.add("d-none"))
-                        : 6 === r.getCurrentStepIndex()
+                        : 4 === r.getCurrentStepIndex()
                             ? (btn_submit.classList.add("d-none"), s.classList.add("d-none"))
                             : (btn_submit.classList.remove("d-inline-block"),
                                 btn_submit.classList.remove("d-none"),
@@ -196,10 +185,6 @@ var KTCreateAccount = (function () {
                 }),
                 r.on("kt.stepper.previous", function (e) {
                     console.log("stepper.previous"), e.goPrevious(), KTUtil.scrollTop()
-                }),
-                // CHECK ACTIVE
-                 check_active.addEventListener("click", function (t) {
-                    Operation.checked(edit_active, check_active)
                 }),
                 // CHECK IMPORT
                 check_import.addEventListener("click", function (t) {
@@ -244,26 +229,6 @@ var KTCreateAccount = (function () {
                     },
                 }).on("draw", function(){
                     delete_permission(table_standards, 1);
-                })),
-                 // TABLE MAQUILADORES
-                (table_maquilador = $("#kt_maquiladores_table").DataTable({
-                    order: [[1, "asc"]],
-                    columnDefs: [
-                        { orderable: !1, targets: 0, visible:0 },
-                    ],
-                    language: {
-                        zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
-                        "<span>No hay datos que mostrar</span></div></div>",
-                        info: "Mostrando página _PAGE_ de _PAGES_",
-                        infoEmpty: "<div class='container-fluid'>No hay Información</div>",
-                        infoFiltered: "(Filtrando _MAX_ registros)",
-                        processing:
-                            "<span class='fa-stack fa-lg'>\n\
-                            <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
-                        </span>&emsp;Processing Message here...",
-                    },
-                }).on("draw", function(){
-                    delete_permission(table_maquilador, 0);
                 })),
                  // TABLE PRODUCTS
                 (table_products = $("#kt_products_table").DataTable({
@@ -331,6 +296,8 @@ var KTCreateAccount = (function () {
                             trigger: new FormValidation.plugins.Trigger(),
                             bootstrap: new FormValidation.plugins.Bootstrap5({
                                 rowSelector: ".fv-row",
+                                eleValidClass: "is-valid",
+                                eleInvalidClass: "is-invalid",
                             }),
                         },
                     })
@@ -378,10 +345,8 @@ var KTCreateAccount = (function () {
                     arr_validations[0].validate().then(function (t) {
                         const formData = new FormData(document.querySelector(`#form_embarques`));
                         const standardsArray = table_standards.column(0).data().toArray()
-                        const maquiladoresArray = table_standards.column(0).data().toArray()
                         const productosArray = table_products.data().toArray();
                         formData.append('standards', JSON.stringify(standardsArray))
-                        formData.append('maquiladores', JSON.stringify(maquiladoresArray))
                         formData.append('productos', JSON.stringify(productosArray))
                         arr_validations[0].enableValidator('puerto_id')
                         arr_validations[0].enableValidator('destinatario_id')
@@ -422,11 +387,8 @@ var KTCreateAccount = (function () {
                 select_empaque.on('change', function() {
                     arr_validations[0].revalidateField('empaque_id')
                     arr_validations[0].disableValidator('destinatario_id')
-                    // const select_estado2 = $('#estado_id').select2()
                     Operation.get_next_selects("marcas", select_empaque.val(), select_marca)
                     Operation.get_next_selects("destinatarios", select_empaque.val(), select_destinatario)
-                    Operation.get_next_selects("maquiladores", select_empaque.val(), select_maquiladores)
-                    Operation.get_next_selects("maquiladores", select_empaque.val(), select_consolidado)
                 })
                 // SELECT VARIEDADES
                 select_municipio.on('change', function() {
@@ -455,11 +417,6 @@ var KTCreateAccount = (function () {
                 btn_add_standard.addEventListener("click", function (t) {
                     t.preventDefault();
                     add_fields(table_standards, select_standard)
-                })
-                 // ADD PERMISSION TO DATATABLE
-                btn_add_maquilador.addEventListener("click", function (t) {
-                    t.preventDefault();
-                    add_fields(table_maquilador, select_maquiladores)
                 })
                 // ADD Products
                 btn_add_products.addEventListener("click", function (t) {

@@ -169,7 +169,7 @@ export default function init(){
                         btn_submit.removeAttribute(
                             "data-kt-indicator"
                         )
-                        const formData = new URLSearchParams(new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`)))
+                        const formData = new FormData(document.querySelector(`#kt_modal_add_${catalog_item}_form`))
                         Catalogs.submit_form(catalog, formData, token, modal, table_items, btn_submit, form, validations)
 
                     }, 1000))

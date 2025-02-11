@@ -1,21 +1,21 @@
 @props(['variedades' => $variedades, 'presentaciones' => $presentaciones])
 <div class="row mb-5">
     <div class="col-md-6 fv-row">
-        <label class="required fs-6 fw-bold mb-2">Folio Pallet</label>
+        <label class="fs-6 fw-bold mb-2">Folio Pallet</label>
         <input type="text" class="form-control" placeholder="Ingresa el folio del pallet" name="folio_pallet" id="folio_pallet" />
     </div>
     <div class="col-md-6 fv-row">
-        <label class="required fs-6 fw-bold mb-2">Lote</label>
+        <label class="fs-6 fw-bold mb-2">Lote</label>
         <input type="text" class="form-control" placeholder="Ingresa el n° de lote" name="lote" id="lote" />
     </div>
 </div>
 <div class="row mb-5">
     <div class="col-md-6 fv-row">
-        <label class="required fs-6 fw-bold mb-2">SADER</label>
+        <label class="fs-6 fw-bold mb-2">SADER</label>
         <input type="text" class="form-control" placeholder="Ingresa el codigo SADER" name="sader" id="sader" />
     </div>
     <div class="col-md-6 fv-row">
-        <label class="required fs-6 fw-bold mb-2">Cartilla</label>
+        <label class="fs-6 fw-bold mb-2">Cartilla</label>
         <input type="text" class="form-control" placeholder="Ingresa el n° de registros" name="cartilla" id="cartilla" />
     </div>
 </div>
@@ -51,7 +51,7 @@
 </div>
 <div class="row mb-5">
     <div class="col-md-6 fv-row">
-        <label class="required fs-6 fw-bold mb-2">Marca Distintiva</label>
+        <label class="fs-6 fw-bold mb-2">Marca Distintiva</label>
         <select id="select_marca" name="select_marca" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una marca" data-allow-clear="true">
             <option></option>
         </select>

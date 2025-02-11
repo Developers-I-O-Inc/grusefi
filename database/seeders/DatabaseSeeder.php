@@ -46,6 +46,8 @@ class DatabaseSeeder extends Seeder
         $admin_plantillas = Permission::create(['name' => 'admin_plantillas']);
         $admin_embarques = Permission::create(['name' => 'admin_embarques']);
         $admin_users = Permission::create(['name' => 'admin_users']);
+        $admin_config = Permission::create(['name' => 'admin_config']);
+        $config_tefs = Permission::create(['name' => 'config_tef']);
         //ASING PERMISSIONS TO ROLES
         $role_admin->givePermissionTo($ver_zonas);
         $role_admin->givePermissionTo($ver_configuracion);
@@ -60,11 +62,13 @@ class DatabaseSeeder extends Seeder
         $role_admin->givePermissionTo($admin_plantillas);
         $role_admin->givePermissionTo($admin_embarques);
         $role_admin->givePermissionTo($admin_users);
+        $role_admin->givePermissionTo($admin_config);
         $role_tefs->givePermissionTo($ver_plantillas);
         $role_tefs->givePermissionTo($admin_plantillas);
         $role_tefs->givePermissionTo($ver_embarques);
         $role_tefs->givePermissionTo($admin_embarques);
         $role_tefs->givePermissionTo($ver_reportes);
+        $role_tefs->givePermissionTo($config_tefs);
         $this->call([
             Paises::class,
             Estados::class,
