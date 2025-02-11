@@ -23,3 +23,6 @@ Route::post('finish_embarque_rpv', 'EmbarquesController@finish_embarque_rpv');
 Route::post('import_products', 'EmbarquesController@import_products');
 Route::get('delete_product_embarque/{product_id}', 'EmbarquesController@delete_product_embarque');
 Route::post('cancel_embarque/{embarque_id}', 'EmbarquesController@cancel_embarque');
+// EMBARQUES SMALL
+Route::get('embarques_small', 'EmbarquesController@embarques_small')->name('embarques_small');
+Route::post('save_embarques_small', 'EmbarquesController@save_embarques_small');

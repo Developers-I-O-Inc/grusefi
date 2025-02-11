@@ -1,4 +1,4 @@
-@props(['embarque' => false, 'vigencias' => $vigencias])
+@props(['embarque' => false, 'vigencias' => $vigencias, 'puertos' => []])
 <style>
     .watermark{
         position: relative;
@@ -376,7 +376,15 @@
                                                 <div>Puerto de entrada</div>
                                                 @if($embarque)
                                                     <div class="m-t-xs" style="display: flex;">
-                                                        <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="puerto"></span>
+                                                        {{-- <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="puerto"></span> --}}
+                                                        <select id="puerto_id" name="puerto_id" class="form-select" data-control="select2" data-placeholder="Selecciona un puerto" data-allow-clear="true">
+                                                            <option value=""></option>
+                                                            @if(isset($puertos))
+                                                                @foreach($puertos as $puerto)
+                                                                    <option value="{{$puerto->id}}">{{$puerto->nombre}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
                                                     </div>
                                                 @else
                                                 <div class="m-t-xs" style="display: flex;">

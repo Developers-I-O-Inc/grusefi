@@ -53,36 +53,17 @@ class Operation {
 
         const validations_products = FormValidation.formValidation(form_products, {
             fields: {
-                lote: {
-                    validators: {
-                        notEmpty: {
-                            message: "Lote requerido",
-                        },
-                    },
-                },
-                sader: {
-                    validators: {
-                        notEmpty: {
-                            message: 'SADER requerido'
-                        }
-                    }
-                },
                 cantidad: {
                     validators: {
                         notEmpty: {
-                            message: 'N° de cantidad requerido'
-                        },
-                        between: {
-                            min: 1,
-                            max: 100,
-                            message: "Tiene que haber al menos una caja y menos de 100"
+                            message: 'Cantidad requerida'
                         }
                     },
                 },
-                cartilla: {
+                peso: {
                     validators: {
                         notEmpty: {
-                            message: 'Cartilla requerida'
+                            message: 'Peso requerido'
                         }
                     },
                 },
@@ -90,6 +71,13 @@ class Operation {
                     validators: {
                         notEmpty: {
                             message: 'Presentación requerida'
+                        }
+                    }
+                },
+                variedad_product_id: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Variedad requerida'
                         }
                     }
                 },

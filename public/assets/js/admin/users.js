@@ -276,6 +276,7 @@ const edit = () => {
                 },
                 success: function (result) {
                     $.each(result.user, function(index){
+                        console.log(result.user[index])
                         table_standards.row.add([result.user[index].standard_id, result.user[index].name, result.user[index].validity, `<button type="button" class="btn btn-active-light-success btn-sm me-0 ms-0" data-kt-standard-table-filter="delete_standard">
                         <i class="ki-outline ki-trash text-danger fs-2"></i>
                     </button>`]).draw()

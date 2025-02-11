@@ -47,28 +47,6 @@
                                 <i class="stepper-check ki-outline ki-double-check fs-2x"></i>
                                 <span class="stepper-number">4</span>
                             </div>
-                            <div class="stepper-label">
-                                <h3 class="stepper-title">Consolidado</h3>
-                                <div class="stepper-desc fw-bold">standardr embarque consolidado o mixto</div>
-                            </div>
-                        </div>
-                        <div class="stepper-item" data-kt-stepper-element="nav">
-                            <div class="stepper-line w-40px"></div>
-                            <div class="stepper-icon w-40px h-40px">
-                                <i class="stepper-check ki-outline ki-double-check fs-2x"></i>
-                                <span class="stepper-number">5</span>
-                            </div>
-                            <div class="stepper-label">
-                                <h3 class="stepper-title">Trasporte</h3>
-                                <div class="stepper-desc fw-bold">Agregar datos de transporte</div>
-                            </div>
-                        </div>
-                        <div class="stepper-item" data-kt-stepper-element="nav">
-                            <div class="stepper-line w-40px"></div>
-                            <div class="stepper-icon w-40px h-40px">
-                                <i class="stepper-check ki-outline ki-double-check fs-2x"></i>
-                                <span class="stepper-number">6</span>
-                            </div>
                             <div class="stepper-tittle">
                                 <h3 class="stepper-title">Completado</h3>
                             </div>
@@ -232,34 +210,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="separator my-2"></div>
-                            <div class="row mb-12">
-                                <div class="col-9">
-                                    <select id="select_maquiladores" class="form-select" data-control="select2" data-placeholder="Selecciona un maquilador" data-allow-clear="true">
-                                        <option></option>
-                                    </select>
-                                </div>
-                                <div class="col-3">
-                                    <button class="btn btn-flex btn-light-success" id="btn_add_maquilador">
-                                       <i class="ki-outline ki-plus fs-2"></i>
-                                        </span>Agregar
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row mb-12">
-                                <table class="table table-row-bordered gy-5" id="kt_maquiladores_table">
-                                    <thead>
-                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                            <th class="">id</th>
-                                            <th class="">Maquilador</th>
-                                            <th class="">Eliminar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="fw-bold text-gray-600">
-
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
                     </div>
                     <div data-kt-stepper-element="content">
@@ -288,48 +238,6 @@
                     </div>
                     <div data-kt-stepper-element="content">
                         <div class="w-100">
-                            <div class="pb-10 pb-lg-15">
-                                <h2 class="fw-bolder text-dark">Empaque Consolidado</h2>
-                                <div class="text-muted fw-bold fs-6">Si el empaque esta consolidado, seleccione</div>
-                            </div>
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                    <span class="required">Empaque</span>
-                                </label>
-                                <select id="consolidado_id" name="consolidado_id" class="form-select" data-control="select2" data-placeholder="Selecciona un empaque" data-allow-clear="true">
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                            <div class="fv-row mb-7">
-                                <input class="form-check-input" type="checkbox" value="0" id="check_activo" name="check_activo"/>
-                                <label class="form-check-label" for="activo">
-                                    Consolidado
-                                </label>
-                            </div>
-                            <input type="text" class="form-control d-none" name="consolidado" id="consolidado" value="0"/>
-                        </div>
-
-                    </div>
-                    <div data-kt-stepper-element="content">
-                        <div class="w-100">
-                            <div class="pb-10 pb-lg-15">
-                                <h2 class="fw-bolder text-dark">Trasporte</h2>
-                                <div class="text-muted fw-bold fs-6">Ingrese los datos del transporte</div>
-                            </div>
-                            <div class="row mb-12">
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-bold mb-2">Empresa Transportista</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa el nombre de la empresa transportista" name="empresa_transporte" id="empresa_transporte" />
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-bold mb-2">Nombre del chofer</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa el nombre del chofer" name="chofer" id="chofer" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-kt-stepper-element="content">
-                        <div class="w-100">
                             <div class="pb-8 pb-lg-10">
                                 <h2 class="fw-bolder text-dark">Embarque terminado!</h2>
                                 <div class="text-muted fw-bold fs-6">Información almacenada correctamente</div>
@@ -347,7 +255,7 @@
                                             <h4 class="text-gray-900 fw-bolder">Notificaciones!</h4>
                                             <div class="fs-6 text-gray-700">Si desea imprimir el formato para vizualizarlo
                                             <a href="#" class="fw-bolder link-success" id="link_dictamen" target="_blank">presione aquí</a></div>
-                                            <div class="fs-6 text-gray-700">O si desea generar o editar el RPV
+                                            <div class="fs-6 text-gray-700">O si desea generar o editar el DV
                                             <a href="#" class="fw-bolder link-success" id="link_consulta">presione aquí</a></div>
                                         </div>
                                     </div>

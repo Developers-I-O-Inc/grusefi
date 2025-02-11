@@ -27,11 +27,6 @@ class Embarques extends Model
         'consecutivo',
         'numero_economico',
         'placas_transporte',
-        'inspector',
-        'consolidado',
-        'consolidado_id',
-        'empresa_transporte',
-        'chofer',
         'tefs_id',
         'uso_id',
         'status'
