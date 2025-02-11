@@ -66,7 +66,6 @@ class EmbarquesController extends Controller
     public function store(Request $request)
     {
         $standards = json_decode($request->get('standards'), true);
-        $maquiladores = json_decode($request->get('maquiladores'), true);
         $productos = json_decode($request->get('productos'), true);
 
         $data = $request->only([
@@ -137,15 +136,6 @@ class EmbarquesController extends Controller
                     $standard->save();
                 }
             }
-
-            // if (!empty($maquiladores)) {
-            //     foreach ($maquiladores as $maquilador_arr) {
-            //         $maquilador = new EmbarquesMaquiladores();
-            //         $maquilador->embarque_id = $embarque->id;
-            //         $maquilador->maquilador_id = $maquilador_arr;
-            //         $maquilador->save();
-            //     }
-            // }
 
             $insertData = [];
             if (!empty($productos)) {
@@ -461,4 +451,49 @@ class EmbarquesController extends Controller
         return redirect()->back();
     }
 
+    public function embarques_small(){
+        $vigencias = Vigencias::where('activo', 1)->first();
+        if($vigencias->count() == 0){
+            return redirect()->route('vigencias.index')->with('error_vigencia', 'No hay vigencias activas, por favor activa una vigencia para poder continuar.');
+        }
+        if(Auth::user()->hasRole('Super Admin')){
+            $empaques = Empaques::where('activo', 1)->get();
+            $lugares = Municipios::where('activo', 1)->get();
+        }
+        else{
+            $empaques = Empaques::get_empaques_by_country();
+            $lugares = Municipios::municipios_by_user(Auth::user()->id);
+        }
+        $paises = Paises::where('activo', 1)->get();
+        $users = User::role('tefs')->get();
+        return view('operation/embarques_small', compact('empaques', 'paises', 'users', 'vigencias', 'lugares', 'vigencias'));
+    }
+
+    public function save_embarques_small(Request $request){
+
+        $data = $request->only([
+            'empaque_id',
+            'destinatario_id',
+            'vigencia_id',
+            'pais_id',
+            'municipio_id',
+        ]);
+
+        // TEFS OR ADMIN
+        if (auth()->user()->hasRole('Super Admin')) {
+            $data['tefs_id'] = $request->get('tefs_id');
+        } else {
+            $data['tefs_id'] = auth()->user()->id;
+
+        }
+
+        Embarques::updateOrCreate(
+            ['id' => $request->get('id_embarque')],
+            $data
+        );
+
+        return response()->json(['success' => 'Datos guardados exitosamente!']);
+
+
+    }
 }

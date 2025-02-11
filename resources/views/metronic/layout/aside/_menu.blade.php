@@ -53,7 +53,7 @@
                 </div>
             </div>
         @endcan
-        @can(["ver_configuacion"])
+        @can(["ver_configuracion"])
             <div data-kt-menu-trigger="hover" data-kt-menu-placement="right-start"
                 class="menu-item py-2">
                 <span class="menu-link menu-center @yield("config")" data-bs-trigger="hover" data-bs-dismiss="click"
@@ -69,84 +69,88 @@
                             <span class="menu-section fs-5 fw-bolder ps-1 py-1">Configuración General</span>
                         </div>
                     </div>
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <span class="menu-link">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
+                    @canany(['config_tef', 'admin_config'])
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <span class="menu-link">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Clientes</span>
+                                <span class="menu-arrow"></span>
                             </span>
-                            <span class="menu-title">Clientes</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <div class="menu-sub menu-sub-accordion">
-                            <div class="menu-item">
-                                <a class="menu-link"
-                                    href="{{route('empaques.index')}}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Nuevo</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link"
-                                    href="{{route('destinatarios.index')}}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Destinatarios</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link"
-                                    href="{{route('marcas.index')}}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Marcas</span>
-                                </a>
+                            <div class="menu-sub menu-sub-accordion">
+                                <div class="menu-item">
+                                    <a class="menu-link"
+                                        href="{{route('empaques.index')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Nuevo</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link"
+                                        href="{{route('destinatarios.index')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Destinatarios</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link"
+                                        href="{{route('marcas.index')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Marcas</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="{{route('presentaciones.index')}}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Presentaciones</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="{{route('puertos.index')}}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Puntos de Entrada</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="{{route('tipo_cultivos.index')}}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Tipo de Cultivos</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="{{route('usos.index')}}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Usos</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="{{route('variedades.index')}}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Variedades</span>
-                        </a>
-                    </div>
+                    @endcanany
+                    @can(['admin_config'])
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{route('presentaciones.index')}}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Presentaciones</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{route('puertos.index')}}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Puntos de Entrada</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{route('tipo_cultivos.index')}}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Tipo de Cultivos</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{route('usos.index')}}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Usos</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{route('variedades.index')}}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Variedades</span>
+                            </a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         @endcan
@@ -194,6 +198,14 @@
                         </div>
                     </div>
                     @can(['admin_embarques'])
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{route('embarques_small')}}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Aperturar DV</span>
+                            </a>
+                        </div>
                         <div class="menu-item">
                             <a class="menu-link" href="{{route('embarques.index')}}">
                                 <span class="menu-bullet">
