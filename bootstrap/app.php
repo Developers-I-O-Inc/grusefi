@@ -38,7 +38,6 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->append(CheckExpirationPassword::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
