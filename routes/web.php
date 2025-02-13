@@ -3,6 +3,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Models\Admin\UsersStandards;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\HomeAuth;
+use App\Http\Middleware\CheckExpirationPassword;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +27,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         $users_standards = UsersStandards::user_standards_date(Auth::user()->id);
         return view('dashboard', compact('users_standards'));
-    })->name('dashboard');
+    })->middleware(CheckExpirationPassword::class)->name('dashboard');
 });
 
 Route::get('/password/expired', function () {
