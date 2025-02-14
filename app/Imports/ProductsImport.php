@@ -20,7 +20,6 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation
             'embarque_id' => $row['embarque_id'],
             'variedad_id' => $row['variedad_id'],
             'presentacion_id' => $row['presentacion_id'],
-            'folio_pallet' => $row['folio_pallet'],
             'lote' => $row['lote'],
             'sader' => $row['sader'],
             'cartilla' => $row['cartilla'],

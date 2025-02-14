@@ -16,8 +16,6 @@ let table_items,
     validations,
     form,
     edit_id,
-    edit_exportacion,
-    edit_asociado,
     edit_nombre_corto,
     edit_nombre_fiscal,
     edit_domicilio_fiscal,
@@ -27,23 +25,16 @@ let table_items,
     edit_num_ext,
     edit_num_int,
     edit_cp,
-    edit_embarque,
-    edit_domicilio_documentacion,
-    edit_sader,
-    edit_codigo,
     edit_active,
     edit_tipo,
     check_active,
     check_tipo,
-    check_exportacion,
-    check_asociado,
     select_municipio,
     select_municipio2,
     select_localidad,
     select_localidad_22,
     image_empaque,
     var_localidad2 = 0,
-    var_municipio2 = 0,
     var_localidad = 0,
     n
 //
@@ -54,9 +45,7 @@ const edit = () => {
         e.addEventListener("click", function (e) {
             e.preventDefault()
             $("#municipio_id").val(null).trigger("change.select2")
-            $("#municipio_id2").val(null).trigger("change.select2")
             $("#localidad_id").val(null).trigger("change.select2")
-            $("#localidad_doc_id").val(null).trigger("change.select2")
             $.get("empaques/"+ $(this).data("id") + "/edit", function(data){
                 edit_id.value=data.empaque[0].id
                 edit_nombre_corto.value = data.empaque[0].nombre_corto
@@ -72,15 +61,6 @@ const edit = () => {
                 $("#municipio_id").val(data.empaque[0].municipio_id).trigger("change.select2")
                 var_localidad = data.empaque[0].localidad_id
                 select_municipio.trigger('change');
-                edit_embarque.value = data.empaque[0].nombre_embarque
-                edit_domicilio_documentacion.value = data.empaque[0].domicilio_documentacion
-                edit_sader.value = data.empaque[0].sader
-                edit_codigo.value = data.empaque[0].codigo
-                $("#municipio_id2").val(data.empaque[0].municipio2).trigger("change.select2")
-                var_localidad2 = data.empaque[0].localidad_doc_id
-                select_municipio2.trigger('change');
-                Catalogs.checked_edit(data.empaque[0].exportacion, edit_exportacion, check_exportacion)
-                Catalogs.checked_edit(data.empaque[0].asociado, edit_asociado, check_asociado)
                 Catalogs.checked_edit(data.empaque[0].activo, edit_active, check_active)
                 if(data.empaque[0].tipo == "Física"){
                     edit_tipo.value = "Física"
@@ -90,7 +70,6 @@ const edit = () => {
                     edit_tipo.value = "Moral"
                     check_tipo.checked = false
                 }
-                image_empaque.style.backgroundImage = `url('${data.empaque[0].imagen}')`;
                 modal.show()
                 var_localidad = 0
             })
@@ -112,8 +91,6 @@ export function init() {
     btn_submit = form.querySelector("#kt_modal_add_empaque_submit")
     btn_cancel = form.querySelector("#kt_modal_add_empaque_cancel")
     edit_id = form.querySelector("#id_empaque")
-    edit_asociado = form.querySelector("#asociado")
-    edit_exportacion = form.querySelector("#exportacion")
     edit_nombre_corto = form.querySelector("#nombre_corto")
     edit_nombre_fiscal = form.querySelector("#nombre_fiscal")
     edit_domicilio_fiscal = form.querySelector("#domicilio_fiscal")
@@ -123,15 +100,9 @@ export function init() {
     edit_num_int = form.querySelector("#num_int")
     edit_num_ext = form.querySelector("#num_ext")
     edit_cp = form.querySelector("#cp")
-    edit_embarque = form.querySelector("#nombre_embarque")
-    edit_domicilio_documentacion = form.querySelector("#domicilio_documentacion")
-    edit_sader = form.querySelector("#sader")
-    edit_codigo = form.querySelector("#codigo")
     edit_tipo = form.querySelector("#tipo")
     check_active = form.querySelector("#check_activo")
     check_tipo = form.querySelector("#check_tipo")
-    check_exportacion = form.querySelector("#check_exportacion")
-    check_asociado = form.querySelector("#check_asociado")
     edit_active = form.querySelector("#activo")
     validations = FormValidation.formValidation(form, {
         fields: {
@@ -154,28 +125,6 @@ export function init() {
                     stringLength: {
                         max: 1000,
                         message: "El domicilio fiscal debe tener menos de 1000 caracteres",
-                    }
-                },
-            },
-            rfc:{
-                validators: {
-                    notEmpty: {
-                        message: "Ingrese el RFC",
-                    },
-                    stringLength: {
-                        max: 13,
-                        message: "El RFC debe tener 13 caracteres",
-                    }
-                },
-            },
-            telefonos:{
-                validators: {
-                    notEmpty: {
-                        message: "Ingrese el telefono",
-                    },
-                    stringLength: {
-                        max: 100,
-                        message: "El telefono debe tener menos de 100 caracteres",
                     }
                 },
             },
@@ -209,46 +158,6 @@ export function init() {
                     },
                 }
             },
-            nombre_embarque:{
-                validators: {
-                    notEmpty: {
-                        message: "Ingrese el nombre del embarque",
-                    },
-                    stringLength: {
-                        max: 200,
-                        message: "El nombre del embarque debe tener menos de 200 caracteres",
-                    }
-                }
-            },
-            domicilio_documentacion:{
-                validators: {
-                    notEmpty: {
-                        message: "Ingrese el domicilio de documentación",
-                    },
-                    stringLength: {
-                        max: 1000,
-                        message: "El domicilio de documentación debe tener menos de 1000 caracteres",
-                    }
-                }
-            },
-            sader:{
-                validators: {
-                    notEmpty: {
-                        message: "Ingrese el sader",
-                    },
-                    stringLength: {
-                        max: 50,
-                        message: "El sader debe tener menos de 50 caracteres",
-                    }
-                }
-            },
-            municipio_id2:{
-                validators: {
-                    notEmpty: {
-                        message: "Seleccione un municipio",
-                    },
-                }
-            }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -266,15 +175,13 @@ export function init() {
         processing: true,
         columns: [
             { data: "check", name: "check" },
-            { data: "buttons", name: "buttons" },
             { data: "id", name: "id" },
             { data: "nombre_corto" , name : "nombre_corto" },
             { data: "nombre_fiscal" , name : "nombre_fiscal" },
             { data: "domicilio_fiscal" , name : "domicilio_fiscal" },
             { data: "rfc" , name : "rfc" },
-            { data: "exportacion" , name : "exportacion" },
-            { data: "asociados" , name : "asociados"},
             { data: "activos", name: "activos" },
+            { data: "buttons", name: "buttons" },
         ],
         order: [[2, "asc"]],
         columnDefs: [
@@ -310,14 +217,6 @@ export function init() {
     // CHECK ACTIVE
     check_active.addEventListener("click", function (t) {
         Catalogs.checked(edit_active, check_active)
-    })
-    // CHECK ASOCIADO
-    check_asociado.addEventListener("click", function (t) {
-        Catalogs.checked(edit_asociado, check_asociado)
-    })
-    // CHECK ACTIVE
-    check_exportacion.addEventListener("click", function (t) {
-        Catalogs.checked(check_exportacion, check_exportacion)
     })
     // BUTTON ADD
     btn_add.addEventListener("click", function (t) {

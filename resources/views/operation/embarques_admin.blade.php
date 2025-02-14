@@ -252,39 +252,7 @@
                                 data-kt-scroll-dependencies="#kt_modal_add_product_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_product_scroll" data-kt-scroll-offset="300px">
                                 <div class="card-body">
-                                    <div class="row mb-12">
-                                        <div class="col-9">
-                                            <select id="select_standard" class="form-select form-select-solid" data-control="select2" data-placeholder="Selecciona una norma" data-allow-clear="true">
-                                                <option></option>
-                                                @foreach ($standards as $standard)
-                                                    <option value="{{ $standard->id }}">{{ $standard->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="col-md-6 fv-row d-none">
-                                                <input class="form-control form-control-solid" placeholder="Seleccione Fecha" id="edit_standards" name="edit_standards"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <button class="btn btn-flex btn-light-success" id="btn_add_standard">
-                                               <i class="ki-outline ki-plus fs-1"></i>
-                                                </span>Agregar
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-12">
-                                        <table class="table table-row-bordered gy-5" id="kt_standards_table">
-                                            <thead>
-                                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                    <th class="">id</th>
-                                                    <th class="">standard</th>
-                                                    <th class="">Eliminar</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="fw-bold text-gray-600">
-
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                    <x-standards-table :standards="$standards"/>
                                 </div>
                             </div>
                         </div>

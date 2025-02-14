@@ -30,41 +30,8 @@ var KTCreateAccount = (function () {
         select_puerto,
         select_tefs,
         select_municipio,
+        observations,
         arr_validations = [],
-        add_fields = (table, select) => {
-            if(select.val() != ""){
-                var data = table.rows().data(); // All data datatable permissions
-                let repeat=false;
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i][0] === select.val()) {
-                        repeat=true;
-                    }
-                }
-                if(repeat){
-                    Swal.fire({
-                        title: "Advertencia!",
-                        text: select.select2('data')[0].text +" ya esta agragado!",
-                        icon: "warning"
-                      });
-                }else{
-
-                    table.row.add([select.val(), select.select2('data')[0].text, `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0" data-kt-customer-table-filter="delete_row">
-                    <i class="ki-outline ki-trash text-danger fs-2"></i>
-                    </button>`]).draw()
-
-                    count_standards = count_standards + 1
-                    edit_text_standard.value=count_standards
-
-                }
-            }
-            else{
-                Swal.fire({
-                    title: "Advertencia!",
-                    text: "Seleccione un registro!",
-                    icon: "warning"
-                  });
-            }
-        },
         delete_permission = (table, standard) => {
             document.querySelectorAll('[data-kt-customer-table-filter="delete_row"]').forEach((e) => {
                 e.addEventListener("click", function (e) {
@@ -135,6 +102,7 @@ var KTCreateAccount = (function () {
                 (select_puerto = $('#puerto_id').select2()),
                 (edit_text_standard = document.querySelector("#edit_standards")),
                 (edit_text_products = document.querySelector("#edit_products")),
+                (observations = document.querySelector("#observations")),
                 (check_import = document.querySelector("#check_import")),
                 (btn_add_standard = document.querySelector("#btn_add_standard")),
                 (btn_add_products = document.querySelector("#btn_add_products")),
@@ -235,10 +203,10 @@ var KTCreateAccount = (function () {
                     order: [[1, "asc"]],
                     columnDefs: [
                         { orderable: !1, targets: 0 },
-                        { orderable: !1, targets: 5, visible : 0 },
-                        { orderable: !1, targets: 7, visible : 0 },
+                        { orderable: !1, targets: 1, visible : 0 },
+                        { orderable: !1, targets: 3, visible : 0 },
+                        { orderable: !1, targets: 8, visible : 0 },
                     ],
-                    responsive: true,
                     language: {
                         zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
                         "<span>No hay datos que mostrar</span></div></div>",
@@ -344,7 +312,7 @@ var KTCreateAccount = (function () {
                     e.preventDefault
                     arr_validations[0].validate().then(function (t) {
                         const formData = new FormData(document.querySelector(`#form_embarques`));
-                        const standardsArray = table_standards.column(0).data().toArray()
+                        const standardsArray = table_standards.rows().data().toArray().map(row => ({ id: row[0], observation: row[2] }))
                         const productosArray = table_products.data().toArray();
                         formData.append('standards', JSON.stringify(standardsArray))
                         formData.append('productos', JSON.stringify(productosArray))
@@ -416,7 +384,7 @@ var KTCreateAccount = (function () {
                  // ADD PERMISSION TO DATATABLE
                 btn_add_standard.addEventListener("click", function (t) {
                     t.preventDefault();
-                    add_fields(table_standards, select_standard)
+                    Operation.add_fields(table_standards, select_standard, observations, 1, count_standards, edit_text_standard)
                 })
                 // ADD Products
                 btn_add_products.addEventListener("click", function (t) {

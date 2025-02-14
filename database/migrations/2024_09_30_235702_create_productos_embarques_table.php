@@ -17,7 +17,6 @@ return new class extends Migration
             $table->smallInteger('variedad_id')->unsigned()->index();
             $table->smallInteger('presentacion_id')->unsigned()->index();
             $table->integer('marca_id')->unsigned()->index()->nullable();
-            $table->string('folio_pallet', 20)->nullable();
             $table->string('lote', 20);
             $table->string('sader', 20);
             $table->string('cartilla', 20);
