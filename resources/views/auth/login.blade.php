@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head><base href="../../../">
+	<head>
 		<title>Grusefi | Iniciar Sesión</title>
 		<link rel="shortcut icon" href="{{asset('favicon.ico')}}"  />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-		<link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+		<link href="{{asset('assets/css/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/css/icons/style.css')}}" rel="stylesheet" type="text/css" />
 	</head>
 	<body id="kt_body" class="bg-body">
 
@@ -14,7 +15,7 @@
 				<div class="d-flex flex-column flex-lg-row-auto w-xl-600px positon-xl-relative" style="background-image: url({{asset('img/login.jpg')}}); background-size: cover;">
 					<div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
 						<div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
-							<a href="../../demo6/dist/index.html" class="py-9 mb-5">
+							<a href="#" class="py-9 mb-5">
 								<img alt="Logo" src="{{asset('img/logo.png')}}" class="h-60px" />
 							</a>
 							<h1 class="fw-bolder fs-2qx pb-5 pb-md-10" style="color: #0f914c;">Bienvenido a Grusefi</h1>
@@ -39,12 +40,13 @@
                                         </div>
                                     </div>
                                 @endif
-                            <x-errors-login class="mb-4" :errors="$errors" />
+
 							<form class="form w-100" method="POST" action="{{ route('login') }}">
                                 @csrf
 								<div class="text-center mb-10">
 									<h1 class="text-dark mb-3">Iniciar Sesión</h1>
 								</div>
+                                <x-errors-login class="mb-4" :errors="$errors" />
 								<div class="fv-row mb-10">
 									<label class="form-label fs-6 fw-bolder text-dark">Email</label>
 									<input class="form-control form-control-lg form-control-solid" type="email" name="email" :value="old('email')" autocomplete="off" />
@@ -69,15 +71,14 @@
 					</div>
 					<div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
 						<div class="d-flex flex-center fw-bold fs-6">
-							<a href="https://keenthemes.com" class="text-muted text-hover-primary px-2" target="_blank">Acerca de</a>
-							<a href="https://keenthemes.com/support" class="text-muted text-hover-primary px-2" target="_blank">Soporte</a>
+							<a href="#" class="text-muted text-hover-primary px-2" target="_blank">Acerca de</a>
+							<a href="#" class="text-muted text-hover-primary px-2" target="_blank">Soporte</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script>var hostUrl = "assets/";</script>
-		<script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
+		<script src="{{asset('assets/js/plugins.bundle.js')}}"></script>
 		<script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
 	</body>
 </html>

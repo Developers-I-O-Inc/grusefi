@@ -358,7 +358,7 @@
         <table style="width: 100%;">
             <tr>
                 <td style="width: 30%;" class="font-p">4. Indique la regulación o requisito que evaluará:</td>
-                <td style="width: 70%;" class="font-g">{{implode(',', $standards->pluck('name')->toArray())}}</td>
+                <td style="width: 70%;" class="font-g">{{ $standards->map(function($standard) { return $standard->name . ', ' . $standard->observations; })->implode(', ') }}</td>
 
             </tr>
         </table>
@@ -593,7 +593,7 @@
                 <td class="font-g">({{$plantilla->cfe_debe_CFMN ? 'X' : ' '}}) Debe expedirse el CFMN</td>
                 <td class="font-g">({{$plantilla->cfe_aplica_flete_CFMN ? 'X' : ' '}}) Aplica Flete</td>
                 <td class="font-g">Anote Folios</td>
-                <td class="font-g"></td>
+                <td class="font-g">{{$plantilla->cfe_folios_CFMN}}</td>
                 <td class="font-g">({{$plantilla->cfe_no_debe_CFMN ? 'X' : ' '}}) No debe expedirse el CFMN</td>
             </tr>
             <tr>
@@ -601,7 +601,7 @@
                 <td class="font-g">({{$plantilla->cfe_debe_CFI ? 'X' : ' '}}) Debe expedirse el CFI </td>
                 <td class="font-g">({{$plantilla->cfe_aplica_flete_CFI ? 'X' : ' '}}) Aplica Flete </td>
                 <td class="font-g">Anote Folios</td>
-                <td class="font-g"></td>
+                <td class="font-g">{{$plantilla->cfe_folios_CFI}}</td>
                 <td class="font-g">({{$plantilla->cfe_no_debe_CFI ? 'X' : ' '}}) No debe expedirse el CFI</td>
             </tr>
         </table>

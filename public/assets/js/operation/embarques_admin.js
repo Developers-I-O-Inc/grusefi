@@ -70,6 +70,7 @@ var KTadminlist = (function () {
         modal_cancel,
         table_products,
         table_standards,
+        observations,
         n,
         save_embarque = (formulario, embarque_id) => {
             const clase = "p_input"
@@ -366,6 +367,7 @@ var KTadminlist = (function () {
                 (btn_save = document.querySelector("#btn_save")),
                 (btn_finish = document.querySelector("#btn_finish")),
                 (btn_import = document.querySelector("#btn_import")),
+                (observations = document.querySelector("#observations")),
                 (select_standard = $('#select_standard').select2()),
                 (select_marca = $('#select_marca').select2()),
                 (n = document.querySelector("#kt_admin_table")) &&
@@ -422,8 +424,9 @@ var KTadminlist = (function () {
                     order: [[1, "asc"]],
                     columnDefs: [
                         { orderable: !1, targets: 0 },
-                        { orderable: !1, targets: 5, visible : 0 },
-                        { orderable: !1, targets: 7, visible : 0 },
+                        { orderable: !1, targets: 1, visible : 0 },
+                        { orderable: !1, targets: 3, visible : 0 },
+                        { orderable: !1, targets: 8, visible : 0 },
                     ],
                     language: {
                         zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +
@@ -457,70 +460,10 @@ var KTadminlist = (function () {
                     table_items.ajax.reload()
                 })
                 btn_products.addEventListener('click', function () {
-                    // e.preventDefault()
-                    fetch(`get_products_embarque/${$(this).data("embarque")}`, {
-                        method: "GET",
-                        headers:{
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response =>{
-                        if(!response.ok){
-                            throw new Error('Error en la base de datos')
-                        }
-                        return response.json()
-                    })
-                    .then(data => {
-                        table_products.clear().draw();
-                        data.forEach(item => {
-                            table_products.row.add([`<button data-id="${item.id}" type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_product" data-kt-customer-table-filter="delete_row">
-                                <i class="ki-outline ki-trash text-danger fs-2"></i>
-                                </button>`,
-                                item.folio_pallet,
-                                item.lote,
-                                item.sader,
-                                item.cartilla,
-                                item.variedad_id,
-                                item.variedad,
-                                item.presentacion_id,
-                                item.presentacion,
-                                item.cantidad,
-                                item.peso,
-                                item.total_kilos,
-                                item.marca_id,
-                                item.marca]).draw()
-                        });
-                        modal.show()
-                    })
-                    .catch(error => {
-                        console.error(error)
-                    })
+                    Operation.get_products_embarque($(this).data("embarque"), table_products, modal)
                 })
                 btn_standards.addEventListener('click', function () {
-                    fetch(`get_standards_embarque/${$(this).data("embarque")}`, {
-                        method: "GET",
-                        headers:{
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response =>{
-                        if(!response.ok){
-                            throw new Error('Error en la base de datos')
-                        }
-                        return response.json()
-                    })
-                    .then(data => {
-                        table_standards.clear().draw();
-                        data.forEach(item => {
-                            table_standards.row.add([item.id, item.name, `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_standard" data-kt-customer-table-filter="delete_row">
-                    <i class="ki-outline ki-trash text-danger fs-2"></i>
-                    </button>`]).draw()
-                        })
-                        modal_standards.show()
-                    })
-                    .catch(error => {
-                        console.error(error)
-                    })
+                    Operation.get_standards_embarque($(this).data("embarque"), table_standards, modal_standards)
                 })
                 // SAVE EMBARQUE RPV
                 btn_save.addEventListener("click", function (t) {
@@ -545,78 +488,12 @@ var KTadminlist = (function () {
                 // ADD standard
                 btn_add_standard.addEventListener("click", function (t) {
                     t.preventDefault();
-                    if(select_standard.val() != "" && select_standard.val() != null){
-                        var data = table_standards.rows().data();
-                        let repeat=false;
-                        for (var i = 0; i < data.length; i++) {
-                            if (data[i][0] == select_standard.val()) {
-                                repeat=true;
-                            }
-                        }
-                        if(repeat){
-                            Swal.fire({
-                                title: "Advertencia!",
-                                text: select_standard.find('option:selected').text() +" ya esta agregada!",
-                                icon: "warning"
-                              });
-                        }else{
-                            table_standards.row.add([select_standard.val(), select_standard.find('option:selected').text(),  `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_standard" data-kt-customer-table-filter="delete_row">
-                    <i class="ki-outline ki-trash text-danger fs-2"></i>
-                    </button>`]).draw();
-                        }
-                    }
-                    else{
-                        Swal.fire({
-                            title: "Advertencia!",
-                            text: "Seleccione una standard!",
-                            icon: "warning"
-                          });
-                    }
+                    Operation.add_fields(table_standards, select_standard, observations)
                 })
                 // SAVE standardS
                 btn_save_standards.addEventListener("click", function (t) {
                     t.preventDefault();
-                    let standards = [];
-                    table_standards.rows().data().each(function (value) {
-                        standards.push({
-                            standard_id: value[0],
-                            standard: value[1]
-                        });
-                    });
-                    console.log(standards)
-                    fetch(`save_standards_embarques`, {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json',
-                            "X-CSRF-TOKEN": Operation.token,
-                        },
-                        body: JSON.stringify({
-                            embarque_id: embarque_id,
-                            standards: standards
-                        })
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Error en la base de datos');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        Swal.fire({
-                            title: "Éxito!",
-                            text: "Las normas han sido guardadas correctamente!",
-                            icon: "success"
-                        });
-                        modal_standards.hide();
-                    })
-                    .catch(error => {
-                        console.error(error);
-                        Swal.fire({
-                            title: "Error!",
-                            text: "Hubo un problema al guardar las normas!",
-                            icon: "error"
-                        });
-                    });
+                    Operation.save_standards_embarque(embarque_id, table_standards, modal_standards)
                 })
                 $("#dates").daterangepicker({
                     locale: {

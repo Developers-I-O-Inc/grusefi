@@ -25,14 +25,7 @@ return new class extends Migration
             $table->string('cp', 5);
             $table->string('rfc', 13);
             $table->string('telefonos', 100);
-            $table->string('imagen', 1000)->nullable();
-            $table->string('nombre_embarque', 200);
-            $table->string('domicilio_documentacion', 1000);
-            $table->string('sader', 50);
-            $table->string('codigo', 10)->nullable();
             $table->enum('tipo', ["Física", "Moral"]);
-            $table->tinyInteger('exportacion')->default(1);
-            $table->tinyInteger('asociado')->default(1);
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
             $table->softDeletes();
