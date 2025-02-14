@@ -132,7 +132,8 @@ class EmbarquesController extends Controller
                 foreach ($standards as $standards_arr) {
                     $standard = new EmbarquesStandards();
                     $standard->embarque_id = $embarque->id;
-                    $standard->standard_id = $standards_arr;
+                    $standard->standard_id = $standards_arr['id'];
+                    $standard->observations = $standards_arr['observation'];
                     $standard->save();
                 }
             }
@@ -142,15 +143,14 @@ class EmbarquesController extends Controller
                 foreach ($productos as $product) {
                     $insertData[] = [
                         'embarque_id' => $embarque->id,
-                        'folio_pallet' => $product[1],
-                        'lote' => $product[2],
-                        'sader' => $product[3],
-                        'cartilla' => $product[4],
-                        'variedad_id' => $product[5],
-                        'presentacion_id' => $product[7],
-                        'cantidad' => $product[9],
-                        'peso' => $product[10],
-                        'marca_id' => $product[12],
+                        'lote' => $product[9],
+                        'sader' => $product[10],
+                        'cartilla' => $product[11],
+                        'variedad_id' => $product[1],
+                        'presentacion_id' => $product[3],
+                        'cantidad' => $product[6],
+                        'peso' => $product[7],
+                        'marca_id' => $product[8],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
@@ -293,7 +293,6 @@ class EmbarquesController extends Controller
 
         $producto = new EmbarquesProductos();
         $producto->embarque_id = $request->get('embarque_id');
-        $producto->folio_pallet = $request->get('folio_pallet');
         $producto->lote = $request->get('lote');
         $producto->cantidad = $request->get('cantidad');
         $producto->peso = $request->get('peso');
@@ -319,6 +318,7 @@ class EmbarquesController extends Controller
             EmbarquesStandards::create([
                 'embarque_id' => $embarque_id,
                 'standard_id' => $marca['standard_id'],
+                'observations' => $marca['observations'],
             ]);
         }
 

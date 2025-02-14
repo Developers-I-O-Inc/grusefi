@@ -22,7 +22,6 @@ class EmbarquesProductos extends Model
         'embarque_id',
         'variedad_id',
         'presentacion_id',
-        'folio_pallet',
         'sader',
         'cantidad',
         'peso',
@@ -33,7 +32,7 @@ class EmbarquesProductos extends Model
 
     public static function get_embarque_products($id){
         return DB::select("SELECT op_embarques_productos.id, embarque_id, presentacion_id, variedad_id, variedad, nombre_cientifico,
-                presentacion, folio_pallet, sader, cantidad, lote, cartilla, peso, marca_id, cat_marcas.nombre AS marca,
+                presentacion, sader, cantidad, lote, cartilla, peso, marca_id, cat_marcas.nombre AS marca,
                 (cantidad * peso) as total_kilos
             FROM op_embarques_productos
             LEFT JOIN cat_presentaciones ON op_embarques_productos.presentacion_id = cat_presentaciones.id

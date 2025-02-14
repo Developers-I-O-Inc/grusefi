@@ -46,15 +46,13 @@
                                             data-kt-check-target="#kt_empaques_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="">Opciones</th>
                                 <th class="">id</th>
                                 <th class="">Nom. Corto</th>
                                 <th class="">Nombre Fiscal</th>
                                 <th class="">Domicilio</th>
                                 <th class="">RFC</th>
-                                <th class="">Exportacion</th>
-                                <th class="">Asociado</th>
                                 <th class="">Status</th>
+                                <th class="">Opciones</th>
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-gray-600">
@@ -87,190 +85,89 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_add_empaque_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_empaque_scroll" data-kt-scroll-offset="300px">
-                                <div class="accordion" id="kt_accordion_1">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="kt_accordion_1_header_1">
-                                            <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_1" aria-expanded="false" aria-controls="kt_accordion_1_body_1">Datos Fiscales</button>
-                                        </h2>
-                                        <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1" style="">
-                                            <div class="accordion-body">
-                                                <div class="row mb-4">
-                                                    <div class="col-md-3 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
-                                                        <input type="text" class="form-control" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" autocomplete="off" />
-                                                        <input type="text" class="form-control d-none" name="id_empaque" id="id_empaque" />
-                                                    </div>
-                                                    <div class="col-md-3 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Nombre Fiscal</label>
-                                                        <input type="text" class="form-control" placeholder="Ingresa el nombre fiscal del empaque" name="nombre_fiscal" id="nombre_fiscal" autocomplete="off"/>
-                                                    </div>
-                                                    <div class="col-md-3 fv-row">
-                                                        <label class="required fs-6 fw-bold form-label mb-2">RFC</label>
-                                                        <input type="text" class="form-control" placeholder="RFC" name="rfc" id="rfc" autocomplete="off" />
-                                                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                                                    </div>
-                                                    <div class="col-md-3 fv-row">
-                                                        <label class="required fs-6 fw-bold form-label mb-2">Teléfonos(s)</label>
-                                                        <input type="text" class="form-control" minlength="3" maxlength="15" placeholder="Ingrese Teléfono" id="telefonos" name="telefonos" autocomplete="off">
-                                                    </div>
+                                <div class="accordion-body">
+                                    <div class="row mb-4">
+                                        <div class="col-md-3 fv-row">
+                                            <label class="required fs-6 fw-bold mb-2">Nombre Corto</label>
+                                            <input type="text" class="form-control" placeholder="Ingresa un nombre" name="nombre_corto" id="nombre_corto" autocomplete="off" />
+                                            <input type="text" class="form-control d-none" name="id_empaque" id="id_empaque" />
+                                        </div>
+                                        <div class="col-md-3 fv-row">
+                                            <label class="required fs-6 fw-bold mb-2">Nombre Fiscal</label>
+                                            <input type="text" class="form-control" placeholder="Ingresa el nombre fiscal del empaque" name="nombre_fiscal" id="nombre_fiscal" autocomplete="off"/>
+                                        </div>
+                                        <div class="col-md-3 fv-row">
+                                            <label class="fs-6 fw-bold form-label mb-2">RFC</label>
+                                            <input type="text" class="form-control" placeholder="RFC" name="rfc" id="rfc" autocomplete="off" />
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                        <div class="col-md-3 fv-row">
+                                            <label class="required fs-6 fw-bold form-label mb-2">Teléfonos(s)</label>
+                                            <input type="text" class="form-control" minlength="3" maxlength="15" placeholder="Ingrese Teléfono" id="telefonos" name="telefonos" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-md-3 fv-row">
+                                            <label class="required fs-6 fw-bold mb-2">Domicilio Fiscal</label>
+                                            <input type="text" class="form-control" placeholder="Ingresa el domicilio fiscal" name="domicilio_fiscal" id="domicilio_fiscal" autocomplete="off" />
+                                        </div>
+                                        <div class="col-md-2 fv-row">
+                                            <label class="required fs-6 fw-bold mb-2">Colonia</label>
+                                            <input type="text" class="form-control" placeholder="Ingresa la colonia" name="colonia" id="colonia" autocomplete="off" />
+                                        </div>
+                                        <div class="col-md-5 fv-row">
+                                            <label class="required fs-6 fw-bold form-label mb-2">Número</label>
+                                            <div class="row fv-row fv-plugins-icon-container">
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control" placeholder="Exterior" name="num_ext" id="num_ext" autocomplete="off"/>
                                                 </div>
-                                                <div class="row mb-4">
-                                                    <div class="col-md-3 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Domicilio Fiscal</label>
-                                                        <input type="text" class="form-control" placeholder="Ingresa el domicilio fiscal" name="domicilio_fiscal" id="domicilio_fiscal" autocomplete="off" />
-                                                    </div>
-                                                    <div class="col-md-2 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Colonia</label>
-                                                        <input type="text" class="form-control" placeholder="Ingresa la colonia" name="colonia" id="colonia" autocomplete="off" />
-                                                    </div>
-                                                    <div class="col-md-5 fv-row">
-                                                        <label class="required fs-6 fw-bold form-label mb-2">Número</label>
-                                                        <div class="row fv-row fv-plugins-icon-container">
-                                                            <div class="col-6">
-                                                                <input type="text" class="form-control" placeholder="Exterior" name="num_ext" id="num_ext" autocomplete="off"/>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <input type="text" class="form-control" placeholder="Interior" name="num_int" id="num_int" autocomplete="off"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2 fv-row fv-plugins-icon-container">
-                                                        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                                            <span class="required">Código Postal</span>
-                                                        </label>
-                                                        <div class="position-relative">
-                                                            <input type="text" class="form-control" minlength="3" maxlength="6" placeholder="Código Postal" id="cp" name="cp" autocomplete="off">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-4">
-                                                    <div class="col-md-6 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Municipio</label>
-                                                        <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona un municipio" data-allow-clear="true">
-                                                            <option value=""></option>
-                                                            @foreach($municipios as $municipio)
-                                                                <option value="{{$municipio->id}}">{{$municipio->nombre.'-'.$municipio->estado}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-6 fv-row">
-                                                        <label class="fs-6 fw-bold mb-2">Localidad</label>
-                                                        <select id="localidad_id" name="localidad_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona una localidad" data-allow-clear="true">
-                                                            <option value=""></option>
-                                                        </select>
-                                                    </div>
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control" placeholder="Interior" name="num_int" id="num_int" autocomplete="off"/>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="kt_accordion_1_header_2">
-                                            <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_2" aria-expanded="false" aria-controls="kt_accordion_1_body_2">Datos Facturación</button>
-                                        </h2>
-                                        <div id="kt_accordion_1_body_2" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1" style="">
-                                            <div class="accordion-body">
-                                                <div class="row mb-4">
-                                                    <div class="col-md-6 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Nombre para Embarcar</label>
-                                                        <input type="text" class="form-control" placeholder="Ingresa nombre para embarcar" name="nombre_embarque" id="nombre_embarque" autocomplete="off" />
-                                                    </div>
-
-                                                    <div class="col-md-6 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Domicilio</label>
-                                                        <input type="text" class="form-control" placeholder="Ingresa domicilio" name="domicilio_documentacion" id="domicilio_documentacion" autocomplete="off"/>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-4">
-                                                    <div class="col-md-6 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Registro Sader</label>
-                                                        <input type="text" class="form-control" placeholder="Ingresa SADER" name="sader" id="sader" autocomplete="off"/>
-                                                    </div>
-
-                                                    <div class="col-md-6 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Código</label>
-                                                        <input type="text" class="form-control" placeholder="Ingresa código" name="codigo" id="codigo" autocomplete="off"/>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-4">
-                                                    <div class="col-md-6 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Municipio</label>
-                                                        <select id="municipio_id2" name="municipio_id2" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona un municipio" data-allow-clear="true">
-                                                            <option value=""></option>
-                                                            @foreach($municipios as $municipio)
-                                                                <option value="{{$municipio->id}}">{{$municipio->nombre.'-'.$municipio->estado}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-md-6 fv-row">
-                                                        <label class="required fs-6 fw-bold mb-2">Localidad</label>
-                                                        <select id="localidad_doc_id" name="localidad_doc_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona una localidad" data-allow-clear="true">
-                                                            <option value=""></option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="fv-row mb-7">
-                                                    <input class="form-check-input" type="checkbox" value="Física" id="check_tipo" name="check_tipo"/>
-                                                    <label class="form-check-label" for="activo">
-                                                        Física
-                                                    </label>
-                                                    <input type="text" class="form-control d-none" name="tipo" id="tipo" value="Moral"/>
-                                                </div>
-                                                <div class="fv-row mb-7">
-                                                    <input class="form-check-input" type="checkbox" value="0" id="check_exportacion" name="check_exportacion"/>
-                                                    <label class="form-check-label" for="activo">
-                                                        Empaque Activo para Exportación
-                                                    </label>
-                                                </div>
-                                                <input type="text" class="form-control d-none" name="exportacion" id="exportacion" value="0"/>
-
-                                                <div class="fv-row mb-7">
-                                                    <input class="form-check-input" type="checkbox" value="0" id="check_asociado" name="check_asociado"/>
-                                                    <label class="form-check-label" for="activo">
-                                                        Empaque Asociado
-                                                    </label>
-                                                </div>
-                                                <input type="text" class="form-control d-none" name="asociado" id="asociado" value="0"/>
-                                                <div class="fv-row mb-7">
-                                                    <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
-                                                    <label class="form-check-label" for="activo">
-                                                        Activo
-                                                    </label>
-                                                </div>
-                                                <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="fv-row mb-7 text-center">
-                                        <div id="image_empaque" class="image-input image-input-empty" data-kt-image-input="true" style="background-image: url(/img/gen006.svg)">
-                                            <div class="image-input-wrapper w-125px h-125px"></div>
-                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                               data-kt-image-input-action="change"
-                                               data-bs-toggle="tooltip"
-                                               data-bs-dismiss="click"
-                                               title="Change avatar">
-                                                <i class="ki-outline ki-pencil text-light fx-1"></i>
-                                                <input type="file" name="imagen" accept=".png, .jpg, .jpeg" />
-                                                <input type="hidden" name="imagen_remove" />
+                                        <div class="col-md-2 fv-row fv-plugins-icon-container">
+                                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                                <span class="required">Código Postal</span>
                                             </label>
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px shadow"
-                                               data-kt-image-input-action="cancel"
-                                               data-bs-toggle="tooltip"
-                                               data-bs-dismiss="click"
-                                               title="Cancel avatar">
-                                                <i class="ki-outline kicross-square fs-2 text-primary"></i>
-                                            </span>
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px shadow"
-                                               data-kt-image-input-action="remove"
-                                               data-bs-toggle="tooltip"
-                                               data-bs-dismiss="click"
-                                               title="Eliminar Imagen">
-                                                <i class="ki-outline kicross-square fs-2 text-primary"></i>
-                                            </span>
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" minlength="3" maxlength="6" placeholder="Código Postal" id="cp" name="cp" autocomplete="off">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-md-6 fv-row">
+                                            <label class="required fs-6 fw-bold mb-2">Municipio</label>
+                                            <select id="municipio_id" name="municipio_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                                <option value=""></option>
+                                                @foreach($municipios as $municipio)
+                                                    <option value="{{$municipio->id}}">{{$municipio->nombre.'-'.$municipio->estado}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 fv-row">
+                                            <label class="fs-6 fw-bold mb-2">Localidad</label>
+                                            <select id="localidad_id" name="localidad_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_empaque" data-placeholder="Selecciona una localidad" data-allow-clear="true">
+                                                <option value=""></option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="fv-row mb-7">
+                                    <input class="form-check-input" type="checkbox" value="Física" id="check_tipo" name="check_tipo"/>
+                                    <label class="form-check-label" for="activo">
+                                        Física
+                                    </label>
+                                    <input type="text" class="form-control d-none" name="tipo" id="tipo" value="Moral"/>
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_activo" name="check_activo" checked/>
+                                    <label class="form-check-label" for="activo">
+                                        Activo
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control d-none" name="activo" id="activo" value="1"/>
                             </div>
                         </div>
                         <div class="modal-footer flex-center">

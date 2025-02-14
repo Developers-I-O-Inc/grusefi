@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('embarque_id')->unsigned()->index();
             $table->smallInteger('standard_id')->unsigned()->index();
+            $table->string('observations', 255)->nullable();
             $table->foreign('embarque_id')->references('id')->on('op_embarques');
             $table->foreign('standard_id')->references('id')->on('cat_standards');
             $table->timestamps();

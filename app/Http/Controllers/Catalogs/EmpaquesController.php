@@ -88,26 +88,11 @@ class EmpaquesController extends Controller
             'cp',
             'rfc',
             'telefonos',
-            'nombre_embarque',
-            'domicilio_documentacion',
-            'codigo',
-            'sader',
-            'exportacion',
-            'asociado',
             'activo',
             'tipo'
         ]);
         $data['localidad_id'] = $request->input('localidad_id') ? $request->input("localidad_id") : null;
         $data['localidad_doc_id'] = $request->input('localidad_doc_id') ? $request->input("localidad_doc_id") : null;
-        // Manejo de la imagen
-        if ($request->hasFile('imagen')) {
-            $image = ImageManager::imagick()->read($request->file('imagen'));
-            $image->resize(300, 200);
-            $imageString = (string) $image->encode();
-            $ruta = "public/img/empaques/".$request->get('nombre_fiscal').".".$request->file('imagen')->getClientOriginalExtension();
-            Storage::disk('local')->put($ruta, $imageString);
-            $data['imagen'] = $ruta;
-        }
 
         Empaques::updateOrCreate(
             ['id' => $request->get('id_empaque')],

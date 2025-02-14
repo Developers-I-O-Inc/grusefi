@@ -40,8 +40,7 @@ class Operation {
     }
 
     async add_products(table_products, btn_add_product, form_products, embarque_id, edit_text_products = null) {
-        let edit_pallet = document.getElementById('folio_pallet'),
-        edit_lote = document.getElementById('lote'),
+        let edit_lote = document.getElementById('lote'),
         edit_sader = document.getElementById('sader'),
         edit_cantidad = document.getElementById('cantidad'),
         edit_peso = document.getElementById('peso'),
@@ -86,6 +85,8 @@ class Operation {
                 trigger: new FormValidation.plugins.Trigger(),
                 bootstrap: new FormValidation.plugins.Bootstrap5({
                     rowSelector: ".fv-row",
+                    eleInvalidClass: "fv-invalid",
+                    eleValidClass: "fv-valid",
                 }),
             },
         })
@@ -103,13 +104,9 @@ class Operation {
                 }
                 if(ban > 0){
                     table_products.row.add([
-                        `<button type="button" data-id="${ban}" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_product" data-kt-customer-table-filter="delete_row">
-                            <i class="ki-outline ki-trash text-danger fs-2"></i>
-                        </button>`,
-                        edit_pallet.value,
-                        edit_lote.value,
-                        edit_sader.value,
-                        edit_cartilla.value,
+                        `<button data-id="${ban}" type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_product" data-kt-customer-table-filter="delete_row">
+                    <i class="ki-outline ki-trash text-danger fs-2"></i>
+                    </button>`,
                         select_variedad.val(),
                         select_variedad.find('option:selected').text(),
                         select_presentacion.val(),
@@ -119,6 +116,9 @@ class Operation {
                         edit_cantidad.value * edit_peso.value,
                         select_marca.val(),
                         select_marca.find('option:selected').text(),
+                        edit_lote.value,
+                        edit_sader.value,
+                        edit_cartilla.value,
                     ]).draw()
 
                     btn_add_product.setAttribute("data-kt-indicator", "off")
@@ -247,6 +247,154 @@ class Operation {
         .catch(error => {
             console.error(error)
         })
+    }
+
+    get_products_embarque(embarque_id, table_products, modal) {
+        fetch(`get_products_embarque/${embarque_id}`, {
+            method: "GET",
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response =>{
+            if(!response.ok){
+                throw new Error('Error en la base de datos')
+            }
+            return response.json()
+        })
+        .then(data => {
+            table_products.clear().draw();
+            data.forEach(item => {
+                table_products.row.add([`<button data-id="${item.id}" type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_product" data-kt-customer-table-filter="delete_row">
+                    <i class="ki-outline ki-trash text-danger fs-2"></i>
+                    </button>`,
+                    item.variedad_id,
+                    item.variedad,
+                    item.presentacion_id,
+                    item.presentacion,
+                    item.cantidad,
+                    item.peso,
+                    item.total_kilos,
+                    item.marca_id,
+                    item.marca,
+                    item.lote,
+                    item.sader,
+                    item.cartilla
+                    ]).draw()
+            });
+            modal.show()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
+    add_fields = (table, select, observations, ban,  count_standards, edit_text_standard) => {
+        if(select.val() != ""){
+            var data = table.rows().data();
+            let repeat=false;
+            for (var i = 0; i < data.length; i++) {
+                if (data[i][0] == select.val()) {
+                    repeat=true;
+                }
+            }
+            if(repeat){
+                Swal.fire({
+                    title: "Advertencia!",
+                    text: select.select2('data')[0].text +" ya esta agragado!",
+                    icon: "warning"
+                  });
+            }else{
+
+                table.row.add([select.val(), select.select2('data')[0].text, observations.value, `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0" data-kt-customer-table-filter="delete_row">
+                <i class="ki-outline ki-trash text-danger fs-2"></i>
+                </button>`]).draw()
+                if(ban){
+                    count_standards = count_standards + 1
+                    edit_text_standard.value=count_standards
+                }
+
+            }
+        }
+        else{
+            Swal.fire({
+                title: "Advertencia!",
+                text: "Seleccione un registro!",
+                icon: "warning"
+              });
+        }
+    }
+
+    get_standards_embarque(embarque_id, table_standards, modal_standards) {
+        fetch(`get_standards_embarque/${embarque_id}`, {
+            method: "GET",
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response =>{
+            if(!response.ok){
+                throw new Error('Error en la base de datos')
+            }
+            return response.json()
+        })
+        .then(data => {
+            table_standards.clear().draw();
+            data.forEach(item => {
+                table_standards.row.add([item.id, item.name, item.observations, `<button type="button" class="btn btn-active-light-danger btn-sm me-0 ms-0 delete_standard" data-kt-customer-table-filter="delete_row">
+        <i class="ki-outline ki-trash text-danger fs-2"></i>
+        </button>`]).draw()
+            })
+            modal_standards.show()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
+    save_standards_embarque(embarque_id, table_standards, modal_standards) {
+        let standards = [];
+        table_standards.rows().data().each(function (value) {
+            standards.push({
+                standard_id: value[0],
+                standard: value[1],
+                observations: value[2]
+            });
+        })
+        console.log(standards)
+        fetch(`save_standards_embarques`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRF-TOKEN": this.token,
+            },
+            body: JSON.stringify({
+                embarque_id: embarque_id,
+                standards: standards
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la base de datos');
+            }
+            return response.json();
+        })
+        .then(data => {
+            Swal.fire({
+                title: "Éxito!",
+                text: "Las normas han sido guardadas correctamente!",
+                icon: "success"
+            });
+            modal_standards.hide();
+        })
+        .catch(error => {
+            console.error(error);
+            Swal.fire({
+                title: "Error!",
+                text: "Hubo un problema al guardar las normas!",
+                icon: "error"
+            });
+        });
     }
 }
 
