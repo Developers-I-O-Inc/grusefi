@@ -1,4 +1,4 @@
-@props(['embarque' => false, 'vigencias' => $vigencias, 'puertos' => []])
+@props(['embarque' => false, 'vigencias' => $vigencias, 'puertos' => [], 'lugares' => [], 'empaques'=>[], 'usos'=> []])
 <style>
     .watermark{
         position: relative;
@@ -271,7 +271,18 @@
                             <div class="section">
                                 <div style="display: flex; align-items: center;">
                                     <div class="text-bold" style="width: 100px;">1 Inicio:</div>
-                                    <div class="group-control" style="flex-grow: 1;">Lugar: <span class="disabled-input m-l-sm">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span></div>
+                                    <div class="group-control fv-row" style="flex-grow: 1;">Lugar:
+                                        @if($embarque)
+                                        <select id="lugar_id" name="lugar_id" class="form-select" data-control="select2" data-placeholder="Selecciona un municipio" data-allow-clear="true">
+                                            <option value=""></option>
+                                            @foreach($lugares as $lugar)
+                                                <option value="{{$lugar->id}}">{{$lugar->nombre}}</option>
+                                            @endforeach
+                                        </select>
+                                        @else
+                                        <span class="disabled-input m-l-sm">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+                                        @endif
+                                    </div>
                                     <div class="group-control m-l-md" style="width: 250px;">Fecha: <span class="disabled-input m-l-sm" id="fecha_embarque">XX/XX/XXXX</span></div>
                                     <div class="group-control m-l-md" style="width: 175px;">Hora: <span class="disabled-input m-l-sm" id="hora_embarque">XX:XX x.x.</span></div>
                                 </div>
@@ -291,37 +302,28 @@
                             <div class="section">
                                 <div class="text-bold">3 Datos para expedición de certificado fitosanitario:</div>
                                 <div style="display: flex;">
-                                    <div style="width: 50%; padding-right: 16px;">
+                                    <div style="width: 50%; padding-right: 16px;" class="fv-row">
                                         Nombre y dirección del remitente:
                                         @if($embarque)
-                                            <div class="m-t-xs" style="display: flex;">
-                                                <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="nombre_fiscal"></span>
-                                            </div>
-                                            <div class="m-t-xs" style="display: flex;">
-                                                <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="domicilio_empaque"></span>
-                                            </div>
+                                        <select id="empaque_id" name="empaque_id" class="form-select form-control" data-control="select2" data-placeholder="Selecciona un cliente" data-allow-clear="true">
+                                            <option value=""></option>
+                                            @foreach($empaques as $empaque)
+                                                <option value="{{$empaque->id}}">{{$empaque->nombre_fiscal}}</option>
+                                            @endforeach
+                                        </select>
                                         @else
-                                            <div class="m-t-xs" style="display: flex;">
-                                                <span class="disabled-input m-b-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
-                                            </div>
                                             <div class="m-t-xs" style="display: flex;">
                                                 <span class="disabled-input m-b-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
                                             </div>
                                         @endif
                                     </div>
-                                    <div style="width: 50%;">
+                                    <div style="width: 50%;" class="fv-row">
                                         Nombre y dirección del destinatario:
                                         @if($embarque)
-                                            <div class="m-t-xs" style="display: flex;">
-                                                <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="destinatario"></span>
-                                            </div>
-                                            <div class="m-t-xs" style="display: flex;">
-                                                <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="destinatario_domicilio"></span>
-                                            </div>
+                                        <select id="destinatario_id" name="destinatario_id" class="form-select" data-control="select2" data-placeholder="Selecciona un destinatario" data-allow-clear="true">
+                                            <option value=""></option>
+                                        </select>
                                         @else
-                                            <div class="m-t-xs" style="display: flex;">
-                                                <span class="disabled-input m-b-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
-                                            </div>
                                             <div class="m-t-xs" style="display: flex;">
                                                 <span class="disabled-input m-b-xs">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
                                             </div>
@@ -348,7 +350,18 @@
                                             </div>
                                             <div style="width: 40%; padding-right: 6px;">
                                                 <div>Uso</div>
-                                                <div class="disabled-input" style="margin-top:18px">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                                @if($embarque)
+                                                <div class="fv-row">
+                                                    <select id="uso_id" name="uso_id" class="form-select" data-control="select2" data-placeholder="Selecciona un uso" data-allow-clear="true">
+                                                        <option value=""></option>
+                                                        @foreach($usos as $uso)
+                                                            <option value="{{$uso->id}}">{{$uso->uso}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @else
+                                                    <div class="disabled-input" style="margin-top:18px">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                                @endif
                                             </div>
                                             <div style="width: 30%;">
                                                 Cantidad
@@ -376,12 +389,11 @@
                                                 <div>Puerto de entrada</div>
                                                 @if($embarque)
                                                     <div class="m-t-xs" style="display: flex;">
-                                                        {{-- <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="puerto"></span> --}}
                                                         <select id="puerto_id" name="puerto_id" class="form-select" data-control="select2" data-placeholder="Selecciona un puerto" data-allow-clear="true">
                                                             <option value=""></option>
                                                             @if(isset($puertos))
                                                                 @foreach($puertos as $puerto)
-                                                                    <option value="{{$puerto->id}}">{{$puerto->nombre}}</option>
+                                                                    <option value="{{$puerto->id}}">{{$puerto->puerto}}</option>
                                                                 @endforeach
                                                             @endif
                                                         </select>
@@ -395,8 +407,13 @@
                                             <div style="width: 50%;">
                                                 Medio de transporte y placas
                                                 @if($embarque)
-                                                    <div class="m-t-xs" style="display: flex;">
-                                                        <span class="disabled-input m-b-xs" style="flex-grow: 1; border-bottom: 1px solid #BBB;" name="transporte"></span>
+                                                    <div class="row">
+                                                        <div class="col-6 my-5">
+                                                            <input type="text" class="form-control" placeholder="Ingresa el número económico" name="numero_economico" id="numero_economico" autocomplete="off" />
+                                                        </div>
+                                                        <div class="col-6 my-5">
+                                                            <input type="text" class="form-control" placeholder="Ingrese las placas" name="placas_transporte" id="placas_transporte" autocomplete="off" />
+                                                        </div>
                                                     </div>
                                                 @else
                                                 <div class="m-t-xs" style="display: flex;">
@@ -410,11 +427,19 @@
                                         <div class="m-t-xs" style="display: flex;">
                                             <div style="width: 60%; padding-right: 16px;">
                                                 <div>Origen</div>
-                                                <div class="disabled-input">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                                @if($embarque)
+                                                    <div class="col-12 my-5 fv-row">
+                                                        <input type="text" class="form-control" placeholder="Ingrese el origen" name="origen_embarque" id="origen_embarque" autocomplete="off" value=""/>
+                                                    </div>
+                                                @else
+                                                    <div class="disabled-input">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                                @endif
                                             </div>
                                             <div style="width: 40%;">
                                                 <div>Procedencia</div>
-                                                <div class="disabled-input">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+
+                                                    <div class="disabled-input my-7">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+                                                {{-- @endif --}}
                                             </div>
                                         </div>
                                     </div>
@@ -793,11 +818,12 @@
                                 <div class="m-t-md" style="display: flex; justify-content: flex-end;">
                                     <div class="m-r-sm">
                                         Clave de aprobación:
-                                        <input id="clave_aprobacion" type="text" name="clave_aprobacion" value="{{$vigencias != null ? $vigencias[0]->clave_aprobacion : ''}}" maxlength="50" class="p_input">
+                                        <input id="vigencia_id" type="text" name="vigencia_id" value="{{$vigencias != null ? $vigencias[0]->id : ''}}" maxlength="50" class="d-none p_input">
+                                        <input id="clave_aprobacion" type="text" name="clave_aprobacion" value="{{$vigencias != null ? $vigencias[0]->clave_aprobacion : ''}}" maxlength="50">
                                     </div>
                                     <div>
                                         Vigencia:
-                                        <input id="vigencia" type="text" name="vigencia" value="{{$vigencias != null ? $vigencias[0]->vigencia : ''}}" maxlength="50" class="p_input">
+                                        <input id="vigencia" type="text" name="vigencia" value="{{$vigencias != null ? $vigencias[0]->vigencia : ''}}" maxlength="50">
                                     </div>
                                 </div>
                             </div>

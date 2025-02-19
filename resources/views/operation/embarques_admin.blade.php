@@ -153,7 +153,7 @@
                         <div id="kt_accordion_1_body_2" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
                             <div class="accordion-body">
                                 <form id="form_rpv">
-                                    <x-table-rpv :embarque="true" :vigencias="null"/>
+                                    <x-table-rpv :embarque="true" :vigencias="$vigencias" :puertos="$puertos" :lugares="$lugares" :empaques="$empaques" :usos="$usos"/>
                                 </form>
                             </div>
                         </div>
