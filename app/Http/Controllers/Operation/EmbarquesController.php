@@ -20,10 +20,12 @@ use App\Models\Operation\EmbarquesProductos;
 use App\Models\Operation\PlantillaRPV;
 use App\Models\Admin\UsersStandards;
 use App\Models\Catalogs\Marcas;
+use App\Models\Catalogs\Puertos;
 use App\Models\Operation\EmbarquesStandards;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use DB;
 
 class EmbarquesController extends Controller
 {
@@ -93,9 +95,10 @@ class EmbarquesController extends Controller
         } else {
             $data['tefs_id'] = auth()->user()->id;
         }
-        // DB::beginTransaction();
 
-        // try {
+        DB::beginTransaction();
+
+        try {
             $embarque = Embarques::updateOrCreate(
                 ['id' => $request->get('id_embarque')],
                 $data
@@ -158,19 +161,14 @@ class EmbarquesController extends Controller
 
                 EmbarquesProductos::insert($insertData);
             }
-            // if ($request->hasFile('file_import')) {
-            //     Excel::import(new ProductsImport, $request->file('file_import'));
-            // }
-
-            // return response()->json(['success' => $request->file('file_import')]);
-            // DB::commit();
+            DB::commit();
 
             return response()->json(['success' => 'Datos guardados exitosamente!', 'embarque_id'=>$embarque->id]);
-        // }
-        // catch (\Exception $e) {
-        //     DB::rollback();
-        //     return response()->json(['error' => 'Error al guardar los permisos.'], 500);
-        // }
+        }
+        catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => 'Error al guardar los permisos.'], 500);
+        }
 
     }
     /**
@@ -255,17 +253,23 @@ class EmbarquesController extends Controller
         $vigencias = Vigencias::where('activo', 1)->get();
         if(auth()->user()->hasRole('Super Admin')){
             $standards = Standards::where('activo', 1)->get();
+            $lugares = Municipios::where('activo', 1)->get();
+            $empaques = Empaques::where('activo', 1)->get();
         }
         else{
+            $municipios = Municipios::get_municipios_template_by_user(Auth::user()->id);
             $standards = UsersStandards::user_standards_select(auth()->user()->id);
             $count_standards = UsersStandards::where('user_id', Auth::user()->id);
+            $lugares = Municipios::municipios_by_user(Auth::user()->id);
             if($count_standards->count() == 0){
                 return redirect()->route('dashboard')->with('error_standards', 'No tienes normas asignadas, por favor asigna normas para poder continuar.');
             }
         }
         $variedades = Variedades::where('activo', 1)->get();
         $presentaciones = Presentaciones::where('activo', 1)->get();
-        return view("operation/embarques_admin", compact('vigencias', 'standards', 'variedades', 'presentaciones'));
+        $puertos = Puertos::where('activo', 1)->get();
+        $usos = Usos::where('activo', 1)->get();
+        return view("operation/embarques_admin", compact('vigencias', 'standards', 'variedades', 'presentaciones', 'puertos', 'lugares', 'empaques', 'usos'));
     }
 
     public function get_embarque_edit($embarque_id)
@@ -332,12 +336,29 @@ class EmbarquesController extends Controller
         $datos = $request->json()->all();
         $embarque = Embarques::find($request->embarque_id);
         $embarque->folio_embarque = $request->folio_embarque;
+        $embarque->lugar_id = $request->lugar_id;
+        $embarque->empaque_id = $request->empaque_id;
+        $embarque->destinatario_id = $request->destinatario_id;
+        $embarque->uso_id = $request->uso_id;
+        $embarque->origen = $request->origen;
+        $embarque->numero_economico = $request->numero_economico;
+        $embarque->placas_transporte = $request->placas_transporte;
+        $embarque->puerto_id = $request->puerto_id;
         $embarque->status = "Modificado";
         $embarque->save();
         $registro = EmbarquesRPV::where('embarque_id', $request->embarque_id)->first();
         unset($datos['folio_embarque']);
         unset($datos['clave_aprobacion']);
         unset($datos['vigencia']);
+        unset($datos['vigencia_id']);
+        unset($datos['lugar_id']);
+        unset($datos['empaque_id']);
+        unset($datos['destinatario_id']);
+        unset($datos['uso_id']);
+        unset($datos['origen']);
+        unset($datos['numero_economico']);
+        unset($datos['puerto_id']);
+        unset($datos['placas_transporte']);
         foreach ($datos as $campo => $valor) {
             $registro->$campo = $valor;
         }
@@ -377,14 +398,33 @@ class EmbarquesController extends Controller
                 $cadena_consecutivo = str_pad($num_consecutivo + 1, 4, '0', STR_PAD_LEFT);
         }
         // -----------------------------
+
+        $embarque->lugar_id = $request->lugar_id;
+        $embarque->empaque_id = $request->empaque_id;
+        $embarque->destinatario_id = $request->destinatario_id;
+        $embarque->uso_id = $request->uso_id;
+        $embarque->origen = $request->origen;
+        $embarque->numero_economico = $request->numero_economico;
+        $embarque->placas_transporte = $request->placas_transporte;
+        $embarque->puerto_id = $request->puerto_id;
         $embarque->folio_embarque = 'VMRE-'.auth()->user()->employee_number.'-'.$country_id->codigo.'-'.$cadena_consecutivo.'-'.substr(date('Y'), 2, 2);
         $embarque->status = "Finalizado";
         $embarque->fecha_termino = now();
         $embarque->save();
+
         $registro = EmbarquesRPV::where('embarque_id', $request->embarque_id)->first();
         unset($datos['folio_embarque']);
         unset($datos['clave_aprobacion']);
         unset($datos['vigencia']);
+        unset($datos['vigencia_id']);
+        unset($datos['lugar_id']);
+        unset($datos['empaque_id']);
+        unset($datos['destinatario_id']);
+        unset($datos['uso_id']);
+        unset($datos['origen']);
+        unset($datos['numero_economico']);
+        unset($datos['puerto_id']);
+        unset($datos['placas_transporte']);
         foreach ($datos as $campo => $valor) {
             $registro->$campo = $valor;
         }
@@ -495,5 +535,88 @@ class EmbarquesController extends Controller
         return response()->json(['success' => 'Datos guardados exitosamente!']);
 
 
+    }
+
+    public function new_dv_template(){
+        $vigencias = Vigencias::where('activo', 1)->get();
+        if($vigencias->count() == 0){
+            return redirect()->route('vigencias.index')->with('error_vigencia', 'No hay vigencias activas, por favor activa una vigencia para poder continuar.');
+        }
+        if(Auth::user()->hasRole('Super Admin')){
+            $empaques = Empaques::where('activo', 1)->get();
+            $municipios = Municipios::get_municipios_template();
+            $lugares = Municipios::where('activo', 1)->get();
+            $standards = Standards::where('activo', 1)->get();
+        }
+        else{
+            $empaques = Empaques::get_empaques_by_country();
+            $municipios = Municipios::get_municipios_template_by_user(Auth::user()->id);
+            $lugares = Municipios::municipios_by_user(Auth::user()->id);
+            $standards = UsersStandards::user_standards_select(Auth::user()->id);
+            $count_standards = UsersStandards::where('user_id', Auth::user()->id);
+            if($count_standards->count() == 0){
+                return redirect()->route('dashboard')->with('error_standards', 'No tienes normas asignadas, por favor asigna normas para poder continuar.');
+            }
+        }
+        $paises = Paises::where('activo', 1)->get();
+        $users = User::role('tefs')->get();
+        $presentaciones = Presentaciones::where('activo', 1)->get();
+        $variedades = Variedades::where('activo', 1)->get();
+        // $municipios = Municipios::where('activo', 1)->get();
+        $vigencia = Vigencias::select('id')->where('activo', 1)->first();
+        $usos = Usos::where('activo', 1)->get();
+        $puertos = Puertos::where('activo', 1)->get();
+        return view('operation/new_dv_template', compact('empaques', 'paises', 'users', 'presentaciones', 'variedades', 'vigencias', 'municipios', 'usos', 'standards', 'puertos', 'lugares'));
+    }
+
+    public function save_new_dv_tamplate(Request $request){
+        $datos = $request->json()->all();
+        // DB::beginTransaction();
+        // try {
+            $embarque_id = Embarques::create([
+                'empaque_id' => $datos['empaque_id'],
+                'municipio_id' => $datos['municipio_id'],
+                'destinatario_id' => $datos['destinatario_id'],
+                'pais_id' => $datos['pais_id'],
+                'puerto_id' => $datos['puerto_id'],
+                'tefs_id' => $datos['tefs_id'],
+                'vigencia_id' => $datos['vigencia_id'],
+                'lugar_id' => $datos['lugar_id'],
+                'uso_id' => $datos['uso_id'],
+                'origen' => $datos['origen'],
+                'folio_embarque' => "EMB-",
+                'numero_economico' => $datos['numero_economico'],
+                'placas_transporte' => $datos['placas_transporte'],
+                'origen' => $datos['origen'],
+                'status' => 'Pendiente',
+            ]);
+            unset($datos['pais_id']);
+            unset($datos['municipio_id']);
+            unset($datos['empaque_id']);
+            unset($datos['destinatario_id']);
+            unset($datos['tefs_id']);
+            unset($datos['puerto_id']);
+            unset($datos['lugar_id']);
+            unset($datos['uso_id']);
+            unset($datos['numero_economico']);
+            unset($datos['placas_transporte']);
+            unset($datos['origen']);
+            unset($datos['vigencia_id']);
+
+            $registro = new EmbarquesRPV();
+            $registro->embarque_id = $embarque_id->id;
+            foreach ($datos as $campo => $valor) {
+                $registro->$campo = $valor;
+            }
+
+            $registro->save();
+
+            // DB::commit();
+            return response()->json(['mensaje' => 'Datos guardados con éxito'], 200);
+        // }
+        // catch (\Exception $e) {
+        //     DB::rollback();
+        //     return response()->json(['error' => 'Error al guardar los datos.'], 500);
+        // }
     }
 }

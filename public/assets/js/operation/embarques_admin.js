@@ -61,6 +61,14 @@ var KTadminlist = (function () {
         span_hora_embarque,
         select_standard,
         select_marca,
+        select_empaque,
+        select_destinatario,
+        select_lugar,
+        select_uso,
+        select_puerto,
+        edit_numero_economico,
+        edit_placas,
+        edit_origen,
         dates,
         filter,
         modal,
@@ -71,6 +79,8 @@ var KTadminlist = (function () {
         table_products,
         table_standards,
         observations,
+        var_destinatario = 0,
+        validations,
         n,
         save_embarque = (formulario, embarque_id) => {
             const clase = "p_input"
@@ -78,7 +88,15 @@ var KTadminlist = (function () {
             let datosFormulario = {}
             datosFormulario = {
                 embarque_id: embarque_id,
-                folio_embarque: edit_folio.value
+                folio_embarque: edit_folio.value,
+                lugar_id: select_lugar.val(),
+                empaque_id: select_empaque.val(),
+                destinatario_id: select_destinatario.val(),
+                uso_id: select_uso.val(),
+                puerto_id: select_puerto.val(),
+                numero_economico: edit_numero_economico.value,
+                placas_transporte: edit_placas.value,
+                origen: edit_origen.value
             }
             Array.from(inputs).forEach(input => {
                 switch(input.type) {
@@ -140,7 +158,15 @@ var KTadminlist = (function () {
             let datosFormulario = {}
             datosFormulario = {
                 embarque_id: embarque_id,
-                folio_embarque: edit_folio.value
+                folio_embarque: edit_folio.value,
+                lugar_id: select_lugar.val(),
+                empaque_id: select_empaque.val(),
+                destinatario_id: select_destinatario.val(),
+                uso_id: select_uso.val(),
+                puerto_id: select_puerto.val(),
+                numero_economico: edit_numero_economico.value,
+                placas_transporte: edit_placas.value,
+                origen: edit_origen.value
             }
             Array.from(inputs).forEach(input => {
                 switch(input.type) {
@@ -266,7 +292,15 @@ var KTadminlist = (function () {
                             const option = new Option(item.nombre, item.id);
                             select_marca.append(option)
                         })
-                        // Operation.get_next_selects("presentaciones", embarque.variedad_id, select_presentacion, true)
+                        $("#empaque_id").val(data.embarque.empaque_id).trigger("change.select2")
+                        var_destinatario = data.embarque.destinatario_id
+                        select_empaque.trigger('change');
+                        $("#uso_id").val(data.embarque.uso_id).trigger("change.select2")
+                        $("#lugar_id").val(data.embarque.lugar_id).trigger("change.select2")
+                        $("#puerto_id").val(data.embarque.puerto_id).trigger("change.select2")
+                        edit_numero_economico.value = data.embarque.numero_economico
+                        edit_placas.value = data.embarque.placas_transporte
+                        edit_origen.value = data.embarque.origen
                         document.getElementById('btn_products').setAttribute('data-embarque', embarque.id);
                         document.getElementById('btn_standards').setAttribute('data-embarque', embarque.id);
                         document.querySelector('#kt_accordion_1_header_2 button').classList.remove('collapsed');
@@ -352,7 +386,6 @@ var KTadminlist = (function () {
                 (modal_cancel = new bootstrap.Modal(document.querySelector("#kt_modal_cancel"))),
                 (span_fecha_embarque = document.querySelector('#fecha_embarque')),
                 (span_hora_embarque = document.querySelector('#hora_embarque')),
-                // (select_presentacion = $('#presentacion_id').select2()),
                 (form_products = document.querySelector("#kt_modal_add_product_form")),
                 (form_rpv = document.querySelector("#form_rpv")),
                 (dates = document.querySelector('#dates')),
@@ -369,7 +402,15 @@ var KTadminlist = (function () {
                 (btn_import = document.querySelector("#btn_import")),
                 (observations = document.querySelector("#observations")),
                 (select_standard = $('#select_standard').select2()),
+                (select_empaque = $('#empaque_id').select2()),
+                (select_destinatario = $('#destinatario_id').select2()),
                 (select_marca = $('#select_marca').select2()),
+                (select_lugar = $('#lugar_id').select2()),
+                (select_uso = $('#uso_id').select2()),
+                (select_puerto = $('#puerto_id').select2()),
+                (edit_numero_economico = document.querySelector('#numero_economico')),
+                (edit_placas = document.querySelector('#placas_transporte')),
+                (edit_origen = document.querySelector('#origen_embarque')),
                 (n = document.querySelector("#kt_admin_table")) &&
                 (n.querySelectorAll("tbody tr").forEach((t) => {
                     // formats
@@ -419,6 +460,53 @@ var KTadminlist = (function () {
                     })
                 )
                 ),
+                (validations = FormValidation.formValidation(form_rpv, {
+                    fields: {
+                        lugar_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "El lugar es requerido",
+                                }
+                            },
+                        },
+                        empaque_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "El empaque es requerido",
+                                }
+                            },
+                        },
+                        destinatario_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "El destinatario es requerido",
+                                }
+                            },
+                        },
+                        uso_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "El uso es requerido",
+                                }
+                            },
+                        },
+                        origen_embarque:{
+                            validators: {
+                                notEmpty: {
+                                    message: "El origen es requerido",
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        bootstrap: new FormValidation.plugins.Bootstrap5({
+                            rowSelector: ".fv-row",
+                            eleInvalidClass: "is-invalid",
+                            eleValidClass: "is-valid",
+                        })
+                    },
+                })),
                  // TABLE PRODUCTS
                 (table_products = $("#kt_products_table").DataTable({
                     order: [[1, "asc"]],
@@ -478,7 +566,22 @@ var KTadminlist = (function () {
                 // SAVE EMBARQUE RPV
                 btn_finish.addEventListener("click", function (t) {
                     t.preventDefault()
-                    finish_embarque(form_rpv, embarque_id)
+                    validations &&
+                    validations.validate().then(function (e) {
+                        "Valid" == e
+                            ?
+                            finish_embarque(form_rpv, embarque_id)
+                            : Swal.fire({
+                                    text: "Error, faltan algunos datos, intente de nuevo por favor.",
+                                    icon: "error",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Entendido!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary",
+                                    },
+                                })
+                    })
+
                 })
                 // ADD Product
                 btn_add_product.addEventListener("click", function (t) {
@@ -494,6 +597,18 @@ var KTadminlist = (function () {
                 btn_save_standards.addEventListener("click", function (t) {
                     t.preventDefault();
                     Operation.save_standards_embarque(embarque_id, table_standards, modal_standards)
+                })
+                // CHANGE EMPAQUE
+                select_empaque.on('change', function() {
+                    let destinatario_id_change
+                        if (var_destinatario == 0) {
+                            destinatario_id_change = select_destinatario.val()
+                        }
+                        else{
+                            destinatario_id_change = var_destinatario
+                        }
+                        console.log("el valor es", destinatario_id_change)
+                        Operation.get_next_selects("destinatarios", destinatario_id_change, select_destinatario, var_destinatario)
                 })
                 $("#dates").daterangepicker({
                     locale: {
