@@ -36,4 +36,23 @@ class Municipios extends Model
     public static function get_municipios(){
         return DB::select("SELECT m.id, m.nombre, m.nombre_corto, m.activo, m.codigo, e.nombre as estado FROM cat_municipios m INNER JOIN cat_estados e ON m.estado_id = e.id");
     }
+
+    public static function get_municipios_template(){
+        return DB::select("SELECT municipios.id, municipios.nombre from plantilla_rpv
+            LEFT JOIN cat_municipios AS municipios ON plantilla_rpv.municipio_id = municipios.id
+            WHERE plantilla_rpv.deleted_at IS NULL");
+    }
+
+    public static function get_municipios_template_by_user($user_id){
+        $estados = UsersCountries::select("estado_id")->where('user_id', $user_id)->get();
+        if($estados->count() == 0){
+            return [];
+        }
+        else{
+            $estados = $estados->pluck('estado_id')->toArray();
+            return DB::select("SELECT municipios.id, municipios.nombre from plantilla_rpv
+                LEFT JOIN cat_municipios AS municipios ON plantilla_rpv.municipio_id = municipios.id WHERE estado_id IN (".implode(",", $estados).")
+                AND plantilla_rpv.deleted_at IS NULL");
+        }
+    }
 }

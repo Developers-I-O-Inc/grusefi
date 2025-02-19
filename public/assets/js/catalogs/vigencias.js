@@ -96,11 +96,7 @@ export function init() {
         order: [[2, "asc"]],
         columnDefs: [
             { orderable: !1, targets: 0 },
-            {
-                targets: [1],
-                visible: false,
-                searchable: false,
-            },
+
         ],
         language: {
             zeroRecords: "<div class='container-fluid '> <div class='d-flex flex-center'>" +

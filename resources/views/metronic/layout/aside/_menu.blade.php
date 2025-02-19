@@ -214,6 +214,14 @@
                                 <span class="menu-title">Generar nuevo DV</span>
                             </a>
                         </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{route('new_dv_template')}}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Generar nuevo DV - Plantilla</span>
+                            </a>
+                        </div>
                     @endcan
                     <div class="menu-item">
                         <a class="menu-link" href="{{route('embarques_admin')}}">
