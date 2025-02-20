@@ -29,3 +29,4 @@ Route::post('save_embarques_small', 'EmbarquesController@save_embarques_small');
 // EMBAQUES DV TEMPLATE
 Route::get('new_dv_template', 'EmbarquesController@new_dv_template')->name('new_dv_template');
 Route::post('save_new_dv_tamplate', 'EmbarquesController@save_new_dv_tamplate');
+Route::get('copy_embarque_rpv/{id}', 'EmbarquesController@copy_embarque_rpv');
