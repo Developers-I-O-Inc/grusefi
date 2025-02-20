@@ -3,12 +3,10 @@
 	var defaultThemeMode = "light";
 	var themeMode;
 	if ( document.documentElement ) {
-        console.log("document.documentElement");
 		if ( document.documentElement.hasAttribute("data-bs-theme-mode")) {
             console.log("document.documentElement.hasAttribute");
 			themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
 		} else {
-            console.log("document.documentElement.hasAttribute else");
 			if ( localStorage.getItem("data-bs-theme") !== null ) {
 				themeMode = localStorage.getItem("data-bs-theme");
 			} else {
