@@ -1,4 +1,4 @@
-@props(['embarque' => false, 'vigencias' => $vigencias, 'puertos' => [], 'lugares' => [], 'empaques'=>[], 'usos'=> []])
+@props(['embarque' => false, 'vigencias' => $vigencias, 'puertos' => [], 'lugares' => [], 'empaques'=>[], 'usos'=> [], 'products' => false])
 <style>
     .watermark{
         position: relative;
@@ -248,7 +248,7 @@
     }
 </style>
 <div class="rounded" id="kt_block_ui_1_target">
-    <table class="dxflGroup_Moderno dxflGroupSys dxflAGSys" style="border-collapse:separate;">
+    <table style="border-collapse:separate;">
         <tbody>
             <tr>
                 <td id="ContentPlaceHolder1_ASPxFormLayout1_3_0" class="dxflHALSys dxflGroupCell_Moderno dxflChildInFirstRowSys dxflFirstChildInRowSys dxflLastChildInRowSys dxflLastChildSys dxflChildInLastRowSys">
@@ -283,8 +283,25 @@
                                         <span class="disabled-input m-l-sm">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
                                         @endif
                                     </div>
-                                    <div class="group-control m-l-md" style="width: 250px;">Fecha: <span class="disabled-input m-l-sm" id="fecha_embarque">XX/XX/XXXX</span></div>
-                                    <div class="group-control m-l-md" style="width: 175px;">Hora: <span class="disabled-input m-l-sm" id="hora_embarque">XX:XX x.x.</span></div>
+                                    <div class="group-control m-l-md" style="width: 250px;">
+                                        @if($embarque)
+                                        Fecha:
+                                            <div class="col-12 my-5 fv-row">
+                                                <input type="text" class="form-control p_input" placeholder="Ingresa la fecha" name="fecha_embarque_new" id="fecha_embarque_new"/>
+                                            </div>
+                                        @else
+                                            Fecha: <span class="disabled-input m-l-sm" id="fecha_embarque">XX/XX/XXXX</span>
+                                        @endif
+                                    </div>
+                                    <div class="group-control m-l-md" style="width: 175px;">
+                                        Hora:
+                                        @if($embarque)
+                                            <div class="col-12 my-5">
+                                                <input type="text" class="form-control p_input" placeholder="Ingresa la hora" name="hora_embarque_new" id="hora_embarque_new"/>
+                                            </div>
+                                        @else
+                                            <span class="disabled-input m-l-sm" id="hora_embarque">XX:XX x.x.</span></div>
+                                        @endif
                                 </div>
                             </div>
                             <div class="section">
@@ -340,10 +357,12 @@
                                                         <span class="svg-icon svg-icon-1"><i class="ki-outline ki-exit-right-corner fs-2"></i></span>
                                                         <span class="pulse-ring w-45px h-45px"></span>
                                                     </button>
-                                                    <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" data-embarque="0" id="btn_import" >
-                                                        <span class="svg-icon svg-icon-1"><i class="ki-outline ki-file-up fs-2"></i></span>
-                                                        <span class="pulse-ring w-45px h-45px"></span>
-                                                    </button>
+                                                    @if(!$products)
+                                                        <button type="button" class="btn btn-icon btn-light-success pulse pulse-success" data-embarque="0" id="btn_import" >
+                                                            <span class="svg-icon svg-icon-1"><i class="ki-outline ki-file-up fs-2"></i></span>
+                                                            <span class="pulse-ring w-45px h-45px"></span>
+                                                        </button>
+                                                    @endif
                                                 @else
                                                     <div class="disabled-input" style="margin-top:18px">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
                                                 @endif

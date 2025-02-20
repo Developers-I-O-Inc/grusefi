@@ -45,9 +45,9 @@ class Operation {
         edit_cantidad = document.getElementById('cantidad'),
         edit_peso = document.getElementById('peso'),
         edit_cartilla = document.getElementById('cartilla'),
-        select_presentacion = $('#presentacion_id').select2(),
-        select_variedad = $('#variedad_product_id').select2(),
-        select_marca = $('#select_marca').select2(),
+        select_presentacion = $('#presentacion_id'),
+        select_variedad = $('#variedad_product_id'),
+        select_marca = $('#select_marca'),
         count_products = 0
 
         const validations_products = FormValidation.formValidation(form_products, {
@@ -97,7 +97,9 @@ class Operation {
                 btn_add_product.setAttribute("data-kt-indicator", "on")
                 if (edit_text_products != null) {
                     count_products += 1;
-                    edit_text_products.value = count_products;
+                    if(edit_text_products != 1){
+                        edit_text_products.value = count_products;
+                    }
                     ban = true
                 } else {
                     ban = await this.save_products(embarque_id, btn_add_product)
@@ -289,7 +291,7 @@ class Operation {
         })
     }
 
-    add_fields = (table, select, observations, ban,  count_standards, edit_text_standard) => {
+    add_fields = (table, select, observations, ban,  count_standards = null, edit_text_standard = null) => {
         if(select.val() != ""){
             var data = table.rows().data();
             let repeat=false;

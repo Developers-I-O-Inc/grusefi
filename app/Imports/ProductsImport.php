@@ -35,12 +35,6 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation
             'embarque_id.exists' => 'El id de embarque no es válido.',
             'variedad_id.exists' => 'El id de variedad no es válido.',
             'presentacion_id.exists' => 'El id de presentación no es válido.',
-            'lote.required' => 'El lote es requerido.',
-            'lote.string' => 'El lote debe ser una cadena de texto.',
-            'sader.required' => 'El sader es requerido.',
-            'sader.string' => 'El sader debe ser una cadena de texto.',
-            'cartilla.required' => 'El sader es requerido.',
-            'cartilla.string' => 'El sader debe ser una cadena de texto.',
             'cantidad.required' => 'Las cantidades son requeridas.',
             'cantidad.integer' => 'Las cantidades deben ser un número entero.',
             'peso.required' => 'El peso es requerido.',
@@ -51,12 +45,8 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            'embarque_id' => 'exists:op_embarques,id',
             'variedad_id' => 'exists:cat_variedades,id',
             'presentacion_id' => 'exists:cat_presentaciones,id',
-            'lote' => 'required|string',
-            'sader' => 'required|string',
-            'cartilla' => 'required|string',
             'cantidad' => 'required|integer',
             'peso' => 'required|numeric',
         ];

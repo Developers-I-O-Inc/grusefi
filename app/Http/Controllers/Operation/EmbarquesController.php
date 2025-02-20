@@ -227,8 +227,11 @@ class EmbarquesController extends Controller
                     <a href="/operation/imprimir_dictamen_embarque_rpv/'.$row->id.'" target="_blank" class="btn btn-active-light-success btn-sm" data-bs-toggle="tooltip" title="Imprimir">
                         <i class="ki-outline ki-printer text-success fs-2"></i>
                     </a>
-                    <button data-id="'.$row->id.'" type="_button" class="btn btn-active-light-success btn-sm" data-bs-toggle="tooltip" title="Cancelar" data-kt-admin-table-filter="delete">
+                    <button data-id="'.$row->id.'" type="button" class="btn btn-active-light-success btn-sm" data-bs-toggle="tooltip" title="Cancelar" data-kt-admin-table-filter="delete">
                         <i class="ki-outline ki-tablet-delete text-danger fs-2"></i>
+                    </button>
+                    <button data-id="'.$row->id.'" type="button" class="btn btn-active-light-success btn-sm copy-dv" data-bs-toggle="tooltip" title="Copiar DV" data-kt-admin-table-filter="copy">
+                        <i class="ki-outline ki-copy text-primary fs-2"></i>
                     </button>';
                 }
 
@@ -238,6 +241,12 @@ class EmbarquesController extends Controller
                     </a>
                     <button data-id="'.$row->id.'" type="button" class="btn btn-active-light-success btn-sm" data-kt-admin-table-filter="upload" data-bs-toggle="tooltip" title="Subir evidencia">
                        <i class="ki-outline ki-file-up text-success fs-2"></i>
+                    </button>
+                     <button data-id="'.$row->id.'" type="_button" class="btn btn-active-light-success btn-sm" data-bs-toggle="tooltip" title="Cancelar" data-kt-admin-table-filter="delete">
+                        <i class="ki-outline ki-tablet-delete text-danger fs-2"></i>
+                    </button>
+                     <button data-id="'.$row->id.'" type="button" class="btn btn-active-light-success btn-sm" data-bs-toggle="tooltip" title="Copiar DV" data-kt-admin-table-filter="copy">
+                        <i class="ki-outline ki-copy text-primary fs-2"></i>
                     </button>
                     ';
                 }
@@ -335,6 +344,7 @@ class EmbarquesController extends Controller
     {
         $datos = $request->json()->all();
         $embarque = Embarques::find($request->embarque_id);
+        $embarque->created_at = $request->fecha_embarque_new . ' ' . $request->hora_embarque_new;
         $embarque->folio_embarque = $request->folio_embarque;
         $embarque->lugar_id = $request->lugar_id;
         $embarque->empaque_id = $request->empaque_id;
@@ -359,6 +369,8 @@ class EmbarquesController extends Controller
         unset($datos['numero_economico']);
         unset($datos['puerto_id']);
         unset($datos['placas_transporte']);
+        unset($datos['fecha_embarque_new']);
+        unset($datos['hora_embarque_new']);
         foreach ($datos as $campo => $valor) {
             $registro->$campo = $valor;
         }
@@ -398,7 +410,7 @@ class EmbarquesController extends Controller
                 $cadena_consecutivo = str_pad($num_consecutivo + 1, 4, '0', STR_PAD_LEFT);
         }
         // -----------------------------
-
+        $embarque->created_at = $request->fecha_embarque_new . ' ' . $request->hora_embarque_new;
         $embarque->lugar_id = $request->lugar_id;
         $embarque->empaque_id = $request->empaque_id;
         $embarque->destinatario_id = $request->destinatario_id;
@@ -425,6 +437,8 @@ class EmbarquesController extends Controller
         unset($datos['numero_economico']);
         unset($datos['puerto_id']);
         unset($datos['placas_transporte']);
+        unset($datos['fecha_embarque_new']);
+        unset($datos['hora_embarque_new']);
         foreach ($datos as $campo => $valor) {
             $registro->$campo = $valor;
         }
@@ -527,10 +541,36 @@ class EmbarquesController extends Controller
 
         }
 
-        Embarques::updateOrCreate(
+        $embarque = Embarques::updateOrCreate(
             ['id' => $request->get('id_embarque')],
             $data
         );
+
+        $plantilla = PlantillaRPV::where('pais_id', $embarque->pais_id)
+        ->where('municipio_id', $embarque->municipio_id)
+        ->first();
+
+            if ($plantilla) {
+                $embarqueRPVData = $plantilla->toArray();
+
+                // Eliminamos los campos que no necesitamos
+                unset(
+                    $embarqueRPVData['id'],
+                    $embarqueRPVData['pais_id'],
+                    $embarqueRPVData['municipio_id'],
+                    $embarqueRPVData['created_at'],
+                    $embarqueRPVData['updated_at'],
+                    $embarqueRPVData['deleted_at'],
+                    $embarqueRPVData['clave_aprobacion'],
+                    $embarqueRPVData['vigencia']
+                );
+
+                $embarqueRPVData['embarque_id'] = $embarque->id;
+                $embarqueRPVData['created_at'] = now();
+                $embarqueRPVData['updated_at'] = now();
+
+                EmbarquesRPV::insert($embarqueRPVData);
+            }
 
         return response()->json(['success' => 'Datos guardados exitosamente!']);
 
@@ -571,8 +611,10 @@ class EmbarquesController extends Controller
 
     public function save_new_dv_tamplate(Request $request){
         $datos = $request->json()->all();
-        // DB::beginTransaction();
-        // try {
+        $productos = json_decode($datos['products'], true);
+        $standards = json_decode($datos['standards'], true);
+        DB::beginTransaction();
+        try {
             $embarque_id = Embarques::create([
                 'empaque_id' => $datos['empaque_id'],
                 'municipio_id' => $datos['municipio_id'],
@@ -602,6 +644,10 @@ class EmbarquesController extends Controller
             unset($datos['placas_transporte']);
             unset($datos['origen']);
             unset($datos['vigencia_id']);
+            unset($datos['fecha_embarque_new']);
+            unset($datos['hora_embarque_new']);
+            unset($datos['products']);
+            unset($datos['standards']);
 
             $registro = new EmbarquesRPV();
             $registro->embarque_id = $embarque_id->id;
@@ -611,12 +657,71 @@ class EmbarquesController extends Controller
 
             $registro->save();
 
-            // DB::commit();
+            if (!empty($standards)) {
+                foreach ($standards as $standards_arr) {
+                    $standard = new EmbarquesStandards();
+                    $standard->embarque_id = $embarque_id->id;
+                    $standard->standard_id = $standards_arr[0];
+                    $standard->observations = $standards_arr[2];
+                    $standard->save();
+                }
+            }
+            $insertData = [];
+            if (!empty($productos)) {
+                foreach ($productos as $product) {
+                    $insertData[] = [
+                        'embarque_id' => $embarque_id->id,
+                        'lote' => $product[9],
+                        'sader' => $product[10],
+                        'cartilla' => $product[11],
+                        'variedad_id' => $product[1],
+                        'presentacion_id' => $product[3],
+                        'cantidad' => $product[6],
+                        'peso' => $product[7],
+                        'marca_id' => $product[8] == '' ? null : $product[8],
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                }
+
+                EmbarquesProductos::insert($insertData);
+            }
+            DB::commit();
             return response()->json(['mensaje' => 'Datos guardados con éxito'], 200);
-        // }
-        // catch (\Exception $e) {
-        //     DB::rollback();
-        //     return response()->json(['error' => 'Error al guardar los datos.'], 500);
-        // }
+        }
+        catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => 'Error al guardar los datos.'], 500);
+        }
+    }
+
+    public function copy_embarque_rpv($id){
+        $embarque = Embarques::find($id);
+        $embarque_dv = EmbarquesRPV::where('embarque_id', $id)->first();
+        $embarque_productos = EmbarquesProductos::where('embarque_id', $id)->get();
+        $embarque_standards = EmbarquesStandards::where('embarque_id', $id)->get();
+        $new_embarque = $embarque->replicate();
+        $new_embarque->status = 'Pendiente';
+        $new_embarque->created_at = now();
+        $new_embarque->folio_embarque = 'EMB-';
+        $new_embarque->save();
+
+        $new_embarque_rpv = $embarque_dv->replicate();
+        $new_embarque_rpv->embarque_id = $new_embarque->id;
+        $new_embarque_rpv->save();
+
+        foreach ($embarque_productos as $producto) {
+            $new_producto = $producto->replicate();
+            $new_producto->embarque_id = $new_embarque->id;
+            $new_producto->save();
+        }
+
+        foreach ($embarque_standards as $standard) {
+            $new_standard = $standard->replicate();
+            $new_standard->embarque_id = $new_embarque->id;
+            $new_standard->save();
+        }
+
+        return response()->json(["OK"=>"Se guardo correctamente"]);
     }
 }
