@@ -21,6 +21,18 @@
             padding: 16px;
         }
 
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 80px;
+            opacity: 0.1;
+            z-index: -1;
+            color: #000000;
+            white-space: nowrap;
+        }
+
         .logo-SNSICA {
             width: 64px;
             min-width: 64px;
@@ -197,6 +209,10 @@
 
 <body>
     <div id="template-container">
+
+    <div class="watermark">
+        CONFIDENCIAL <!-- Texto de tu marca de agua -->
+    </div>
         <table>
             <tr class="encabezado_principal">
                 <td rowspan="2" style="width: 8%;"><img class="logo-SNSICA" src="{{public_path('img/SNSICA.png')}}" alt="Logo"></td>

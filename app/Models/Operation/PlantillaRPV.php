@@ -71,7 +71,6 @@ class PlantillaRPV extends Model
         'cfe_aplica_fleje_CFI',
         'cfe_no_debe_CFI',
         'cfe_folios_CFI',
-        'clave_aprobacion',
-        'vigencia'
+        'vigencia_id'
     ];
 }

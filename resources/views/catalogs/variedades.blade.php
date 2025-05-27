@@ -1,7 +1,7 @@
 @extends('metronic.index')
-@section('title', 'Variedades')
+@section('title', 'Productos')
 @section('zones', 'active')
-@section('subtitle', 'Control de Variedades')
+@section('subtitle', 'Control de Productos')
 @section('content')
     <div id="kt_content_container" class="container-xxl">
         <div class="card shadow-sm">
@@ -18,12 +18,12 @@
                                     fill="black" />
                             </svg>
                         </span>
-                        <input type="text" data-kt-variedad-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar variedades" />
+                        <input type="text" data-kt-variedad-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar productos" />
                     </div>
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-variedad-table-toolbar="base">
-                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Variedad</button>
+                        <button type="button" class="btn btn-primary" id="btn_add">Agregar Producto</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none"
                         data-kt-variedad-table-toolbar="selected">
@@ -46,7 +46,7 @@
                                 </div>
                             </th>
                             <th class="min-w-25px">id</th>
-                            <th class="min-w-125px">Variedad</th>
+                            <th class="min-w-125px">Producto</th>
                             <th class="min-w-125px">Nombre Científico</th>
                             <th class="min-w-125px">Tipo de Cultivo</th>
                             <th class="min-w-125px">Status</th>
@@ -64,7 +64,7 @@
                 <div class="modal-content">
                     <form class="form" action="#" id="kt_modal_add_variedad_form">
                         <div class="modal-header" id="kt_modal_add_variedad_header">
-                            <h2 class="fw-bolder">Agregar Variedad</h2>
+                            <h2 class="fw-bolder">Agregar Producto</h2>
                             <div id="kt_modal_add_variedad_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -83,7 +83,7 @@
                                 data-kt-scroll-dependencies="#kt_modal_add_variedad_header"
                                 data-kt-scroll-wrappers="#kt_modal_add_variedad_scroll" data-kt-scroll-offset="300px">
                                 <div class="fv-row mb-4">
-                                    <label class="required fs-6 fw-bold mb-2">Nombre variedad</label>
+                                    <label class="required fs-6 fw-bold mb-2">Nombre producto</label>
                                     <input type="text" class="form-control" placeholder="Ingresa un nombre" name="variedad" id="variedad" autocomplete="off"/>
                                     <input type="text" class="form-control d-none" name="id_variedad" id="id_variedad" />
                                 </div>

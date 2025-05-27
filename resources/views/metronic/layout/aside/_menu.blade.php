@@ -147,7 +147,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Variedades</span>
+                                <span class="menu-title">Productos</span>
                             </a>
                         </div>
                     @endcan
