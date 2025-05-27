@@ -15,7 +15,7 @@
         <input type="text" class="form-control" placeholder="Ingresa el n° de cartilla o trajeta" name="cartilla" id="cartilla" />
     </div>
      <div class="col-md-6 fv-row">
-        <label class="required fs-6 fw-bold mb-2">Variedad</label>
+        <label class="required fs-6 fw-bold mb-2">Producto</label>
         <select id="variedad_product_id" name="variedad_product_id" class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_add_product" data-placeholder="Seleccione una variedad" data-allow-clear="true">
             <option></option>
             @foreach($variedades as $variedad)

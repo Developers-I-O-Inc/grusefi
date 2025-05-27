@@ -15,6 +15,7 @@ return new class extends Migration
             $table->smallIncrements('id');
             $table->smallInteger('pais_id')->unsigned()->index();
             $table->smallInteger('municipio_id')->unsigned()->index();
+            $table->smallInteger('vigencia_id')->unsigned()->index();
             // SERVICIO SOLICITADO
             $table->boolean('ss_dictamen_verificacion');
             $table->boolean('ss_certificado_movilizacion');
@@ -118,12 +119,11 @@ return new class extends Migration
             $table->boolean('cfe_aplica_flete_CFI');
             $table->boolean('cfe_no_debe_CFI');
             $table->string('cfe_folios_CFI')->nullable();
-            $table->string('clave_aprobacion', 100);
-            $table->string('vigencia', 50);
             $table->timestamps();
             $table->softdeletes();
             $table->foreign('pais_id')->references('id')->on('cat_paises');
             $table->foreign('municipio_id')->references('id')->on('cat_municipios');
+            $table->foreign('vigencia_id')->references('id')->on('cat_vigencias');
         });
     }
 

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('op_embarques_rpv', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('embarque_id')->unsigned()->index();
+            $table->smallInteger('vigencia_id')->unsigned()->index();
             // SERVICIO SOLICITADO
             $table->boolean('ss_dictamen_verificacion');
             $table->boolean('ss_certificado_movilizacion');
@@ -120,7 +121,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softdeletes();
             $table->foreign('embarque_id')->references('id')->on('op_embarques');
-
+            $table->foreign('vigencia_id')->references('id')->on('cat_vigencias');
         });
     }
 

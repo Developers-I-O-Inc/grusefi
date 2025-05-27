@@ -359,7 +359,7 @@ let table_items,
                     icon: "info",
                     showCancelButton: !0,
                     buttonsStyling: !1,
-                    confirmButtonText: "Sí, eliminar!",
+                    confirmButtonText: "Sí, copiar!",
                     cancelButtonText: "No, cancelar",
                     customClass: {
                         confirmButton: "btn fw-bold btn-success",
