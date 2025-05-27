@@ -1,23 +1,6 @@
 @props(['embarque' => false, 'vigencias' => $vigencias, 'puertos' => [], 'lugares' => [], 'empaques'=>[], 'usos'=> [], 'products' => false])
 <style>
-    .watermark{
-        position: relative;
-    }
-    .watermark::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 85%;
-        height: 85%;
-        background: url('/img/marca_agua.jpg') no-repeat center center;
-        background-size: contain;
-        transform: translate(-50%, -50%); /* Centra la imagen */
-        filter: grayscale(100%);
-        opacity: 0.1;
-        z-index: 0; /* Cambiado de 0 a -1 */
-        pointer-events: none; /* Añadido */
-    }
+    /*  */
 
     .card table {
         position: relative;
@@ -40,14 +23,14 @@
         margin: 0px -16px;
     }
 
-    #template-container {
+    /* #template-container {
         display: block;
         font-size: 16px;
         background: #FFF;
         color: #333;
         padding: 16px;
         box-shadow: 0px 3px 4px #AAA;
-    }
+    } */
 
     #template-container * {
         box-sizing: border-box;
@@ -838,7 +821,7 @@
                                     <div class="m-r-sm">
                                         Clave de aprobación:
                                         <input id="vigencia_id" type="text" name="vigencia_id" value="{{$vigencias != null ? $vigencias[0]->id : ''}}" maxlength="50" class="d-none p_input">
-                                        <input id="clave_aprobacion" type="text" name="clave_aprobacion" value="{{$vigencias != null ? $vigencias[0]->clave_aprobacion : ''}}" maxlength="50">
+                                        <input id="" type="text" name="clave_aprobacion" value="{{$vigencias != null ? $vigencias[0]->clave_aprobacion : ''}}" maxlength="50">
                                     </div>
                                     <div>
                                         Vigencia:

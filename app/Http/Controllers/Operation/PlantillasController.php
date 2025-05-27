@@ -64,6 +64,7 @@ class PlantillasController extends Controller
     public function edit_plantilla(Request $request) {
         $datos = $request->json()->all();
         $registro = PlantillaRPV::find($request->id);
+        unset($datos['vigencia_id']);
         foreach ($datos as $campo => $valor) {
             $registro->$campo = $valor;
         }
@@ -101,8 +102,36 @@ class PlantillasController extends Controller
         $standards = EmbarquesStandards::get_standards_embarque($embarque_id);
         $marcas = EmbarquesProductos::get_only_embarque_marcas($embarque_id);
         $vigencias = Vigencias::where('activo', 1)->first();
-        $pdf = PDF::loadView('operation/reports/dictamen_embarque', compact("plantilla", "embarque", "embarques_standards", "count_productos", "embarques_productos",
-            "presentations", 'procedencia', 'standards', 'quantities', 'marcas', 'vigencias', 'domicilio_destinatario'));
+        // $pdf = PDF::loadView('operation/reports/dictamen_embarque', compact("plantilla", "embarque", "embarques_standards", "count_productos", "embarques_productos",
+        //     "presentations", 'procedencia', 'standards', 'quantities', 'marcas', 'vigencias', 'domicilio_destinatario'));
+        // return $pdf->stream($embarque->folio_embarque.'.pdf');
+        $pdf = PDF::loadView('operation/reports/dictamen_embarque', compact(
+            "plantilla", "embarque", "embarques_standards", "count_productos",
+            "embarques_productos", "presentations", 'procedencia', 'standards',
+            'quantities', 'marcas', 'vigencias', 'domicilio_destinatario'
+        ));
+
+        $pdf->setOption('isPhpEnabled', true);
+
+        $canvas = $pdf->getDomPDF()->getCanvas();
+        $canvas->page_script(function($pageNumber, $pageCount, $canvas, $fontMetrics) {
+            $text = "CONFIDENCIAL";
+            $font = $fontMetrics->getFont('Arial', 'bold');
+            $size = 80;
+            $opacity = 0.1;
+
+            // Posición centrada
+            $x = ($canvas->get_width() - $fontMetrics->getTextWidth($text, $font, $size)) / 2;
+            $y = $canvas->get_height() / 2;
+
+            // Rotar 45 grados
+            $canvas->save();
+            $canvas->rotate(-45, $x, $y);
+            $canvas->set_opacity($opacity);
+            $canvas->text($x, $y, $text, $font, $size, [0, 0, 0]);
+            $canvas->restore();
+        });
+
         return $pdf->stream($embarque->folio_embarque.'.pdf');
     }
 
